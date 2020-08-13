@@ -45,3 +45,6 @@ jobs:
         run: yarn test --ci
         env:
           CI: true
+
+      - name: Deploy to github pages
+        run: yarn deploy
