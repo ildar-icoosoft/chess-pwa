@@ -1,9 +1,7 @@
-name: CI
+name: GH-Pages
 
 on:
   push:
-    branches: [ develop ]
-  pull_request:
     branches: [ develop ]
 
 jobs:
@@ -45,3 +43,14 @@ jobs:
         run: yarn test --ci
         env:
           CI: true
+
+      - name: Build
+        run: yarn build
+        env:
+          CI: true
+
+      - name: Deploy to github pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
