@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ develop, CHESSPWA2_github-actions ]
   pull_request:
     branches: [ develop ]
 
@@ -42,6 +42,6 @@ jobs:
           CI: true
 
       - name: Test
-        run: yarn test --ci --maxWorkers=2 --watchAll=false
+        run: yarn test --ci
         env:
           CI: true
