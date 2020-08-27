@@ -3,7 +3,9 @@
  */
 import { FC } from "react";
 
-const GamePreviewsList: FC<any> = () => {
+type GamePreviewsListProps = Record<string, unknown>;
+
+const GamePreviewsList: FC<GamePreviewsListProps> = () => {
   return null;
 };
 
