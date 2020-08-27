@@ -3,8 +3,8 @@
  */
 import { FC } from "react";
 
-const OngoingGames: FC<any> = () => {
+const GamePreviewsList: FC<any> = () => {
   return null;
 };
 
-export default OngoingGames;
+export default GamePreviewsList;

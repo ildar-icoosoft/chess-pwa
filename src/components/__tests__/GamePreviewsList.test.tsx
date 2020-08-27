@@ -1,8 +1,8 @@
-import { mountTest } from "../../tests/mountTest";
-import OngoingGames from "../OngoingGames";
+import GamePreviewsList from "../GamePreviewsList";
+import mountTest from "../../tests/mountTest";
 
 describe("OngoingGames", () => {
-  mountTest(OngoingGames);
+  mountTest(GamePreviewsList);
 
   // it("Snapshot", () => {
   //   const tree = TestRenderer.create(<Board/>).toJSON();

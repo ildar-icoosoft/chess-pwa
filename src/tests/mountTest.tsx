@@ -1,10 +1,9 @@
 /* eslint-disable jest/no-export */
-/* eslint-disable import/prefer-default-export */
 
 import React from "react";
 import TestRenderer from "react-test-renderer";
 
-export const mountTest = (Component: React.ComponentType) => {
+const mountTest = (Component: React.ComponentType) => {
   describe(`mount and unmount`, () => {
     it(`component could be updated and unmounted without errors`, () => {
       expect(() => {
@@ -14,3 +13,5 @@ export const mountTest = (Component: React.ComponentType) => {
     });
   });
 };
+
+export default mountTest;
