@@ -25,6 +25,4 @@ export const GamePreviewsList: FC<GamePreviewsListProps> = ({ games = [] }) => {
       })}
     </div>
   );
-
-  return null;
 };
