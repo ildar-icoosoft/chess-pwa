@@ -5,7 +5,7 @@ import React, { FC } from "react";
 import { Board } from "ii-react-chessboard";
 import Game from "../interfaces/Game";
 
-export const initialBoardFen =
+const initialBoardFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 export interface GamePreviewsListProps {
