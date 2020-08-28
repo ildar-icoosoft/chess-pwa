@@ -4,6 +4,7 @@
 import React, { FC } from "react";
 import { Board } from "ii-react-chessboard";
 import Game from "../interfaces/Game";
+import css from "./GamePreviewsList.module.css";
 
 const initialBoardFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -14,14 +15,18 @@ export interface GamePreviewsListProps {
 
 export const GamePreviewsList: FC<GamePreviewsListProps> = ({ games = [] }) => {
   return (
-    <div>
+    <div className={css.grid}>
       {games.map((item) => {
         let fen: string = item.initialFen;
         if (fen === "startpos") {
           fen = initialBoardFen;
         }
 
-        return <Board key={item.id} position={fen} viewOnly={false} />;
+        return (
+          <div className={css.cell} key={item.id}>
+            <Board position={fen} viewOnly={false} width={240} />
+          </div>
+        );
       })}
     </div>
   );
