@@ -61,11 +61,22 @@ describe("OngoingGames", () => {
 
         const boards = testInstance.findAllByType(Board);
 
-        expect(boards.length).toBe(2);
-
         expect(boards[0].props.position).toBe(initialBoardFen);
         expect(boards[1].props.position).toBe(
           "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR w KQkq - 0 1"
+        );
+      });
+
+      it("viewOnly", () => {
+        const testRenderer = TestRenderer.create(
+          <GamePreviewsList games={games} />
+        );
+        const testInstance = testRenderer.root;
+
+        const boards = testInstance.findAllByType(Board);
+
+        expect(boards.every((item) => item.props.viewOnly === false)).toBe(
+          true
         );
       });
     });

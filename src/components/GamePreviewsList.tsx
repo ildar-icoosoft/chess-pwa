@@ -21,7 +21,7 @@ export const GamePreviewsList: FC<GamePreviewsListProps> = ({ games = [] }) => {
           fen = initialBoardFen;
         }
 
-        return <Board key={item.id} position={fen} />;
+        return <Board key={item.id} position={fen} viewOnly={false} />;
       })}
     </div>
   );
