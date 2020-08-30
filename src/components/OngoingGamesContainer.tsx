@@ -4,7 +4,7 @@ import Game from "../interfaces/Game";
 import { getOngoingGames } from "../services/api";
 
 export interface OngoingGamesContainerProps {
-  onLoad?: () => void;
+  [key: string]: any;
 }
 
 export const OngoingGamesContainer: FC<OngoingGamesContainerProps> = () => {
