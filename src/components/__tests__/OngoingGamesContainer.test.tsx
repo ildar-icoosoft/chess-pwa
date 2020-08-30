@@ -3,6 +3,7 @@ import React from "react";
 import { OngoingGamesContainer } from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../GamePreviewsList";
 import Game from "../../interfaces/Game";
+import mountTest from "../../tests/mountTest";
 
 jest.mock("../../services/api");
 
@@ -42,6 +43,7 @@ const games: Game[] = [
 ];
 
 describe("OngoingGamesContainer", () => {
+  // @todo. need to fix mountTest to work with components with async useEffect()
   // mountTest(OngoingGamesContainer);
 
   describe("children components", () => {
