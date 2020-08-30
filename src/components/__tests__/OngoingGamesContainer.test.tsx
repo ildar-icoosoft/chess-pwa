@@ -1,9 +1,10 @@
 import TestRenderer, { ReactTestRenderer } from "react-test-renderer";
 import React from "react";
-import mountTest from "../../tests/mountTest";
 import { OngoingGamesContainer } from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../GamePreviewsList";
 import Game from "../../interfaces/Game";
+
+jest.mock("../../services/api");
 
 jest.useFakeTimers();
 
