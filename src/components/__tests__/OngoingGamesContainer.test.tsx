@@ -1,4 +1,4 @@
-import TestRenderer, { ReactTestRenderer } from "react-test-renderer";
+import TestRenderer from "react-test-renderer";
 import React from "react";
 import { OngoingGamesContainer } from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../GamePreviewsList";
@@ -65,7 +65,7 @@ describe("OngoingGamesContainer", () => {
         expect(gamePreviewsComponent.props.games).toEqual([]);
 
         await TestRenderer.act(async () => {
-          jest.advanceTimersByTime(3000);
+          jest.advanceTimersByTime(1000);
         });
 
         expect(gamePreviewsComponent.props.games).toEqual(games);

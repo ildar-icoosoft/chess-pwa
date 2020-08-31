@@ -37,6 +37,6 @@ export const getOngoingGames = (): Promise<Game[]> => {
           black: null,
         },
       ]);
-    }, 3000);
+    }, 1000);
   });
 };

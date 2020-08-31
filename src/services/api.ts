@@ -2,6 +2,7 @@
 
 import Game from "../interfaces/Game";
 import ioClient from "./ioClient";
+import { SubscriptionData } from "../interfaces/SubscriptionData";
 
 export const getOngoingGames = (): Promise<Game[]> => {
   return new Promise((resolve, reject) => {
@@ -13,5 +14,11 @@ export const getOngoingGames = (): Promise<Game[]> => {
 
       resolve(body);
     });
+  });
+};
+
+export const watchGames = (cb: (data: SubscriptionData) => void) => {
+  ioClient.socket.on("game", (msg: SubscriptionData) => {
+    cb(msg);
   });
 };

@@ -1,6 +1,8 @@
+import { SubscriptionData } from "../../interfaces/SubscriptionData";
+
 export default {
   socket: {
-    get: (url: string, cb: any) => {
+    get(url: string, cb: any) {
       setTimeout(() => {
         cb([
           {
@@ -34,7 +36,19 @@ export default {
             black: null,
           },
         ]);
-      }, 1000);
+      }, 0);
+    },
+    on(path: string, cb: (data: SubscriptionData) => void) {
+      setTimeout(() => {
+        cb({
+          verb: "updated",
+          data: {
+            id: 2,
+            moves: "e2e4",
+          },
+          id: 2,
+        });
+      }, 0);
     },
   },
 };
