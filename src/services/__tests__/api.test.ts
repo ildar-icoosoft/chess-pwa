@@ -1,10 +1,11 @@
 import Game from "../../interfaces/Game";
 import { getOngoingGames, watchGames } from "../api";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";
+import ioClient from "../ioClient";
 
 jest.mock("../ioClient");
 
-const gamesBeforeChange: Game[] = [
+const games: Game[] = [
   {
     id: 1,
     initialFen: "startpos",
@@ -39,11 +40,21 @@ const gamesBeforeChange: Game[] = [
 
 describe("api service", () => {
   it("getOngoingGames()", () => {
-    return expect(getOngoingGames()).resolves.toEqual(gamesBeforeChange);
+    (ioClient as any).setMockResponse(games);
+    return expect(getOngoingGames()).resolves.toEqual(games);
   });
 
   it("watchGames()", () => {
     return new Promise((resolve) => {
+      (ioClient as any).setMockResponse({
+        verb: "updated",
+        data: {
+          id: 2,
+          moves: "e2e4",
+        },
+        id: 2,
+      });
+
       watchGames((data: SubscriptionData) => {
         expect(data).toEqual({
           verb: "updated",
