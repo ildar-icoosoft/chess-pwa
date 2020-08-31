@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import Game from "../../interfaces/Game";
+import { SubscriptionData } from "../../interfaces/SubscriptionData";
 
 export const getOngoingGames = (): Promise<Game[]> => {
   return new Promise((resolve) => {
@@ -39,4 +40,17 @@ export const getOngoingGames = (): Promise<Game[]> => {
       ]);
     }, 1000);
   });
+};
+
+export const watchGames = (cb: (data: SubscriptionData) => void) => {
+  setTimeout(() => {
+    cb({
+      verb: "updated",
+      data: {
+        id: 1,
+        moves: "e2e4",
+      },
+      id: 1,
+    });
+  }, 2000);
 };

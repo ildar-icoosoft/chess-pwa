@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 import Game from "../interfaces/Game";
 import ioClient from "./ioClient";
 import { SubscriptionData } from "../interfaces/SubscriptionData";

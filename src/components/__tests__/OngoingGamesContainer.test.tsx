@@ -8,13 +8,46 @@ jest.useFakeTimers();
 
 jest.mock("../../services/api");
 
-const games: Game[] = [
+const gamesBeforeChange: Game[] = [
   {
     id: 1,
     initialFen: "startpos",
     wtime: 300000,
     btime: 300000,
     moves: "",
+    status: "started",
+    white: null,
+    black: null,
+  },
+  {
+    id: 2,
+    initialFen: "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR w KQkq - 0 1",
+    wtime: 300000,
+    btime: 300000,
+    moves: "",
+    status: "started",
+    white: null,
+    black: null,
+  },
+  {
+    id: 3,
+    initialFen: "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR w KQkq - 0 1",
+    wtime: 300000,
+    btime: 300000,
+    moves: "",
+    status: "started",
+    white: null,
+    black: null,
+  },
+];
+
+const gamesAfterChange: Game[] = [
+  {
+    id: 1,
+    initialFen: "startpos",
+    wtime: 300000,
+    btime: 300000,
+    moves: "e2e4",
     status: "started",
     white: null,
     black: null,
@@ -68,7 +101,13 @@ describe("OngoingGamesContainer", () => {
           jest.advanceTimersByTime(1000);
         });
 
-        expect(gamePreviewsComponent.props.games).toEqual(games);
+        expect(gamePreviewsComponent.props.games).toEqual(gamesBeforeChange);
+
+        await TestRenderer.act(async () => {
+          jest.advanceTimersByTime(1000);
+        });
+
+        expect(gamePreviewsComponent.props.games).toEqual(gamesAfterChange);
       });
     });
   });
