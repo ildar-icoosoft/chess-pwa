@@ -4,9 +4,9 @@ import { OngoingGamesContainer } from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../GamePreviewsList";
 import Game from "../../interfaces/Game";
 
-jest.mock("../../services/api");
-
 jest.useFakeTimers();
+
+jest.mock("../../services/api");
 
 const games: Game[] = [
   {
@@ -47,12 +47,8 @@ describe("OngoingGamesContainer", () => {
 
   describe("children components", () => {
     it("contains GamePreviewsList", async () => {
-      let testRenderer: ReactTestRenderer;
-      await TestRenderer.act(async () => {
-        testRenderer = TestRenderer.create(<OngoingGamesContainer />);
-      });
-      /* eslint-disable @typescript-eslint/no-non-null-assertion */
-      const testInstance = testRenderer!.root;
+      const testRenderer = TestRenderer.create(<OngoingGamesContainer />);
+      const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(GamePreviewsList).length).toBe(1);
     });
@@ -61,20 +57,15 @@ describe("OngoingGamesContainer", () => {
   describe("children components props", () => {
     describe("GamePreviewsList", () => {
       it("games", async () => {
-        let testRenderer: ReactTestRenderer;
-        await TestRenderer.act(async () => {
-          testRenderer = TestRenderer.create(<OngoingGamesContainer />);
-        });
-        /* eslint-disable @typescript-eslint/no-non-null-assertion */
-        const testInstance = testRenderer!.root;
+        const testRenderer = TestRenderer.create(<OngoingGamesContainer />);
+        const testInstance = testRenderer.root;
 
         const gamePreviewsComponent = testInstance.findByType(GamePreviewsList);
 
-        // @todo: need to check if games prop is empty array on the start
-        // expect(gamePreviewsComponent.props.games).toEqual([]);
+        expect(gamePreviewsComponent.props.games).toEqual([]);
 
-        TestRenderer.act(() => {
-          jest.runAllTimers();
+        await TestRenderer.act(async () => {
+          jest.advanceTimersByTime(3000);
         });
 
         expect(gamePreviewsComponent.props.games).toEqual(games);
