@@ -1,6 +1,8 @@
 import Game from "../../interfaces/Game";
 import { getOngoingGames } from "../api";
 
+jest.mock("../ioClient");
+
 const games: Game[] = [
   {
     id: 1,
@@ -35,14 +37,7 @@ const games: Game[] = [
 ];
 
 describe("api service", () => {
-  beforeAll(() => jest.spyOn(window, "fetch"));
-
   it("getOngoingGames()", () => {
-    (window.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => games,
-    });
-
     return expect(getOngoingGames()).resolves.toEqual(games);
   });
 });
