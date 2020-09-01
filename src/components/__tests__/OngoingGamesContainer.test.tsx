@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { OngoingGamesContainer } from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../GamePreviewsList";
 import Game from "../../interfaces/Game";
+import * as api from "../../services/api";
 
 jest.useFakeTimers();
 
@@ -90,6 +93,22 @@ describe("OngoingGamesContainer", () => {
   describe("children components props", () => {
     describe("GamePreviewsList", () => {
       it("games", async () => {
+        // @ts-ignore
+        api.setMockOngoingGames(gamesBeforeChange);
+        // @ts-ignore
+        api.setGetOngoingGamesDelay(1000);
+        // @ts-ignore
+        api.setMockSubscriptionData({
+          verb: "updated",
+          data: {
+            id: 1,
+            moves: "e2e4",
+          },
+          id: 1,
+        });
+        // @ts-ignore
+        api.setWatchDelay(2000);
+
         const testRenderer = TestRenderer.create(<OngoingGamesContainer />);
         const testInstance = testRenderer.root;
 
