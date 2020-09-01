@@ -34,7 +34,6 @@ export const setMockSubscriptionData = (data: SubscriptionData) => {
 };
 
 export const watchGames = (cb: (data: SubscriptionData) => void) => {
-  console.log("subscriptionData", subscriptionData);
   if (subscriptionData === undefined) {
     return;
   }

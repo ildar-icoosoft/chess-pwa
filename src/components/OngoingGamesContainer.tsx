@@ -3,7 +3,6 @@ import { findIndex } from "lodash";
 import { GamePreviewsList } from "./GamePreviewsList";
 import Game from "../interfaces/Game";
 import { getOngoingGames, watchGames } from "../services/api";
-import { SubscriptionData } from "../interfaces/SubscriptionData";
 
 export type OngoingGamesContainerProps = Record<string, unknown>;
 
@@ -13,14 +12,14 @@ interface State {
 
 type Action =
   | { type: "GET_GAMES"; payload: Game[] }
-  | { type: "UPDATE_GAME"; payload: SubscriptionData }
-  | { type: "CREATE_GAME"; payload: SubscriptionData };
+  | { type: "UPDATE_GAME"; payload: Partial<Game> }
+  | { type: "CREATE_GAME"; payload: Game };
 
 const initialState: State = {
   games: [],
 };
 
-const reducer = (state: State, action: Action) => {
+const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "GET_GAMES":
       return {
@@ -46,8 +45,13 @@ const reducer = (state: State, action: Action) => {
       }
       return state;
     }
+    case "CREATE_GAME": {
+      return {
+        games: [...state.games, action.payload],
+      };
+    }
     default:
-      throw new Error(`unknown action type ${action.type}`);
+      throw new Error(`unknown action type ${(action as any).type}`);
   }
 };
 
@@ -62,6 +66,8 @@ export const OngoingGamesContainer: FC<OngoingGamesContainerProps> = () => {
     watchGames((subscriptionData) => {
       if (subscriptionData.verb === "updated") {
         dispatch({ type: "UPDATE_GAME", payload: subscriptionData.data });
+      } else if (subscriptionData.verb === "created") {
+        dispatch({ type: "CREATE_GAME", payload: subscriptionData.data });
       }
     });
   }, []);
