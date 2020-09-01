@@ -3,13 +3,13 @@
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { OngoingGamesContainer } from "../OngoingGamesContainer";
-import { GamePreviewsList } from "../GamePreviewsList";
-import Game from "../../interfaces/Game";
-import * as api from "../../services/api";
+import { GamePreviewsList } from "../../GamePreviewsList";
+import Game from "../../../interfaces/Game";
+import * as api from "../../../services/api";
 
 jest.useFakeTimers();
 
-jest.mock("../../services/api");
+jest.mock("../../../services/api");
 
 const gamesBeforeChange: Game[] = [
   {
