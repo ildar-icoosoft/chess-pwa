@@ -1,5 +1,6 @@
 import { findIndex } from "lodash";
 import Game from "../../interfaces/Game";
+import { SubscriptionData } from "../../interfaces/SubscriptionData";
 
 export interface State {
   games: Game[];
@@ -7,8 +8,8 @@ export interface State {
 
 export type Action =
   | { type: "GET_GAMES"; payload: Game[] }
-  | { type: "UPDATE_GAME"; payload: Partial<Game> }
-  | { type: "CREATE_GAME"; payload: Game };
+  | { type: "UPDATE_GAME"; payload: SubscriptionData }
+  | { type: "CREATE_GAME"; payload: SubscriptionData };
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -26,19 +27,28 @@ export const reducer = (state: State, action: Action): State => {
           games: state.games.map((item, itemIndex) => {
             if (itemIndex === index) {
               return {
-                ...item,
-                ...action.payload,
+                ...action.payload.previous,
+                ...action.payload.data,
               };
             }
             return item;
           }),
         };
       }
-      return state;
+
+      return {
+        games: [
+          ...state.games,
+          {
+            ...action.payload.previous,
+            ...action.payload.data,
+          },
+        ],
+      };
     }
     case "CREATE_GAME": {
       return {
-        games: [...state.games, action.payload],
+        games: [...state.games, action.payload.data],
       };
     }
     default:

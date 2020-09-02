@@ -17,9 +17,9 @@ export const OngoingGamesContainer: FC<OngoingGamesContainerProps> = () => {
 
     watchGames((subscriptionData) => {
       if (subscriptionData.verb === "updated") {
-        dispatch({ type: "UPDATE_GAME", payload: subscriptionData.data });
+        dispatch({ type: "UPDATE_GAME", payload: subscriptionData });
       } else if (subscriptionData.verb === "created") {
-        dispatch({ type: "CREATE_GAME", payload: subscriptionData.data });
+        dispatch({ type: "CREATE_GAME", payload: subscriptionData });
       }
     });
   }, []);
