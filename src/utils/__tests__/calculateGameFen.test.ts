@@ -53,7 +53,7 @@ describe("calculateGameFen", () => {
     );
   });
 
-  it("incorrect moves", () => {
+  it("incorrect moves must be ignored", () => {
     const game: Game = {
       id: 1,
       initialFen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
@@ -65,8 +65,8 @@ describe("calculateGameFen", () => {
       black: null,
     };
 
-    expect(() => {
-      calculateGameFen(game);
-    }).toThrow();
+    expect(calculateGameFen(game)).toBe(
+      "rnbqkbnr/pppp1ppp/8/4p3/8/8/PPPPPPPP/RNBQKBNR w KQkq e6 0 2"
+    );
   });
 });

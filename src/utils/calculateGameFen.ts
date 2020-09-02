@@ -1,4 +1,4 @@
-import { Chess, Move as ChessJsMove, PieceType, Square } from "chess.js";
+import { Chess } from "chess.js";
 import Game from "../interfaces/Game";
 
 const startPositionFen =
@@ -17,12 +17,9 @@ export default (game: Game): string => {
   const chess = new Chess(initialFen);
 
   game.moves.split(" ").forEach((move) => {
-    const result = chess.move(move, {
+    chess.move(move, {
       sloppy: true,
     });
-    if (!result) {
-      throw Error(`invalid move ${move}`);
-    }
   });
 
   return chess.fen();
