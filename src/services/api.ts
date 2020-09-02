@@ -15,3 +15,11 @@ export const watchGames = (cb: (data: SubscriptionData) => void): void => {
     cb(msg);
   });
 };
+
+export const getGame = (id: number): Promise<Game> => {
+  return new Promise((resolve) => {
+    ioClient.socket.get(`/api/v1/game/${id}`, (body: Game) => {
+      resolve(body);
+    });
+  });
+};
