@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Game from "../../interfaces/Game";
 import { getOngoingGames, watchGames } from "../api";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";

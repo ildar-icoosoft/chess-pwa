@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export const ioClient: any = jest.genMockFromModule("../ioClient");
 
 let mockResponse: any;
