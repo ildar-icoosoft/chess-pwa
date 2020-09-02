@@ -2,7 +2,7 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import mountTest from "../../tests/mountTest";
 import HomePage from "../HomePage";
-import { OngoingGamesContainer } from "../../components/OngoingGamesContainer/OngoingGamesContainer";
+import { OngoingGamesContainer } from "../../components/OngoingGamesContainer";
 
 jest.mock("../../services/api");
 

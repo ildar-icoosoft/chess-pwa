@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useReducer } from "react";
-import { GamePreviewsList } from "../GamePreviewsList";
-import { getOngoingGames, watchGames } from "../../services/api";
-import { reducer } from "./reducer";
+import { GamePreviewsList } from "./GamePreviewsList";
+import { getOngoingGames, watchGames } from "../services/api";
+import { reducer } from "./OngoingGamesContainer.reducer";
 
 export type OngoingGamesContainerProps = Record<string, unknown>;
 

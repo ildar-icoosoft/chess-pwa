@@ -1,6 +1,6 @@
 import { findIndex } from "lodash";
-import Game from "../../interfaces/Game";
-import { SubscriptionData } from "../../interfaces/SubscriptionData";
+import Game from "../interfaces/Game";
+import { SubscriptionData } from "../interfaces/SubscriptionData";
 
 export interface State {
   games: Game[];
