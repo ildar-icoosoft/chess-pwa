@@ -16,7 +16,7 @@ export const getOngoingGames = (): Promise<Game[]> => {
 };
 
 export const watchGames = (cb: (data: SubscriptionData) => void): void => {
-  ioClient.socket.on("gamehhhh", (msg: SubscriptionData) => {
+  ioClient.socket.on("game", (msg: SubscriptionData) => {
     cb(msg);
   });
 };
