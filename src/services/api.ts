@@ -22,9 +22,13 @@ export const watchGames = (cb: (data: SubscriptionData) => void): void => {
 };
 
 export const getGame = (id: number): Promise<Game> => {
-  return new Promise((resolve) => {
-    ioClient.socket.get(`/api/v1/game/${id}`, (body: Game) => {
-      resolve(body);
+  return new Promise((resolve, reject) => {
+    ioClient.socket.get(`/api/v1/game/${id}`, (body: Game, jwr: JWR) => {
+      if (jwr.statusCode === 200) {
+        resolve(body);
+      } else {
+        reject(jwr);
+      }
     });
   });
 };

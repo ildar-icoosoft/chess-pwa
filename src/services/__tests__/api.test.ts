@@ -41,9 +41,17 @@ const games: Game[] = [
 ];
 
 describe("api service", () => {
-  it("getGame()", () => {
+  it("getGame() success", () => {
     (ioClient as any).setMockResponse(games[0]);
     return expect(getGame(1)).resolves.toEqual(games[0]);
+  });
+
+  it("getGame() fail", () => {
+    (ioClient as any).setMockResponse("game not found", 404);
+    return expect(getGame(1)).rejects.toEqual({
+      statusCode: 404,
+      body: "game not found",
+    });
   });
 
   it("getOngoingGames() success", () => {
