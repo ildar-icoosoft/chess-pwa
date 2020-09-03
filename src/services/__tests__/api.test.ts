@@ -46,9 +46,17 @@ describe("api service", () => {
     return expect(getGame(1)).resolves.toEqual(games[0]);
   });
 
-  it("getOngoingGames()", () => {
+  it("getOngoingGames() success", () => {
     (ioClient as any).setMockResponse(games);
     return expect(getOngoingGames()).resolves.toEqual(games);
+  });
+
+  it("getOngoingGames() fail", () => {
+    (ioClient as any).setMockResponse("route not found", 404);
+    return expect(getOngoingGames()).rejects.toEqual({
+      statusCode: 404,
+      body: "route not found",
+    });
   });
 
   it("watchGames()", () => {
