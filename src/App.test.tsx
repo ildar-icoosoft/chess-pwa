@@ -26,6 +26,8 @@ describe("App", () => {
     });
   });
 
+  // @todo. add tests for App contains HomePage and GamePage
+
   describe("DOM structure", () => {
     it("renders learn react link", () => {
       const { getByText } = render(<App />);
