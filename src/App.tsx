@@ -12,9 +12,6 @@ const App: FC = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/game">Game</Link>
-            </li>
           </ul>
         </nav>
 
