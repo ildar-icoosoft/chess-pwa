@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { getGame } from "../services/api";
+import { getGame, watchGames } from "../services/api";
 import Game from "../interfaces/Game";
 import { SingleGame } from "../components/SingleGame";
 
@@ -14,6 +14,17 @@ export const SingleGameContainer: FC<GameContainerProps> = ({ id }) => {
     getGame(id)
       .then((res) => setGame(res))
       .catch(() => {});
+
+    watchGames((subscriptionData) => {
+      if (subscriptionData.id === id) {
+        if (subscriptionData.verb === "updated") {
+          setGame({
+            ...subscriptionData.previous,
+            ...subscriptionData.data,
+          });
+        }
+      }
+    });
   }, [id]);
 
   if (game) {
