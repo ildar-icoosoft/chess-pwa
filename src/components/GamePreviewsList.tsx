@@ -1,6 +1,3 @@
-/**
- * Renders a chess board using React
- */
 import React, { FC } from "react";
 import { Board } from "ii-react-chessboard";
 import Game from "../interfaces/Game";
