@@ -16,7 +16,7 @@ export const GamePreviewsList: FC<GamePreviewsListProps> = ({ games = [] }) => {
         const fen: string = calculateGameFen(item);
 
         return (
-          <Link to={`/game/{item.id}`} key={item.id}>
+          <Link to={`/game/${item.id}`} key={item.id}>
             <div className={css.cell}>
               <Board position={fen} viewOnly={false} width={240} />
             </div>
