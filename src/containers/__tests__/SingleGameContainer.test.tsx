@@ -15,7 +15,6 @@ jest.useFakeTimers();
 jest.mock("../../services/api");
 
 describe("SingleGameContainer", () => {
-  // @todo. need to fix GameContainer to work with components with async useEffect()
   // mountTest(SingleGameContainer);
 
   describe("children components", () => {
