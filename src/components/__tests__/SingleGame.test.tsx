@@ -1,6 +1,6 @@
 import TestRenderer from "react-test-renderer";
 import React from "react";
-import { Board, PieceColor } from "ii-react-chessboard";
+import { Board, PieceColor, ValidMoves } from "ii-react-chessboard";
 import { SingleGame } from "../SingleGame";
 import Game from "../../interfaces/Game";
 
@@ -133,6 +133,36 @@ describe("SingleGame", () => {
         );
 
         expect(board.props.turnColor).toBe(PieceColor.WHITE);
+      });
+
+      it("validMoves", async () => {
+        const initialFen = "8/4p3/8/5k2/8/3p4/4PP2/4K3 w KQkq - 0 1";
+
+        const initialPositionValidMoves: ValidMoves = {
+          e1: ["d2", "f1", "d1", "g1", "c1"],
+          e2: ["e3", "e4", "d3"],
+          f2: ["f3", "f4"],
+        };
+
+        const testRenderer = TestRenderer.create(
+          <SingleGame
+            game={{
+              id: 2,
+              initialFen,
+              wtime: 300000,
+              btime: 300000,
+              moves: "",
+              status: "started",
+              white: null,
+              black: null,
+            }}
+          />
+        );
+        const testInstance = testRenderer.root;
+
+        const board = testInstance.findByType(Board);
+
+        expect(board.props.validMoves).toEqual(initialPositionValidMoves);
       });
     });
   });

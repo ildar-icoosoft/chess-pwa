@@ -1,8 +1,15 @@
 import React, { FC } from "react";
-import { Board, Move, PieceColor } from "ii-react-chessboard";
+import { ChessInstance } from "chess.js";
+import {
+  Board,
+  getValidMoves,
+  Move,
+  PieceColor,
+  ValidMoves,
+} from "ii-react-chessboard";
 import Game from "../interfaces/Game";
-import calculateGameFen from "../utils/calculateGameFen";
-import getTurnColorFromFen from "../utils/getTurnColorFromFen";
+import makeChessInstance from "../utils/makeChessInstance";
+import getTurnColor from "../utils/getTurnColor";
 
 export interface SingleGameProps {
   game?: Game;
@@ -14,9 +21,14 @@ export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
     return null;
   }
 
-  const fen: string = calculateGameFen(game);
+  const chess: ChessInstance = makeChessInstance(game);
+
+  const fen: string = chess.fen();
+
   const turnColor: PieceColor =
-    getTurnColorFromFen(fen) === "white" ? PieceColor.WHITE : PieceColor.BLACK;
+    getTurnColor(chess) === "white" ? PieceColor.WHITE : PieceColor.BLACK;
+
+  const validMoves: ValidMoves = getValidMoves(chess);
 
   return (
     <Board
@@ -24,6 +36,7 @@ export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
       draggable
       position={fen}
       turnColor={turnColor}
+      validMoves={validMoves}
       onMove={onMove}
     />
   );
