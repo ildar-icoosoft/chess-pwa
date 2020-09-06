@@ -136,4 +136,32 @@ describe("SingleGame", () => {
       });
     });
   });
+
+  describe("Events", () => {
+    it("onMove", () => {
+      const onMove = jest.fn();
+
+      const testInstance = TestRenderer.create(
+        <SingleGame game={gameSample} onMove={onMove} />
+      ).root;
+
+      const board: TestRenderer.ReactTestInstance = testInstance.findByType(
+        Board
+      );
+
+      TestRenderer.act(() => {
+        board.props.onMove({
+          from: "e2",
+          to: "e4",
+        });
+      });
+
+      expect(onMove).toBeCalledTimes(1);
+
+      expect(onMove).toBeCalledWith({
+        from: "e2",
+        to: "e4",
+      });
+    });
+  });
 });
