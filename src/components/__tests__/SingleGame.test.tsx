@@ -85,6 +85,17 @@ describe("SingleGame", () => {
         );
       });
 
+      it("allowMarkers", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const board = testInstance.findByType(Board);
+
+        expect(board.props.allowMarkers).toBeTruthy();
+      });
+
       it("check", () => {
         const testRenderer = TestRenderer.create(
           <SingleGame game={gameSample} />

@@ -34,6 +34,7 @@ export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
 
   return (
     <Board
+      allowMarkers
       check={check}
       clickable
       draggable
