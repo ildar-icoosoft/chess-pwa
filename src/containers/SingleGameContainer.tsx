@@ -14,15 +14,13 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
   useEffect(() => {
     let mounted = true;
 
-    getGame(id)
-      .then((res) => {
-        if (!mounted) {
-          return;
-        }
+    getGame(id).then((res) => {
+      if (!mounted) {
+        return;
+      }
 
-        setGame(res);
-      })
-      .catch(() => {});
+      setGame(res);
+    });
 
     watchGames((subscriptionData) => {
       if (!mounted) {
