@@ -15,6 +15,17 @@ const gameSample: Game = {
   black: null,
 };
 
+const gameWithCheckmateSample: Game = {
+  id: 1,
+  initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "mate",
+  white: null,
+  black: null,
+};
+
 describe("SingleGame", () => {
   describe("children components", () => {
     it("contains Board", () => {
@@ -72,6 +83,30 @@ describe("SingleGame", () => {
         expect(board.props.position).toBe(
           "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR w KQkq - 0 1"
         );
+      });
+
+      describe("check", () => {
+        it("false", () => {
+          const testRenderer = TestRenderer.create(
+            <SingleGame game={gameSample} />
+          );
+          const testInstance = testRenderer.root;
+
+          const board = testInstance.findByType(Board);
+
+          expect(board.props.check).toBeFalsy();
+        });
+
+        it("true", () => {
+          const testRenderer = TestRenderer.create(
+            <SingleGame game={gameWithCheckmateSample} />
+          );
+          const testInstance = testRenderer.root;
+
+          const board = testInstance.findByType(Board);
+
+          expect(board.props.check).toBeTruthy();
+        });
       });
 
       it("clickable", () => {

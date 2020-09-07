@@ -23,6 +23,8 @@ export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
 
   const chess: ChessInstance = makeChessInstance(game);
 
+  const check: boolean = chess.in_check();
+
   const fen: string = chess.fen();
 
   const turnColor: PieceColor =
@@ -32,6 +34,7 @@ export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
 
   return (
     <Board
+      check={check}
       clickable
       draggable
       position={fen}
