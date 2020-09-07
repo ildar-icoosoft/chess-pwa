@@ -125,7 +125,55 @@ describe("SingleGameContainer", () => {
     });
   });
 
-  // describek("API calls", () => {
-  //
-  // });
+  describe("API calls", () => {
+    it("makeMove", async () => {
+      // @ts-ignore
+      api.setMockGame({
+        id: 1,
+        initialFen: "startpos",
+        wtime: 300000,
+        btime: 300000,
+        moves: "",
+        status: "started",
+        white: null,
+        black: null,
+      });
+      // @ts-ignore
+      api.setGetGameDelay(1000);
+
+      const testRenderer = TestRenderer.create(<SingleGameContainer id={1} />);
+      const testInstance = testRenderer.root;
+
+      await TestRenderer.act(async () => {
+        jest.advanceTimersByTime(1000);
+      });
+
+      const singleGame = testInstance.findByType(SingleGame);
+
+      const makeMoveFn: jest.Mock = api.makeMove as jest.Mock;
+
+      makeMoveFn.mockImplementation(() => {
+        return Promise.resolve({
+          id: 1,
+          initialFen: "startpos",
+          wtime: 300000,
+          btime: 300000,
+          moves: "e2e4",
+          status: "started",
+          white: null,
+          black: null,
+        });
+      });
+
+      makeMoveFn.mockClear();
+
+      singleGame.props.onMove({
+        from: "e2",
+        to: "e4",
+      });
+
+      expect(makeMoveFn).toHaveBeenCalledTimes(1);
+      expect(makeMoveFn).toBeCalledWith(1, "e2e4");
+    });
+  });
 });

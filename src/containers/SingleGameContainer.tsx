@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
-import { getGame, watchGames } from "../services/api";
+import { Move } from "ii-react-chessboard";
+import { getGame, makeMove, watchGames } from "../services/api";
 import Game from "../interfaces/Game";
 import { SingleGame } from "../components/SingleGame";
 
@@ -43,8 +44,12 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
     };
   }, [id]);
 
+  const onMove = (move: Move) => {
+    makeMove(id, `${move.from}${move.to}`);
+  };
+
   if (game) {
-    return <SingleGame game={game} />;
+    return <SingleGame game={game} onMove={onMove} />;
   }
   return null;
 };
