@@ -40,6 +40,7 @@ export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
       position={fen}
       turnColor={turnColor}
       validMoves={validMoves}
+      viewOnly={game.status !== "started"}
       onMove={onMove}
     />
   );

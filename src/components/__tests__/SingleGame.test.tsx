@@ -85,28 +85,19 @@ describe("SingleGame", () => {
         );
       });
 
-      describe("check", () => {
-        it("false", () => {
-          const testRenderer = TestRenderer.create(
-            <SingleGame game={gameSample} />
-          );
-          const testInstance = testRenderer.root;
+      it("check", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
 
-          const board = testInstance.findByType(Board);
+        const board = testInstance.findByType(Board);
 
-          expect(board.props.check).toBeFalsy();
-        });
+        expect(board.props.check).toBeFalsy();
 
-        it("true", () => {
-          const testRenderer = TestRenderer.create(
-            <SingleGame game={gameWithCheckmateSample} />
-          );
-          const testInstance = testRenderer.root;
+        testRenderer.update(<SingleGame game={gameWithCheckmateSample} />);
 
-          const board = testInstance.findByType(Board);
-
-          expect(board.props.check).toBeTruthy();
-        });
+        expect(board.props.check).toBeTruthy();
       });
 
       it("clickable", () => {
@@ -198,6 +189,21 @@ describe("SingleGame", () => {
         const board = testInstance.findByType(Board);
 
         expect(board.props.validMoves).toEqual(initialPositionValidMoves);
+      });
+
+      it("viewOnly", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const board = testInstance.findByType(Board);
+
+        expect(board.props.viewOnly).toBeFalsy();
+
+        testRenderer.update(<SingleGame game={gameWithCheckmateSample} />);
+
+        expect(board.props.viewOnly).toBeTruthy();
       });
     });
   });
