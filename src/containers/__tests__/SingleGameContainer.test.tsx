@@ -167,13 +167,26 @@ describe("SingleGameContainer", () => {
 
       makeMoveFn.mockClear();
 
-      singleGame.props.onMove({
-        from: "e2",
-        to: "e4",
+      await TestRenderer.act(async () => {
+        singleGame.props.onMove({
+          from: "e2",
+          to: "e4",
+        });
       });
 
       expect(makeMoveFn).toHaveBeenCalledTimes(1);
       expect(makeMoveFn).toBeCalledWith(1, "e2e4");
+
+      expect(singleGame.props.game).toEqual({
+        id: 1,
+        initialFen: "startpos",
+        wtime: 300000,
+        btime: 300000,
+        moves: "e2e4",
+        status: "started",
+        white: null,
+        black: null,
+      });
     });
   });
 });

@@ -43,7 +43,9 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
   }, [id]);
 
   const onMove = (move: Move) => {
-    makeMove(id, `${move.from}${move.to}`);
+    makeMove(id, `${move.from}${move.to}`).then((updatedGame) => {
+      setGame(updatedGame);
+    });
   };
 
   if (game) {
