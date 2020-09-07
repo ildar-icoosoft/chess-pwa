@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import React, { FC, useEffect, useState } from "react";
 import { Move } from "ii-react-chessboard";
 import { getGame, makeMove, watchGames } from "../services/api";
@@ -43,6 +45,11 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
   }, [id]);
 
   const onMove = (move: Move) => {
+    setGame({
+      ...(game as Game),
+      moves: `${game!.moves} ${move.from}${move.to}`.trim(),
+    });
+
     makeMove(id, `${move.from}${move.to}`).then((updatedGame) => {
       setGame(updatedGame);
     });

@@ -153,21 +153,25 @@ describe("SingleGameContainer", () => {
       const makeMoveFn: jest.Mock = api.makeMove as jest.Mock;
 
       makeMoveFn.mockImplementation(() => {
-        return Promise.resolve({
-          id: 1,
-          initialFen: "startpos",
-          wtime: 300000,
-          btime: 300000,
-          moves: "e2e4",
-          status: "started",
-          white: null,
-          black: null,
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({
+              id: 1,
+              initialFen: "startpos",
+              wtime: 300000,
+              btime: 300000,
+              moves: "e2e5", // actually there will be e2e4 in backend response
+              status: "started",
+              white: null,
+              black: null,
+            });
+          }, 1000);
         });
       });
 
       makeMoveFn.mockClear();
 
-      await TestRenderer.act(async () => {
+      TestRenderer.act(() => {
         singleGame.props.onMove({
           from: "e2",
           to: "e4",
@@ -177,12 +181,29 @@ describe("SingleGameContainer", () => {
       expect(makeMoveFn).toHaveBeenCalledTimes(1);
       expect(makeMoveFn).toBeCalledWith(1, "e2e4");
 
+      // change moves property immediately before sending request to backend API
       expect(singleGame.props.game).toEqual({
         id: 1,
         initialFen: "startpos",
         wtime: 300000,
         btime: 300000,
         moves: "e2e4",
+        status: "started",
+        white: null,
+        black: null,
+      });
+
+      await TestRenderer.act(async () => {
+        jest.advanceTimersByTime(1000);
+      });
+
+      // data from backend. e2e5 is just for testing. Actually backend should return e2e4
+      expect(singleGame.props.game).toEqual({
+        id: 1,
+        initialFen: "startpos",
+        wtime: 300000,
+        btime: 300000,
+        moves: "e2e5",
         status: "started",
         white: null,
         black: null,
