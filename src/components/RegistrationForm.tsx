@@ -4,16 +4,25 @@ import { Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
 
 const registrationSchema = Yup.object().shape({
+  fullName: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .min(6, "Password length must be >= 6")
+    .required("Required"),
+  confirmPassword: Yup.string()
+    .equals([Yup.ref("password")], "Please enter valid password")
     .required("Required"),
 });
 
 export const RegistrationForm: FC<unknown> = () => {
   return (
     <Formik
-      initialValues={{ email: "", password: "", repeatPassword: "" }}
+      initialValues={{
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      }}
       validationSchema={registrationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -36,6 +45,23 @@ export const RegistrationForm: FC<unknown> = () => {
           noValidate
           onSubmit={(e) => handleSubmit(e as FormEvent<HTMLFormElement>)}
         >
+          <Form.Group>
+            <Form.Label>Full name</Form.Label>
+            <Form.Control
+              type="text"
+              name="fullName"
+              placeholder="Enter full name"
+              onBlur={handleBlur}
+              value={values.fullName}
+              onChange={handleChange}
+              isValid={touched.fullName && !errors.fullName}
+              isInvalid={touched.fullName && !!errors.fullName}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.fullName}
+            </Form.Control.Feedback>
+          </Form.Group>
+
           <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -71,19 +97,19 @@ export const RegistrationForm: FC<unknown> = () => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type="password"
-              name="repeatPassword"
-              placeholder="Repeat Password"
+              name="confirmPassword"
+              placeholder="Password"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.password}
-              isValid={touched.repeatPassword && !errors.repeatPassword}
-              isInvalid={touched.repeatPassword && !!errors.repeatPassword}
+              value={values.confirmPassword}
+              isValid={touched.confirmPassword && !errors.confirmPassword}
+              isInvalid={touched.confirmPassword && !!errors.confirmPassword}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.password}
+              {errors.confirmPassword}
             </Form.Control.Feedback>
           </Form.Group>
 
