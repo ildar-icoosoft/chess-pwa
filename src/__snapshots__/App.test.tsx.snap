@@ -1,16 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Snapshot 1`] = `
-<div>
-  <nav>
-    <ul>
-      <li>
-        Home
-      </li>
-    </ul>
-  </nav>
-  <div
-    className="grid"
-  />
-</div>
+Array [
+  <button
+    className="ant-btn ant-btn-primary"
+    onClick={[Function]}
+    type="button"
+  >
+    <span>
+      Login / Register
+    </span>
+  </button>,
+  <div>
+    <nav>
+      <ul>
+        <li>
+          Home
+        </li>
+      </ul>
+    </nav>
+    <div
+      className="grid"
+    />
+  </div>,
+]
 `;

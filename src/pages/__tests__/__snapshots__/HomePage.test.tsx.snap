@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HomePage Snapshot 1`] = `
-<div
-  className="grid"
-/>
+Array [
+  <div
+    className="grid"
+  />,
+  ";",
+]
 `;
