@@ -4,6 +4,7 @@ import ioClient from "./ioClient";
 import { SubscriptionData } from "../interfaces/SubscriptionData";
 import LoginData from "../interfaces/LoginData";
 import SignUpData from "../interfaces/SignUpData";
+import User from "../interfaces/User";
 
 export const login = (data: LoginData): Promise<any> => {
   return new Promise((resolve, reject) => {
@@ -47,30 +48,31 @@ export const register = (data: SignUpData): Promise<any> => {
   });
 };
 
-export const getRandomQuote = (): Promise<Game[]> => {
+export const logout = (): Promise<void> => {
   return new Promise((resolve, reject) => {
-    ioClient.socket.get("/api/random-quote", (body: Game[], jwr: JWR) => {
+    ioClient.socket.post(
+      "/api/v1/account/logout",
+      {},
+      (body: Game[], jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          resolve();
+        } else {
+          reject(jwr);
+        }
+      }
+    );
+  });
+};
+
+export const getCurrentUserInfo = (): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    ioClient.socket.get("/api/v1/account/me", (body: User, jwr: JWR) => {
       if (jwr.statusCode === 200) {
         resolve(body);
       } else {
         reject(jwr);
       }
     });
-  });
-};
-
-export const getProtectedRandomQuote = (): Promise<Game[]> => {
-  return new Promise((resolve, reject) => {
-    ioClient.socket.get(
-      "/api/protected/random-quote",
-      (body: Game[], jwr: JWR) => {
-        if (jwr.statusCode === 200) {
-          resolve(body);
-        } else {
-          reject(jwr);
-        }
-      }
-    );
   });
 };
 

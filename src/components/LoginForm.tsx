@@ -2,6 +2,8 @@ import React, { FC, FormEvent } from "react";
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
+import { login } from "../services/api";
+import LoginData from "../interfaces/LoginData";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -16,10 +18,21 @@ export const LoginForm: FC<unknown> = () => {
       initialValues={{ email: "", password: "" }}
       validationSchema={loginSchema}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        login(values as LoginData)
+          .then((res) => {
+            console.log("login ok", res);
+          })
+          .catch((err) => {
+            console.log("login err", err);
+          })
+          .finally(() => {
+            setSubmitting(false);
+          });
+
+        // setTimeout(() => {
+        //   alert(JSON.stringify(values, null, 2));
+        //   setSubmitting(false);
+        // }, 400);
       }}
     >
       {({

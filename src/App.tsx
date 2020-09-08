@@ -1,13 +1,24 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import { Button, Modal } from "react-bootstrap";
 import { LoginTabsContainer } from "./containers/LoginTabsContainer";
+import { getCurrentUserInfo } from "./services/api";
 
 const App: FC = () => {
   const [modalIsVisible, setModalVisibility] = useState(false);
+
+  useEffect(() => {
+    getCurrentUserInfo()
+      .then((res) => {
+        console.log("getCurrentUserInfo ok", res);
+      })
+      .catch((err) => {
+        console.log("getCurrentUserInfo err", err);
+      });
+  }, []);
 
   const showModal = useCallback(() => {
     setModalVisibility(true);
