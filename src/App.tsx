@@ -1,16 +1,14 @@
 import React, { FC, useCallback, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
-import { Button, Modal } from "antd";
+import { LoginForm } from "./components/LoginForm";
+import { Button, Modal } from "react-bootstrap";
 
 const App: FC = () => {
   const [modalIsVisible, setModalVisibility] = useState(false);
 
-  const handleOk = () => {
-    alert("ok");
-  };
   const showModal = useCallback(() => {
     setModalVisibility(true);
   }, []);
@@ -20,18 +18,17 @@ const App: FC = () => {
 
   return (
     <Router>
-      <Button type="primary" onClick={showModal}>
+      <Button variant="primary" onClick={showModal}>
         Login / Register
       </Button>
-      <Modal
-        title="Basic Modal"
-        visible={modalIsVisible}
-        onOk={handleOk}
-        onCancel={hideModal}
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+      <Modal show={modalIsVisible} onHide={hideModal} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Login</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <LoginForm />
+        </Modal.Body>
       </Modal>
       <div>
         <nav>

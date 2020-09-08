@@ -3,13 +3,9 @@
 exports[`App Snapshot 1`] = `
 Array [
   <button
-    className="ant-btn ant-btn-primary"
     onClick={[Function]}
-    type="button"
   >
-    <span>
-      Login / Register
-    </span>
+    Login / Register
   </button>,
   <div>
     <nav>
