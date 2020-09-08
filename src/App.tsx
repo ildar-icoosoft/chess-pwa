@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
-import { LoginForm } from "./components/LoginForm";
 import { Button, Modal } from "react-bootstrap";
+import { LoginTabsContainer } from "./containers/LoginTabsContainer";
 
 const App: FC = () => {
   const [modalIsVisible, setModalVisibility] = useState(false);
@@ -27,7 +27,7 @@ const App: FC = () => {
         </Modal.Header>
 
         <Modal.Body>
-          <LoginForm />
+          <LoginTabsContainer />
         </Modal.Body>
       </Modal>
       <div>

@@ -2,15 +2,39 @@ import { JWR } from "sails.io.js";
 import Game from "../interfaces/Game";
 import ioClient from "./ioClient";
 import { SubscriptionData } from "../interfaces/SubscriptionData";
+import LoginData from "../interfaces/LoginData";
+import SignUpData from "../interfaces/SignUpData";
 
-export const login = (): Promise<Game[]> => {
+export const login = (data: LoginData): Promise<any> => {
   return new Promise((resolve, reject) => {
     ioClient.socket.put(
       "/api/v1/entrance/login",
       {
         rememberMe: true,
-        emailAddress: "ildar@ildar.com",
-        password: "123123123",
+        emailAddress: data.email,
+        password: data.password,
+      },
+      (body: Game[], jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          resolve(body);
+        } else {
+          reject(jwr);
+        }
+      }
+    );
+  });
+};
+
+export const register = (data: SignUpData): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    ioClient.socket.put(
+      "/api/v1/entrance/login",
+      {
+        fullName: data.fullName,
+        emailAddress: data.email,
+        password: data.password,
+        confirmPassword: data.password,
+        agreed: true,
       },
       (body: Game[], jwr: JWR) => {
         if (jwr.statusCode === 200) {

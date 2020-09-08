@@ -3,18 +3,18 @@ import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
 
-const loginSchema = Yup.object().shape({
+const registrationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .min(6, "Password length must be >= 6")
     .required("Required"),
 });
 
-export const LoginForm: FC<unknown> = () => {
+export const RegistrationForm: FC<unknown> = () => {
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
-      validationSchema={loginSchema}
+      initialValues={{ email: "", password: "", repeatPassword: "" }}
+      validationSchema={registrationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -36,7 +36,7 @@ export const LoginForm: FC<unknown> = () => {
           noValidate
           onSubmit={(e) => handleSubmit(e as FormEvent<HTMLFormElement>)}
         >
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
@@ -53,7 +53,7 @@ export const LoginForm: FC<unknown> = () => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -69,8 +69,26 @@ export const LoginForm: FC<unknown> = () => {
               {errors.password}
             </Form.Control.Feedback>
           </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="repeatPassword"
+              placeholder="Repeat Password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+              isValid={touched.repeatPassword && !errors.repeatPassword}
+              isInvalid={touched.repeatPassword && !!errors.repeatPassword}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.password}
+            </Form.Control.Feedback>
+          </Form.Group>
+
           <Button variant="primary" type="submit" disabled={isSubmitting}>
-            Login
+            Register
           </Button>
         </Form>
       )}
