@@ -1,14 +1,22 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-/* eslint-disable prefer-promise-reject-errors */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
+// @ts-ignore
+import { SubscriptionData } from "../../interfaces/SubscriptionData";
+
+const ioClient = jest.genMockFromModule<any>("../api");
+
+ioClient.getOngoingGames.mockImplementation(() => new Promise(() => {}));
+ioClient.getGame.mockImplementation(() => new Promise(() => {}));
+ioClient.makeMove.mockImplementation(() => new Promise(() => {}));
+
+module.exports = ioClient;
+
+/*
 
 import Game from "../../interfaces/Game";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";
 
-/**
- * delay in msec
- */
 let ongoingGamesDelay = 0;
 export const setGetOngoingGamesDelay = (value: number): void => {
   ongoingGamesDelay = value;
@@ -74,3 +82,4 @@ export const watchGames = (cb: (data: SubscriptionData) => void): void => {
 };
 
 export const makeMove = jest.fn();
+*/
