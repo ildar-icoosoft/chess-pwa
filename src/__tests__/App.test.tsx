@@ -1,13 +1,13 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { render } from "@testing-library/react";
-import { App } from "./App";
-import mountTest from "./tests/mountTest";
-import HomePage from "./pages/HomePage";
+import { App } from "../App";
+import mountTest from "../tests/mountTest";
+import HomePage from "../pages/HomePage";
 
 jest.useFakeTimers();
 
-jest.mock("./services/api");
+jest.mock("../services/api");
 
 describe("App", () => {
   mountTest(App);
@@ -27,7 +27,7 @@ describe("App", () => {
   });
 
   // @todo. add tests for App contains HomePage and GamePage
-  // @todo. add tests about other content (link to Home Page)
+  // @todo. add tests about other content
 
   describe("DOM structure", () => {
     it("renders learn react link", () => {

@@ -26,7 +26,7 @@ export const App: FC = () => {
   });
 
   useEffect(() => {
-    getCurrentUser().then((result: User) => {
+    getCurrentUser().then((result: User | null) => {
       dispatch({ type: "GET_CURRENT_USER", payload: result });
     });
   }, []);
