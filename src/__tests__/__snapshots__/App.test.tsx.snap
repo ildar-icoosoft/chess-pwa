@@ -14,12 +14,7 @@ Array [
     <nav>
       <ul>
         <li>
-          <a
-            href="/"
-            onClick={[Function]}
-          >
-            Home
-          </a>
+          Home
         </li>
       </ul>
     </nav>

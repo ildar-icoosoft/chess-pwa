@@ -1,9 +1,8 @@
 import React, { FC, FormEvent } from "react";
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import { Alert, Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
 import LoginData from "../interfaces/LoginData";
-import { FormikHelpers } from "formik/dist/types";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -24,10 +23,11 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={loginSchema}
-      onSubmit={(values, formikHelpers) => {
+      onSubmit={(values, formikHelpers): Promise<void> | void => {
         if (onSubmit) {
           return onSubmit(values as LoginData, formikHelpers);
         }
+        return undefined;
       }}
     >
       {({

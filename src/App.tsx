@@ -1,25 +1,16 @@
-import React, { Dispatch, FC, useCallback, useEffect, useReducer } from "react";
+import React, { FC, useCallback, useEffect, useReducer } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
-import { LoginTabsContainer } from "./containers/LoginTabsContainer";
+import LoginTabsContainer from "./containers/LoginTabsContainer";
 import { getCurrentUser, logout } from "./services/api";
 import User from "./interfaces/User";
 import { reducer } from "./App.reducer";
+import { AppContext } from "./AppContext";
 
-export interface AppContextData {
-  user: User | null;
-  dispatch: Dispatch<any>;
-}
-
-export const AppContext = React.createContext<AppContextData>({
-  user: null,
-  dispatch() {},
-});
-
-export const App: FC = () => {
+const App: FC = () => {
   const [state, dispatch] = useReducer(reducer, {
     user: null,
     isAuthModalVisible: false,
@@ -99,3 +90,5 @@ export const App: FC = () => {
     </AppContext.Provider>
   );
 };
+
+export default App;

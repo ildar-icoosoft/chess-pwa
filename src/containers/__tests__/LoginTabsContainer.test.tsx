@@ -1,11 +1,11 @@
-import mountTest from "../../tests/mountTest";
-import { LoginTabsContainer } from "../LoginTabsContainer";
 import TestRenderer from "react-test-renderer";
 import React from "react";
+import mountTest from "../../tests/mountTest";
+import LoginTabsContainer from "../LoginTabsContainer";
 import { LoginForm } from "../../components/LoginForm";
 import { RegistrationForm } from "../../components/RegistrationForm";
-import { AppContext } from "../../App";
 import { login, register } from "../../services/api";
+import { AppContext } from "../../AppContext";
 
 jest.useFakeTimers();
 

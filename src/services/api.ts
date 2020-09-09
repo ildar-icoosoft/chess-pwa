@@ -69,12 +69,10 @@ export const getCurrentUser = (): Promise<User | null> => {
     ioClient.socket.get("/api/v1/account/me", (body: User, jwr: JWR) => {
       if (jwr.statusCode === 200) {
         resolve(body);
+      } else if (jwr.statusCode === 401) {
+        resolve(null);
       } else {
-        if (jwr.statusCode === 401) {
-          resolve(null);
-        } else {
-          reject(jwr);
-        }
+        reject(jwr);
       }
     });
   });

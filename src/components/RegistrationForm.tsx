@@ -39,10 +39,11 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
         confirmPassword: "",
       }}
       validationSchema={registrationSchema}
-      onSubmit={(values, formikHelpers) => {
+      onSubmit={(values, formikHelpers): Promise<void> | void => {
         if (onSubmit) {
           return onSubmit(values as RegistrationFormData, formikHelpers);
         }
+        return undefined;
       }}
     >
       {({

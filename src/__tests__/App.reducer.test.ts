@@ -56,7 +56,7 @@ describe("App.reducer", () => {
   });
 
   it("LOGIN action", () => {
-    let state = reducer(stateSample3, {
+    const state = reducer(stateSample3, {
       type: "LOGIN",
       payload: {
         id: 1,
@@ -74,7 +74,7 @@ describe("App.reducer", () => {
   });
 
   it("LOGOUT action", () => {
-    let state = reducer(stateSample2, {
+    const state = reducer(stateSample2, {
       type: "LOGOUT",
     });
 
@@ -85,7 +85,7 @@ describe("App.reducer", () => {
   });
 
   it("SHOW_AUTH_MODAL action", () => {
-    let state = reducer(stateSample4, {
+    const state = reducer(stateSample4, {
       type: "SHOW_AUTH_MODAL",
     });
 
@@ -99,7 +99,7 @@ describe("App.reducer", () => {
   });
 
   it("HIDE_AUTH_MODAL action", () => {
-    let state = reducer(stateSample2, {
+    const state = reducer(stateSample2, {
       type: "HIDE_AUTH_MODAL",
     });
 
