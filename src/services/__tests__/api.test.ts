@@ -8,6 +8,7 @@ import {
   getOngoingGames,
   login,
   makeMove,
+  register,
   watchGames,
 } from "../api";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";
@@ -267,6 +268,52 @@ describe("api service", () => {
       ).rejects.toEqual({
         body: "Not authenticated",
         statusCode: 401,
+      });
+    });
+  });
+
+  describe("register()", () => {
+    it("success", () => {
+      const user: User = {
+        id: 1,
+        fullName: "Christopher Garcia",
+      };
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb(user, {
+            body: user,
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+      return expect(
+        register({
+          fullName: "Christopher Garcia",
+          email: "test@test.com",
+          password: "123",
+        })
+      ).resolves.toEqual(user);
+    });
+
+    it("fail", () => {
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb("User already exists", {
+            body: "User already exists",
+            statusCode: 409,
+          } as JWR);
+        }
+      );
+      return expect(
+        register({
+          fullName: "John Smith",
+          email: "test@test.com",
+          password: "123",
+        })
+      ).rejects.toEqual({
+        body: "User already exists",
+        statusCode: 409,
       });
     });
   });
