@@ -1,7 +1,11 @@
-import React, { FC, FormEvent } from "react";
+import React, { FC, FormEvent, useContext } from "react";
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
+import { register } from "../services/api";
+import User from "../interfaces/User";
+import SignUpData from "../interfaces/SignUpData";
+import { AppContext } from "../App";
 
 const registrationSchema = Yup.object().shape({
   fullName: Yup.string().required("Required"),
@@ -10,11 +14,13 @@ const registrationSchema = Yup.object().shape({
     .min(6, "Password length must be >= 6")
     .required("Required"),
   confirmPassword: Yup.string()
-    .equals([Yup.ref("password")], "Please enter valid password")
+    .equals([Yup.ref("password")], "Please repeat the password")
     .required("Required"),
 });
 
 export const RegistrationForm: FC<unknown> = () => {
+  const appContext = useContext(AppContext);
+
   return (
     <Formik
       initialValues={{
@@ -25,10 +31,16 @@ export const RegistrationForm: FC<unknown> = () => {
       }}
       validationSchema={registrationSchema}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        register(values as SignUpData)
+          .then((user: User) => {
+            appContext.dispatch({ type: "LOGIN", payload: user });
+          })
+          .catch((err) => {
+            console.log("regiter err", err);
+          })
+          .finally(() => {
+            setSubmitting(false);
+          });
       }}
     >
       {({

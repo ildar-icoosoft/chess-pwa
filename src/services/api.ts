@@ -6,7 +6,7 @@ import LoginData from "../interfaces/LoginData";
 import SignUpData from "../interfaces/SignUpData";
 import User from "../interfaces/User";
 
-export const login = (data: LoginData): Promise<any> => {
+export const login = (data: LoginData): Promise<User> => {
   return new Promise((resolve, reject) => {
     ioClient.socket.put(
       "/api/v1/entrance/login",
@@ -15,7 +15,7 @@ export const login = (data: LoginData): Promise<any> => {
         emailAddress: data.email,
         password: data.password,
       },
-      (body: Game[], jwr: JWR) => {
+      (body: User, jwr: JWR) => {
         if (jwr.statusCode === 200) {
           resolve(body);
         } else {
@@ -26,10 +26,10 @@ export const login = (data: LoginData): Promise<any> => {
   });
 };
 
-export const register = (data: SignUpData): Promise<any> => {
+export const register = (data: SignUpData): Promise<User> => {
   return new Promise((resolve, reject) => {
-    ioClient.socket.put(
-      "/api/v1/entrance/login",
+    ioClient.socket.post(
+      "/api/v1/entrance/signup",
       {
         fullName: data.fullName,
         emailAddress: data.email,
@@ -37,7 +37,7 @@ export const register = (data: SignUpData): Promise<any> => {
         confirmPassword: data.password,
         agreed: true,
       },
-      (body: Game[], jwr: JWR) => {
+      (body: User, jwr: JWR) => {
         if (jwr.statusCode === 200) {
           resolve(body);
         } else {

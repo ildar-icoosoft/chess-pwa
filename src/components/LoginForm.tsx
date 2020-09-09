@@ -22,17 +22,14 @@ export const LoginForm: FC<unknown> = () => {
       initialValues={{ email: "", password: "" }}
       validationSchema={loginSchema}
       onSubmit={(values, { setSubmitting }) => {
-        console.log("login request");
         login(values as LoginData)
           .then((user: User) => {
-            console.log("login okkkk", user);
             appContext.dispatch({ type: "LOGIN", payload: user });
           })
           .catch((err) => {
             console.log("login err", err);
           })
           .finally(() => {
-            console.log("login finally");
             setSubmitting(false);
           });
       }}

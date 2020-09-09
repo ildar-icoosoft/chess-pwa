@@ -29,12 +29,12 @@ const login = (state: State, { payload }: Action): State => ({
   user: payload as User,
 });
 
-const showAuthModal = (state: State, { payload }: Action): State => ({
+const showAuthModal = (state: State): State => ({
   ...state,
   isAuthModalVisible: true,
 });
 
-const hideAuthModal = (state: State, { payload }: Action): State => ({
+const hideAuthModal = (state: State): State => ({
   ...state,
   isAuthModalVisible: false,
 });
