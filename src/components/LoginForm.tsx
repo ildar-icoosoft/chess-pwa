@@ -2,10 +2,9 @@ import React, { FC, FormEvent, useContext } from "react";
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
-import { login } from "../services/api";
 import LoginData from "../interfaces/LoginData";
 import { AppContext } from "../App";
-import User from "../interfaces/User";
+import { FormikHelpers } from "formik/dist/types";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -14,24 +13,22 @@ const loginSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export const LoginForm: FC<unknown> = () => {
-  const appContext = useContext(AppContext);
+export interface LoginFormProps {
+  onSubmit(
+    values: LoginData,
+    formikHelpers: FormikHelpers<LoginData>
+  ): void | Promise<void>;
+}
 
+export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={loginSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        login(values as LoginData)
-          .then((user: User) => {
-            appContext.dispatch({ type: "LOGIN", payload: user });
-          })
-          .catch((err) => {
-            console.log("login err", err);
-          })
-          .finally(() => {
-            setSubmitting(false);
-          });
+      onSubmit={(values, formikHelpers) => {
+        if (onSubmit) {
+          return onSubmit(values, formikHelpers);
+        }
       }}
     >
       {({
