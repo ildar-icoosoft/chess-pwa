@@ -27,7 +27,9 @@ describe("App", () => {
   });
 
   // @todo. add tests for App contains HomePage and GamePage
-  // @todo. add tests about other content
+  // @todo. add tests for other content
+  // @todo. add tests for auth modal
+  // @todo. add tests for AppContext
 
   describe("DOM structure", () => {
     it("renders learn react link", () => {
