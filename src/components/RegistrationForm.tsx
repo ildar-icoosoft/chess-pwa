@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, useContext } from "react";
 import { Formik } from "formik";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
 import { FormikHelpers } from "formik/dist/types";
 
@@ -53,12 +53,17 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
         handleBlur,
         handleSubmit,
         isSubmitting,
+        status,
+        setStatus,
         /* and other goodies */
       }) => (
         <Form
           noValidate
           onSubmit={(e) => handleSubmit(e as FormEvent<HTMLFormElement>)}
+          onChange={() => setStatus("")}
         >
+          {!!status && <Alert variant="danger">{status}</Alert>}
+
           <Form.Group>
             <Form.Label>Full name</Form.Label>
             <Form.Control

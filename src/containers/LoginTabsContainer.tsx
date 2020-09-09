@@ -9,25 +9,51 @@ import LoginData from "../interfaces/LoginData";
 import User from "../interfaces/User";
 import { login, register } from "../services/api";
 import { AppContext } from "../App";
+import { FormikHelpers } from "formik";
 
 export const LoginTabsContainer: FC<unknown> = () => {
   const appContext = useContext(AppContext);
 
-  const doLogin = React.useCallback((values: LoginData) => {
-    return login(values).then((user: User) => {
-      appContext.dispatch({ type: "LOGIN", payload: user });
-    });
-  }, []);
+  const doLogin = React.useCallback(
+    (values: LoginData, formikHelpers: FormikHelpers<LoginData>) => {
+      return login(values)
+        .then((user: User) => {
+          appContext.dispatch({ type: "LOGIN", payload: user });
+        })
+        .catch((err) => {
+          if (err.statusCode === 401) {
+            formikHelpers.setStatus("Incorrect email or password");
+          } else {
+            formikHelpers.setStatus("Internal server error");
+          }
+        });
+    },
+    []
+  );
 
-  const doSignUp = React.useCallback((values: RegistrationFormData) => {
-    return register({
-      fullName: values.fullName,
-      email: values.email,
-      password: values.password,
-    }).then((user: User) => {
-      appContext.dispatch({ type: "LOGIN", payload: user });
-    });
-  }, []);
+  const doSignUp = React.useCallback(
+    (
+      values: RegistrationFormData,
+      formikHelpers: FormikHelpers<RegistrationFormData>
+    ) => {
+      return register({
+        fullName: values.fullName,
+        email: values.email,
+        password: values.password,
+      })
+        .then((user: User) => {
+          appContext.dispatch({ type: "LOGIN", payload: user });
+        })
+        .catch((err) => {
+          if (err.statusCode === 409) {
+            formikHelpers.setStatus("User with provided email already");
+          } else {
+            formikHelpers.setStatus("Internal server error");
+          }
+        });
+    },
+    []
+  );
 
   return (
     <Tabs transition={false}>

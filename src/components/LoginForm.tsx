@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, useContext } from "react";
 import { Formik } from "formik";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
 import LoginData from "../interfaces/LoginData";
 import { FormikHelpers } from "formik/dist/types";
@@ -38,13 +38,17 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
         handleBlur,
         handleSubmit,
         isSubmitting,
+        status,
+        setStatus,
         /* and other goodies */
       }) => (
         <Form
           noValidate
           onSubmit={(e) => handleSubmit(e as FormEvent<HTMLFormElement>)}
+          onChange={() => setStatus("")}
         >
-          <Form.Group controlId="formBasicEmail">
+          {!!status && <Alert variant="danger">{status}</Alert>}
+          <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
@@ -61,7 +65,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
