@@ -52,9 +52,12 @@ export const App: FC = () => {
     >
       <Router>
         {state.user ? (
-          <Button variant="primary" onClick={doLogout}>
-            Logout
-          </Button>
+          <>
+            <div>Hi, {state.user.fullName}</div>
+            <Button variant="primary" onClick={doLogout}>
+              Logout
+            </Button>
+          </>
         ) : (
           <Button variant="primary" onClick={showModal}>
             Login / Register
