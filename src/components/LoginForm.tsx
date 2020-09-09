@@ -3,7 +3,6 @@ import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
 import LoginData from "../interfaces/LoginData";
-import { AppContext } from "../App";
 import { FormikHelpers } from "formik/dist/types";
 
 const loginSchema = Yup.object().shape({
@@ -27,7 +26,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
       validationSchema={loginSchema}
       onSubmit={(values, formikHelpers) => {
         if (onSubmit) {
-          return onSubmit(values, formikHelpers);
+          return onSubmit(values as LoginData, formikHelpers);
         }
       }}
     >
