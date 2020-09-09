@@ -5,9 +5,8 @@ import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import { Button, Modal } from "react-bootstrap";
 import { LoginTabsContainer } from "./containers/LoginTabsContainer";
-import { getCurrentUserInfo, logout } from "./services/api";
+import { getCurrentUser, logout } from "./services/api";
 import User from "./interfaces/User";
-import { JWR } from "sails.io.js";
 import { reducer } from "./App.reducer";
 
 export interface AppContextData {
@@ -27,15 +26,9 @@ export const App: FC = () => {
   });
 
   useEffect(() => {
-    getCurrentUserInfo()
-      .then((result: User) => {
-        dispatch({ type: "GET_CURRENT_USER", payload: result });
-      })
-      .catch((err: JWR) => {
-        if (err.statusCode !== 401) {
-          throw err;
-        }
-      });
+    getCurrentUser().then((result: User) => {
+      dispatch({ type: "GET_CURRENT_USER", payload: result });
+    });
   }, []);
 
   const showModal = useCallback(() => {

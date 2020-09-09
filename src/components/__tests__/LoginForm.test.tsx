@@ -1,6 +1,6 @@
 import mountTest from "../../tests/mountTest";
-import { LoginModal } from "../LoginModal";
+import { LoginForm } from "../LoginForm";
 
-describe("GamePreviewsList", () => {
-  mountTest(LoginModal);
+describe("LoginForm", () => {
+  mountTest(LoginForm);
 });

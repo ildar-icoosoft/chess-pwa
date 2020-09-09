@@ -64,13 +64,17 @@ export const logout = (): Promise<void> => {
   });
 };
 
-export const getCurrentUserInfo = (): Promise<any> => {
+export const getCurrentUser = (): Promise<User | null> => {
   return new Promise((resolve, reject) => {
     ioClient.socket.get("/api/v1/account/me", (body: User, jwr: JWR) => {
       if (jwr.statusCode === 200) {
         resolve(body);
       } else {
-        reject(jwr);
+        if (jwr.statusCode === 401) {
+          resolve(null);
+        } else {
+          reject(jwr);
+        }
       }
     });
   });

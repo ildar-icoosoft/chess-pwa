@@ -3,7 +3,10 @@
 exports[`App Snapshot 1`] = `
 Array [
   <button
+    className="btn btn-primary"
+    disabled={false}
     onClick={[Function]}
+    type="button"
   >
     Login / Register
   </button>,
