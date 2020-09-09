@@ -1,9 +1,9 @@
 import React, { Dispatch, FC, useCallback, useEffect, useReducer } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
-import { Button, Modal } from "react-bootstrap";
 import { LoginTabsContainer } from "./containers/LoginTabsContainer";
 import { getCurrentUser, logout } from "./services/api";
 import User from "./interfaces/User";

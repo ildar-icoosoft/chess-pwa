@@ -28,7 +28,7 @@ export const LoginTabsContainer: FC<unknown> = () => {
           }
         });
     },
-    []
+    [appContext]
   );
 
   const doSignUp = React.useCallback(
@@ -52,7 +52,7 @@ export const LoginTabsContainer: FC<unknown> = () => {
           }
         });
     },
-    []
+    [appContext]
   );
 
   return (
