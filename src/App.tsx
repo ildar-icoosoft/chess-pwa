@@ -1,66 +1,105 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { Dispatch, FC, useCallback, useEffect, useReducer } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import { Button, Modal } from "react-bootstrap";
 import { LoginTabsContainer } from "./containers/LoginTabsContainer";
-import { getCurrentUserInfo } from "./services/api";
+import { getCurrentUserInfo, logout } from "./services/api";
+import User from "./interfaces/User";
+import { JWR } from "sails.io.js";
+import { reducer } from "./App.reducer";
 
-const App: FC = () => {
-  const [modalIsVisible, setModalVisibility] = useState(false);
+export interface AppContextData {
+  user: User | null;
+  dispatch: Dispatch<any>;
+}
+
+export const AppContext = React.createContext<AppContextData>({
+  user: null,
+  dispatch() {},
+});
+
+export const App: FC = () => {
+  const [state, dispatch] = useReducer(reducer, {
+    user: null,
+    isAuthModalVisible: false,
+  });
 
   useEffect(() => {
     getCurrentUserInfo()
-      .then((res) => {
-        console.log("getCurrentUserInfo ok", res);
+      .then((result: User) => {
+        dispatch({ type: "GET_CURRENT_USER", payload: result });
       })
-      .catch((err) => {
-        console.log("getCurrentUserInfo err", err);
+      .catch((err: JWR) => {
+        if (err.statusCode !== 401) {
+          throw err;
+        }
       });
   }, []);
 
   const showModal = useCallback(() => {
-    setModalVisibility(true);
+    dispatch({ type: "SHOW_AUTH_MODAL" });
   }, []);
   const hideModal = useCallback(() => {
-    setModalVisibility(false);
+    dispatch({ type: "HIDE_AUTH_MODAL" });
+  }, []);
+  const doLogout = useCallback(() => {
+    logout().then(() => {
+      dispatch({ type: "LOGOUT" });
+    });
   }, []);
 
   return (
-    <Router>
-      <Button variant="primary" onClick={showModal}>
-        Login / Register
-      </Button>
-      <Modal show={modalIsVisible} onHide={hideModal} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
+    <AppContext.Provider
+      value={{
+        user: state.user,
+        dispatch,
+      }}
+    >
+      <Router>
+        {state.user ? (
+          <Button variant="primary" onClick={doLogout}>
+            Logout
+          </Button>
+        ) : (
+          <Button variant="primary" onClick={showModal}>
+            Login / Register
+          </Button>
+        )}
 
-        <Modal.Body>
-          <LoginTabsContainer />
-        </Modal.Body>
-      </Modal>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
-        </nav>
+        <Modal
+          show={state.isAuthModalVisible}
+          onHide={hideModal}
+          animation={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Login</Modal.Title>
+          </Modal.Header>
 
-        <Switch>
-          <Route path="/game/:id">
-            <GamePage />
-          </Route>
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          <Modal.Body>
+            <LoginTabsContainer />
+          </Modal.Body>
+        </Modal>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <Switch>
+            <Route path="/game/:id">
+              <GamePage />
+            </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </AppContext.Provider>
   );
 };
-
-export default App;

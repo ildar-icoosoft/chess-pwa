@@ -1,9 +1,11 @@
-import React, { FC, FormEvent } from "react";
+import React, { FC, FormEvent, useContext } from "react";
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
 import { login } from "../services/api";
 import LoginData from "../interfaces/LoginData";
+import { AppContext } from "../App";
+import User from "../interfaces/User";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -13,26 +15,26 @@ const loginSchema = Yup.object().shape({
 });
 
 export const LoginForm: FC<unknown> = () => {
+  const appContext = useContext(AppContext);
+
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={loginSchema}
       onSubmit={(values, { setSubmitting }) => {
+        console.log("login request");
         login(values as LoginData)
-          .then((res) => {
-            console.log("login ok", res);
+          .then((user: User) => {
+            console.log("login okkkk", user);
+            appContext.dispatch({ type: "LOGIN", payload: user });
           })
           .catch((err) => {
             console.log("login err", err);
           })
           .finally(() => {
+            console.log("login finally");
             setSubmitting(false);
           });
-
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);
-        // }, 400);
       }}
     >
       {({
