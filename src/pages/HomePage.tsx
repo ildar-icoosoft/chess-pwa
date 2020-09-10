@@ -1,27 +1,27 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { OngoingGamesContainer } from "../containers/OngoingGamesContainer";
-import { Button } from "react-bootstrap";
-import { challengeAi as apiChallengeAi } from "../services/api";
+import { Button, Modal } from "react-bootstrap";
+import { ChallengeAiFormContainer } from "../containers/ChallengeAiFormContainer";
 
 const HomePage: FC<unknown> = () => {
-  const challengeAi = () => {
-    apiChallengeAi({
-      level: 3,
-      color: "random",
-      clockLimit: 400,
-      clockIncrement: 4,
-    })
-      .then((res) => {
-        debugger;
-      })
-      .catch((err) => {
-        debugger;
-      });
-  };
+  const [showChallengeAiModal, setShowChallengeAiModal] = useState(false);
 
   return (
     <>
-      <Button variant="primary" onClick={challengeAi}>
+      <Modal
+        show={showChallengeAiModal}
+        onHide={() => setShowChallengeAiModal(false)}
+        animation={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Login</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <ChallengeAiFormContainer />
+        </Modal.Body>
+      </Modal>
+      <Button variant="primary" onClick={() => setShowChallengeAiModal(true)}>
         Challenge AI
       </Button>
       <OngoingGamesContainer />
