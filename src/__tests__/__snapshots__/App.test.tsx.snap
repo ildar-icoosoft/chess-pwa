@@ -18,6 +18,14 @@ Array [
         </li>
       </ul>
     </nav>
+    <button
+      className="btn btn-primary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Challenge AI
+    </button>
     <div
       className="grid"
     />

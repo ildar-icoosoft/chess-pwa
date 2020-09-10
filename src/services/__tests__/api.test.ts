@@ -3,6 +3,7 @@
 import { JWR, RequestCallback } from "sails.io.js";
 import Game from "../../interfaces/Game";
 import {
+  challengeAi,
   getCurrentUser,
   getGame,
   getOngoingGames,
@@ -314,6 +315,49 @@ describe("api service", () => {
       ).rejects.toEqual({
         body: "User already exists",
         statusCode: 409,
+      });
+    });
+  });
+
+  describe("challengeAi()", () => {
+    it("success", () => {
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb(games[0], {
+            body: games[0],
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+      return expect(
+        challengeAi({
+          level: 3,
+          color: "random",
+          clockLimit: 300,
+          clockIncrement: 0,
+        })
+      ).resolves.toEqual(games[0]);
+    });
+
+    it("fail", () => {
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb("Wrong params", {
+            body: "Wrong params",
+            statusCode: 400,
+          } as JWR);
+        }
+      );
+      return expect(
+        challengeAi({
+          level: 3,
+          color: "random",
+          clockLimit: 300,
+          clockIncrement: 0,
+        })
+      ).rejects.toEqual({
+        body: "Wrong params",
+        statusCode: 400,
       });
     });
   });

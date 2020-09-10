@@ -5,6 +5,7 @@ import { SubscriptionData } from "../interfaces/SubscriptionData";
 import LoginData from "../interfaces/LoginData";
 import SignUpData from "../interfaces/SignUpData";
 import User from "../interfaces/User";
+import { ChallengeAiData } from "../interfaces/ChallengeAiData";
 
 export const login = (data: LoginData): Promise<User> => {
   return new Promise((resolve, reject) => {
@@ -113,6 +114,22 @@ export const makeMove = (gameId: number, move: string): Promise<Game> => {
     ioClient.socket.post(
       `/api/v1/board/game/${gameId}/move/${move}`,
       {},
+      (body: Game, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          resolve(body);
+        } else {
+          reject(jwr);
+        }
+      }
+    );
+  });
+};
+
+export const challengeAi = (data: ChallengeAiData): Promise<Game> => {
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(
+      `/api/v1/challenge/ai`,
+      data,
       (body: Game, jwr: JWR) => {
         if (jwr.statusCode === 200) {
           resolve(body);
