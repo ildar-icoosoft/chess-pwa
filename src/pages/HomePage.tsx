@@ -14,7 +14,7 @@ const HomePage: FC<unknown> = () => {
         animation={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Play with the computer</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -22,7 +22,7 @@ const HomePage: FC<unknown> = () => {
         </Modal.Body>
       </Modal>
       <Button variant="primary" onClick={() => setShowChallengeAiModal(true)}>
-        Challenge AI
+        Play with the computer
       </Button>
       <OngoingGamesContainer />
     </>
