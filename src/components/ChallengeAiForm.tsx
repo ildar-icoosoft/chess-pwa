@@ -76,6 +76,7 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
             <ButtonGroup className={cx("mx-auto", css.levelButtonGroup)}>
               {[1, 2, 3, 4, 5, 6, 7, 8].map((level) => (
                 <Button
+                  key={level}
                   type="button"
                   variant={level === values.level ? "dark" : "light"}
                   onClick={() => setFieldValue("level", level)}
