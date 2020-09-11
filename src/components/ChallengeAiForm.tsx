@@ -41,7 +41,6 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
         >
           {!!status && <Alert variant="danger">{status}</Alert>}
           <fieldset>
-            <h4>Time Control</h4>
             <Form.Group>
               <Form.Label>Minutes per side: {values.clockLimit}</Form.Label>
               <Form.Control
@@ -71,7 +70,7 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
             </Form.Group>
           </fieldset>
 
-          <h4>Level</h4>
+          <div className="text-center">Level</div>
 
           <Row>
             <ButtonGroup className={cx("mx-auto", css.levelButtonGroup)}>
@@ -86,6 +85,38 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
               ))}
             </ButtonGroup>
           </Row>
+
+          <div className="text-center">A.I. Level: {values.level}</div>
+
+          <div className={css.colorSubmits}>
+            <button
+              type="submit"
+              title="Black"
+              className={cx(css.colorSubmitsButton, css.blackButton)}
+              name="color"
+              value="black"
+            >
+              <i></i>
+            </button>
+            <button
+              type="submit"
+              title="Random side"
+              className={cx(css.colorSubmitsButton, css.randomButton)}
+              name="color"
+              value="random"
+            >
+              <i></i>
+            </button>
+            <button
+              type="submit"
+              title="White"
+              className={cx(css.colorSubmitsButton, css.whiteButton)}
+              name="color"
+              value="white"
+            >
+              <i></i>
+            </button>
+          </div>
 
           <Button variant="primary" type="submit" disabled={isSubmitting}>
             Submit
