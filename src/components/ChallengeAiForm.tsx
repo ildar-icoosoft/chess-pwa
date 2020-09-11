@@ -6,7 +6,7 @@ import css from "./ChallengeAiForm.module.scss";
 import cx from "classnames";
 
 export interface ChallengeAiFormProps {
-  onSubmit(
+  onSubmit?(
     values: ChallengeAiData,
     formikHelpers: FormikHelpers<ChallengeAiData>
   ): void | Promise<void>;
@@ -91,37 +91,33 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
 
           <div className={css.colorSubmits}>
             <button
+              disabled={isSubmitting}
               type="submit"
               title="Black"
               className={cx(css.colorSubmitsButton, css.blackButton)}
-              name="color"
-              value="black"
+              onClick={() => setFieldValue("color", "black")}
             >
               <i></i>
             </button>
             <button
+              disabled={isSubmitting}
               type="submit"
               title="Random side"
               className={cx(css.colorSubmitsButton, css.randomButton)}
-              name="color"
-              value="random"
+              onClick={() => setFieldValue("color", "random")}
             >
               <i></i>
             </button>
             <button
+              disabled={isSubmitting}
               type="submit"
               title="White"
               className={cx(css.colorSubmitsButton, css.whiteButton)}
-              name="color"
-              value="white"
+              onClick={() => setFieldValue("color", "white")}
             >
               <i></i>
             </button>
           </div>
-
-          <Button variant="primary" type="submit" disabled={isSubmitting}>
-            Submit
-          </Button>
         </Form>
       )}
     </Formik>
