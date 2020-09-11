@@ -18,7 +18,10 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
       initialValues={{ level: 3, color: "", clockLimit: 5, clockIncrement: 3 }}
       onSubmit={(values, formikHelpers): Promise<void> | void => {
         if (onSubmit) {
-          return onSubmit(values as ChallengeAiData, formikHelpers as any);
+          return onSubmit(
+            values as ChallengeAiData,
+            formikHelpers as FormikHelpers<ChallengeAiData>
+          );
         }
         return undefined;
       }}
