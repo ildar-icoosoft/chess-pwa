@@ -58,7 +58,7 @@ export const {
 
 export default currentUserSlice.reducer;
 
-export const fetchCurrentUser = (): AppThunk => (dispatch) => {
+export const fetchCurrentUser = (): AppThunk<void> => (dispatch) => {
   dispatch(getCurrentUserRequest());
 
   ioClient.socket.get("/api/v1/account/me", (body: unknown, jwr: JWR) => {
@@ -72,7 +72,9 @@ export const fetchCurrentUser = (): AppThunk => (dispatch) => {
   });
 };
 
-export const login = (data: LoginData): AppThunk => (dispatch) => {
+export const login = (data: LoginData): AppThunk<Promise<User>> => (
+  dispatch
+) => {
   return new Promise((resolve, reject) => {
     ioClient.socket.put(
       "/api/v1/entrance/login",
@@ -84,7 +86,7 @@ export const login = (data: LoginData): AppThunk => (dispatch) => {
       (body: unknown, jwr: JWR) => {
         if (jwr.statusCode === 200) {
           dispatch(loginSuccess(body as User));
-          resolve(body);
+          resolve(body as User);
         } else {
           reject(jwr);
         }
@@ -93,7 +95,9 @@ export const login = (data: LoginData): AppThunk => (dispatch) => {
   });
 };
 
-export const register = (data: SignUpData): AppThunk => (dispatch) => {
+export const register = (data: SignUpData): AppThunk<Promise<User>> => (
+  dispatch
+) => {
   return new Promise((resolve, reject) => {
     ioClient.socket.post(
       "/api/v1/entrance/signup",
@@ -107,7 +111,7 @@ export const register = (data: SignUpData): AppThunk => (dispatch) => {
       (body: unknown, jwr: JWR) => {
         if (jwr.statusCode === 200) {
           dispatch(registerSuccess(body as User));
-          resolve(body);
+          resolve(body as User);
         } else {
           reject(jwr);
         }
@@ -116,7 +120,7 @@ export const register = (data: SignUpData): AppThunk => (dispatch) => {
   });
 };
 
-export const logout = (): AppThunk => (dispatch) => {
+export const logout = (): AppThunk<Promise<void>> => (dispatch) => {
   return new Promise((resolve, reject) => {
     ioClient.socket.post(
       "/api/v1/account/logout",

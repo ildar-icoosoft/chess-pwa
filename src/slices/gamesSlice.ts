@@ -66,7 +66,7 @@ export const {
 
 export default gamesSlice.reducer;
 
-export const fetchGames = (): AppThunk => (dispatch) => {
+export const fetchGames = (): AppThunk<void> => (dispatch) => {
   dispatch(getGamesRequest());
 
   ioClient.socket.get("/api/v1/game/playing", (body: Game[], jwr: JWR) => {
@@ -78,7 +78,7 @@ export const fetchGames = (): AppThunk => (dispatch) => {
   });
 };
 
-export const watchGames = (): AppThunk => (dispatch) => {
+export const watchGames = (): AppThunk<void> => (dispatch) => {
   ioClient.socket.on("game", (subscriptionData: SubscriptionData) => {
     if (subscriptionData.verb === "updated") {
       dispatch(updateGameSuccess(subscriptionData));

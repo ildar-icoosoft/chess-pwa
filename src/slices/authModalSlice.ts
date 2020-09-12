@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginSuccess, registerSuccess } from "./currentUserSlice";
 
 interface AuthModalState {
   isAuthModalVisible: boolean;
@@ -16,6 +17,14 @@ const authModalSlice = createSlice({
       state.isAuthModalVisible = true;
     },
     hideAuthModal(state) {
+      state.isAuthModalVisible = false;
+    },
+  },
+  extraReducers: {
+    [loginSuccess.toString()]: (state) => {
+      state.isAuthModalVisible = false;
+    },
+    [registerSuccess.toString()]: (state) => {
       state.isAuthModalVisible = false;
     },
   },
