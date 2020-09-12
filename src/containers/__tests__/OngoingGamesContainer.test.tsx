@@ -2,7 +2,7 @@
 
 import TestRenderer from "react-test-renderer";
 import React from "react";
-import { OngoingGamesContainer } from "../OngoingGamesContainer";
+import OngoingGamesContainer from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../../components/GamePreviewsList";
 import Game from "../../interfaces/Game";
 import mountTest from "../../tests/mountTest";

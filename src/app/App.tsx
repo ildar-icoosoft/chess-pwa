@@ -1,63 +1,54 @@
-import React, { FC, useCallback, useEffect, useReducer } from "react";
+import React, { FC, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "../pages/HomePage";
 import GamePage from "../pages/GamePage";
 import LoginTabsContainer from "../containers/LoginTabsContainer";
-import { getCurrentUser, logout } from "../services/api";
-import User from "../interfaces/User";
-import { reducer } from "./App.reducer";
 import { AppContext } from "./AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./rootReducer";
+import { fetchCurrentUser, logout } from "../slices/currentUserSlice";
+import { showAuthModal, hideAuthModal } from "../slices/authModalSlice";
 
 const App: FC = () => {
-  const [state, dispatch] = useReducer(reducer, {
-    user: null,
-    isAuthModalVisible: false,
-  });
+  const dispatch = useDispatch();
+
+  const { currentUser, isLoading, error } = useSelector(
+    (state: RootState) => state.currentUser
+  );
+  const { isAuthModalVisible } = useSelector(
+    (state: RootState) => state.authModal
+  );
 
   useEffect(() => {
-    getCurrentUser().then((result: User | null) => {
-      dispatch({ type: "GET_CURRENT_USER", payload: result });
-    });
-  }, []);
-
-  const showModal = useCallback(() => {
-    dispatch({ type: "SHOW_AUTH_MODAL" });
-  }, []);
-  const hideModal = useCallback(() => {
-    dispatch({ type: "HIDE_AUTH_MODAL" });
-  }, []);
-  const doLogout = useCallback(() => {
-    logout().then(() => {
-      dispatch({ type: "LOGOUT" });
-    });
-  }, []);
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   return (
     <AppContext.Provider
       value={{
-        user: state.user,
+        user: currentUser,
         dispatch,
       }}
     >
       <Router>
-        {state.user ? (
+        {currentUser ? (
           <>
-            <div>Hi, {state.user.fullName}</div>
-            <Button variant="primary" onClick={doLogout}>
+            <div>Hi, {currentUser.fullName}</div>
+            <Button variant="primary" onClick={() => dispatch(logout())}>
               Logout
             </Button>
           </>
         ) : (
-          <Button variant="primary" onClick={showModal}>
+          <Button variant="primary" onClick={() => dispatch(showAuthModal())}>
             Login / Register
           </Button>
         )}
 
         <Modal
-          show={state.isAuthModalVisible}
-          onHide={hideModal}
+          show={isAuthModalVisible}
+          onHide={() => dispatch(hideAuthModal())}
           animation={false}
         >
           <Modal.Header closeButton>
