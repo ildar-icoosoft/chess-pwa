@@ -5,7 +5,6 @@ import LoginTabsContainer from "../LoginTabsContainer";
 import { LoginForm } from "../../components/LoginForm";
 import { RegistrationForm } from "../../components/RegistrationForm";
 import { login, register } from "../../services/api";
-import { AppContext } from "../../app/AppContext";
 
 jest.useFakeTimers();
 
@@ -35,16 +34,7 @@ describe("LoginTabsContainer", () => {
       it("LoginForm onSubmit", async () => {
         const dispatchFn = jest.fn();
 
-        const testRenderer = TestRenderer.create(
-          <AppContext.Provider
-            value={{
-              user: null,
-              dispatch: dispatchFn,
-            }}
-          >
-            <LoginTabsContainer />
-          </AppContext.Provider>
-        );
+        const testRenderer = TestRenderer.create(<LoginTabsContainer />);
         const testInstance = testRenderer.root;
 
         const loginForm = testInstance.findByType(LoginForm);
@@ -82,16 +72,7 @@ describe("LoginTabsContainer", () => {
       it("RegistrationForm onSubmit", async () => {
         const dispatchFn = jest.fn();
 
-        const testRenderer = TestRenderer.create(
-          <AppContext.Provider
-            value={{
-              user: null,
-              dispatch: dispatchFn,
-            }}
-          >
-            <LoginTabsContainer />
-          </AppContext.Provider>
-        );
+        const testRenderer = TestRenderer.create(<LoginTabsContainer />);
         const testInstance = testRenderer.root;
 
         const registrationForm = testInstance.findByType(RegistrationForm);

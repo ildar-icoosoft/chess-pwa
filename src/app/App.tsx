@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "../pages/HomePage";
 import GamePage from "../pages/GamePage";
 import LoginTabsContainer from "../containers/LoginTabsContainer";
-import { AppContext } from "./AppContext";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./rootReducer";
 import { fetchCurrentUser, logout } from "../slices/currentUserSlice";
@@ -26,59 +25,52 @@ const App: FC = () => {
   }, [dispatch]);
 
   return (
-    <AppContext.Provider
-      value={{
-        user: currentUser,
-        dispatch,
-      }}
-    >
-      <Router>
-        {currentUser ? (
-          <>
-            <div>Hi, {currentUser.fullName}</div>
-            <Button variant="primary" onClick={() => dispatch(logout())}>
-              Logout
-            </Button>
-          </>
-        ) : (
-          <Button variant="primary" onClick={() => dispatch(showAuthModal())}>
-            Login / Register
+    <Router>
+      {currentUser ? (
+        <>
+          <div>Hi, {currentUser.fullName}</div>
+          <Button variant="primary" onClick={() => dispatch(logout())}>
+            Logout
           </Button>
-        )}
+        </>
+      ) : (
+        <Button variant="primary" onClick={() => dispatch(showAuthModal())}>
+          Login / Register
+        </Button>
+      )}
 
-        <Modal
-          show={isAuthModalVisible}
-          onHide={() => dispatch(hideAuthModal())}
-          animation={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
-          </Modal.Header>
+      <Modal
+        show={isAuthModalVisible}
+        onHide={() => dispatch(hideAuthModal())}
+        animation={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Login</Modal.Title>
+        </Modal.Header>
 
-          <Modal.Body>
-            <LoginTabsContainer />
-          </Modal.Body>
-        </Modal>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-            </ul>
-          </nav>
+        <Modal.Body>
+          <LoginTabsContainer />
+        </Modal.Body>
+      </Modal>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </ul>
+        </nav>
 
-          <Switch>
-            <Route path="/game/:id">
-              <GamePage />
-            </Route>
-            <Route path="/">
-              <HomePage />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </AppContext.Provider>
+        <Switch>
+          <Route path="/game/:id">
+            <GamePage />
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
