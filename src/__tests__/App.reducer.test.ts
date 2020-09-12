@@ -1,4 +1,4 @@
-import { reducer, State } from "../App.reducer";
+import { reducer, State } from "../app/App.reducer";
 
 const stateSample1: State = {
   user: null,

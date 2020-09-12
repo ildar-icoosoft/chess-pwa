@@ -1,5 +1,5 @@
 import React, { Dispatch } from "react";
-import User from "./interfaces/User";
+import User from "../interfaces/User";
 import { Action } from "./App.reducer";
 
 export interface AppContextData {

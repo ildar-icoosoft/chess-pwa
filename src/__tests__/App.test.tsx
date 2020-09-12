@@ -1,7 +1,7 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { render } from "@testing-library/react";
-import App from "../App";
+import App from "../app/App";
 import mountTest from "../tests/mountTest";
 import HomePage from "../pages/HomePage";
 

@@ -5,7 +5,7 @@ import LoginTabsContainer from "../LoginTabsContainer";
 import { LoginForm } from "../../components/LoginForm";
 import { RegistrationForm } from "../../components/RegistrationForm";
 import { login, register } from "../../services/api";
-import { AppContext } from "../../AppContext";
+import { AppContext } from "../../app/AppContext";
 
 jest.useFakeTimers();
 

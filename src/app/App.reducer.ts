@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import User from "./interfaces/User";
+import User from "../interfaces/User";
 
 export interface State {
   user: User | null;

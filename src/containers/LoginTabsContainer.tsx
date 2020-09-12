@@ -9,7 +9,7 @@ import {
 import LoginData from "../interfaces/LoginData";
 import User from "../interfaces/User";
 import { login, register } from "../services/api";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../app/AppContext";
 
 const LoginTabsContainer: FC<unknown> = () => {
   const appContext = useContext(AppContext);
