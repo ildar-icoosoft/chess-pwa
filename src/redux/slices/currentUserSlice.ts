@@ -1,19 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { normalize } from "normalizr";
 import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
 import { JWR } from "sails.io.js";
 import User from "../../interfaces/User";
 import LoginData from "../../interfaces/LoginData";
 import SignUpData from "../../interfaces/SignUpData";
+import userSchema from "../schemas/userSchema";
+import NormalizedItem from "../interfaces/NormalizedItem";
 
 interface CurrentUserState {
-  currentUser: User | null;
+  userId: number | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: CurrentUserState = {
-  currentUser: null,
+  userId: null,
   isLoading: true,
   error: null,
 };
@@ -26,8 +29,8 @@ const currentUserSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    getCurrentUserSuccess(state, action: PayloadAction<User | null>) {
-      state.currentUser = action.payload;
+    getCurrentUserSuccess(state, action: PayloadAction<NormalizedItem | null>) {
+      state.userId = action.payload ? action.payload.result : null;
       state.isLoading = false;
       state.error = null;
     },
@@ -35,14 +38,14 @@ const currentUserSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    loginSuccess(state, action: PayloadAction<User>) {
-      state.currentUser = action.payload;
+    loginSuccess(state, action: PayloadAction<NormalizedItem>) {
+      state.userId = action.payload.result;
     },
-    registerSuccess(state, action: PayloadAction<User>) {
-      state.currentUser = action.payload;
+    registerSuccess(state, action: PayloadAction<NormalizedItem>) {
+      state.userId = action.payload.result;
     },
     logoutSuccess(state) {
-      state.currentUser = null;
+      state.userId = null;
     },
   },
 });
@@ -58,17 +61,26 @@ export const {
 
 export default currentUserSlice.reducer;
 
-export const fetchCurrentUser = (): AppThunk<void> => (dispatch) => {
+export const fetchCurrentUser = (): AppThunk<Promise<User | null>> => (
+  dispatch
+) => {
   dispatch(getCurrentUserRequest());
 
-  ioClient.socket.get("/api/v1/account/me", (body: unknown, jwr: JWR) => {
-    if (jwr.statusCode === 200) {
-      dispatch(getCurrentUserSuccess(body as User));
-    } else if (jwr.statusCode === 401) {
-      dispatch(getCurrentUserSuccess(null));
-    } else {
-      dispatch(getCurrentUserError(body as string));
-    }
+  return new Promise((resolve, reject) => {
+    ioClient.socket.get("/api/v1/account/me", (body: unknown, jwr: JWR) => {
+      if (jwr.statusCode === 200) {
+        const normalizedUser = normalize(body as User, userSchema);
+
+        dispatch(getCurrentUserSuccess(normalizedUser));
+        resolve(body as User);
+      } else if (jwr.statusCode === 401) {
+        dispatch(getCurrentUserSuccess(null));
+        resolve(null);
+      } else {
+        dispatch(getCurrentUserError(body as string));
+        reject(jwr);
+      }
+    });
   });
 };
 
@@ -85,7 +97,9 @@ export const login = (data: LoginData): AppThunk<Promise<User>> => (
       },
       (body: unknown, jwr: JWR) => {
         if (jwr.statusCode === 200) {
-          dispatch(loginSuccess(body as User));
+          const normalizedUser = normalize(body as User, userSchema);
+
+          dispatch(loginSuccess(normalizedUser));
           resolve(body as User);
         } else {
           reject(jwr);
@@ -110,7 +124,9 @@ export const register = (data: SignUpData): AppThunk<Promise<User>> => (
       },
       (body: unknown, jwr: JWR) => {
         if (jwr.statusCode === 200) {
-          dispatch(registerSuccess(body as User));
+          const normalizedUser = normalize(body as User, userSchema);
+
+          dispatch(registerSuccess(normalizedUser));
           resolve(body as User);
         } else {
           reject(jwr);

@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { normalize } from "normalizr";
+import { JWR } from "sails.io.js";
 import Game from "../../interfaces/Game";
-import User from "../../interfaces/User";
-import {
-  getGamesSuccess,
-  updateGameSuccess,
-  makeMoveSuccess,
-  getSingleGameSuccess,
-} from "./gamesSlice";
-import gameSchema from "../normalizr/schemas/gameSchema";
+import gameSchema from "../schemas/gameSchema";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";
-import { NormalizedGamesList } from "../normalizr/interfaces/game";
+import { AppThunk } from "../../app/store";
+import ioClient from "../../services/ioClient";
+import { getOngoingGamesSuccess } from "./ongoingGamesSlice";
+import { getSingleGameSuccess } from "./singleGameSlice";
+import NormalizedEntities from "../interfaces/NormalizedEntities";
+import NormalizedUserEntity from "../interfaces/NormalizedUserEntity";
+import NormalizedGameEntity from "../interfaces/NormalizedGameEntity";
 
-interface EntitiesState {
-  users: Record<string, User>;
-  games: Record<string, Game>;
+export interface EntitiesState {
+  users: Record<string, NormalizedUserEntity>;
+  games: Record<string, NormalizedGameEntity>;
 }
 
 const initialState: EntitiesState = {
@@ -22,23 +22,42 @@ const initialState: EntitiesState = {
   games: {},
 };
 
+const getNormalizedDataReducer = (
+  state: EntitiesState,
+  action: PayloadAction<NormalizedEntities>
+) => {
+  Object.assign(state, action.payload.entities);
+};
+
 const entitiesSlice = createSlice({
   name: "entities",
   initialState,
-  reducers: {},
+  reducers: {
+    updateGameSuccess: getNormalizedDataReducer,
+    createGameSuccess: getNormalizedDataReducer,
+    makeMoveRequest(_state) {},
+    makeMoveSuccess: getNormalizedDataReducer,
+    makeMoveError(_state, _action: PayloadAction<string>) {},
+  },
   extraReducers: {
-    [getGamesSuccess.toString()]: (
-      state,
-      action: PayloadAction<NormalizedGamesList>
-    ) => {
-      Object.assign(state, action.payload.entities);
-    },
-    [updateGameSuccess.toString()]: (
-      state,
-      action: PayloadAction<SubscriptionData>
-    ) => {
-      const subscriptionData = action.payload;
+    [getOngoingGamesSuccess.toString()]: getNormalizedDataReducer,
+    [getSingleGameSuccess.toString()]: getNormalizedDataReducer,
+  },
+});
 
+export const {
+  updateGameSuccess,
+  createGameSuccess,
+  makeMoveRequest,
+  makeMoveSuccess,
+  makeMoveError,
+} = entitiesSlice.actions;
+
+export default entitiesSlice.reducer;
+
+export const watchGames = (): AppThunk<void> => (dispatch) => {
+  ioClient.socket.on("game", (subscriptionData: SubscriptionData) => {
+    if (subscriptionData.verb === "updated") {
       const game = {
         ...subscriptionData.previous,
         ...subscriptionData.data,
@@ -46,19 +65,36 @@ const entitiesSlice = createSlice({
 
       const normalizedGame = normalize(game, gameSchema);
 
-      Object.assign(state, normalizedGame.entities);
-    },
-    [makeMoveSuccess.toString()]: (state, action: PayloadAction<Game>) => {
-      const normalizedGame = normalize(action.payload, gameSchema);
+      dispatch(updateGameSuccess(normalizedGame));
+    } else if (subscriptionData.verb === "created") {
+      const normalizedGame = normalize(subscriptionData.data, gameSchema);
 
-      Object.assign(state, normalizedGame.entities);
-    },
-    [getSingleGameSuccess.toString()]: (state, action: PayloadAction<Game>) => {
-      const normalizedGame = normalize(action.payload, gameSchema);
+      dispatch(createGameSuccess(normalizedGame));
+    }
+  });
+};
 
-      Object.assign(state, normalizedGame.entities);
-    },
-  },
-});
+export const makeMove = (
+  gameId: number,
+  move: string
+): AppThunk<Promise<Game>> => (dispatch) => {
+  dispatch(makeMoveRequest());
 
-export default entitiesSlice.reducer;
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(
+      `/api/v1/board/game/${gameId}/move/${move}`,
+      {},
+      (body: unknown, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          const normalizedGame = normalize(body as Game, gameSchema);
+
+          dispatch(makeMoveSuccess(normalizedGame));
+          resolve(body as Game);
+        } else {
+          dispatch(makeMoveError(body as string));
+          reject(jwr);
+        }
+      }
+    );
+  });
+};

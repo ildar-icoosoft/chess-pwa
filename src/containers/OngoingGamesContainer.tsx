@@ -3,8 +3,8 @@ import { denormalize } from "normalizr";
 import { useDispatch, useSelector } from "react-redux";
 import { GamePreviewsList } from "../components/GamePreviewsList";
 import { RootState } from "../app/rootReducer";
-import { fetchGames } from "../redux/slices/gamesSlice";
-import gameSchema from "../redux/normalizr/schemas/gameSchema";
+import { fetchOngoingGames } from "../redux/slices/ongoingGamesSlice";
+import gameSchema from "../redux/schemas/gameSchema";
 
 const OngoingGamesContainer: FC<unknown> = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const OngoingGamesContainer: FC<unknown> = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchGames());
+    dispatch(fetchOngoingGames());
   }, [dispatch]);
 
   return <GamePreviewsList games={items} />;

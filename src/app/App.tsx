@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { denormalize } from "normalizr";
 import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "../pages/HomePage";
@@ -9,14 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./rootReducer";
 import { fetchCurrentUser, logout } from "../redux/slices/currentUserSlice";
 import { showAuthModal, hideAuthModal } from "../redux/slices/authModalSlice";
-import { watchGames } from "../redux/slices/gamesSlice";
+import User from "../interfaces/User";
+import userSchema from "../redux/schemas/userSchema";
+import { watchGames } from "../redux/slices/entitiesSlice";
 
 const App: FC = () => {
   const dispatch = useDispatch();
 
-  const { currentUser, isLoading, error } = useSelector(
-    (state: RootState) => state.currentUser
-  );
+  const currentUser: User | null = useSelector((state: RootState) => {
+    if (state.currentUser.userId) {
+      return denormalize(state.currentUser.userId, userSchema, state.entities);
+    }
+    return null;
+  });
   const { isAuthModalVisible } = useSelector(
     (state: RootState) => state.authModal
   );

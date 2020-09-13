@@ -5,8 +5,9 @@ import { SingleGame } from "../components/SingleGame";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { RootState } from "../app/rootReducer";
-import { fetchGame, makeMove } from "../redux/slices/gamesSlice";
-import gameSchema from "../redux/normalizr/schemas/gameSchema";
+import gameSchema from "../redux/schemas/gameSchema";
+import { fetchGame } from "../redux/slices/singleGameSlice";
+import { makeMove } from "../redux/slices/entitiesSlice";
 
 export interface SingleGameContainerProps {
   id: number;
