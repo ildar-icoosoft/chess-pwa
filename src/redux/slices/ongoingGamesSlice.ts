@@ -7,13 +7,13 @@ import { normalize } from "normalizr";
 import gameSchema from "../schemas/gameSchema";
 import NormalizedData from "../interfaces/NormalizedData";
 
-interface GamesState {
+interface OngoingGamesState {
   items: number[];
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: GamesState = {
+const initialState: OngoingGamesState = {
   items: [],
   isLoading: true,
   error: null,

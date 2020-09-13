@@ -1,11 +1,11 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import gamesReducer from "../redux/slices/ongoingGamesSlice";
+import ongoingGamesReducer from "../redux/slices/ongoingGamesSlice";
 import currentUserReducer from "../redux/slices/currentUserSlice";
 import authModalReducer from "../redux/slices/authModalSlice";
 import entitiesReducer from "../redux/slices/entitiesSlice";
 
 const rootReducer = combineReducers({
-  games: gamesReducer,
+  ongoingGames: ongoingGamesReducer,
   currentUser: currentUserReducer,
   authModal: authModalReducer,
   entities: entitiesReducer,
