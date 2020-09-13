@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { SingleGameContainer } from "../SingleGameContainer";
@@ -9,10 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/rootReducer";
 import { makeMove } from "../../redux/slices/entitiesSlice";
 import { fetchGame } from "../../redux/slices/singleGameSlice";
-
-// @todo. add tests about subscriptions. Warning: Can't perform a React state update on an unmounted component.
-//  This is a no-op, but it indicates a memory leak in your application. To fix,
-//  cancel all subscriptions and asynchronous tasks in a useEffect cleanup function
 
 jest.useFakeTimers();
 
@@ -78,10 +72,6 @@ describe("SingleGameContainer", () => {
         );
         const testInstance = testRenderer.root;
 
-        await TestRenderer.act(async () => {
-          jest.advanceTimersByTime(1000);
-        });
-
         const singleGame = testInstance.findByType(SingleGame);
 
         expect(singleGame.props.game).toEqual({
@@ -99,7 +89,7 @@ describe("SingleGameContainer", () => {
   });
 
   describe("dispatch() calls", () => {
-    it("makeMove", async () => {
+    it("makeMove()", () => {
       const dispatch = jest.fn();
       (useDispatch as jest.Mock).mockReturnValue(dispatch);
 
@@ -129,7 +119,7 @@ describe("SingleGameContainer", () => {
       expect(dispatch).toBeCalledWith("makeMove return value");
     });
 
-    it("fetchGame()", async () => {
+    it("fetchGame()", () => {
       const dispatch = jest.fn();
       (useDispatch as jest.Mock).mockReturnValue(dispatch);
 

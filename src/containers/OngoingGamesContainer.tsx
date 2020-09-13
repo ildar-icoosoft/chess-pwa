@@ -10,7 +10,7 @@ const OngoingGamesContainer: FC<unknown> = () => {
   const dispatch = useDispatch();
 
   const items = useSelector((state: RootState) =>
-    denormalize(state.games.items, [gameSchema], state.entities)
+    denormalize(state.ongoingGames.items, [gameSchema], state.entities)
   );
 
   useEffect(() => {
