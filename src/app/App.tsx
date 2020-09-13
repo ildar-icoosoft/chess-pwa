@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./rootReducer";
 import { fetchCurrentUser, logout } from "../redux/slices/currentUserSlice";
 import { showAuthModal, hideAuthModal } from "../redux/slices/authModalSlice";
+import { watchGames } from "../redux/slices/gamesSlice";
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
+    dispatch(watchGames());
   }, [dispatch]);
 
   return (
