@@ -26,7 +26,8 @@ const getNormalizedDataReducer = (
   state: EntitiesState,
   action: PayloadAction<NormalizedData<unknown>>
 ) => {
-  Object.assign(state, action.payload.entities);
+  Object.assign(state.users, action.payload.entities.users);
+  Object.assign(state.games, action.payload.entities.games);
 };
 
 const entitiesSlice = createSlice({
