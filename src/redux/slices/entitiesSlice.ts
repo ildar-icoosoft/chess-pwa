@@ -8,9 +8,9 @@ import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
 import { getOngoingGamesSuccess } from "./ongoingGamesSlice";
 import { getSingleGameSuccess } from "./singleGameSlice";
-import NormalizedEntities from "../interfaces/NormalizedEntities";
 import NormalizedUserEntity from "../interfaces/NormalizedUserEntity";
 import NormalizedGameEntity from "../interfaces/NormalizedGameEntity";
+import NormalizedData from "../interfaces/NormalizedData";
 
 export interface EntitiesState {
   users: Record<string, NormalizedUserEntity>;
@@ -24,7 +24,7 @@ const initialState: EntitiesState = {
 
 const getNormalizedDataReducer = (
   state: EntitiesState,
-  action: PayloadAction<NormalizedEntities>
+  action: PayloadAction<NormalizedData<unknown>>
 ) => {
   Object.assign(state, action.payload.entities);
 };

@@ -6,7 +6,7 @@ import { JWR } from "sails.io.js";
 import { normalize } from "normalizr";
 import gameSchema from "../schemas/gameSchema";
 import ItemErrorPayload from "../interfaces/ItemErrorPayload";
-import NormalizedItem from "../interfaces/NormalizedItem";
+import NormalizedData from "../interfaces/NormalizedData";
 
 interface SingleGameState {
   [gameId: string]: {
@@ -27,7 +27,7 @@ const singleGameSlice = createSlice({
         error: null,
       };
     },
-    getSingleGameSuccess(state, action: PayloadAction<NormalizedItem>) {
+    getSingleGameSuccess(state, action: PayloadAction<NormalizedData<number>>) {
       state[action.payload.result] = {
         isLoading: false,
         error: null,

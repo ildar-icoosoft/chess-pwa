@@ -7,7 +7,7 @@ import User from "../../interfaces/User";
 import LoginData from "../../interfaces/LoginData";
 import SignUpData from "../../interfaces/SignUpData";
 import userSchema from "../schemas/userSchema";
-import NormalizedItem from "../interfaces/NormalizedItem";
+import NormalizedData from "../interfaces/NormalizedData";
 
 interface CurrentUserState {
   userId: number | null;
@@ -29,7 +29,10 @@ const currentUserSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    getCurrentUserSuccess(state, action: PayloadAction<NormalizedItem | null>) {
+    getCurrentUserSuccess(
+      state,
+      action: PayloadAction<NormalizedData<number> | null>
+    ) {
       state.userId = action.payload ? action.payload.result : null;
       state.isLoading = false;
       state.error = null;
@@ -38,10 +41,10 @@ const currentUserSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    loginSuccess(state, action: PayloadAction<NormalizedItem>) {
+    loginSuccess(state, action: PayloadAction<NormalizedData<number>>) {
       state.userId = action.payload.result;
     },
-    registerSuccess(state, action: PayloadAction<NormalizedItem>) {
+    registerSuccess(state, action: PayloadAction<NormalizedData<number>>) {
       state.userId = action.payload.result;
     },
     logoutSuccess(state) {

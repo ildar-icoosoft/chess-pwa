@@ -5,7 +5,7 @@ import ioClient from "../../services/ioClient";
 import { JWR } from "sails.io.js";
 import { normalize } from "normalizr";
 import gameSchema from "../schemas/gameSchema";
-import NormalizedList from "../interfaces/NormalizedList";
+import NormalizedData from "../interfaces/NormalizedData";
 
 interface GamesState {
   items: number[];
@@ -27,7 +27,10 @@ const ongoingGamesSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    getOngoingGamesSuccess(state, action: PayloadAction<NormalizedList>) {
+    getOngoingGamesSuccess(
+      state,
+      action: PayloadAction<NormalizedData<number[]>>
+    ) {
       state.items = action.payload.result;
       state.isLoading = false;
       state.error = null;
