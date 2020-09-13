@@ -7,8 +7,8 @@ import GamePage from "../pages/GamePage";
 import LoginTabsContainer from "../containers/LoginTabsContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./rootReducer";
-import { fetchCurrentUser, logout } from "../slices/currentUserSlice";
-import { showAuthModal, hideAuthModal } from "../slices/authModalSlice";
+import { fetchCurrentUser, logout } from "../redux/slices/currentUserSlice";
+import { showAuthModal, hideAuthModal } from "../redux/slices/authModalSlice";
 
 const App: FC = () => {
   const dispatch = useDispatch();

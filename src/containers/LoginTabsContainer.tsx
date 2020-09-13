@@ -9,7 +9,7 @@ import {
 import LoginData from "../interfaces/LoginData";
 import User from "../interfaces/User";
 import { useDispatch } from "react-redux";
-import { login, register } from "../slices/currentUserSlice";
+import { login, register } from "../redux/slices/currentUserSlice";
 import { AppDispatch } from "../app/store";
 
 const LoginTabsContainer: FC<unknown> = () => {

@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GamePreviewsList } from "../components/GamePreviewsList";
 import { RootState } from "../app/rootReducer";
-import { fetchGames, watchGames } from "../slices/gamesSlice";
+import { fetchGames, watchGames } from "../redux/slices/gamesSlice";
 
 const OngoingGamesContainer: FC<unknown> = () => {
   const dispatch = useDispatch();

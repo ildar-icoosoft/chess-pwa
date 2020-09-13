@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk } from "../app/store";
-import ioClient from "../services/ioClient";
+import { AppThunk } from "../../app/store";
+import ioClient from "../../services/ioClient";
 import { JWR } from "sails.io.js";
-import User from "../interfaces/User";
-import LoginData from "../interfaces/LoginData";
-import SignUpData from "../interfaces/SignUpData";
+import User from "../../interfaces/User";
+import LoginData from "../../interfaces/LoginData";
+import SignUpData from "../../interfaces/SignUpData";
 
 interface CurrentUserState {
   currentUser: User | null;
@@ -67,7 +67,7 @@ export const fetchCurrentUser = (): AppThunk<void> => (dispatch) => {
     } else if (jwr.statusCode === 401) {
       dispatch(getCurrentUserSuccess(null));
     } else {
-      dispatch(getCurrentUserError(jwr.body));
+      dispatch(getCurrentUserError(body as string));
     }
   });
 };
