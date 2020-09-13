@@ -8,8 +8,9 @@ import {
   makeMoveSuccess,
   getSingleGameSuccess,
 } from "./gamesSlice";
-import gameSchema from "../schemas/gameSchema";
+import gameSchema from "../normalizr/schemas/gameSchema";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";
+import { NormalizedGamesList } from "../normalizr/interfaces/game";
 
 interface EntitiesState {
   users: Record<string, User>;
@@ -26,9 +27,11 @@ const entitiesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getGamesSuccess.toString()]: (state, action: PayloadAction<Game[]>) => {
-      const normalizedGames = normalize(action.payload, [gameSchema]);
-      Object.assign(state, normalizedGames.entities);
+    [getGamesSuccess.toString()]: (
+      state,
+      action: PayloadAction<NormalizedGamesList>
+    ) => {
+      Object.assign(state, action.payload.entities);
     },
     [updateGameSuccess.toString()]: (
       state,

@@ -5,7 +5,8 @@ import ioClient from "../../services/ioClient";
 import { JWR } from "sails.io.js";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";
 import { normalize } from "normalizr";
-import gameSchema from "../schemas/gameSchema";
+import gameSchema from "../normalizr/schemas/gameSchema";
+import { NormalizedGamesList } from "../normalizr/interfaces/game";
 
 interface GamesState {
   items: number[];
@@ -27,9 +28,8 @@ const gamesSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    getGamesSuccess(state, action: PayloadAction<Game[]>) {
-      const normalizedGames = normalize(action.payload, [gameSchema]);
-      state.items = normalizedGames.result;
+    getGamesSuccess(state, action: PayloadAction<NormalizedGamesList>) {
+      state.items = action.payload.result;
       state.isLoading = false;
       state.error = null;
     },
@@ -73,7 +73,9 @@ export const fetchGames = (): AppThunk<Promise<Game[]>> => (dispatch) => {
   return new Promise((resolve, reject) => {
     ioClient.socket.get("/api/v1/game/playing", (body: unknown, jwr: JWR) => {
       if (jwr.statusCode === 200) {
-        dispatch(getGamesSuccess(body as Game[]));
+        const normalizedGames = normalize(body as Game[], [gameSchema]);
+        dispatch(getGamesSuccess(normalizedGames));
+
         resolve(body as Game[]);
       } else {
         dispatch(getGamesError(body as string));
