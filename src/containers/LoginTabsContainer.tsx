@@ -41,7 +41,9 @@ const LoginTabsContainer: FC<unknown> = () => {
         })
       ).catch((err) => {
         if (err.statusCode === 409) {
-          formikHelpers.setStatus("User with provided email already");
+          formikHelpers.setStatus(
+            "The provided email address is already in use"
+          );
         } else {
           formikHelpers.setStatus("Internal server error");
         }
