@@ -4,33 +4,12 @@ import mountTest from "../../tests/mountTest";
 import LoginTabsContainer from "../LoginTabsContainer";
 import { LoginForm } from "../../components/LoginForm";
 import { RegistrationForm } from "../../components/RegistrationForm";
-import { RootState } from "../../app/rootReducer";
 import { useDispatch } from "react-redux";
 import { login, register } from "../../redux/slices/currentUserSlice";
 
 jest.useFakeTimers();
 
 jest.mock("../../redux/slices/currentUserSlice");
-
-const stateSample1: RootState = {
-  currentUser: {
-    userId: null,
-    isLoading: false,
-    error: null,
-  },
-  authModal: {
-    isAuthModalVisible: false,
-  },
-  ongoingGames: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
-  entities: {
-    users: {},
-    games: {},
-  },
-};
 
 describe("LoginTabsContainer", () => {
   mountTest(LoginTabsContainer);
