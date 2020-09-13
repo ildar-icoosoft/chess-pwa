@@ -80,6 +80,7 @@ const gamesSlice = createSlice({
     },
     getSingleGameError(_state, _action: PayloadAction<string>) {},
   },
+  extraReducers: {},
 });
 
 export const {
