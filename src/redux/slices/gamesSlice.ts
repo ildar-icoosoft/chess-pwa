@@ -4,9 +4,11 @@ import Game from "../../interfaces/Game";
 import ioClient from "../../services/ioClient";
 import { JWR } from "sails.io.js";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";
+import { normalize } from "normalizr";
+import gameSchema from "../schemas/gameSchema";
 
 interface GamesState {
-  items: Game[];
+  items: number[];
   isLoading: boolean;
   error: string | null;
 }
@@ -26,7 +28,8 @@ const gamesSlice = createSlice({
       state.error = null;
     },
     getGamesSuccess(state, action: PayloadAction<Game[]>) {
-      state.items = action.payload;
+      const normalizedGames = normalize(action.payload, [gameSchema]);
+      state.items = normalizedGames.result;
       state.isLoading = false;
       state.error = null;
     },
@@ -34,50 +37,15 @@ const gamesSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    updateGameSuccess(state, action: PayloadAction<SubscriptionData>) {
-      const subscriptionData = action.payload;
-
-      const game = {
-        ...subscriptionData.previous,
-        ...subscriptionData.data,
-      };
-
-      const founded = state.items.find((item) => item.id === game.id);
-
-      if (founded) {
-        Object.assign(founded, game);
-      } else {
-        state.items.push(game);
-      }
-    },
+    updateGameSuccess(_state, _action: PayloadAction<SubscriptionData>) {},
     createGameSuccess(state, action: PayloadAction<SubscriptionData>) {
-      state.items.push(action.payload.data);
+      state.items.push(action.payload.data.id);
     },
     makeMoveRequest() {},
-    makeMoveSuccess(state, action: PayloadAction<Game>) {
-      const game = action.payload;
-
-      const founded = state.items.find((item) => item.id === game.id);
-
-      if (founded) {
-        Object.assign(founded, game);
-      } else {
-        state.items.push(game);
-      }
-    },
+    makeMoveSuccess(_state, _action: PayloadAction<Game>) {},
     makeMoveError(_state, _action: PayloadAction<string>) {},
     getSingleGameRequest() {},
-    getSingleGameSuccess(state, action: PayloadAction<Game>) {
-      const game = action.payload;
-
-      const founded = state.items.find((item) => item.id === game.id);
-
-      if (founded) {
-        Object.assign(founded, game);
-      } else {
-        state.items.push(game);
-      }
-    },
+    getSingleGameSuccess(_state, _action: PayloadAction<Game>) {},
     getSingleGameError(_state, _action: PayloadAction<string>) {},
   },
   extraReducers: {},
