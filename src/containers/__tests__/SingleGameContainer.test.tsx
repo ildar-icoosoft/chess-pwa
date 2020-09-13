@@ -8,6 +8,7 @@ import mountTest from "../../tests/mountTest";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/rootReducer";
 import { makeMove } from "../../redux/slices/entitiesSlice";
+import { fetchGame } from "../../redux/slices/singleGameSlice";
 
 // @todo. add tests about subscriptions. Warning: Can't perform a React state update on an unmounted component.
 //  This is a no-op, but it indicates a memory leak in your application. To fix,
@@ -16,6 +17,7 @@ import { makeMove } from "../../redux/slices/entitiesSlice";
 jest.useFakeTimers();
 
 jest.mock("../../redux/slices/entitiesSlice");
+jest.mock("../../redux/slices/singleGameSlice");
 
 const stateSample: RootState = {
   currentUser: {
@@ -125,6 +127,33 @@ describe("SingleGameContainer", () => {
 
       expect(dispatch).toBeCalledTimes(1);
       expect(dispatch).toBeCalledWith("makeMove return value");
+    });
+
+    it("fetchGame()", async () => {
+      const dispatch = jest.fn();
+      (useDispatch as jest.Mock).mockReturnValue(dispatch);
+
+      const fetchGameFn = fetchGame as jest.Mock;
+      fetchGameFn.mockReturnValue("fetchGame return value");
+
+      fetchGameFn.mockClear();
+
+      const testRenderer = TestRenderer.create(<SingleGameContainer id={1} />);
+
+      expect(fetchGameFn).toBeCalledTimes(1);
+      expect(fetchGameFn).toBeCalledWith(1);
+
+      expect(dispatch).toBeCalledTimes(1);
+      expect(dispatch).toBeCalledWith("fetchGame return value");
+
+      fetchGameFn.mockClear();
+
+      TestRenderer.act(() => {
+        testRenderer.update(<SingleGameContainer id={2} />);
+      });
+
+      expect(fetchGameFn).toBeCalledTimes(1);
+      expect(fetchGameFn).toBeCalledWith(2);
     });
   });
 });
