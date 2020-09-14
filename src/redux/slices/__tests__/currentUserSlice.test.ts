@@ -7,6 +7,7 @@ import currentUserReducer, {
   logoutSuccess,
   fetchCurrentUser,
   login,
+  register,
 } from "../currentUserSlice";
 import { RootState } from "../../../app/rootReducer";
 import User from "../../../interfaces/User";
@@ -350,6 +351,76 @@ describe("currentUserSlice reducer", () => {
       expect(result).rejects.toEqual({
         body: "Not authenticated",
         statusCode: 401,
+      });
+
+      expect(dispatch).toBeCalledTimes(0);
+    });
+  });
+
+  describe("should handle register", () => {
+    it("success", () => {
+      const dispatch = jest.fn();
+
+      const user: User = {
+        id: 1,
+        fullName: "Christopher Garcia",
+      };
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb(user, {
+            body: user,
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+
+      const result = register({
+        fullName: "Christopher Garcia",
+        email: "test@test.com",
+        password: "123",
+      })(dispatch, () => stateSample, null);
+
+      expect(result).resolves.toEqual(user);
+
+      expect(dispatch).toBeCalledTimes(1);
+      expect(dispatch).toBeCalledWith({
+        type: registerSuccess.type,
+        payload: {
+          result: 1,
+          entities: {
+            users: {
+              "1": {
+                id: 1,
+                fullName: "Christopher Garcia",
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it("fail", () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb("User already exists", {
+            body: "User already exists",
+            statusCode: 409,
+          } as JWR);
+        }
+      );
+
+      const result = register({
+        fullName: "Christopher Garcia",
+        email: "test@test.com",
+        password: "123",
+      })(dispatch, () => stateSample, null);
+
+      expect(result).rejects.toEqual({
+        body: "User already exists",
+        statusCode: 409,
       });
 
       expect(dispatch).toBeCalledTimes(0);
