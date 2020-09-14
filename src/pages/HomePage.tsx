@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { OngoingGamesContainer } from "../containers/OngoingGamesContainer";
+import OngoingGamesContainer from "../containers/OngoingGamesContainer";
 import { Button, Modal } from "react-bootstrap";
 import { ChallengeAiFormContainer } from "../containers/ChallengeAiFormContainer";
 

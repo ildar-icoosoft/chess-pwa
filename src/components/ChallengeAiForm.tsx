@@ -1,9 +1,9 @@
 import { Formik, FormikHelpers } from "formik";
 import React, { FC, FormEvent } from "react";
-import { ChallengeAiData } from "../interfaces/ChallengeAiData";
-import { Alert, Button, ButtonGroup, Form, Row } from "react-bootstrap";
-import css from "./ChallengeAiForm.module.scss";
 import cx from "classnames";
+import { Alert, Button, ButtonGroup, Form, Row } from "react-bootstrap";
+import { ChallengeAiData } from "../interfaces/ChallengeAiData";
+import css from "./ChallengeAiForm.module.scss";
 
 export interface ChallengeAiFormProps {
   onSubmit?(
@@ -100,7 +100,7 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
               className={cx(css.colorSubmitsButton, css.blackButton)}
               onClick={() => setFieldValue("color", "black")}
             >
-              <i></i>
+              <i />
             </button>
             <button
               disabled={isSubmitting}
@@ -109,7 +109,7 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
               className={cx(css.colorSubmitsButton, css.randomButton)}
               onClick={() => setFieldValue("color", "random")}
             >
-              <i></i>
+              <i />
             </button>
             <button
               disabled={isSubmitting}
@@ -118,7 +118,7 @@ export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
               className={cx(css.colorSubmitsButton, css.whiteButton)}
               onClick={() => setFieldValue("color", "white")}
             >
-              <i></i>
+              <i />
             </button>
           </div>
         </Form>
