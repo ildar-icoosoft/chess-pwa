@@ -9,14 +9,14 @@ export interface ChallengeAiFormProps {
   onSubmit?(
     values: ChallengeAiData,
     formikHelpers: FormikHelpers<ChallengeAiData>
-  ): void | Promise<void>;
+  ): void | Promise<any>;
 }
 
 export const ChallengeAiForm: FC<ChallengeAiFormProps> = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={{ level: 3, color: "", clockLimit: 5, clockIncrement: 3 }}
-      onSubmit={(values, formikHelpers): Promise<void> | void => {
+      onSubmit={(values, formikHelpers): Promise<any> | void => {
         if (onSubmit) {
           return onSubmit(
             values as ChallengeAiData,
