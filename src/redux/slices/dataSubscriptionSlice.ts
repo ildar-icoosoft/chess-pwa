@@ -3,11 +3,11 @@
 /* eslint-disable import/no-cycle */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { normalize } from "normalizr";
 import NormalizedData from "../interfaces/NormalizedData";
 import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
 import { SubscriptionData } from "../../interfaces/SubscriptionData";
-import { normalize } from "normalizr";
 import gameSchema from "../schemas/gameSchema";
 
 interface DataSubscriptionState {}
