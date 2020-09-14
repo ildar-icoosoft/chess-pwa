@@ -14,7 +14,6 @@ import { RootState } from "../../../app/rootReducer";
 import User from "../../../interfaces/User";
 import ioClient from "../../../services/ioClient";
 import { JWR, RequestCallback } from "sails.io.js";
-import { getCurrentUser } from "../../../services/api";
 
 jest.mock("../../../services/ioClient");
 
