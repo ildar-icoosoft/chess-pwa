@@ -1,10 +1,10 @@
 import TestRenderer from "react-test-renderer";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import OngoingGamesContainer from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../../components/GamePreviewsList";
 import mountTest from "../../tests/mountTest";
 import { RootState } from "../../app/rootReducer";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchOngoingGames } from "../../redux/slices/ongoingGamesSlice";
 
 jest.useFakeTimers();

@@ -1,9 +1,9 @@
 import TestRenderer from "react-test-renderer";
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { SingleGameContainer } from "../SingleGameContainer";
 import { SingleGame } from "../../components/SingleGame";
 import mountTest from "../../tests/mountTest";
-import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/rootReducer";
 import { makeMove } from "../../redux/slices/entitiesSlice";
 import { fetchGame } from "../../redux/slices/singleGameSlice";

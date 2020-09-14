@@ -1,3 +1,5 @@
+/* eslint-disable import/no-cycle */
+
 import { combineReducers } from "@reduxjs/toolkit";
 import ongoingGamesReducer from "../redux/slices/ongoingGamesSlice";
 import currentUserReducer from "../redux/slices/currentUserSlice";

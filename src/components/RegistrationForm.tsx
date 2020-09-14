@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { FC, FormEvent } from "react";
 import { Formik } from "formik";
 import { Alert, Button, Form } from "react-bootstrap";

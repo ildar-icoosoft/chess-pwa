@@ -1,8 +1,11 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-cycle */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { normalize } from "normalizr";
+import { JWR } from "sails.io.js";
 import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
-import { JWR } from "sails.io.js";
 import User from "../../interfaces/User";
 import LoginData from "../../interfaces/LoginData";
 import SignUpData from "../../interfaces/SignUpData";

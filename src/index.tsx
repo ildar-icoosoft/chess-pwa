@@ -1,3 +1,6 @@
+/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";

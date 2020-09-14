@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-cycle */
+
 import { createSlice } from "@reduxjs/toolkit";
 import { loginSuccess, registerSuccess } from "./currentUserSlice";
 

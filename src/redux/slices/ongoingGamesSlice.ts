@@ -1,9 +1,12 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-cycle */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { JWR } from "sails.io.js";
+import { normalize } from "normalizr";
 import { AppThunk } from "../../app/store";
 import Game from "../../interfaces/Game";
 import ioClient from "../../services/ioClient";
-import { JWR } from "sails.io.js";
-import { normalize } from "normalizr";
 import gameSchema from "../schemas/gameSchema";
 import NormalizedData from "../interfaces/NormalizedData";
 

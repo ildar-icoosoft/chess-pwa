@@ -1,11 +1,11 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
+import { useDispatch, useSelector } from "react-redux";
 import { render } from "@testing-library/react";
 import App from "../App";
 import mountTest from "../../tests/mountTest";
 import HomePage from "../../pages/HomePage";
 import { RootState } from "../rootReducer";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../../redux/slices/currentUserSlice";
 import { watchGames } from "../../redux/slices/entitiesSlice";
 

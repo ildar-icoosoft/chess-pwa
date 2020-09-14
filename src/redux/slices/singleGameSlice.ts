@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+/* eslint-disable import/no-cycle */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JWR } from "sails.io.js";

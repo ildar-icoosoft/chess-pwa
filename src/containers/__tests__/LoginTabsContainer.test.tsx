@@ -1,10 +1,10 @@
 import TestRenderer from "react-test-renderer";
 import React from "react";
+import { useDispatch } from "react-redux";
 import mountTest from "../../tests/mountTest";
 import LoginTabsContainer from "../LoginTabsContainer";
 import { LoginForm } from "../../components/LoginForm";
 import { RegistrationForm } from "../../components/RegistrationForm";
-import { useDispatch } from "react-redux";
 import { login, register } from "../../redux/slices/currentUserSlice";
 
 jest.useFakeTimers();

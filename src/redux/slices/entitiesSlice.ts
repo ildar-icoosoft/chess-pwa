@@ -1,3 +1,7 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-cycle */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { normalize } from "normalizr";
 import { JWR } from "sails.io.js";
@@ -10,7 +14,6 @@ import { getOngoingGamesSuccess } from "./ongoingGamesSlice";
 import { getSingleGameSuccess } from "./singleGameSlice";
 import NormalizedUserEntity from "../interfaces/NormalizedUserEntity";
 import NormalizedGameEntity from "../interfaces/NormalizedGameEntity";
-import NormalizedData from "../interfaces/NormalizedData";
 
 export interface EntitiesState {
   users: Record<string, NormalizedUserEntity>;
@@ -24,7 +27,9 @@ const initialState: EntitiesState = {
 
 const getNormalizedDataReducer = (
   state: EntitiesState,
-  action: PayloadAction<NormalizedData<unknown>>
+  action: PayloadAction<{
+    entities: Partial<EntitiesState>;
+  }>
 ) => {
   Object.assign(state.users, action.payload.entities.users);
   Object.assign(state.games, action.payload.entities.games);
@@ -36,7 +41,7 @@ const entitiesSlice = createSlice({
   reducers: {
     updateGameSuccess: getNormalizedDataReducer,
     createGameSuccess: getNormalizedDataReducer,
-    makeMoveRequest(_state) {},
+    makeMoveRequest() {},
     makeMoveSuccess: getNormalizedDataReducer,
     makeMoveError(_state, _action: PayloadAction<string>) {},
   },

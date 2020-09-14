@@ -1,5 +1,6 @@
-import React, { Dispatch, FC } from "react";
+import React, { FC } from "react";
 import { Tab, Tabs } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { FormikHelpers } from "formik";
 import { LoginForm } from "../components/LoginForm";
 import {
@@ -7,8 +8,6 @@ import {
   RegistrationFormData,
 } from "../components/RegistrationForm";
 import LoginData from "../interfaces/LoginData";
-import User from "../interfaces/User";
-import { useDispatch } from "react-redux";
 import { login, register } from "../redux/slices/currentUserSlice";
 import { AppDispatch } from "../app/store";
 

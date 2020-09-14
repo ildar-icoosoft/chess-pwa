@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from "react";
 import { denormalize } from "normalizr";
+import { useDispatch, useSelector } from "react-redux";
 import { Move } from "ii-react-chessboard";
 import { SingleGame } from "../components/SingleGame";
-import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { RootState } from "../app/rootReducer";
 import gameSchema from "../redux/schemas/gameSchema";

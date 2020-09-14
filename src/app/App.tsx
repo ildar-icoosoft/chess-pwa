@@ -1,12 +1,12 @@
 import React, { FC, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { denormalize } from "normalizr";
 import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "../pages/HomePage";
 import GamePage from "../pages/GamePage";
 import LoginTabsContainer from "../containers/LoginTabsContainer";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./rootReducer";
 import { fetchCurrentUser, logout } from "../redux/slices/currentUserSlice";
 import { showAuthModal, hideAuthModal } from "../redux/slices/authModalSlice";
