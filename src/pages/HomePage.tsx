@@ -1,16 +1,27 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import OngoingGamesContainer from "../containers/OngoingGamesContainer";
 import { Button, Modal } from "react-bootstrap";
 import { ChallengeAiFormContainer } from "../containers/ChallengeAiFormContainer";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/rootReducer";
+import {
+  hideChallengeAiModal,
+  showChallengeAiModal,
+} from "../redux/slices/challengeAiModalSlice";
+import { AppDispatch } from "../app/store";
 
 const HomePage: FC<unknown> = () => {
-  const [showChallengeAiModal, setShowChallengeAiModal] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { isChallengeAiModalVisible } = useSelector(
+    (state: RootState) => state.challengeAiModal
+  );
 
   return (
     <>
       <Modal
-        show={showChallengeAiModal}
-        onHide={() => setShowChallengeAiModal(false)}
+        show={isChallengeAiModalVisible}
+        onHide={() => dispatch(hideChallengeAiModal())}
         animation={false}
       >
         <Modal.Header closeButton>
@@ -21,7 +32,10 @@ const HomePage: FC<unknown> = () => {
           <ChallengeAiFormContainer />
         </Modal.Body>
       </Modal>
-      <Button variant="primary" onClick={() => setShowChallengeAiModal(true)}>
+      <Button
+        variant="primary"
+        onClick={() => dispatch(showChallengeAiModal())}
+      >
         Play with the computer
       </Button>
       <OngoingGamesContainer />

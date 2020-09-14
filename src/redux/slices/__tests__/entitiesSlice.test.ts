@@ -40,6 +40,9 @@ const stateSample: RootState = {
   authModal: {
     isAuthModalVisible: false,
   },
+  challengeAiModal: {
+    isChallengeAiModalVisible: false,
+  },
   ongoingGames: {
     items: [],
     isLoading: false,
