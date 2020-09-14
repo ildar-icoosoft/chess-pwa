@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-interface */
+/* eslint-disable import/no-cycle */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { JWR } from "sails.io.js";
+import { normalize } from "normalizr";
 import NormalizedData from "../interfaces/NormalizedData";
 import { ChallengeAiData } from "../../interfaces/ChallengeAiData";
 import { AppThunk } from "../../app/store";
 import Game from "../../interfaces/Game";
 import ioClient from "../../services/ioClient";
-import { JWR } from "sails.io.js";
-import { normalize } from "normalizr";
 import gameSchema from "../schemas/gameSchema";
 
 interface ChallengeState {}

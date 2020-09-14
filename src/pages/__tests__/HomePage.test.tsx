@@ -1,10 +1,10 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
+import { useSelector } from "react-redux";
 import mountTest from "../../tests/mountTest";
 import HomePage from "../HomePage";
 import OngoingGamesContainer from "../../containers/OngoingGamesContainer";
 import { RootState } from "../../app/rootReducer";
-import { useSelector } from "react-redux";
 
 const stateSample: RootState = {
   currentUser: {

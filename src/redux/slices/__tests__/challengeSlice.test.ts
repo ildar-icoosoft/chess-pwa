@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { JWR, RequestCallback } from "sails.io.js";
 import challengeReducer, {
   challengeAi,
   challengeAiRequest,
@@ -5,10 +8,9 @@ import challengeReducer, {
   challengeAiError,
 } from "../challengeSlice";
 import ioClient from "../../../services/ioClient";
-import { JWR, RequestCallback } from "sails.io.js";
 import { RootState } from "../../../app/rootReducer";
 import Game from "../../../interfaces/Game";
-import entitiesReducer, { makeMoveRequest } from "../entitiesSlice";
+import { makeMoveRequest } from "../entitiesSlice";
 
 jest.mock("../../../services/ioClient");
 
@@ -55,7 +57,7 @@ describe("challengeSlice reducer", () => {
     ).toEqual({});
   });
 
-  describe("should handle challengeAiRequest", () => {
+  it("should handle challengeAiRequest", () => {
     expect(
       challengeReducer(
         {},
@@ -66,7 +68,7 @@ describe("challengeSlice reducer", () => {
     ).toEqual({});
   });
 
-  describe("should handle challengeAiSuccess", () => {
+  it("should handle challengeAiSuccess", () => {
     expect(
       challengeReducer(
         {},
@@ -81,7 +83,7 @@ describe("challengeSlice reducer", () => {
     ).toEqual({});
   });
 
-  describe("should handle challengeAiError", () => {
+  it("should handle challengeAiError", () => {
     expect(
       challengeReducer(
         {},

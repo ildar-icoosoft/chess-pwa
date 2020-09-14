@@ -1,14 +1,14 @@
 import React, { FC, useCallback } from "react";
 import { FormikHelpers } from "formik";
 import { useHistory } from "react-router-dom";
-import { ChallengeAiForm } from "../components/ChallengeAiForm";
 import { useDispatch } from "react-redux";
+import { ChallengeAiForm } from "../components/ChallengeAiForm";
 import { AppDispatch } from "../app/store";
 import { challengeAi } from "../redux/slices/challengeSlice";
 import { ChallengeAiData } from "../interfaces/ChallengeAiData";
 import Game from "../interfaces/Game";
 
-export const ChallengeAiFormContainer: FC<unknown> = () => {
+const ChallengeAiFormContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const history = useHistory();
@@ -30,8 +30,10 @@ export const ChallengeAiFormContainer: FC<unknown> = () => {
           }
         });
     },
-    [dispatch]
+    [dispatch, history]
   );
 
   return <ChallengeAiForm onSubmit={challengeAiAndOpenGamePage} />;
 };
+
+export default ChallengeAiFormContainer;

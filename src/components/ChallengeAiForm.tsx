@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Formik, FormikHelpers } from "formik";
 import React, { FC, FormEvent } from "react";
 import cx from "classnames";

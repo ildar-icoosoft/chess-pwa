@@ -1,9 +1,9 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
-import mountTest from "../../tests/mountTest";
-import { ChallengeAiFormContainer } from "../ChallengeAiFormContainer";
-import { ChallengeAiForm } from "../../components/ChallengeAiForm";
 import { useDispatch } from "react-redux";
+import mountTest from "../../tests/mountTest";
+import ChallengeAiFormContainer from "../ChallengeAiFormContainer";
+import { ChallengeAiForm } from "../../components/ChallengeAiForm";
 import { challengeAi } from "../../redux/slices/challengeSlice";
 
 jest.useFakeTimers();

@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import OngoingGamesContainer from "../containers/OngoingGamesContainer";
 import { Button, Modal } from "react-bootstrap";
-import { ChallengeAiFormContainer } from "../containers/ChallengeAiFormContainer";
 import { useDispatch, useSelector } from "react-redux";
+import OngoingGamesContainer from "../containers/OngoingGamesContainer";
+import ChallengeAiFormContainer from "../containers/ChallengeAiFormContainer";
+
 import { RootState } from "../app/rootReducer";
 import {
   hideChallengeAiModal,
