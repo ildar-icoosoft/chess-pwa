@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { JWR, RequestCallback } from "sails.io.js";
 import currentUserReducer, {
   getCurrentUserRequest,
   getCurrentUserSuccess,
@@ -13,7 +16,6 @@ import currentUserReducer, {
 import { RootState } from "../../../app/rootReducer";
 import User from "../../../interfaces/User";
 import ioClient from "../../../services/ioClient";
-import { JWR, RequestCallback } from "sails.io.js";
 
 jest.mock("../../../services/ioClient");
 
@@ -192,7 +194,7 @@ describe("currentUserSlice reducer", () => {
   });
 
   describe("should handle fetchCurrentUser", () => {
-    it("success. User is authenticated", () => {
+    it("success. User is authenticated", async () => {
       const dispatch = jest.fn();
 
       const user: User = {
@@ -211,7 +213,7 @@ describe("currentUserSlice reducer", () => {
 
       const result = fetchCurrentUser()(dispatch, () => stateSample, null);
 
-      expect(result).resolves.toEqual(user);
+      await expect(result).resolves.toEqual(user);
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -233,7 +235,7 @@ describe("currentUserSlice reducer", () => {
       });
     });
 
-    it("success. User is NOT authenticated", () => {
+    it("success. User is NOT authenticated", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.get as jest.Mock).mockImplementationOnce(
@@ -247,7 +249,7 @@ describe("currentUserSlice reducer", () => {
 
       const result = fetchCurrentUser()(dispatch, () => stateSample, null);
 
-      expect(result).resolves.toBeNull();
+      await expect(result).resolves.toBeNull();
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -259,7 +261,7 @@ describe("currentUserSlice reducer", () => {
       });
     });
 
-    it("fail", () => {
+    it("fail", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.get as jest.Mock).mockImplementationOnce(
@@ -273,7 +275,7 @@ describe("currentUserSlice reducer", () => {
 
       const result = fetchCurrentUser()(dispatch, () => stateSample, null);
 
-      expect(result).rejects.toEqual({
+      await expect(result).rejects.toEqual({
         body: "Not found",
         statusCode: 404,
       });
@@ -290,7 +292,7 @@ describe("currentUserSlice reducer", () => {
   });
 
   describe("should handle login", () => {
-    it("success", () => {
+    it("success", async () => {
       const dispatch = jest.fn();
 
       const user: User = {
@@ -312,7 +314,7 @@ describe("currentUserSlice reducer", () => {
         password: "123",
       })(dispatch, () => stateSample, null);
 
-      expect(result).resolves.toEqual(user);
+      await expect(result).resolves.toEqual(user);
 
       expect(dispatch).toBeCalledTimes(1);
       expect(dispatch).toBeCalledWith({
@@ -331,7 +333,7 @@ describe("currentUserSlice reducer", () => {
       });
     });
 
-    it("fail", () => {
+    it("fail", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.put as jest.Mock).mockImplementationOnce(
@@ -348,7 +350,7 @@ describe("currentUserSlice reducer", () => {
         password: "123",
       })(dispatch, () => stateSample, null);
 
-      expect(result).rejects.toEqual({
+      await expect(result).rejects.toEqual({
         body: "Not authenticated",
         statusCode: 401,
       });
@@ -358,7 +360,7 @@ describe("currentUserSlice reducer", () => {
   });
 
   describe("should handle register", () => {
-    it("success", () => {
+    it("success", async () => {
       const dispatch = jest.fn();
 
       const user: User = {
@@ -381,7 +383,7 @@ describe("currentUserSlice reducer", () => {
         password: "123",
       })(dispatch, () => stateSample, null);
 
-      expect(result).resolves.toEqual(user);
+      await expect(result).resolves.toEqual(user);
 
       expect(dispatch).toBeCalledTimes(1);
       expect(dispatch).toBeCalledWith({
@@ -400,7 +402,7 @@ describe("currentUserSlice reducer", () => {
       });
     });
 
-    it("fail", () => {
+    it("fail", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
@@ -418,7 +420,7 @@ describe("currentUserSlice reducer", () => {
         password: "123",
       })(dispatch, () => stateSample, null);
 
-      expect(result).rejects.toEqual({
+      await expect(result).rejects.toEqual({
         body: "User already exists",
         statusCode: 409,
       });
@@ -442,7 +444,7 @@ describe("currentUserSlice reducer", () => {
 
       const result = logout()(dispatch, () => stateSample, null);
 
-      expect(result).resolves.toBeUndefined();
+      return expect(result).resolves.toBeUndefined();
     });
 
     it("fail", () => {
@@ -459,7 +461,7 @@ describe("currentUserSlice reducer", () => {
 
       const result = logout()(dispatch, () => stateSample, null);
 
-      expect(result).rejects.toEqual({
+      return expect(result).rejects.toEqual({
         body: "error text",
         statusCode: 500,
       });

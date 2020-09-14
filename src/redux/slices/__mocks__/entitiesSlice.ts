@@ -1,3 +1,5 @@
-const slice = jest.genMockFromModule<any>("../entitiesSlice");
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-module.exports = slice;
+const entitiesSlice = jest.genMockFromModule<any>("../entitiesSlice");
+
+module.exports = entitiesSlice;

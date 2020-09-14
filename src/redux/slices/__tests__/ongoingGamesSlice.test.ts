@@ -1,3 +1,4 @@
+import { JWR, RequestCallback } from "sails.io.js";
 import ongoingGamesReducer, {
   getOngoingGamesRequest,
   getOngoingGamesSuccess,
@@ -7,7 +8,6 @@ import ongoingGamesReducer, {
 import Game from "../../../interfaces/Game";
 import { RootState } from "../../../app/rootReducer";
 import ioClient from "../../../services/ioClient";
-import { JWR, RequestCallback } from "sails.io.js";
 
 jest.mock("../../../services/ioClient");
 
@@ -118,7 +118,7 @@ describe("ongoingGamesSlice reducer", () => {
   });
 
   describe("should handle fetchOngoingGames", () => {
-    it("success", () => {
+    it("success", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.get as jest.Mock).mockImplementationOnce(
@@ -132,7 +132,7 @@ describe("ongoingGamesSlice reducer", () => {
 
       const result = fetchOngoingGames()(dispatch, () => stateSample, null);
 
-      expect(result).resolves.toEqual([gameSample]);
+      await expect(result).resolves.toEqual([gameSample]);
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -151,7 +151,7 @@ describe("ongoingGamesSlice reducer", () => {
       });
     });
 
-    it("fail", () => {
+    it("fail", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.get as jest.Mock).mockImplementationOnce(
@@ -165,7 +165,7 @@ describe("ongoingGamesSlice reducer", () => {
 
       const result = fetchOngoingGames()(dispatch, () => stateSample, null);
 
-      expect(result).rejects.toEqual({
+      await expect(result).rejects.toEqual({
         body: "internal server error",
         statusCode: 500,
       });

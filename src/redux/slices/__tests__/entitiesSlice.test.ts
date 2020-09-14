@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { JWR, RequestCallback } from "sails.io.js";
 import entitiesReducer, {
   EntitiesState,
   updateGameSuccess,
@@ -13,21 +16,8 @@ import { getSingleGameSuccess } from "../singleGameSlice";
 import Game from "../../../interfaces/Game";
 import { RootState } from "../../../app/rootReducer";
 import ioClient from "../../../services/ioClient";
-import { JWR, RequestCallback } from "sails.io.js";
-import { SubscriptionData } from "../../../interfaces/SubscriptionData";
 
 jest.mock("../../../services/ioClient");
-
-const gameSample: Game = {
-  id: 1,
-  initialFen: "startpos",
-  wtime: 300000,
-  btime: 300000,
-  moves: "",
-  status: "started",
-  white: null,
-  black: null,
-};
 
 const gameWithMoveSample: Game = {
   id: 1,
@@ -227,7 +217,7 @@ describe("entitiesSlice reducer", () => {
   });
 
   describe("should handle makeMove", () => {
-    it("success", () => {
+    it("success", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
@@ -241,7 +231,7 @@ describe("entitiesSlice reducer", () => {
 
       const result = makeMove(1, "e2e4")(dispatch, () => stateSample, null);
 
-      expect(result).resolves.toEqual(gameWithMoveSample);
+      await expect(result).resolves.toEqual(gameWithMoveSample);
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -260,7 +250,7 @@ describe("entitiesSlice reducer", () => {
       });
     });
 
-    it("fail", () => {
+    it("fail", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
@@ -274,7 +264,7 @@ describe("entitiesSlice reducer", () => {
 
       const result = makeMove(1, "e2e4")(dispatch, () => stateSample, null);
 
-      expect(result).rejects.toEqual({
+      await expect(result).rejects.toEqual({
         body: "game not found",
         statusCode: 404,
       });

@@ -1,3 +1,5 @@
-const slice = jest.genMockFromModule<any>("../singleGameSlice");
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-module.exports = slice;
+const singleGameSlice = jest.genMockFromModule<any>("../singleGameSlice");
+
+module.exports = singleGameSlice;
