@@ -5,9 +5,62 @@ import entitiesReducer, {
   makeMoveSuccess,
   makeMoveRequest,
   makeMoveError,
+  makeMove,
 } from "../entitiesSlice";
-import { getOngoingGamesSuccess } from "../ongoingGamesSlice";
+import {
+  fetchOngoingGames,
+  getOngoingGamesRequest,
+  getOngoingGamesSuccess,
+} from "../ongoingGamesSlice";
 import { getSingleGameSuccess } from "../singleGameSlice";
+import Game from "../../../interfaces/Game";
+import { RootState } from "../../../app/rootReducer";
+import ioClient from "../../../services/ioClient";
+import { JWR, RequestCallback } from "sails.io.js";
+
+jest.mock("../../../services/ioClient");
+
+const gameSample: Game = {
+  id: 1,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "started",
+  white: null,
+  black: null,
+};
+
+const gameWithMoveSample: Game = {
+  id: 1,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 300000,
+  moves: "e2e4",
+  status: "started",
+  white: null,
+  black: null,
+};
+
+const stateSample: RootState = {
+  currentUser: {
+    userId: null,
+    isLoading: false,
+    error: null,
+  },
+  authModal: {
+    isAuthModalVisible: false,
+  },
+  ongoingGames: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  entities: {
+    users: {},
+    games: {},
+  },
+};
 
 const entitiesBefore: EntitiesState = {
   users: {
@@ -173,5 +226,69 @@ describe("entitiesSlice reducer", () => {
         payload: "error text",
       })
     ).toEqual(entitiesBefore);
+  });
+
+  describe("should handle makeMove", () => {
+    it("success", () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb(gameWithMoveSample, {
+            body: gameWithMoveSample,
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+
+      const result = makeMove(1, "e2e4")(dispatch, () => stateSample, null);
+
+      expect(result).resolves.toEqual(gameWithMoveSample);
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: makeMoveRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: makeMoveSuccess.type,
+        payload: {
+          result: 1,
+          entities: {
+            games: {
+              "1": gameWithMoveSample,
+            },
+          },
+        },
+      });
+    });
+
+    it("fail", () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb("game not found", {
+            body: "game not found",
+            statusCode: 404,
+          } as JWR);
+        }
+      );
+
+      const result = makeMove(1, "e2e4")(dispatch, () => stateSample, null);
+
+      expect(result).rejects.toEqual({
+        body: "game not found",
+        statusCode: 404,
+      });
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: makeMoveRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: makeMoveError.type,
+        payload: "game not found",
+      });
+    });
   });
 });

@@ -8,11 +8,6 @@ import Game from "../../../interfaces/Game";
 import { RootState } from "../../../app/rootReducer";
 import ioClient from "../../../services/ioClient";
 import { JWR, RequestCallback } from "sails.io.js";
-import {
-  fetchGame,
-  getSingleGameRequest,
-  getSingleGameSuccess,
-} from "../singleGameSlice";
 
 jest.mock("../../../services/ioClient");
 
