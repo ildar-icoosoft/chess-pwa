@@ -4,8 +4,6 @@ import mountTest from "../../tests/mountTest";
 import HomePage from "../HomePage";
 import OngoingGamesContainer from "../../containers/OngoingGamesContainer";
 
-jest.mock("../../services/api");
-
 describe("HomePage", () => {
   mountTest(HomePage);
 
