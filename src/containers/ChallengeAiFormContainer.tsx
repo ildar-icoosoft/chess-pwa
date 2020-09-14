@@ -2,7 +2,7 @@ import React, { FC, useCallback } from "react";
 import { ChallengeAiForm } from "../components/ChallengeAiForm";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../app/store";
-import { challengeAi } from "../redux/slices/entitiesSlice";
+import { challengeAi } from "../redux/slices/challengeSlice";
 import { ChallengeAiData } from "../interfaces/ChallengeAiData";
 import { FormikHelpers } from "formik";
 

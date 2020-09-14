@@ -4,11 +4,11 @@ import mountTest from "../../tests/mountTest";
 import { ChallengeAiFormContainer } from "../ChallengeAiFormContainer";
 import { ChallengeAiForm } from "../../components/ChallengeAiForm";
 import { useDispatch } from "react-redux";
-import { challengeAi } from "../../redux/slices/entitiesSlice";
+import { challengeAi } from "../../redux/slices/challengeSlice";
 
 jest.useFakeTimers();
 
-jest.mock("../../redux/slices/entitiesSlice");
+jest.mock("../../redux/slices/challengeSlice");
 
 describe("ChallengeAiFormContainer", () => {
   mountTest(ChallengeAiFormContainer);

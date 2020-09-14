@@ -5,6 +5,7 @@ import ongoingGamesReducer, {
   getOngoingGamesError,
   fetchOngoingGames,
 } from "../ongoingGamesSlice";
+import { challengeAiSuccess } from "../challengeSlice";
 import Game from "../../../interfaces/Game";
 import { RootState } from "../../../app/rootReducer";
 import ioClient from "../../../services/ioClient";
@@ -52,6 +53,50 @@ describe("ongoingGamesSlice reducer", () => {
       items: [],
       isLoading: true,
       error: null,
+    });
+  });
+
+  it("should handle challengeAiSuccess", () => {
+    expect(
+      ongoingGamesReducer(
+        {
+          items: [1],
+          isLoading: true,
+          error: "error text",
+        },
+        {
+          type: challengeAiSuccess.type,
+          payload: {
+            result: 2,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      items: [2, 1],
+      isLoading: true,
+      error: "error text",
+    });
+
+    expect(
+      ongoingGamesReducer(
+        {
+          items: [1],
+          isLoading: true,
+          error: "error text",
+        },
+        {
+          type: challengeAiSuccess.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      items: [1],
+      isLoading: true,
+      error: "error text",
     });
   });
 
