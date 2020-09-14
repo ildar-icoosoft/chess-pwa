@@ -5,7 +5,35 @@ import currentUserReducer, {
   loginSuccess,
   registerSuccess,
   logoutSuccess,
+  fetchCurrentUser,
 } from "../currentUserSlice";
+import { RootState } from "../../../app/rootReducer";
+import User from "../../../interfaces/User";
+import ioClient from "../../../services/ioClient";
+import { JWR, RequestCallback } from "sails.io.js";
+import { getCurrentUser } from "../../../services/api";
+
+jest.mock("../../../services/ioClient");
+
+const stateSample: RootState = {
+  currentUser: {
+    userId: null,
+    isLoading: false,
+    error: null,
+  },
+  authModal: {
+    isAuthModalVisible: false,
+  },
+  ongoingGames: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  entities: {
+    users: {},
+    games: {},
+  },
+};
 
 describe("currentUserSlice reducer", () => {
   it("should handle initial state", () => {
@@ -158,6 +186,104 @@ describe("currentUserSlice reducer", () => {
       userId: null,
       isLoading: true,
       error: "error text",
+    });
+  });
+
+  describe("should handle fetchCurrentUser", () => {
+    it("success. User is authenticated", () => {
+      const dispatch = jest.fn();
+
+      const user: User = {
+        id: 1,
+        fullName: "Christopher Garcia",
+      };
+
+      (ioClient.socket.get as jest.Mock).mockImplementationOnce(
+        (url: string, cb: RequestCallback) => {
+          cb(user, {
+            body: user,
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+
+      const result = fetchCurrentUser()(dispatch, () => stateSample, null);
+
+      expect(result).resolves.toEqual(user);
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: getCurrentUserRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: getCurrentUserSuccess.type,
+        payload: {
+          entities: {
+            users: {
+              "1": {
+                id: 1,
+                fullName: "Christopher Garcia",
+              },
+            },
+          },
+          result: 1,
+        },
+      });
+    });
+
+    it("success. User is NOT authenticated", () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.get as jest.Mock).mockImplementationOnce(
+        (url: string, cb: RequestCallback) => {
+          cb("Not authenticated", {
+            body: "Not authenticated",
+            statusCode: 401,
+          } as JWR);
+        }
+      );
+
+      const result = fetchCurrentUser()(dispatch, () => stateSample, null);
+
+      expect(result).resolves.toBeNull();
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: getCurrentUserRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: getCurrentUserSuccess.type,
+        payload: null,
+      });
+    });
+
+    it("fail", () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.get as jest.Mock).mockImplementationOnce(
+        (url: string, cb: RequestCallback) => {
+          cb("Not found", {
+            body: "Not found",
+            statusCode: 404,
+          } as JWR);
+        }
+      );
+
+      const result = fetchCurrentUser()(dispatch, () => stateSample, null);
+
+      expect(result).rejects.toEqual({
+        body: "Not found",
+        statusCode: 404,
+      });
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: getCurrentUserRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: getCurrentUserError.type,
+        payload: "Not found",
+      });
     });
   });
 });
