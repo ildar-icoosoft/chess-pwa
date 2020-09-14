@@ -8,6 +8,7 @@ import currentUserReducer, {
   fetchCurrentUser,
   login,
   register,
+  logout,
 } from "../currentUserSlice";
 import { RootState } from "../../../app/rootReducer";
 import User from "../../../interfaces/User";
@@ -424,6 +425,45 @@ describe("currentUserSlice reducer", () => {
       });
 
       expect(dispatch).toBeCalledTimes(0);
+    });
+  });
+
+  describe("should handle logout", () => {
+    it("success", () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb("", {
+            body: "",
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+
+      const result = logout()(dispatch, () => stateSample, null);
+
+      expect(result).resolves.toBeUndefined();
+    });
+
+    it("fail", () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb("", {
+            body: "error text",
+            statusCode: 500,
+          } as JWR);
+        }
+      );
+
+      const result = logout()(dispatch, () => stateSample, null);
+
+      expect(result).rejects.toEqual({
+        body: "error text",
+        statusCode: 500,
+      });
     });
   });
 });
