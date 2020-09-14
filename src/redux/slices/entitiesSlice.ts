@@ -14,6 +14,7 @@ import { getOngoingGamesSuccess } from "./ongoingGamesSlice";
 import { getSingleGameSuccess } from "./singleGameSlice";
 import NormalizedUserEntity from "../interfaces/NormalizedUserEntity";
 import NormalizedGameEntity from "../interfaces/NormalizedGameEntity";
+import { ChallengeAiData } from "../../interfaces/ChallengeAiData";
 
 export interface EntitiesState {
   users: Record<string, NormalizedUserEntity>;
@@ -44,6 +45,9 @@ const entitiesSlice = createSlice({
     makeMoveRequest() {},
     makeMoveSuccess: getNormalizedDataReducer,
     makeMoveError(_state, _action: PayloadAction<string>) {},
+    challengeAiRequest() {},
+    challengeAiSuccess: getNormalizedDataReducer,
+    challengeAiError(_state, _action: PayloadAction<string>) {},
   },
   extraReducers: {
     [getOngoingGamesSuccess.toString()]: getNormalizedDataReducer,
@@ -57,6 +61,9 @@ export const {
   makeMoveRequest,
   makeMoveSuccess,
   makeMoveError,
+  challengeAiRequest,
+  challengeAiSuccess,
+  challengeAiError,
 } = entitiesSlice.actions;
 
 export default entitiesSlice.reducer;
@@ -98,6 +105,30 @@ export const makeMove = (
           resolve(body as Game);
         } else {
           dispatch(makeMoveError(body as string));
+          reject(jwr);
+        }
+      }
+    );
+  });
+};
+
+export const challengeAi = (data: ChallengeAiData): AppThunk<Promise<Game>> => (
+  dispatch
+) => {
+  dispatch(challengeAiRequest());
+
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(
+      `/api/v1/challenge/ai`,
+      data,
+      (body: unknown, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          const normalizedGame = normalize(body as Game, gameSchema);
+
+          dispatch(challengeAiSuccess(normalizedGame));
+          resolve(body as Game);
+        } else {
+          dispatch(challengeAiError(body as string));
           reject(jwr);
         }
       }

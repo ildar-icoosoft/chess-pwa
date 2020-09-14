@@ -24,7 +24,7 @@ Array [
       onClick={[Function]}
       type="button"
     >
-      Challenge AI
+      Play with the computer
     </button>
     <div
       className="grid"

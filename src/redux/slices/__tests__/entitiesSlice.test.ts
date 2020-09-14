@@ -10,6 +10,10 @@ import entitiesReducer, {
   makeMoveError,
   makeMove,
   watchGames,
+  challengeAiRequest,
+  challengeAiSuccess,
+  challengeAiError,
+  challengeAi,
 } from "../entitiesSlice";
 import { getOngoingGamesSuccess } from "../ongoingGamesSlice";
 import { getSingleGameSuccess } from "../singleGameSlice";
@@ -376,6 +380,109 @@ describe("entitiesSlice reducer", () => {
             },
           },
         },
+      });
+    });
+  });
+
+  it("should handle challengeAiRequest", () => {
+    expect(
+      entitiesReducer(entitiesBefore, {
+        type: challengeAiRequest.type,
+      })
+    ).toEqual(entitiesBefore);
+  });
+
+  it("should handle challengeAiSuccess", () => {
+    expect(
+      entitiesReducer(entitiesBefore, {
+        type: challengeAiSuccess.type,
+        payload: {
+          result: 2,
+          entities: payloadEntities,
+        },
+      })
+    ).toEqual(entitiesAfter);
+  });
+
+  it("should handle challengeAiError", () => {
+    expect(
+      entitiesReducer(entitiesBefore, {
+        type: challengeAiError.type,
+        payload: "error text",
+      })
+    ).toEqual(entitiesBefore);
+  });
+
+  describe("should handle challengeAi", () => {
+    it("success", async () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb(gameWithMoveSample, {
+            body: gameWithMoveSample,
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+
+      const result = challengeAi({
+        level: 3,
+        color: "random",
+        clockLimit: 300,
+        clockIncrement: 10,
+      })(dispatch, () => stateSample, null);
+
+      await expect(result).resolves.toEqual(gameWithMoveSample);
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: challengeAiRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: challengeAiSuccess.type,
+        payload: {
+          result: 1,
+          entities: {
+            games: {
+              "1": gameWithMoveSample,
+            },
+          },
+        },
+      });
+    });
+
+    it("fail", async () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: any, cb: RequestCallback) => {
+          cb("internal server error", {
+            body: "internal server error",
+            statusCode: 500,
+          } as JWR);
+        }
+      );
+
+      const result = challengeAi({
+        level: 3,
+        color: "random",
+        clockLimit: 300,
+        clockIncrement: 10,
+      })(dispatch, () => stateSample, null);
+
+      await expect(result).rejects.toEqual({
+        body: "internal server error",
+        statusCode: 500,
+      });
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: challengeAiRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: challengeAiError.type,
+        payload: "internal server error",
       });
     });
   });
