@@ -10,6 +10,8 @@ export const gameSample: Game = {
   white: null,
   black: null,
 };
+export const gameSampleFen =
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 export const gameWithMovesSample: Game = {
   id: 2,
@@ -21,6 +23,8 @@ export const gameWithMovesSample: Game = {
   white: null,
   black: null,
 };
+export const gameWithMovesSampleFen =
+  "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2";
 
 export const gameWithCheckmateSample: Game = {
   id: 3,
@@ -44,7 +48,7 @@ export const blackTurnGameSample: Game = {
   black: null,
 };
 
-export const witeTurnGameSample: Game = {
+export const whiteTurnGameSample: Game = {
   id: 2,
   initialFen: "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR b KQkq - 0 1",
   wtime: 300000,

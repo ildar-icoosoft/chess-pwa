@@ -7,7 +7,9 @@ import {
   gameSample,
   gameWithCheckmateSample,
   blackTurnGameSample,
-  witeTurnGameSample,
+  whiteTurnGameSample,
+  gameSampleFen,
+  gameWithMovesSampleFen,
 } from "../../test-utils/data-sample/game";
 
 describe("SingleGame", () => {
@@ -34,15 +36,11 @@ describe("SingleGame", () => {
 
         const board = testInstance.findByType(Board);
 
-        expect(board.props.position).toBe(
-          "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-        );
+        expect(board.props.position).toBe(gameSampleFen);
 
         testRenderer.update(<SingleGame game={gameWithMovesSample} />);
 
-        expect(board.props.position).toBe(
-          "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2"
-        );
+        expect(board.props.position).toBe(gameWithMovesSampleFen);
       });
 
       it("allowMarkers", () => {
@@ -103,7 +101,7 @@ describe("SingleGame", () => {
 
         expect(board.props.turnColor).toBe(PieceColor.BLACK);
 
-        testRenderer.update(<SingleGame game={witeTurnGameSample} />);
+        testRenderer.update(<SingleGame game={whiteTurnGameSample} />);
 
         expect(board.props.turnColor).toBe(PieceColor.WHITE);
       });
