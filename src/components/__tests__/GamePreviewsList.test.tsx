@@ -5,12 +5,12 @@ import { Board } from "ii-react-chessboard";
 import { GamePreviewsList } from "../GamePreviewsList";
 import mountTest from "../../test-utils/mountTest";
 import {
-  gameWithMoves,
-  gameWithoutMoves,
+  gameWithMovesSample,
+  gameSample,
 } from "../../test-utils/data-sample/game";
 import Game from "../../interfaces/Game";
 
-const gamesList: Game[] = [gameWithoutMoves, gameWithMoves];
+const gamesList: Game[] = [gameSample, gameWithMovesSample];
 
 describe("GamePreviewsList", () => {
   mountTest(GamePreviewsList);
