@@ -3,11 +3,11 @@ import TestRenderer from "react-test-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import { render } from "@testing-library/react";
 import App from "../App";
-import mountTest from "../../tests/mountTest";
+import mountTest from "../../test-utils/mountTest";
 import HomePage from "../../pages/HomePage";
 import { fetchCurrentUser } from "../../redux/slices/currentUserSlice";
 import { watchGames } from "../../redux/slices/dataSubscriptionSlice";
-import { defaultState } from "../../tests/data-sample/state";
+import { defaultState } from "../../test-utils/data-sample/state";
 
 jest.useFakeTimers();
 

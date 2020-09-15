@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OngoingGamesContainer from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../../components/GamePreviewsList";
-import mountTest from "../../tests/mountTest";
+import mountTest from "../../test-utils/mountTest";
 import { RootState } from "../../app/rootReducer";
 import { fetchOngoingGames } from "../../redux/slices/ongoingGamesSlice";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { useDispatch } from "react-redux";
-import mountTest from "../../tests/mountTest";
+import mountTest from "../../test-utils/mountTest";
 import ChallengeAiFormContainer from "../ChallengeAiFormContainer";
 import { ChallengeAiForm } from "../../components/ChallengeAiForm";
 import { challengeAi } from "../../redux/slices/challengeSlice";

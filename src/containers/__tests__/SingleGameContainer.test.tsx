@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { SingleGameContainer } from "../SingleGameContainer";
 import { SingleGame } from "../../components/SingleGame";
-import mountTest from "../../tests/mountTest";
+import mountTest from "../../test-utils/mountTest";
 import { RootState } from "../../app/rootReducer";
 import { makeMove } from "../../redux/slices/moveSlice";
 import { fetchGame } from "../../redux/slices/singleGameSlice";

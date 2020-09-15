@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import TestRenderer from "react-test-renderer";
 import { Board } from "ii-react-chessboard";
 import { GamePreviewsList } from "../GamePreviewsList";
-import mountTest from "../../tests/mountTest";
-import { gameWithMoves, gameWithoutMoves } from "../../tests/data-sample/game";
+import mountTest from "../../test-utils/mountTest";
+import {
+  gameWithMoves,
+  gameWithoutMoves,
+} from "../../test-utils/data-sample/game";
 import Game from "../../interfaces/Game";
 
 const gamesList: Game[] = [gameWithoutMoves, gameWithMoves];
