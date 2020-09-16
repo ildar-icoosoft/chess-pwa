@@ -23,7 +23,7 @@ export const defaultState: RootState = {
   },
 };
 
-export const stateWithOngoingGames: RootState = {
+export const stateWithOngoingGamesSample: RootState = {
   currentUser: {
     userId: null,
     isLoading: false,

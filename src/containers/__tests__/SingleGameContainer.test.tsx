@@ -6,7 +6,7 @@ import { SingleGame } from "../../components/SingleGame";
 import mountTest from "../../test-utils/mountTest";
 import { makeMove } from "../../redux/slices/moveSlice";
 import { fetchGame } from "../../redux/slices/singleGameSlice";
-import { stateWithOngoingGames } from "../../test-utils/data-sample/state";
+import { stateWithOngoingGamesSample } from "../../test-utils/data-sample/state";
 
 jest.useFakeTimers();
 
@@ -16,7 +16,7 @@ jest.mock("../../redux/slices/singleGameSlice");
 describe("SingleGameContainer", () => {
   beforeAll(() => {
     (useSelector as jest.Mock).mockImplementation((cb) =>
-      cb(stateWithOngoingGames)
+      cb(stateWithOngoingGamesSample)
     );
   });
 
