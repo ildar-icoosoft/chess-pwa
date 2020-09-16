@@ -26,7 +26,7 @@ const HomePage: FC<unknown> = () => {
         animation={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Play with the computer test</Modal.Title>
+          <Modal.Title>Play with the computer test1</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
