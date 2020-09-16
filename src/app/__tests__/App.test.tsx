@@ -64,9 +64,7 @@ describe("App", () => {
       fetchCurrentUserFn.mockClear();
       fetchCurrentUserFn.mockReturnValue(fetchCurrentUserReturnedValue);
 
-      TestRenderer.act(() => {
-        TestRenderer.create(<App />);
-      });
+      TestRenderer.create(<App />);
 
       expect(fetchCurrentUserFn).toBeCalledTimes(1);
       expect(fetchCurrentUserFn).toBeCalledWith();
@@ -85,9 +83,7 @@ describe("App", () => {
       watchGamesFn.mockClear();
       watchGamesFn.mockReturnValue(watchGamesReturnedValue);
 
-      TestRenderer.act(() => {
-        TestRenderer.create(<App />);
-      });
+      TestRenderer.create(<App />);
 
       expect(watchGamesFn).toBeCalledTimes(1);
       expect(watchGamesFn).toBeCalledWith();
