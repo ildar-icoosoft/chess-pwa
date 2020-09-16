@@ -4,7 +4,7 @@ import entitiesReducer, { EntitiesState } from "../entitiesSlice";
 import { getOngoingGamesSuccess } from "../ongoingGamesSlice";
 import { getSingleGameSuccess } from "../singleGameSlice";
 import { challengeAiSuccess } from "../challengeSlice";
-import { makeMoveSuccess } from "../moveSlice";
+import { makeMoveRequest, makeMoveSuccess } from "../moveSlice";
 import {
   createGameBySubscription,
   updateGameBySubscription,
@@ -26,6 +26,27 @@ const entitiesBefore: EntitiesState = {
       wtime: 300000,
       btime: 300000,
       moves: "",
+      status: "started",
+      white: null,
+      black: null,
+    },
+  },
+};
+
+const entitiesBeforeWithMove: EntitiesState = {
+  users: {
+    1: {
+      id: 1,
+      fullName: "Robert Johnson",
+    },
+  },
+  games: {
+    1: {
+      id: 1,
+      initialFen: "startpos",
+      wtime: 300000,
+      btime: 300000,
+      moves: "e2e4",
       status: "started",
       white: null,
       black: null,
@@ -125,16 +146,28 @@ describe("entitiesSlice reducer", () => {
     ).toEqual(entitiesAfter);
   });
 
+  it("should handle makeMoveRequest", () => {
+    expect(
+      entitiesReducer(entitiesBefore, {
+        type: makeMoveRequest.type,
+        payload: {
+          gameId: 1,
+          move: "e2e4",
+        },
+      })
+    ).toEqual(entitiesBeforeWithMove);
+  });
+
   it("should handle makeMoveSuccess", () => {
     expect(
       entitiesReducer(entitiesBefore, {
         type: makeMoveSuccess.type,
         payload: {
-          result: 2,
-          entities: payloadEntities,
+          result: 1,
+          entities: entitiesBeforeWithMove,
         },
       })
-    ).toEqual(entitiesAfter);
+    ).toEqual(entitiesBeforeWithMove);
   });
 
   it("should handle getOngoingGamesSuccess", () => {
