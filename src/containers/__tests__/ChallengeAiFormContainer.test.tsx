@@ -14,7 +14,7 @@ describe("ChallengeAiFormContainer", () => {
   mountTest(ChallengeAiFormContainer);
 
   describe("children components", () => {
-    it("contains LoginForm", async () => {
+    it("contains ChallengeAiForm", async () => {
       const testRenderer = TestRenderer.create(<ChallengeAiFormContainer />);
       const testInstance = testRenderer.root;
 
@@ -23,7 +23,7 @@ describe("ChallengeAiFormContainer", () => {
   });
 
   describe("dispatch() calls", () => {
-    it("challengeAi()", () => {
+    it("should call dispatch(challengeAi())", () => {
       const dispatch = jest.fn();
       dispatch.mockReturnValue(Promise.resolve());
       (useDispatch as jest.Mock).mockReturnValue(dispatch);
