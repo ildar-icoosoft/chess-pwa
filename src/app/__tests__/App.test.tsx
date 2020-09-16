@@ -58,7 +58,7 @@ describe("App", () => {
 
       (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
 
-      const fetchCurrentUserReturnedValue = Symbol();
+      const fetchCurrentUserReturnedValue = Symbol("fetchCurrentUser");
 
       const fetchCurrentUserFn = fetchCurrentUser as jest.Mock;
       fetchCurrentUserFn.mockClear();
@@ -77,7 +77,7 @@ describe("App", () => {
 
       (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
 
-      const watchGamesReturnedValue = Symbol();
+      const watchGamesReturnedValue = Symbol("watchGames");
 
       const watchGamesFn = watchGames as jest.Mock;
       watchGamesFn.mockClear();

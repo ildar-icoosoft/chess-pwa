@@ -1,3 +1,5 @@
+/* eslint-disable prefer-promise-reject-errors */
+
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { useDispatch } from "react-redux";
@@ -39,7 +41,7 @@ describe("ChallengeAiFormContainer", () => {
 
       const challengeAiForm = testInstance.findByType(ChallengeAiForm);
 
-      const challengeAiReturnedValue = Symbol();
+      const challengeAiReturnedValue = Symbol("challengeAi");
 
       const challengeAiFn = challengeAi as jest.Mock;
       challengeAiFn.mockClear();

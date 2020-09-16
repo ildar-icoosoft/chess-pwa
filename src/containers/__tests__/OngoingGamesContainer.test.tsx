@@ -70,7 +70,7 @@ describe("OngoingGamesContainer", () => {
 
       (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
 
-      const fetchOngoingGamesReturnedValue = Symbol();
+      const fetchOngoingGamesReturnedValue = Symbol("fetchOngoingGames");
 
       const fetchOngoingGamesFn = fetchOngoingGames as jest.Mock;
       fetchOngoingGamesFn.mockClear();

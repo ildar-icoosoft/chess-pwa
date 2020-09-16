@@ -2,7 +2,6 @@
 
 import { JWR, RequestCallback } from "sails.io.js";
 import ioClient from "../../../services/ioClient";
-import Game from "../../../interfaces/Game";
 import moveReducer, {
   makeMove,
   makeMoveRequest,

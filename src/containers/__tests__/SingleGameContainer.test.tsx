@@ -67,7 +67,7 @@ describe("SingleGameContainer", () => {
   describe("dispatch() calls", () => {
     it("should call dispatch(makeMove())", () => {
       const dispatch = useDispatch<jest.Mock>();
-      const makeMoveReturnedValue = Symbol();
+      const makeMoveReturnedValue = Symbol("makeMove");
 
       const testRenderer = TestRenderer.create(<SingleGameContainer id={1} />);
       const testInstance = testRenderer.root;
@@ -96,7 +96,7 @@ describe("SingleGameContainer", () => {
 
       (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
 
-      const fetchGameReturnedValue = Symbol();
+      const fetchGameReturnedValue = Symbol("fetchGame");
 
       const fetchGameFn = fetchGame as jest.Mock;
       fetchGameFn.mockClear();

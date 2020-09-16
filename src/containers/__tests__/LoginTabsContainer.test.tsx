@@ -1,3 +1,5 @@
+/* eslint-disable prefer-promise-reject-errors */
+
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -44,7 +46,7 @@ describe("LoginTabsContainer", () => {
 
       const loginForm = testInstance.findByType(LoginForm);
 
-      const loginReturnedValue = Symbol();
+      const loginReturnedValue = Symbol("login");
 
       const loginFn = login as jest.Mock;
       loginFn.mockClear();
@@ -137,7 +139,7 @@ describe("LoginTabsContainer", () => {
 
       const registrationForm = testInstance.findByType(RegistrationForm);
 
-      const registerReturnedValue = Symbol();
+      const registerReturnedValue = Symbol("register");
 
       const registerFn = register as jest.Mock;
       registerFn.mockClear();
