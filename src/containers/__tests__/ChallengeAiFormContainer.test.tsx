@@ -1,16 +1,23 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import mountTest from "../../test-utils/mountTest";
 import ChallengeAiFormContainer from "../ChallengeAiFormContainer";
 import { ChallengeAiForm } from "../../components/ChallengeAiForm";
 import { challengeAi } from "../../redux/slices/challengeSlice";
+import { gameSample } from "../../test-utils/data-sample/game";
 
 jest.useFakeTimers();
 
 jest.mock("../../redux/slices/challengeSlice");
 
 describe("ChallengeAiFormContainer", () => {
+  beforeEach(() => {
+    useDispatch<jest.Mock>().mockClear();
+    (useHistory().push as jest.Mock).mockClear();
+  });
+
   mountTest(ChallengeAiFormContainer);
 
   describe("children components", () => {
@@ -24,34 +31,27 @@ describe("ChallengeAiFormContainer", () => {
 
   describe("dispatch() calls", () => {
     it("should call dispatch(challengeAi())", () => {
-      const dispatch = jest.fn();
-      dispatch.mockReturnValue(Promise.resolve());
-      (useDispatch as jest.Mock).mockReturnValue(dispatch);
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() => new Promise(() => {}));
 
       const testRenderer = TestRenderer.create(<ChallengeAiFormContainer />);
       const testInstance = testRenderer.root;
 
       const challengeAiForm = testInstance.findByType(ChallengeAiForm);
 
-      dispatch.mockClear();
+      const challengeAiReturnedValue = Symbol();
 
       const challengeAiFn = challengeAi as jest.Mock;
-      challengeAiFn.mockReturnValue("challengeAiFn return value");
-
       challengeAiFn.mockClear();
+      challengeAiFn.mockReturnValue(challengeAiReturnedValue);
 
       TestRenderer.act(() => {
-        challengeAiForm.props.onSubmit(
-          {
-            level: 3,
-            color: "random",
-            clockLimit: 300,
-            clockIncrement: 10,
-          },
-          {
-            setStatus: () => {},
-          }
-        );
+        challengeAiForm.props.onSubmit({
+          level: 3,
+          color: "random",
+          clockLimit: 300,
+          clockIncrement: 10,
+        });
       });
 
       expect(challengeAiFn).toBeCalledTimes(1);
@@ -62,8 +62,99 @@ describe("ChallengeAiFormContainer", () => {
         clockIncrement: 10,
       });
 
-      expect(dispatch).toBeCalledTimes(1);
-      expect(dispatch).toBeCalledWith("challengeAiFn return value");
+      expect(dispatch).toBeCalledWith(challengeAiReturnedValue);
+    });
+
+    it("should handle dispatch(challengeAi()) success", async () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() => Promise.resolve(gameSample));
+
+      const testRenderer = TestRenderer.create(<ChallengeAiFormContainer />);
+      const testInstance = testRenderer.root;
+
+      const challengeAiForm = testInstance.findByType(ChallengeAiForm);
+
+      await TestRenderer.act(async () => {
+        challengeAiForm.props.onSubmit({
+          level: 3,
+          color: "random",
+          clockLimit: 300,
+          clockIncrement: 10,
+        });
+      });
+
+      const push = useHistory().push as jest.Mock;
+
+      expect(push).toBeCalledTimes(1);
+      expect(push).toBeCalledWith("/game/1");
+    });
+
+    it("should handle dispatch(challengeAi()) fail 401", async () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() =>
+        Promise.reject({
+          statusCode: 401,
+        })
+      );
+
+      const testRenderer = TestRenderer.create(<ChallengeAiFormContainer />);
+      const testInstance = testRenderer.root;
+
+      const challengeAiForm = testInstance.findByType(ChallengeAiForm);
+
+      const formikSetStatusFn = jest.fn();
+
+      await TestRenderer.act(async () => {
+        challengeAiForm.props.onSubmit(
+          {
+            level: 3,
+            color: "random",
+            clockLimit: 300,
+            clockIncrement: 10,
+          },
+          {
+            setStatus: formikSetStatusFn,
+          }
+        );
+      });
+
+      expect(formikSetStatusFn).toBeCalledTimes(1);
+      expect(formikSetStatusFn).toBeCalledWith(
+        "You must log in to play with computer"
+      );
+    });
+
+    it("should handle dispatch(challengeAi()) fail NOT 401", async () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() =>
+        Promise.reject({
+          statusCode: 500,
+        })
+      );
+
+      const testRenderer = TestRenderer.create(<ChallengeAiFormContainer />);
+      const testInstance = testRenderer.root;
+
+      const challengeAiForm = testInstance.findByType(ChallengeAiForm);
+
+      const formikSetStatusFn = jest.fn();
+
+      await TestRenderer.act(async () => {
+        challengeAiForm.props.onSubmit(
+          {
+            level: 3,
+            color: "random",
+            clockLimit: 300,
+            clockIncrement: 10,
+          },
+          {
+            setStatus: formikSetStatusFn,
+          }
+        );
+      });
+
+      expect(formikSetStatusFn).toBeCalledTimes(1);
+      expect(formikSetStatusFn).toBeCalledWith("Internal server error");
     });
   });
 });
