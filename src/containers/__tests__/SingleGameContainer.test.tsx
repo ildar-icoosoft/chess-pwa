@@ -4,52 +4,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { SingleGameContainer } from "../SingleGameContainer";
 import { SingleGame } from "../../components/SingleGame";
 import mountTest from "../../test-utils/mountTest";
-import { RootState } from "../../app/rootReducer";
 import { makeMove } from "../../redux/slices/moveSlice";
 import { fetchGame } from "../../redux/slices/singleGameSlice";
+import { stateWithOngoingGames } from "../../test-utils/data-sample/state";
 
 jest.useFakeTimers();
 
 jest.mock("../../redux/slices/moveSlice");
 jest.mock("../../redux/slices/singleGameSlice");
 
-const stateSample: RootState = {
-  currentUser: {
-    userId: null,
-    isLoading: false,
-    error: null,
-  },
-  authModal: {
-    isAuthModalVisible: false,
-  },
-  challengeAiModal: {
-    isChallengeAiModalVisible: false,
-  },
-  ongoingGames: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
-  entities: {
-    users: {},
-    games: {
-      "1": {
-        id: 1,
-        initialFen: "startpos",
-        wtime: 300000,
-        btime: 300000,
-        moves: "",
-        status: "started",
-        white: null,
-        black: null,
-      },
-    },
-  },
-};
-
 describe("SingleGameContainer", () => {
   beforeAll(() => {
-    (useSelector as jest.Mock).mockImplementation((cb) => cb(stateSample));
+    (useSelector as jest.Mock).mockImplementation((cb) =>
+      cb(stateWithOngoingGames)
+    );
   });
 
   beforeEach(() => {
@@ -107,9 +75,8 @@ describe("SingleGameContainer", () => {
       const singleGame = testInstance.findByType(SingleGame);
 
       const makeMoveFn = makeMove as jest.Mock;
-      makeMoveFn.mockReturnValue(makeMoveReturnedValue);
-
       makeMoveFn.mockClear();
+      makeMoveFn.mockReturnValue(makeMoveReturnedValue);
 
       TestRenderer.act(() => {
         singleGame.props.onMove({
@@ -124,8 +91,9 @@ describe("SingleGameContainer", () => {
       expect(dispatch).toBeCalledWith(makeMoveReturnedValue);
     });
 
-    it("fetchGame()", () => {
+    it("should call dispatch(fetchGame())", () => {
       const dispatch = useDispatch<jest.Mock>();
+
       (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
 
       const fetchGameReturnedValue = Symbol();
