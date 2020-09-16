@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TestRenderer from "react-test-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import { render } from "@testing-library/react";
@@ -20,6 +20,7 @@ describe("App", () => {
   });
   beforeEach(() => {
     useDispatch<jest.Mock>().mockClear();
+    (useEffect as jest.Mock).mockReset();
   });
 
   mountTest(App);
@@ -55,6 +56,8 @@ describe("App", () => {
     it("should call dispatch(fetchCurrentUser())", () => {
       const dispatch = useDispatch<jest.Mock>();
 
+      (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
+
       const fetchCurrentUserReturnedValue = Symbol();
 
       const fetchCurrentUserFn = fetchCurrentUser as jest.Mock;
@@ -73,6 +76,8 @@ describe("App", () => {
 
     it("watchGames()", () => {
       const dispatch = useDispatch<jest.Mock>();
+
+      (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
 
       const watchGamesReturnedValue = Symbol();
 
