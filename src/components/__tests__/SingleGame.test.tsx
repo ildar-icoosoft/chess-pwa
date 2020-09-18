@@ -198,6 +198,24 @@ describe("SingleGame", () => {
         // PieceColor.BLACK because currentUser plays with white
         expect(board.props.movableColor).toBe(PieceColor.WHITE);
       });
+
+      it("orientation", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const board = testInstance.findByType(Board);
+
+        // white by default
+        expect(board.props.orientation).toBe(PieceColor.WHITE);
+
+        testRenderer.update(
+          <SingleGame currentUser={userSample} game={gameSample2} />
+        );
+        // black because current user plays black
+        expect(board.props.orientation).toBe(PieceColor.BLACK);
+      });
     });
   });
 

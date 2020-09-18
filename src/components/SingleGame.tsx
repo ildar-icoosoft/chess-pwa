@@ -55,12 +55,18 @@ export const SingleGame: FC<SingleGameProps> = ({
     movableColor = PieceColor.BLACK;
   }
 
+  let orientation = PieceColor.WHITE;
+  if (currentUser && currentUser === game.black) {
+    orientation = PieceColor.BLACK;
+  }
+
   return (
     <Board
       allowMarkers
       check={check}
       clickable
       draggable
+      orientation={orientation}
       position={fen}
       turnColor={turnColor}
       movableColor={movableColor}
