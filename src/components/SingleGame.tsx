@@ -47,6 +47,14 @@ export const SingleGame: FC<SingleGameProps> = ({
     viewOnly = false;
   }
 
+  let movableColor: PieceColor | undefined;
+  if (currentUser && currentUser === game.white) {
+    movableColor = PieceColor.WHITE;
+  }
+  if (currentUser && currentUser === game.black) {
+    movableColor = PieceColor.BLACK;
+  }
+
   return (
     <Board
       allowMarkers
@@ -55,6 +63,7 @@ export const SingleGame: FC<SingleGameProps> = ({
       draggable
       position={fen}
       turnColor={turnColor}
+      movableColor={movableColor}
       validMoves={validMoves}
       viewOnly={viewOnly}
       onMove={onMove}

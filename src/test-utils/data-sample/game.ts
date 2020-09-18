@@ -24,6 +24,17 @@ export const gameSample2: Game = {
   black: userSample,
 };
 
+// with white user
+export const gameSample3: Game = {
+  id: 1,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "started",
+  white: userSample,
+  black: null,
+};
 export const gameSampleFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 

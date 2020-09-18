@@ -11,6 +11,7 @@ import {
   gameSampleFen,
   gameWithMovesSampleFen,
   gameSample2,
+  gameSample3,
 } from "../../test-utils/data-sample/game";
 import { userSample } from "../../test-utils/data-sample/user";
 
@@ -166,6 +167,36 @@ describe("SingleGame", () => {
         );
         // false because currentUser is a gamer of this game and game is not over
         expect(board.props.viewOnly).toBeTruthy();
+      });
+
+      it("movableColor", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const board = testInstance.findByType(Board);
+
+        // undefined because currentUser is null
+        expect(board.props.movableColor).toBeUndefined();
+
+        testRenderer.update(
+          <SingleGame currentUser={userSample} game={gameSample} />
+        );
+        // undefined because currentUser is not a gamer of this game
+        expect(board.props.viewOnly).toBeTruthy();
+
+        testRenderer.update(
+          <SingleGame currentUser={userSample} game={gameSample2} />
+        );
+        // PieceColor.BLACK because currentUser plays with black
+        expect(board.props.movableColor).toBe(PieceColor.BLACK);
+
+        testRenderer.update(
+          <SingleGame currentUser={userSample} game={gameSample3} />
+        );
+        // PieceColor.BLACK because currentUser plays with white
+        expect(board.props.movableColor).toBe(PieceColor.WHITE);
       });
     });
   });
