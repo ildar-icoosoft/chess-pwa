@@ -10,7 +10,9 @@ import {
   whiteTurnGameSample,
   gameSampleFen,
   gameWithMovesSampleFen,
+  gameSample2,
 } from "../../test-utils/data-sample/game";
+import { userSample } from "../../test-utils/data-sample/user";
 
 describe("SingleGame", () => {
   describe("children components", () => {
@@ -144,10 +146,25 @@ describe("SingleGame", () => {
 
         const board = testInstance.findByType(Board);
 
-        expect(board.props.viewOnly).toBeFalsy();
+        // true because currentUser is null
+        expect(board.props.viewOnly).toBeTruthy();
 
-        testRenderer.update(<SingleGame game={gameWithCheckmateSample} />);
+        testRenderer.update(
+          <SingleGame currentUser={userSample} game={gameWithCheckmateSample} />
+        );
+        // true because game is over
+        expect(board.props.viewOnly).toBeTruthy();
 
+        testRenderer.update(
+          <SingleGame currentUser={userSample} game={gameSample} />
+        );
+        // true because currentUser is not a gamer of this game
+        expect(board.props.viewOnly).toBeTruthy();
+
+        testRenderer.update(
+          <SingleGame currentUser={userSample} game={gameSample2} />
+        );
+        // false because currentUser is a gamer of this game and game is not over
         expect(board.props.viewOnly).toBeTruthy();
       });
     });

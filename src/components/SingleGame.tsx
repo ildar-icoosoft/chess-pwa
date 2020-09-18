@@ -18,7 +18,11 @@ export interface SingleGameProps {
   onMove?(move: Move): void;
 }
 
-export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
+export const SingleGame: FC<SingleGameProps> = ({
+  game,
+  currentUser,
+  onMove,
+}) => {
   if (!game) {
     return null;
   }
@@ -34,6 +38,15 @@ export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
 
   const validMoves: ValidMoves = getValidMoves(chess);
 
+  let viewOnly = true;
+  if (
+    currentUser &&
+    (currentUser === game.white || currentUser === game.black) &&
+    game.status !== "started"
+  ) {
+    viewOnly = false;
+  }
+
   return (
     <Board
       allowMarkers
@@ -43,7 +56,7 @@ export const SingleGame: FC<SingleGameProps> = ({ game, onMove }) => {
       position={fen}
       turnColor={turnColor}
       validMoves={validMoves}
-      viewOnly={game.status !== "started"}
+      viewOnly={viewOnly}
       onMove={onMove}
     />
   );

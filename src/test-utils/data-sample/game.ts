@@ -1,4 +1,5 @@
 import Game from "../../interfaces/Game";
+import { userSample } from "./user";
 
 export const gameSample: Game = {
   id: 1,
@@ -10,6 +11,19 @@ export const gameSample: Game = {
   white: null,
   black: null,
 };
+
+// with black user
+export const gameSample2: Game = {
+  id: 1,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "started",
+  white: null,
+  black: userSample,
+};
+
 export const gameSampleFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
