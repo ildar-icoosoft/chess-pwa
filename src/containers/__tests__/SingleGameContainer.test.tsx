@@ -6,7 +6,11 @@ import { SingleGame } from "../../components/SingleGame";
 import mountTest from "../../test-utils/mountTest";
 import { makeMove } from "../../redux/slices/moveSlice";
 import { fetchGame } from "../../redux/slices/singleGameSlice";
-import { stateWithOngoingGamesSample } from "../../test-utils/data-sample/state";
+import {
+  defaultState,
+  stateWithDataSample,
+  stateWithDataSample2,
+} from "../../test-utils/data-sample/state";
 
 jest.useFakeTimers();
 
@@ -14,13 +18,10 @@ jest.mock("../../redux/slices/moveSlice");
 jest.mock("../../redux/slices/singleGameSlice");
 
 describe("SingleGameContainer", () => {
-  beforeAll(() => {
-    (useSelector as jest.Mock).mockImplementation((cb) =>
-      cb(stateWithOngoingGamesSample)
-    );
-  });
-
   beforeEach(() => {
+    (useSelector as jest.Mock).mockImplementation((cb) =>
+      cb(stateWithDataSample)
+    );
     useDispatch<jest.Mock>().mockClear();
     (useEffect as jest.Mock).mockReset();
   });
@@ -60,6 +61,28 @@ describe("SingleGameContainer", () => {
           white: null,
           black: null,
         });
+      });
+
+      it("currentUser", async () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGameContainer id={1} />
+        );
+        const testInstance = testRenderer.root;
+
+        const singleGame = testInstance.findByType(SingleGame);
+
+        expect(singleGame.props.currentUser).toEqual({
+          id: 1,
+          fullName: "Thomas Miller",
+        });
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithDataSample2)
+        );
+
+        testRenderer.update(<SingleGameContainer id={1} />);
+
+        expect(singleGame.props.currentUser).toBeUndefined();
       });
     });
   });

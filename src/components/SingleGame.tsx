@@ -10,9 +10,11 @@ import {
 import Game from "../interfaces/Game";
 import makeChessInstance from "../utils/makeChessInstance";
 import getTurnColor from "../utils/getTurnColor";
+import User from "../interfaces/User";
 
 export interface SingleGameProps {
   game?: Game;
+  currentUser?: User;
   onMove?(move: Move): void;
 }
 
