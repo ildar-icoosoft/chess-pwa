@@ -21,7 +21,10 @@ export const gameSample2: Game = {
   moves: "",
   status: "started",
   white: null,
-  black: userSample,
+  black: {
+    id: 1,
+    fullName: "Thomas Miller",
+  },
 };
 
 // with white user
@@ -32,7 +35,10 @@ export const gameSample3: Game = {
   btime: 300000,
   moves: "",
   status: "started",
-  white: userSample,
+  white: {
+    id: 1,
+    fullName: "Thomas Miller",
+  },
   black: null,
 };
 export const gameSampleFen =

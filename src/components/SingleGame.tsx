@@ -41,23 +41,31 @@ export const SingleGame: FC<SingleGameProps> = ({
   let viewOnly = true;
   if (
     currentUser &&
-    (currentUser === game.white || currentUser === game.black) &&
-    game.status !== "started"
+    (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
+    game.status === "started"
   ) {
     viewOnly = false;
   }
 
   let movableColor: PieceColor | undefined;
-  if (currentUser && currentUser === game.white) {
+  if (currentUser && currentUser.id === game.white?.id) {
     movableColor = PieceColor.WHITE;
   }
-  if (currentUser && currentUser === game.black) {
+  if (currentUser && currentUser.id === game.black?.id) {
     movableColor = PieceColor.BLACK;
   }
 
   let orientation = PieceColor.WHITE;
-  if (currentUser && currentUser === game.black) {
+  if (currentUser && currentUser.id === game.black?.id) {
     orientation = PieceColor.BLACK;
+  }
+
+  const movesHistory = chess.history({ verbose: true });
+
+  let lastMoveSquares: string[] | undefined;
+  if (movesHistory.length) {
+    const lastMove = movesHistory[movesHistory.length - 1];
+    lastMoveSquares = [lastMove.from, lastMove.to];
   }
 
   return (
@@ -69,6 +77,7 @@ export const SingleGame: FC<SingleGameProps> = ({
       orientation={orientation}
       position={fen}
       turnColor={turnColor}
+      lastMoveSquares={lastMoveSquares}
       movableColor={movableColor}
       validMoves={validMoves}
       viewOnly={viewOnly}

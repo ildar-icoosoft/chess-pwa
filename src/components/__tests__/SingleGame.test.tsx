@@ -166,7 +166,7 @@ describe("SingleGame", () => {
           <SingleGame currentUser={userSample} game={gameSample2} />
         );
         // false because currentUser is a gamer of this game and game is not over
-        expect(board.props.viewOnly).toBeTruthy();
+        expect(board.props.viewOnly).toBeFalsy();
       });
 
       it("movableColor", () => {
@@ -215,6 +215,22 @@ describe("SingleGame", () => {
         );
         // black because current user plays black
         expect(board.props.orientation).toBe(PieceColor.BLACK);
+      });
+
+      it("lastMoveSquares", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const board = testInstance.findByType(Board);
+
+        // no moves
+        expect(board.props.lastMoveSquares).toBeUndefined();
+
+        testRenderer.update(<SingleGame game={gameWithMovesSample} />);
+        // actually last move is g1g3, but it is incorrect move. Last correct move is e7e5
+        expect(board.props.lastMoveSquares).toEqual(["e7", "e5"]);
       });
     });
   });
