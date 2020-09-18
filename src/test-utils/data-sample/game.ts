@@ -1,5 +1,4 @@
 import Game from "../../interfaces/Game";
-import { userSample } from "./user";
 
 export const gameSample: Game = {
   id: 1,

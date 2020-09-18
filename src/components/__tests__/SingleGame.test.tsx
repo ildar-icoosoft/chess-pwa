@@ -13,7 +13,7 @@ import {
   gameSample2,
   gameSample3,
 } from "../../test-utils/data-sample/game";
-import { userSample } from "../../test-utils/data-sample/user";
+import userSample from "../../test-utils/data-sample/user";
 
 describe("SingleGame", () => {
   describe("children components", () => {

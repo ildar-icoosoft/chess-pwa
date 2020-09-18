@@ -7,7 +7,6 @@ import mountTest from "../../test-utils/mountTest";
 import { makeMove } from "../../redux/slices/moveSlice";
 import { fetchGame } from "../../redux/slices/singleGameSlice";
 import {
-  defaultState,
   stateWithDataSample,
   stateWithDataSample2,
 } from "../../test-utils/data-sample/state";
