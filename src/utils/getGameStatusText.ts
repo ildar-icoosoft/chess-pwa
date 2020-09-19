@@ -1,11 +1,11 @@
 import Game from "../interfaces/Game";
 
 export default (game: Game): string => {
-  if (game.status === "started") {
-    if (game.btime === 0) {
+  if (game.status === "outoftime") {
+    if (game.winner === "white") {
       return "Time out • White is victorious";
     }
-    if (game.wtime === 0) {
+    if (game.winner === "black") {
       return "Time out • Black is victorious";
     }
   }

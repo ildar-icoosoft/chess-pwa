@@ -3,6 +3,8 @@ import Game from "../../interfaces/Game";
 export const gameSample: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -18,33 +20,39 @@ export const gameSampleFen =
 export const whiteOutOfTimeGameSample: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 0,
   btime: 300000,
   moves: "",
-  status: "started",
+  status: "outoftime",
   white: null,
   black: null,
-  winner: null,
+  winner: "black",
 };
 
 export const blackOutOfTimeGameSample: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 0,
   moves: "",
-  status: "started",
+  status: "outoftime",
   white: null,
   black: null,
-  winner: null,
+  winner: "white",
 };
 
 // with black user
 export const gameSample2: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -62,6 +70,8 @@ export const gameSample2: Game = {
 export const gameSample3: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -78,6 +88,8 @@ export const gameSample3: Game = {
 export const gameWithMovesSample: Game = {
   id: 2,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -93,6 +105,8 @@ export const gameWithMovesSampleFen =
 export const gameWithCheckmateByWhiteSample: Game = {
   id: 3,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
   wtime: 300000,
   btime: 300000,
@@ -106,6 +120,8 @@ export const gameWithCheckmateByWhiteSample: Game = {
 export const gameWithCheckmateByBlackSample: Game = {
   id: 3,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
   wtime: 300000,
   btime: 300000,
@@ -119,6 +135,8 @@ export const gameWithCheckmateByBlackSample: Game = {
 export const gameWithDrawSample: Game = {
   id: 3,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
   wtime: 300000,
   btime: 300000,
@@ -132,6 +150,8 @@ export const gameWithDrawSample: Game = {
 export const gameWithStalemateSample: Game = {
   id: 3,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
   wtime: 300000,
   btime: 300000,
@@ -145,6 +165,8 @@ export const gameWithStalemateSample: Game = {
 export const blackTurnGameSample: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -158,6 +180,8 @@ export const blackTurnGameSample: Game = {
 export const whiteTurnGameSample: Game = {
   id: 2,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR b KQkq - 0 1",
   wtime: 300000,
   btime: 300000,
@@ -171,6 +195,8 @@ export const whiteTurnGameSample: Game = {
 export const gameWithIncorrectMoveSample: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
   wtime: 300000,
   btime: 300000,
@@ -184,6 +210,8 @@ export const gameWithIncorrectMoveSample: Game = {
 export const blackResignedGameSample: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 0,
@@ -197,6 +225,8 @@ export const blackResignedGameSample: Game = {
 export const whiteResignedGameSample: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 0,
@@ -210,6 +240,8 @@ export const whiteResignedGameSample: Game = {
 export const abortedGameSample: Game = {
   id: 1,
   aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 0,

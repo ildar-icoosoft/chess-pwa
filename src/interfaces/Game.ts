@@ -4,6 +4,8 @@ import User from "./User";
 export default interface Game {
   id: number;
   aiLevel: number;
+  clockLimit: number;
+  clockIncrement: number;
   initialFen: string;
   wtime: number;
   btime: number;
