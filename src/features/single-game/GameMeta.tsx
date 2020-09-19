@@ -11,5 +11,15 @@ export const GameMeta: FC<GameMetaProps> = ({ game }) => {
     return null;
   }
 
-  return <div>{getGameStatusText(game)}</div>;
+  return (
+    <>
+      <div>{getGameStatusText(game)}</div>
+      <div data-testid="white-user">
+        White: {game.white ? game.white.fullName : `AI level ${game.aiLevel}`}
+      </div>
+      <div data-testid="black-user">
+        Black: {game.black ? game.black.fullName : `AI level ${game.aiLevel}`}
+      </div>
+    </>
+  );
 };

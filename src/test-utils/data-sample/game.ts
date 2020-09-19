@@ -2,6 +2,7 @@ import Game from "../../interfaces/Game";
 
 export const gameSample: Game = {
   id: 1,
+  aiLevel: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -9,10 +10,14 @@ export const gameSample: Game = {
   status: "started",
   white: null,
   black: null,
+  winner: null,
 };
+export const gameSampleFen =
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 export const whiteOutOfTimeGameSample: Game = {
   id: 1,
+  aiLevel: 3,
   initialFen: "startpos",
   wtime: 0,
   btime: 300000,
@@ -20,10 +25,12 @@ export const whiteOutOfTimeGameSample: Game = {
   status: "started",
   white: null,
   black: null,
+  winner: null,
 };
 
 export const blackOutOfTimeGameSample: Game = {
   id: 1,
+  aiLevel: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 0,
@@ -31,11 +38,13 @@ export const blackOutOfTimeGameSample: Game = {
   status: "started",
   white: null,
   black: null,
+  winner: null,
 };
 
 // with black user
 export const gameSample2: Game = {
   id: 1,
+  aiLevel: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -46,11 +55,13 @@ export const gameSample2: Game = {
     id: 1,
     fullName: "Thomas Miller",
   },
+  winner: null,
 };
 
 // with white user
 export const gameSample3: Game = {
   id: 1,
+  aiLevel: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -61,12 +72,12 @@ export const gameSample3: Game = {
     fullName: "Thomas Miller",
   },
   black: null,
+  winner: null,
 };
-export const gameSampleFen =
-  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 export const gameWithMovesSample: Game = {
   id: 2,
+  aiLevel: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -74,12 +85,14 @@ export const gameWithMovesSample: Game = {
   status: "started",
   white: null,
   black: null,
+  winner: null,
 };
 export const gameWithMovesSampleFen =
   "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2";
 
 export const gameWithCheckmateSample: Game = {
   id: 3,
+  aiLevel: 3,
   initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
   wtime: 300000,
   btime: 300000,
@@ -87,10 +100,12 @@ export const gameWithCheckmateSample: Game = {
   status: "mate",
   white: null,
   black: null,
+  winner: null,
 };
 
 export const blackTurnGameSample: Game = {
   id: 1,
+  aiLevel: 3,
   initialFen: "startpos",
   wtime: 300000,
   btime: 300000,
@@ -98,10 +113,12 @@ export const blackTurnGameSample: Game = {
   status: "started",
   white: null,
   black: null,
+  winner: null,
 };
 
 export const whiteTurnGameSample: Game = {
   id: 2,
+  aiLevel: 3,
   initialFen: "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR b KQkq - 0 1",
   wtime: 300000,
   btime: 300000,
@@ -109,4 +126,44 @@ export const whiteTurnGameSample: Game = {
   status: "started",
   white: null,
   black: null,
+  winner: null,
+};
+
+export const gameWithIncorrectMoveSample: Game = {
+  id: 1,
+  aiLevel: 3,
+  initialFen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
+  wtime: 300000,
+  btime: 300000,
+  moves: "e2e4 e7e5", // e2e4 is incorrect
+  status: "started",
+  white: null,
+  black: null,
+  winner: null,
+};
+
+export const blackResignedGameSample: Game = {
+  id: 1,
+  aiLevel: 3,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 0,
+  moves: "",
+  status: "resign",
+  white: null,
+  black: null,
+  winner: "white",
+};
+
+export const whiteResignedGameSample: Game = {
+  id: 1,
+  aiLevel: 3,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 0,
+  moves: "",
+  status: "resign",
+  white: null,
+  black: null,
+  winner: "black",
 };
