@@ -17,6 +17,21 @@ export const gameSample: Game = {
 export const gameSampleFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
+export const gameWith10Plus5MinControlSample: Game = {
+  id: 1,
+  aiLevel: 3,
+  clockLimit: 600,
+  clockIncrement: 5,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "started",
+  white: null,
+  black: null,
+  winner: null,
+};
+
 export const whiteOutOfTimeGameSample: Game = {
   id: 1,
   aiLevel: 3,

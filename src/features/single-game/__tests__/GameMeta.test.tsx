@@ -5,6 +5,7 @@ import {
   gameSample,
   gameSample2,
   gameSample3,
+  gameWith10Plus5MinControlSample,
 } from "../../../test-utils/data-sample/game";
 import getGameStatusText from "../../../utils/getGameStatusText";
 
@@ -35,6 +36,16 @@ describe("GameMeta", () => {
 
       expect(getByTestId("white-user").innerHTML).toContain("Thomas Miller");
       expect(getByTestId("black-user").innerHTML).toContain("AI level 3");
+    });
+
+    it("should contain time control", () => {
+      const { queryByText, rerender } = render(<GameMeta game={gameSample} />);
+
+      expect(queryByText("5 + 3")).not.toBeNull();
+
+      rerender(<GameMeta game={gameWith10Plus5MinControlSample} />);
+
+      expect(queryByText("10 + 5")).not.toBeNull();
     });
   });
 });

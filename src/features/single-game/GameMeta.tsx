@@ -14,6 +14,9 @@ export const GameMeta: FC<GameMetaProps> = ({ game }) => {
   return (
     <>
       <div>{getGameStatusText(game)}</div>
+      <div>
+        {game.clockLimit / 60} + {game.clockIncrement}
+      </div>
       <div data-testid="white-user">
         White: {game.white ? game.white.fullName : `AI level ${game.aiLevel}`}
       </div>
