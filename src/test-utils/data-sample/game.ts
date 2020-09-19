@@ -11,6 +11,28 @@ export const gameSample: Game = {
   black: null,
 };
 
+export const whiteOutOfTimeGameSample: Game = {
+  id: 1,
+  initialFen: "startpos",
+  wtime: 0,
+  btime: 300000,
+  moves: "",
+  status: "started",
+  white: null,
+  black: null,
+};
+
+export const blackOutOfTimeGameSample: Game = {
+  id: 1,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 0,
+  moves: "",
+  status: "started",
+  white: null,
+  black: null,
+};
+
 // with black user
 export const gameSample2: Game = {
   id: 1,

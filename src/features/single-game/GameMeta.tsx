@@ -6,5 +6,9 @@ export interface GameMetaProps {
 }
 
 export const GameMeta: FC<GameMetaProps> = ({ game }) => {
-  return null;
+  if (!game) {
+    return null;
+  }
+
+  return <div></div>;
 };
