@@ -19,5 +19,26 @@ export default (game: Game): string => {
     }
   }
 
+  if (game.status === "aborted") {
+    return "Game aborted";
+  }
+
+  if (game.status === "mate") {
+    if (game.winner === "white") {
+      return "Checkmate • White is victorious";
+    }
+    if (game.winner === "black") {
+      return "Checkmate • Black is victorious";
+    }
+  }
+
+  if (game.status === "draw") {
+    return "Draw";
+  }
+
+  if (game.status === "stalemate") {
+    return "Stalemate";
+  }
+
   return "Playing right now";
 };

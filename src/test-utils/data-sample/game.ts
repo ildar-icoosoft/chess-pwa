@@ -90,7 +90,7 @@ export const gameWithMovesSample: Game = {
 export const gameWithMovesSampleFen =
   "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2";
 
-export const gameWithCheckmateSample: Game = {
+export const gameWithCheckmateByWhiteSample: Game = {
   id: 3,
   aiLevel: 3,
   initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
@@ -98,6 +98,45 @@ export const gameWithCheckmateSample: Game = {
   btime: 300000,
   moves: "",
   status: "mate",
+  white: null,
+  black: null,
+  winner: "white",
+};
+
+export const gameWithCheckmateByBlackSample: Game = {
+  id: 3,
+  aiLevel: 3,
+  initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "mate",
+  white: null,
+  black: null,
+  winner: "black",
+};
+
+export const gameWithDrawSample: Game = {
+  id: 3,
+  aiLevel: 3,
+  initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "draw",
+  white: null,
+  black: null,
+  winner: null,
+};
+
+export const gameWithStalemateSample: Game = {
+  id: 3,
+  aiLevel: 3,
+  initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "stalemate",
   white: null,
   black: null,
   winner: null,
@@ -166,4 +205,17 @@ export const whiteResignedGameSample: Game = {
   white: null,
   black: null,
   winner: "black",
+};
+
+export const abortedGameSample: Game = {
+  id: 1,
+  aiLevel: 3,
+  initialFen: "startpos",
+  wtime: 300000,
+  btime: 0,
+  moves: "",
+  status: "aborted",
+  white: null,
+  black: null,
+  winner: null,
 };

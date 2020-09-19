@@ -5,7 +5,7 @@ import { SingleGame } from "../SingleGame";
 import {
   gameWithMovesSample,
   gameSample,
-  gameWithCheckmateSample,
+  gameWithCheckmateByWhiteSample,
   blackTurnGameSample,
   whiteTurnGameSample,
   gameSampleFen,
@@ -67,7 +67,9 @@ describe("SingleGame", () => {
 
         expect(board.props.check).toBeFalsy();
 
-        testRenderer.update(<SingleGame game={gameWithCheckmateSample} />);
+        testRenderer.update(
+          <SingleGame game={gameWithCheckmateByWhiteSample} />
+        );
 
         expect(board.props.check).toBeTruthy();
       });
@@ -151,7 +153,10 @@ describe("SingleGame", () => {
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(
-          <SingleGame currentUser={userSample} game={gameWithCheckmateSample} />
+          <SingleGame
+            currentUser={userSample}
+            game={gameWithCheckmateByWhiteSample}
+          />
         );
         // true because game is over
         expect(board.props.viewOnly).toBeTruthy();
