@@ -2,12 +2,13 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { GameMeta } from "../GameMeta";
 import {
-  blackOutOfTimeGameSample,
   gameSample,
   gameSample2,
   gameSample3,
-  whiteOutOfTimeGameSample,
 } from "../../../test-utils/data-sample/game";
+import getGameStatusText from "../../../utils/getGameStatusText";
+
+jest.mock("../../../utils/getGameStatusText");
 
 describe("GameMeta", () => {
   describe("DOM structure", () => {
@@ -17,15 +18,11 @@ describe("GameMeta", () => {
     });
 
     it("should contain status", () => {
-      const { queryByText, rerender } = render(<GameMeta game={gameSample} />);
+      (getGameStatusText as jest.Mock).mockReturnValue("some status text");
 
-      expect(queryByText("Playing right now")).not.toBeNull();
+      const { queryByText } = render(<GameMeta game={gameSample} />);
 
-      rerender(<GameMeta game={whiteOutOfTimeGameSample} />);
-      expect(queryByText("Time out • Black is victorious")).not.toBeNull();
-
-      rerender(<GameMeta game={blackOutOfTimeGameSample} />);
-      expect(queryByText("Time out • White is victorious")).not.toBeNull();
+      expect(queryByText("some status text")).not.toBeNull();
     });
 
     it("should contain players names", () => {
