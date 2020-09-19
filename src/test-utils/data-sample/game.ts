@@ -1,3 +1,4 @@
+import { ValidMoves } from "ii-react-chessboard";
 import Game from "../../interfaces/Game";
 
 export const gameSample: Game = {
@@ -30,6 +31,26 @@ export const gameWith10Plus5MinControlSample: Game = {
   white: null,
   black: null,
   winner: null,
+};
+
+export const gameWithSmallAmountOfPiecesSample: Game = {
+  id: 2,
+  aiLevel: 3,
+  clockLimit: 600,
+  clockIncrement: 5,
+  initialFen: "8/4p3/8/5k2/8/3p4/4PP2/4K3 w KQkq - 0 1",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "started",
+  white: null,
+  black: null,
+  winner: null,
+};
+export const gameWithSmallAmountOfPiecesSampleValidMoves: ValidMoves = {
+  e1: ["d2", "f1", "d1", "g1", "c1"],
+  e2: ["e3", "e4", "d3"],
+  f2: ["f3", "f4"],
 };
 
 export const whiteOutOfTimeGameSample: Game = {

@@ -1,6 +1,6 @@
 import TestRenderer from "react-test-renderer";
 import React from "react";
-import { Board, PieceColor, ValidMoves } from "ii-react-chessboard";
+import { Board, PieceColor } from "ii-react-chessboard";
 import { SingleGame } from "../SingleGame";
 import {
   gameWithMovesSample,
@@ -12,6 +12,8 @@ import {
   gameWithMovesSampleFen,
   gameSample2,
   gameSample3,
+  gameWithSmallAmountOfPiecesSample,
+  gameWithSmallAmountOfPiecesSampleValidMoves,
 } from "../../../test-utils/data-sample/game";
 import userSample from "../../../test-utils/data-sample/user";
 
@@ -112,33 +114,16 @@ describe("SingleGame", () => {
       });
 
       it("validMoves", async () => {
-        const initialFen = "8/4p3/8/5k2/8/3p4/4PP2/4K3 w KQkq - 0 1";
-
-        const initialPositionValidMoves: ValidMoves = {
-          e1: ["d2", "f1", "d1", "g1", "c1"],
-          e2: ["e3", "e4", "d3"],
-          f2: ["f3", "f4"],
-        };
-
         const testRenderer = TestRenderer.create(
-          <SingleGame
-            game={{
-              id: 2,
-              initialFen,
-              wtime: 300000,
-              btime: 300000,
-              moves: "",
-              status: "started",
-              white: null,
-              black: null,
-            }}
-          />
+          <SingleGame game={gameWithSmallAmountOfPiecesSample} />
         );
         const testInstance = testRenderer.root;
 
         const board = testInstance.findByType(Board);
 
-        expect(board.props.validMoves).toEqual(initialPositionValidMoves);
+        expect(board.props.validMoves).toEqual(
+          gameWithSmallAmountOfPiecesSampleValidMoves
+        );
       });
 
       it("viewOnly", () => {
