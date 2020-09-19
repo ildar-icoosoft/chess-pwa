@@ -16,6 +16,7 @@ import {
   gameWithSmallAmountOfPiecesSampleValidMoves,
 } from "../../../test-utils/data-sample/game";
 import userSample from "../../../test-utils/data-sample/user";
+import { GameMeta } from "../GameMeta";
 
 describe("SingleGame", () => {
   describe("children components", () => {
@@ -28,6 +29,17 @@ describe("SingleGame", () => {
       testRenderer.update(<SingleGame game={gameSample} />);
 
       expect(testInstance.findAllByType(Board).length).toBe(1);
+    });
+
+    it("contains GameMeta", () => {
+      const testRenderer = TestRenderer.create(<SingleGame />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(GameMeta).length).toBe(0);
+
+      testRenderer.update(<SingleGame game={gameSample} />);
+
+      expect(testInstance.findAllByType(GameMeta).length).toBe(1);
     });
   });
 
