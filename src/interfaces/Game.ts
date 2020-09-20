@@ -1,5 +1,6 @@
 import GameStatus from "../types/GameStatus";
 import User from "./User";
+import { PieceColor } from "../types/PieceColor";
 
 export default interface Game {
   id: number;
@@ -13,5 +14,5 @@ export default interface Game {
   status: GameStatus;
   white: User | null;
   black: User | null;
-  winner: "black" | "white" | null;
+  winner: PieceColor | null;
 }
