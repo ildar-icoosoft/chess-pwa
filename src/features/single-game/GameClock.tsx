@@ -10,21 +10,10 @@ export interface GameClockProps {
 }
 
 export const GameClock: FC<GameClockProps> = ({ game, color = "white" }) => {
-  if (!game) {
-    return null;
-  }
-
-  let msec: number;
-  if (color === "white") {
-    msec = game.wtime;
-  } else {
-    msec = game.btime;
-  }
-
   const [timePassed, setTimePassed] = useState(0);
 
   useEffect(() => {
-    if (game.status !== "started") {
+    if (!game || game.status !== "started") {
       return;
     }
 
@@ -36,6 +25,17 @@ export const GameClock: FC<GameClockProps> = ({ game, color = "white" }) => {
       clearTimeout(timeoutId);
     };
   }, []);
+
+  if (!game) {
+    return null;
+  }
+
+  let msec: number;
+  if (color === "white") {
+    msec = game.wtime;
+  } else {
+    msec = game.btime;
+  }
 
   const time = moment()
     .startOf("day")
