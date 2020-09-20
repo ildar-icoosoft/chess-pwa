@@ -9,6 +9,8 @@ export default {
 const games: Game[] = [
   {
     id: 1,
+    createdAt: 1600550685503,
+    updatedAt: 1600552247463,
     aiLevel: 3,
     clockLimit: 300,
     clockIncrement: 3,
@@ -23,6 +25,8 @@ const games: Game[] = [
   },
   {
     id: 2,
+    createdAt: 1600550685503,
+    updatedAt: 1600552247463,
     aiLevel: 3,
     clockLimit: 300,
     clockIncrement: 3,
