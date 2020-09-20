@@ -14,20 +14,32 @@ export interface GameControlPanelProps {
   orientation?: PieceColor;
 }
 
-export const GameControlPanel: FC<GameControlPanelProps> = ({ game }) => {
+export const GameControlPanel: FC<GameControlPanelProps> = ({
+  game,
+  turnColor = "white",
+  orientation = "white",
+}) => {
   if (!game) {
     return null;
   }
 
   return (
     <div>
-      <GameClock />
+      <GameClock
+        game={game}
+        turnColor={turnColor}
+        color={orientation === "white" ? "black" : "white"}
+      />
       <GameControlPanelUserName />
       <GameControlPanelTopToolbar />
       <GameMoves />
       <GameControlPanelBottomToolbar />
       <GameControlPanelUserName />
-      <GameClock />
+      <GameClock
+        game={game}
+        turnColor={turnColor}
+        color={orientation === "white" ? "white" : "black"}
+      />
     </div>
   );
 };
