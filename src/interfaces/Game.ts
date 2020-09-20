@@ -4,6 +4,8 @@ import { PieceColor } from "../types/PieceColor";
 
 export default interface Game {
   id: number;
+  createdAt: number;
+  updatedAt: number;
   aiLevel: number;
   clockLimit: number;
   clockIncrement: number;

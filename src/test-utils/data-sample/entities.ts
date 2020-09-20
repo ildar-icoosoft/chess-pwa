@@ -10,6 +10,8 @@ export const entitiesSample: EntitiesState = {
   games: {
     1: {
       id: 1,
+      createdAt: 1600550685503,
+      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -60,6 +62,8 @@ export const entitiesSampleAfterMove: EntitiesState = {
   games: {
     1: {
       id: 1,
+      createdAt: 1600550685503,
+      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -85,6 +89,8 @@ export const addGamePayloadSample: EntitiesState = {
   games: {
     2: {
       id: 2,
+      createdAt: 1600550685503,
+      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -114,6 +120,8 @@ export const entitiesSampleAfterAddingGame: EntitiesState = {
   games: {
     1: {
       id: 1,
+      createdAt: 1600550685503,
+      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -128,6 +136,8 @@ export const entitiesSampleAfterAddingGame: EntitiesState = {
     },
     2: {
       id: 2,
+      createdAt: 1600550685503,
+      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
