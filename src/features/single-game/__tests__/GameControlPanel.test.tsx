@@ -5,6 +5,9 @@ import { gameSample } from "../../../test-utils/data-sample/game";
 import TestRenderer from "react-test-renderer";
 import { GameClock } from "../GameClock";
 import { GameMoves } from "../GameMoves";
+import { GameControlPanelUserName } from "../GameControlPanelUserName";
+import { GameControlPanelBottomToolbar } from "../GameControlPanelBottomToolbar";
+import { GameControlPanelTopToolbar } from "../GameControlPanelTopToolbar";
 
 describe("GameControlPanel", () => {
   describe("children components", () => {
@@ -24,6 +27,39 @@ describe("GameControlPanel", () => {
       const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(GameMoves).length).toBe(1);
+    });
+
+    it("contains GameControlPanelUserName", () => {
+      const testRenderer = TestRenderer.create(
+        <GameControlPanel game={gameSample} />
+      );
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(GameControlPanelUserName).length).toBe(
+        2
+      );
+    });
+
+    it("contains GameControlPanelTopToolbar", () => {
+      const testRenderer = TestRenderer.create(
+        <GameControlPanel game={gameSample} />
+      );
+      const testInstance = testRenderer.root;
+
+      expect(
+        testInstance.findAllByType(GameControlPanelTopToolbar).length
+      ).toBe(1);
+    });
+
+    it("contains GameControlPanelBottomToolbar", () => {
+      const testRenderer = TestRenderer.create(
+        <GameControlPanel game={gameSample} />
+      );
+      const testInstance = testRenderer.root;
+
+      expect(
+        testInstance.findAllByType(GameControlPanelBottomToolbar).length
+      ).toBe(1);
     });
   });
 
