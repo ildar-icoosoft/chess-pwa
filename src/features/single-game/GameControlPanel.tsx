@@ -3,6 +3,7 @@ import Game from "../../interfaces/Game";
 import { FC } from "react";
 import { PieceColor } from "../../types/PieceColor";
 import { GameClock } from "./GameClock";
+import { GameMoves } from "./GameMoves";
 
 export interface GameControlPanelProps {
   game?: Game;
@@ -18,6 +19,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({ game }) => {
   return (
     <div>
       <GameClock />
+      <GameMoves />
       <GameClock />
     </div>
   );
