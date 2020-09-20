@@ -1,20 +1,13 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import { GameControlPanel } from "../GameControlPanel";
-import {
-  gameSample,
-  gameSampleFen,
-  gameWithMovesSample,
-  gameWithMovesSampleFen,
-} from "../../../test-utils/data-sample/game";
+import { gameSample } from "../../../test-utils/data-sample/game";
 import TestRenderer from "react-test-renderer";
 import { GameClock } from "../GameClock";
 import { GameMoves } from "../GameMoves";
 import { GameControlPanelUserName } from "../GameControlPanelUserName";
 import { GameControlPanelBottomToolbar } from "../GameControlPanelBottomToolbar";
 import { GameControlPanelTopToolbar } from "../GameControlPanelTopToolbar";
-import { SingleGame } from "../SingleGame";
-import { Board } from "ii-react-chessboard";
 
 describe("GameControlPanel", () => {
   describe("children components", () => {
