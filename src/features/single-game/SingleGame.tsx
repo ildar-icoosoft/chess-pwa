@@ -11,6 +11,7 @@ import Game from "../../interfaces/Game";
 import makeChessInstance from "../../utils/makeChessInstance";
 import User from "../../interfaces/User";
 import { GameMeta } from "./GameMeta";
+import { GameControlPanel } from "./GameControlPanel";
 
 export interface SingleGameProps {
   game?: Game;
@@ -71,6 +72,7 @@ export const SingleGame: FC<SingleGameProps> = ({
   return (
     <>
       <GameMeta game={game} />
+      <GameControlPanel game={game} orientation={orientation} />
       <Board
         allowMarkers
         check={check}
