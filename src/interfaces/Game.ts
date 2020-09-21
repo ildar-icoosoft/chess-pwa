@@ -10,6 +10,7 @@ export default interface Game {
   clockLimit: number;
   clockIncrement: number;
   initialFen: string;
+  turn: PieceColor;
   wtime: number;
   btime: number;
   moves: string;

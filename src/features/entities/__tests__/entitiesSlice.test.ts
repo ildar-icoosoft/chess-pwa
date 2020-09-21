@@ -4,6 +4,7 @@ import entitiesReducer from "../entitiesSlice";
 import { getOngoingGamesSuccess } from "../../ongoing-games/ongoingGamesSlice";
 import { getSingleGameSuccess } from "../../single-game/singleGameSlice";
 import { challengeAiSuccess } from "../../challenge/challengeSlice";
+import { increment1Sec } from "../../game-clock/gameClockSlice";
 import { makeMoveRequest, makeMoveSuccess } from "../../move/moveSlice";
 import {
   getCurrentUserSuccess,
@@ -142,6 +143,14 @@ describe("entitiesSlice reducer", () => {
       })
     ).toEqual(entitiesSampleAfterAddingGame);
   });
+
+  // it("should handle increment1Sec", () => {
+  //   expect(
+  //     entitiesReducer(entitiesSample, {
+  //       type: increment1Sec.type,
+  //     })
+  //   ).toEqual(entitiesSampleAfterAddingGame);
+  // });
 
   it("should handle getSingleGameSuccess", () => {
     expect(
