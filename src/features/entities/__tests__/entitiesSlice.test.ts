@@ -4,7 +4,7 @@ import entitiesReducer from "../entitiesSlice";
 import { getOngoingGamesSuccess } from "../../ongoing-games/ongoingGamesSlice";
 import { getSingleGameSuccess } from "../../single-game/singleGameSlice";
 import { challengeAiSuccess } from "../../challenge/challengeSlice";
-import { increment1Sec } from "../../game-clock/gameClockSlice";
+import { oneSecondPassed } from "../../game-clock/gameClockSlice";
 import { makeMoveRequest, makeMoveSuccess } from "../../move/moveSlice";
 import {
   getCurrentUserSuccess,
@@ -20,9 +20,10 @@ import {
   addUserPayloadSample,
   emptyEntitiesSample,
   entitiesSample,
-  entitiesSampleAfterAddingGame,
-  entitiesSampleAfterMove,
+  entitiesAfterAddingGameSample,
+  entitiesAfterMoveSample,
   entitiesWithUserSample,
+  entitiesAfterOneSecondSample,
 } from "../../../test-utils/data-sample/entities";
 
 jest.mock("../../../services/ioClient");
@@ -93,7 +94,7 @@ describe("entitiesSlice reducer", () => {
           entities: addGamePayloadSample,
         },
       })
-    ).toEqual(entitiesSampleAfterAddingGame);
+    ).toEqual(entitiesAfterAddingGameSample);
   });
 
   it("should handle createGameSuccess", () => {
@@ -105,7 +106,7 @@ describe("entitiesSlice reducer", () => {
           entities: addGamePayloadSample,
         },
       })
-    ).toEqual(entitiesSampleAfterAddingGame);
+    ).toEqual(entitiesAfterAddingGameSample);
   });
 
   it("should handle makeMoveRequest", () => {
@@ -117,7 +118,7 @@ describe("entitiesSlice reducer", () => {
           move: "e2e4",
         },
       })
-    ).toEqual(entitiesSampleAfterMove);
+    ).toEqual(entitiesAfterMoveSample);
   });
 
   it("should handle makeMoveSuccess", () => {
@@ -126,10 +127,10 @@ describe("entitiesSlice reducer", () => {
         type: makeMoveSuccess.type,
         payload: {
           result: 1,
-          entities: entitiesSampleAfterMove,
+          entities: entitiesAfterMoveSample,
         },
       })
-    ).toEqual(entitiesSampleAfterMove);
+    ).toEqual(entitiesAfterMoveSample);
   });
 
   it("should handle getOngoingGamesSuccess", () => {
@@ -141,16 +142,16 @@ describe("entitiesSlice reducer", () => {
           entities: addGamePayloadSample,
         },
       })
-    ).toEqual(entitiesSampleAfterAddingGame);
+    ).toEqual(entitiesAfterAddingGameSample);
   });
 
-  // it("should handle increment1Sec", () => {
-  //   expect(
-  //     entitiesReducer(entitiesSample, {
-  //       type: increment1Sec.type,
-  //     })
-  //   ).toEqual(entitiesSampleAfterAddingGame);
-  // });
+  it("should handle oneSecondPassed", () => {
+    expect(
+      entitiesReducer(entitiesSample, {
+        type: oneSecondPassed.type,
+      })
+    ).toEqual(entitiesAfterOneSecondSample);
+  });
 
   it("should handle getSingleGameSuccess", () => {
     expect(
@@ -161,7 +162,7 @@ describe("entitiesSlice reducer", () => {
           entities: addGamePayloadSample,
         },
       })
-    ).toEqual(entitiesSampleAfterAddingGame);
+    ).toEqual(entitiesAfterAddingGameSample);
   });
 
   it("should handle challengeAiSuccess", () => {
@@ -173,6 +174,6 @@ describe("entitiesSlice reducer", () => {
           entities: addGamePayloadSample,
         },
       })
-    ).toEqual(entitiesSampleAfterAddingGame);
+    ).toEqual(entitiesAfterAddingGameSample);
   });
 });

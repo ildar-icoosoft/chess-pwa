@@ -9,17 +9,17 @@ const gameClockSlice = createSlice({
   name: "gameClock",
   initialState,
   reducers: {
-    increment1Sec() {},
+    oneSecondPassed() {},
   },
   extraReducers: {},
 });
 
-export const { increment1Sec } = gameClockSlice.actions;
+export const { oneSecondPassed } = gameClockSlice.actions;
 
 export default gameClockSlice.reducer;
 
 export const startGameClock = (): AppThunk<void> => (dispatch) => {
   setInterval(() => {
-    dispatch(increment1Sec());
+    dispatch(oneSecondPassed());
   }, 1000);
 };

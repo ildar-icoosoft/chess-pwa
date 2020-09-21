@@ -81,7 +81,7 @@ export const entitiesWithUserSample: EntitiesState = {
   games: {},
 };
 
-export const entitiesSampleAfterMove: EntitiesState = {
+export const entitiesAfterMoveSample: EntitiesState = {
   users: {
     1: {
       id: 1,
@@ -137,7 +137,7 @@ export const addGamePayloadSample: EntitiesState = {
   },
 };
 
-export const entitiesSampleAfterAddingGame: EntitiesState = {
+export const entitiesAfterAddingGameSample: EntitiesState = {
   users: {
     1: {
       id: 1,

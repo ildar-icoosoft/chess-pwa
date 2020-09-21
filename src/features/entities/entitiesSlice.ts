@@ -11,6 +11,7 @@ import {
 import { getOngoingGamesSuccess } from "../ongoing-games/ongoingGamesSlice";
 import { getSingleGameSuccess } from "../single-game/singleGameSlice";
 import { challengeAiSuccess } from "../challenge/challengeSlice";
+import { oneSecondPassed } from "../game-clock/gameClockSlice";
 import {
   updateGameBySubscription,
   createGameBySubscription,
@@ -77,6 +78,19 @@ const entitiesSlice = createSlice({
       } ${action.payload.move}`.trim();
     },
     [makeMoveSuccess.type]: getNormalizedDataReducer,
+    [oneSecondPassed.type]: (state: EntitiesState) => {
+      for (const gameId in state.games) {
+        if (state.games[gameId].status === "started") {
+          const timePropName =
+            state.games[gameId].turn === "white" ? "wtime" : "btime";
+
+          state.games[gameId][timePropName] -= 1000;
+          if (state.games[gameId][timePropName] < 0) {
+            state.games[gameId][timePropName] = 0;
+          }
+        }
+      }
+    },
   },
 });
 

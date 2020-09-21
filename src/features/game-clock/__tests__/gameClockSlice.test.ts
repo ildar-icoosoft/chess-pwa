@@ -1,5 +1,5 @@
 import gameClockReducer, {
-  increment1Sec,
+  oneSecondPassed,
   startGameClock,
 } from "../../game-clock/gameClockSlice";
 import { defaultState } from "../../../test-utils/data-sample/state";
@@ -15,12 +15,12 @@ describe("gameClockSlice reducer", () => {
     ).toEqual({});
   });
 
-  it("should handle increment1Sec", () => {
+  it("should handle oneSecondPassed", () => {
     expect(
       gameClockReducer(
         {},
         {
-          type: increment1Sec.type,
+          type: oneSecondPassed.type,
         }
       )
     ).toEqual({});
@@ -38,13 +38,13 @@ describe("gameClockSlice reducer", () => {
     jest.advanceTimersByTime(1000);
     expect(dispatch).toBeCalledTimes(1);
     expect(dispatch).toHaveBeenNthCalledWith(1, {
-      type: increment1Sec.type,
+      type: oneSecondPassed.type,
     });
 
     jest.advanceTimersByTime(1000);
     expect(dispatch).toBeCalledTimes(2);
     expect(dispatch).toHaveBeenNthCalledWith(2, {
-      type: increment1Sec.type,
+      type: oneSecondPassed.type,
     });
   });
 });
