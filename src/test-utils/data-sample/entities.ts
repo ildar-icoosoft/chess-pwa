@@ -97,7 +97,7 @@ export const entitiesAfterMoveSample: EntitiesState = {
       clockLimit: 300,
       clockIncrement: 3,
       initialFen: "startpos",
-      turn: "white",
+      turn: "black",
       wtime: 300000,
       btime: 300000,
       moves: "e2e4",

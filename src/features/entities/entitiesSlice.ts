@@ -73,6 +73,8 @@ const entitiesSlice = createSlice({
       state: EntitiesState,
       action: PayloadAction<MoveRequestPayload>
     ) => {
+      state.games[action.payload.gameId].turn =
+        state.games[action.payload.gameId].turn === "white" ? "black" : "white";
       state.games[action.payload.gameId].moves = `${
         state.games[action.payload.gameId].moves
       } ${action.payload.move}`.trim();
