@@ -29,7 +29,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
         color={orientation === "white" ? "black" : "white"}
       />
       <GameControlPanelTopToolbar />
-      <GameMoves />
+      <GameMoves game={game} />
       <GameControlPanelBottomToolbar />
       <GameControlPanelUserName
         game={game}

@@ -121,6 +121,19 @@ describe("GameControlPanel", () => {
         expect(gameControlPanelUserNames[1].props.color).toBe("black");
       });
     });
+
+    describe("GameMoves", () => {
+      it("game", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameMoves = testInstance.findByType(GameMoves);
+
+        expect(gameMoves.props.game).toBe(gameSample);
+      });
+    });
   });
 
   describe("DOM structure", () => {
