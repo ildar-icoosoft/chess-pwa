@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import moment from "moment";
 import Game from "../../interfaces/Game";
 import { PieceColor } from "../../types/PieceColor";
@@ -10,22 +10,6 @@ export interface GameClockProps {
 }
 
 export const GameClock: FC<GameClockProps> = ({ game, color = "white" }) => {
-  const [timePassed, setTimePassed] = useState(0);
-
-  useEffect(() => {
-    if (!game || game.status !== "started") {
-      return;
-    }
-
-    const timeoutId = setTimeout(() => {
-      setTimePassed((timePassed) => timePassed + 1000);
-    }, 1000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
   if (!game) {
     return null;
   }
@@ -37,10 +21,7 @@ export const GameClock: FC<GameClockProps> = ({ game, color = "white" }) => {
     msec = game.btime;
   }
 
-  const time = moment()
-    .startOf("day")
-    .milliseconds(msec - timePassed)
-    .format("mm : ss");
+  const time = moment().startOf("day").milliseconds(msec).format("mm : ss");
 
   return <div data-testid="time">{time}</div>;
 };
