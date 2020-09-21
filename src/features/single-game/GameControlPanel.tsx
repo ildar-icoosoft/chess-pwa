@@ -10,13 +10,11 @@ import { GameControlPanelBottomToolbar } from "./GameControlPanelBottomToolbar";
 
 export interface GameControlPanelProps {
   game?: Game;
-  turnColor?: PieceColor;
   orientation?: PieceColor;
 }
 
 export const GameControlPanel: FC<GameControlPanelProps> = ({
   game,
-  turnColor = "white",
   orientation = "white",
 }) => {
   if (!game) {
@@ -25,21 +23,13 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
 
   return (
     <div>
-      <GameClock
-        game={game}
-        turnColor={turnColor}
-        color={orientation === "white" ? "black" : "white"}
-      />
+      <GameClock time={orientation === "white" ? game.btime : game.wtime} />
       <GameControlPanelUserName />
       <GameControlPanelTopToolbar />
       <GameMoves />
       <GameControlPanelBottomToolbar />
       <GameControlPanelUserName />
-      <GameClock
-        game={game}
-        turnColor={turnColor}
-        color={orientation === "white" ? "white" : "black"}
-      />
+      <GameClock time={orientation === "white" ? game.wtime : game.btime} />
     </div>
   );
 };

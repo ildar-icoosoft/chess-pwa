@@ -65,7 +65,7 @@ describe("GameControlPanel", () => {
 
   describe("children components props", () => {
     describe("GameClock", () => {
-      it("game", () => {
+      it("time", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />
         );
@@ -73,46 +73,15 @@ describe("GameControlPanel", () => {
 
         const gameClocks = testInstance.findAllByType(GameClock);
 
-        expect(gameClocks[0].props.game).toBe(gameSample);
-        expect(gameClocks[1].props.game).toBe(gameSample);
-      });
-
-      it("turnColor", () => {
-        const testRenderer = TestRenderer.create(
-          <GameControlPanel game={gameSample} />
-        );
-        const testInstance = testRenderer.root;
-
-        const gameClocks = testInstance.findAllByType(GameClock);
-
-        expect(gameClocks[0].props.turnColor).toBe("white");
-        expect(gameClocks[1].props.turnColor).toBe("white");
-
-        testRenderer.update(
-          <GameControlPanel game={gameSample} turnColor={"black"} />
-        );
-
-        expect(gameClocks[0].props.turnColor).toBe("black");
-        expect(gameClocks[1].props.turnColor).toBe("black");
-      });
-
-      it("color", () => {
-        const testRenderer = TestRenderer.create(
-          <GameControlPanel game={gameSample} />
-        );
-        const testInstance = testRenderer.root;
-
-        const gameClocks = testInstance.findAllByType(GameClock);
-
-        expect(gameClocks[0].props.color).toBe("black");
-        expect(gameClocks[1].props.color).toBe("white");
+        expect(gameClocks[0].props.time).toBe(365000);
+        expect(gameClocks[1].props.time).toBe(310000);
 
         testRenderer.update(
           <GameControlPanel game={gameSample} orientation={"black"} />
         );
 
-        expect(gameClocks[0].props.color).toBe("white");
-        expect(gameClocks[1].props.color).toBe("black");
+        expect(gameClocks[0].props.time).toBe(310000);
+        expect(gameClocks[1].props.time).toBe(365000);
       });
     });
   });

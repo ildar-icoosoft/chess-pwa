@@ -12,11 +12,13 @@ describe("GameClock", () => {
 
   describe("DOM structure", () => {
     it("should display time", () => {
-      const { rerender, getByTestId } = render(<GameClock game={gameSample} />);
+      const { rerender, getByTestId } = render(
+        <GameClock time={gameSample.wtime} />
+      );
 
       expect(getByTestId("time").innerHTML).toBe("05 : 10");
 
-      rerender(<GameClock game={gameSample} color={"black"} />);
+      rerender(<GameClock time={gameSample.btime} />);
       expect(getByTestId("time").innerHTML).toBe("06 : 05");
     });
   });

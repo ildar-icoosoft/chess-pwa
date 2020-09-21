@@ -9,7 +9,6 @@ import {
 } from "ii-react-chessboard";
 import Game from "../../interfaces/Game";
 import makeChessInstance from "../../utils/makeChessInstance";
-import getTurnColor from "../../utils/getTurnColor";
 import User from "../../interfaces/User";
 import { GameMeta } from "./GameMeta";
 
@@ -35,7 +34,7 @@ export const SingleGame: FC<SingleGameProps> = ({
   const fen: string = chess.fen();
 
   const turnColor: PieceColor =
-    getTurnColor(chess) === "white" ? PieceColor.WHITE : PieceColor.BLACK;
+    game.turn === "white" ? PieceColor.WHITE : PieceColor.BLACK;
 
   const validMoves: ValidMoves = getValidMoves(chess);
 

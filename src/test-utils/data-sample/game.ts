@@ -242,7 +242,7 @@ export const blackTurnGameSample: Game = {
   clockLimit: 300,
   clockIncrement: 3,
   initialFen: "startpos",
-  turn: "white",
+  turn: "black",
   wtime: 300000,
   btime: 300000,
   moves: "e2e4 e7e5 g1f3",
