@@ -84,6 +84,43 @@ describe("GameControlPanel", () => {
         expect(gameClocks[1].props.time).toBe(365000);
       });
     });
+
+    describe("GameControlPanelUserName", () => {
+      it("game", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameControlPanelUserNames = testInstance.findAllByType(
+          GameControlPanelUserName
+        );
+
+        expect(gameControlPanelUserNames[0].props.game).toBe(gameSample);
+        expect(gameControlPanelUserNames[1].props.game).toBe(gameSample);
+      });
+
+      it("color", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameControlPanelUserNames = testInstance.findAllByType(
+          GameControlPanelUserName
+        );
+
+        expect(gameControlPanelUserNames[0].props.color).toBe("black");
+        expect(gameControlPanelUserNames[1].props.color).toBe("white");
+
+        testRenderer.update(
+          <GameControlPanel game={gameSample} orientation={"black"} />
+        );
+
+        expect(gameControlPanelUserNames[0].props.color).toBe("white");
+        expect(gameControlPanelUserNames[1].props.color).toBe("black");
+      });
+    });
   });
 
   describe("DOM structure", () => {

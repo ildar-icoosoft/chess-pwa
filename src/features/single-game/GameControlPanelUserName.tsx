@@ -1,8 +1,24 @@
 import React from "react";
 import { FC } from "react";
+import Game from "../../interfaces/Game";
+import { PieceColor } from "../../types/PieceColor";
 
-export interface GameControlPanelUserNameProps {}
+export interface GameControlPanelUserNameProps {
+  game?: Game;
+  color?: PieceColor;
+}
 
-export const GameControlPanelUserName: FC<GameControlPanelUserNameProps> = () => {
-  return null;
+export const GameControlPanelUserName: FC<GameControlPanelUserNameProps> = ({
+  game,
+  color = "white",
+}) => {
+  if (!game) {
+    return null;
+  }
+
+  return (
+    <div>
+      {game[color] ? game[color]!.fullName : `AI level ${game.aiLevel}`}
+    </div>
+  );
 };
