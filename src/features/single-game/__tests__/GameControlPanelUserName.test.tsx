@@ -17,7 +17,7 @@ describe("GameControlPanelUserName", () => {
 
       expect(container.innerHTML).toContain("AI level 3");
 
-      rerender(<GameControlPanelUserName game={gameSample2} color={"black"} />);
+      rerender(<GameControlPanelUserName game={gameSample2} color="black" />);
 
       expect(container.innerHTML).toContain("Thomas Miller");
     });

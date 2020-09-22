@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import React from "react";
+import TestRenderer from "react-test-renderer";
 import { GameControlPanel } from "../GameControlPanel";
 import { gameSample } from "../../../test-utils/data-sample/game";
-import TestRenderer from "react-test-renderer";
 import { GameClock } from "../GameClock";
 import { GameMoves } from "../GameMoves";
 import { GameControlPanelUserName } from "../GameControlPanelUserName";
@@ -77,7 +77,7 @@ describe("GameControlPanel", () => {
         expect(gameClocks[1].props.time).toBe(310000);
 
         testRenderer.update(
-          <GameControlPanel game={gameSample} orientation={"black"} />
+          <GameControlPanel game={gameSample} orientation="black" />
         );
 
         expect(gameClocks[0].props.time).toBe(310000);
@@ -114,7 +114,7 @@ describe("GameControlPanel", () => {
         expect(gameControlPanelUserNames[1].props.color).toBe("white");
 
         testRenderer.update(
-          <GameControlPanel game={gameSample} orientation={"black"} />
+          <GameControlPanel game={gameSample} orientation="black" />
         );
 
         expect(gameControlPanelUserNames[0].props.color).toBe("white");
@@ -285,7 +285,7 @@ describe("GameControlPanel", () => {
         expect(bottomToolbar.props.onAbortGame).toBe(onAbortGame);
       });
 
-      it("onFlipBoard", () => {
+      it("onOfferDraw", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />
         );
