@@ -67,7 +67,7 @@ export const entitiesBeforeTimeOutSample: EntitiesState = {
       clockIncrement: 3,
       initialFen: "startpos",
       turn: "white",
-      wtime: 1000,
+      wtime: 800,
       btime: 300000,
       moves: "",
       status: "started",
