@@ -6,9 +6,10 @@ import { Move } from "chess.js";
 
 export interface GameMovesProps {
   game?: Game;
+  onRewindToMove?(moveIndex: number): void;
 }
 
-export const GameMoves: FC<GameMovesProps> = ({ game }) => {
+export const GameMoves: FC<GameMovesProps> = ({ game, onRewindToMove }) => {
   if (!game) {
     return null;
   }
@@ -19,6 +20,14 @@ export const GameMoves: FC<GameMovesProps> = ({ game }) => {
 
   const movesPairs = _chunk(movesHistory, 2);
 
+  const makeRewindToMoveHandler = (moveIndex: number) => {
+    return () => {
+      if (onRewindToMove) {
+        onRewindToMove(moveIndex);
+      }
+    };
+  };
+
   return (
     <table>
       <tbody>
@@ -26,13 +35,19 @@ export const GameMoves: FC<GameMovesProps> = ({ game }) => {
           <tr key={index}>
             <td>{index + 1}</td>
             <td>
-              <div data-testid={`move-${formatMove(pair[0])}`}>
+              <div
+                data-testid={`move-${index * 2}`}
+                onClick={makeRewindToMoveHandler(index * 2)}
+              >
                 {formatMove(pair[0])}
               </div>
             </td>
             <td>
               {pair[1] && (
-                <div data-testid={`move-${formatMove(pair[1])}`}>
+                <div
+                  data-testid={`move-${index * 2 + 1}`}
+                  onClick={makeRewindToMoveHandler(index * 2 + 1)}
+                >
                   {formatMove(pair[1])}
                 </div>
               )}
