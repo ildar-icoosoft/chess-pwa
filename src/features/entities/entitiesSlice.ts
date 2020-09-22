@@ -96,6 +96,7 @@ const entitiesSlice = createSlice({
 
           if (game[timePropName] === 0) {
             game.status = "outoftime";
+            game.winner = game.turn === "white" ? "black" : "white";
           }
         }
       });

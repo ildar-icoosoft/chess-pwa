@@ -99,7 +99,7 @@ export const entitiesAfterTimeOutSample: EntitiesState = {
       status: "outoftime",
       white: null,
       black: null,
-      winner: null,
+      winner: "black",
     },
   },
 };
