@@ -24,6 +24,8 @@ import {
   entitiesAfterMoveSample,
   entitiesWithUserSample,
   entitiesAfterOneSecondSample,
+  entitiesAfterTimeOutSample,
+  entitiesBeforeTimeOutSample,
 } from "../../../test-utils/data-sample/entities";
 
 jest.mock("../../../services/ioClient");
@@ -151,6 +153,12 @@ describe("entitiesSlice reducer", () => {
         type: oneSecondPassed.type,
       })
     ).toEqual(entitiesAfterOneSecondSample);
+
+    expect(
+      entitiesReducer(entitiesBeforeTimeOutSample, {
+        type: oneSecondPassed.type,
+      })
+    ).toEqual(entitiesAfterTimeOutSample);
   });
 
   it("should handle getSingleGameSuccess", () => {

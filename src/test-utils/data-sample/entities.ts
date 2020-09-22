@@ -56,6 +56,62 @@ export const entitiesAfterOneSecondSample: EntitiesState = {
   },
 };
 
+export const entitiesBeforeTimeOutSample: EntitiesState = {
+  users: {
+    1: {
+      id: 1,
+      fullName: "Robert Johnson",
+    },
+  },
+  games: {
+    1: {
+      id: 1,
+      createdAt: 1600550685503,
+      updatedAt: 1600552247463,
+      aiLevel: 3,
+      clockLimit: 300,
+      clockIncrement: 3,
+      initialFen: "startpos",
+      turn: "white",
+      wtime: 1000,
+      btime: 300000,
+      moves: "",
+      status: "started",
+      white: null,
+      black: null,
+      winner: null,
+    },
+  },
+};
+
+export const entitiesAfterTimeOutSample: EntitiesState = {
+  users: {
+    1: {
+      id: 1,
+      fullName: "Robert Johnson",
+    },
+  },
+  games: {
+    1: {
+      id: 1,
+      createdAt: 1600550685503,
+      updatedAt: 1600552247463,
+      aiLevel: 3,
+      clockLimit: 300,
+      clockIncrement: 3,
+      initialFen: "startpos",
+      turn: "white",
+      wtime: 0,
+      btime: 300000,
+      moves: "",
+      status: "outoftime",
+      white: null,
+      black: null,
+      winner: null,
+    },
+  },
+};
+
 export const emptyEntitiesSample: EntitiesState = {
   users: {},
   games: {},

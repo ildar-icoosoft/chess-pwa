@@ -84,13 +84,18 @@ const entitiesSlice = createSlice({
       const gameIds = Object.keys(state.games);
 
       gameIds.forEach((gameId) => {
-        if (state.games[gameId].status === "started") {
-          const timePropName =
-            state.games[gameId].turn === "white" ? "wtime" : "btime";
+        const game = state.games[gameId];
 
-          state.games[gameId][timePropName] -= 1000;
-          if (state.games[gameId][timePropName] < 0) {
-            state.games[gameId][timePropName] = 0;
+        if (game.status === "started") {
+          const timePropName = game.turn === "white" ? "wtime" : "btime";
+
+          game[timePropName] -= 1000;
+          if (game[timePropName] < 0) {
+            game[timePropName] = 0;
+          }
+
+          if (game[timePropName] === 0) {
+            game.status = "outoftime";
           }
         }
       });
