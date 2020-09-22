@@ -3,8 +3,6 @@ import Game from "../../interfaces/Game";
 
 export const gameSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -23,8 +21,6 @@ export const gameSampleFen =
 
 export const gameWith10Plus5MinControlSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 600,
   clockIncrement: 5,
@@ -41,8 +37,6 @@ export const gameWith10Plus5MinControlSample: Game = {
 
 export const gameWithSmallAmountOfPiecesSample: Game = {
   id: 2,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 600,
   clockIncrement: 5,
@@ -64,8 +58,6 @@ export const gameWithSmallAmountOfPiecesSampleValidMoves: ValidMoves = {
 
 export const whiteOutOfTimeGameSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -82,8 +74,6 @@ export const whiteOutOfTimeGameSample: Game = {
 
 export const blackOutOfTimeGameSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -101,8 +91,6 @@ export const blackOutOfTimeGameSample: Game = {
 // with black user
 export const gameSample2: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -123,8 +111,6 @@ export const gameSample2: Game = {
 // with white user
 export const gameSample3: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -144,8 +130,6 @@ export const gameSample3: Game = {
 
 export const gameWithMovesSample: Game = {
   id: 2,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -164,8 +148,6 @@ export const gameWithMovesSampleFen =
 
 export const gameWithCheckmateByWhiteSample: Game = {
   id: 3,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -182,8 +164,6 @@ export const gameWithCheckmateByWhiteSample: Game = {
 
 export const gameWithCheckmateByBlackSample: Game = {
   id: 3,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -200,8 +180,6 @@ export const gameWithCheckmateByBlackSample: Game = {
 
 export const gameWithDrawSample: Game = {
   id: 3,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -218,8 +196,6 @@ export const gameWithDrawSample: Game = {
 
 export const gameWithStalemateSample: Game = {
   id: 3,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -236,8 +212,6 @@ export const gameWithStalemateSample: Game = {
 
 export const blackTurnGameSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -254,8 +228,6 @@ export const blackTurnGameSample: Game = {
 
 export const whiteTurnGameSample: Game = {
   id: 2,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -272,8 +244,6 @@ export const whiteTurnGameSample: Game = {
 
 export const gameWithIncorrectMoveSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -290,8 +260,6 @@ export const gameWithIncorrectMoveSample: Game = {
 
 export const blackResignedGameSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -308,8 +276,6 @@ export const blackResignedGameSample: Game = {
 
 export const whiteResignedGameSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,
@@ -326,8 +292,6 @@ export const whiteResignedGameSample: Game = {
 
 export const abortedGameSample: Game = {
   id: 1,
-  createdAt: 1600550685503,
-  updatedAt: 1600552247463,
   aiLevel: 3,
   clockLimit: 300,
   clockIncrement: 3,

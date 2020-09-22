@@ -53,8 +53,6 @@ export const stateWithDataSample: RootState = {
     games: {
       "1": {
         id: 1,
-        createdAt: 1600550685503,
-        updatedAt: 1600552247463,
         aiLevel: 3,
         clockLimit: 300,
         clockIncrement: 3,
@@ -101,8 +99,6 @@ export const stateWithDataSample2: RootState = {
     games: {
       "1": {
         id: 1,
-        createdAt: 1600550685503,
-        updatedAt: 1600552247463,
         aiLevel: 3,
         clockLimit: 300,
         clockIncrement: 3,

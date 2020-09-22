@@ -51,8 +51,6 @@ describe("OngoingGamesContainer", () => {
         expect(gamePreviewsComponent.props.games).toEqual([
           {
             id: 1,
-            createdAt: 1600550685503,
-            updatedAt: 1600552247463,
             aiLevel: 3,
             clockLimit: 300,
             clockIncrement: 3,

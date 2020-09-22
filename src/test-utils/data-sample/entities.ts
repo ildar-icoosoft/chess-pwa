@@ -10,8 +10,6 @@ export const entitiesSample: EntitiesState = {
   games: {
     1: {
       id: 1,
-      createdAt: 1600550685503,
-      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -38,8 +36,6 @@ export const entitiesAfterOneSecondSample: EntitiesState = {
   games: {
     1: {
       id: 1,
-      createdAt: 1600550685503,
-      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -66,8 +62,6 @@ export const entitiesBeforeTimeOutSample: EntitiesState = {
   games: {
     1: {
       id: 1,
-      createdAt: 1600550685503,
-      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -94,8 +88,6 @@ export const entitiesAfterTimeOutSample: EntitiesState = {
   games: {
     1: {
       id: 1,
-      createdAt: 1600550685503,
-      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -147,8 +139,6 @@ export const entitiesAfterMoveSample: EntitiesState = {
   games: {
     1: {
       id: 1,
-      createdAt: 1600550685503,
-      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -175,8 +165,6 @@ export const addGamePayloadSample: EntitiesState = {
   games: {
     2: {
       id: 2,
-      createdAt: 1600550685503,
-      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -207,8 +195,6 @@ export const entitiesAfterAddingGameSample: EntitiesState = {
   games: {
     1: {
       id: 1,
-      createdAt: 1600550685503,
-      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
@@ -224,8 +210,6 @@ export const entitiesAfterAddingGameSample: EntitiesState = {
     },
     2: {
       id: 2,
-      createdAt: 1600550685503,
-      updatedAt: 1600552247463,
       aiLevel: 3,
       clockLimit: 300,
       clockIncrement: 3,
