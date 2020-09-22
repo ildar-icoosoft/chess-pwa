@@ -7,7 +7,7 @@ describe("GameMoves", () => {
   describe("DOM structure", () => {
     it("should contain nothing if no game", () => {
       const { container } = render(<GameMoves />);
-      expect(container).toBeEmpty();
+      expect(container).toBeEmptyDOMElement();
     });
 
     it("should contain moves", () => {

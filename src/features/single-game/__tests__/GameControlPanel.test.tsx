@@ -139,7 +139,7 @@ describe("GameControlPanel", () => {
   describe("DOM structure", () => {
     it("should contain nothing if no game", () => {
       const { container } = render(<GameControlPanel />);
-      expect(container).toBeEmpty();
+      expect(container).toBeEmptyDOMElement();
     });
   });
 });

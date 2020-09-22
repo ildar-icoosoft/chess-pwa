@@ -7,7 +7,7 @@ describe("GameControlPanelUserName", () => {
   describe("DOM structure", () => {
     it("should contain nothing if no game", () => {
       const { container } = render(<GameControlPanelUserName />);
-      expect(container).toBeEmpty();
+      expect(container).toBeEmptyDOMElement();
     });
 
     it("should contain player names", () => {
