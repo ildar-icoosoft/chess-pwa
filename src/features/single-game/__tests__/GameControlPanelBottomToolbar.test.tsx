@@ -1,9 +1,8 @@
 import { render, fireEvent } from "@testing-library/react";
-import { GameMeta } from "../GameMeta";
 import React from "react";
 import { GameControlPanelBottomToolbar } from "../GameControlPanelBottomToolbar";
 
-describe("GameMeta", () => {
+describe("GameControlPanelBottomToolbar.test", () => {
   describe("Events", () => {
     it("onAbortGame", () => {
       const onAbortGame = jest.fn();
