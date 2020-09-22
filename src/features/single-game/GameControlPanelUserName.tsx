@@ -1,5 +1,6 @@
-import React from "react";
-import { FC } from "react";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
+import React, { FC } from "react";
 import Game from "../../interfaces/Game";
 import { PieceColor } from "../../types/PieceColor";
 

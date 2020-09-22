@@ -1,5 +1,4 @@
-import React, { useCallback } from "react";
-import { FC } from "react";
+import React, { FC, useCallback } from "react";
 
 export interface GameControlPanelBottomToolbarProps {
   onAbortGame?(): void;
@@ -30,13 +29,25 @@ export const GameControlPanelBottomToolbar: FC<GameControlPanelBottomToolbarProp
 
   return (
     <>
-      <button data-testid={"abort-game-btn"} onClick={handleAbortGame}>
+      <button
+        type="button"
+        data-testid="abort-game-btn"
+        onClick={handleAbortGame}
+      >
         Abort
       </button>
-      <button data-testid={"offer-draw-btn"} onClick={handleOfferDraw}>
+      <button
+        type="button"
+        data-testid="offer-draw-btn"
+        onClick={handleOfferDraw}
+      >
         Offer a draw
       </button>
-      <button data-testid={"resign-game-btn"} onClick={handleResignGame}>
+      <button
+        type="button"
+        data-testid="resign-game-btn"
+        onClick={handleResignGame}
+      >
         Resign
       </button>
     </>

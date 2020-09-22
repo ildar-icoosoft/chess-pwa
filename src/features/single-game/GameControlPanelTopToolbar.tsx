@@ -1,5 +1,4 @@
-import React, { useCallback } from "react";
-import { FC } from "react";
+import React, { FC, useCallback } from "react";
 
 export interface GameControlPanelTopToolbarProps {
   onFlipBoard?(): void;
@@ -44,29 +43,37 @@ export const GameControlPanelTopToolbar: FC<GameControlPanelTopToolbarProps> = (
 
   return (
     <>
-      <button data-testid={"flip-board-btn"} onClick={handleFlipBoard}>
+      <button
+        type="button"
+        data-testid="flip-board-btn"
+        onClick={handleFlipBoard}
+      >
         Flip board
       </button>
       <button
-        data-testid={"rewind-to-prev-move-btn"}
+        type="button"
+        data-testid="rewind-to-prev-move-btn"
         onClick={handleRewindToPrevMove}
       >
         Rewind to prev move
       </button>
       <button
-        data-testid={"rewind-to-first-move-btn"}
+        type="button"
+        data-testid="rewind-to-first-move-btn"
         onClick={handleRewindToFirstMove}
       >
         Rewind to first move
       </button>
       <button
-        data-testid={"rewind-to-last-move-btn"}
+        type="button"
+        data-testid="rewind-to-last-move-btn"
         onClick={handleRewindToLastMove}
       >
         Rewind to last move
       </button>
       <button
-        data-testid={"rewind-to-next-move-btn"}
+        type="button"
+        data-testid="rewind-to-next-move-btn"
         onClick={handleRewindToNextMove}
       >
         Rewind to next move
