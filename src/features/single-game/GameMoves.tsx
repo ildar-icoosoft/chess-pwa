@@ -8,11 +8,6 @@ export interface GameMovesProps {
   game?: Game;
 }
 
-interface MovePair {
-  whiteMove: string;
-  blackMove: string;
-}
-
 export const GameMoves: FC<GameMovesProps> = ({ game }) => {
   if (!game) {
     return null;
