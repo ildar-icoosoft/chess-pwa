@@ -11,11 +11,13 @@ import { GameControlPanelBottomToolbar } from "./GameControlPanelBottomToolbar";
 export interface GameControlPanelProps {
   game?: Game;
   orientation?: PieceColor;
+  onRewindToMove?(moveIndex: number): void;
 }
 
 export const GameControlPanel: FC<GameControlPanelProps> = ({
   game,
   orientation = "white",
+  onRewindToMove,
 }) => {
   if (!game) {
     return null;
@@ -29,7 +31,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
         color={orientation === "white" ? "black" : "white"}
       />
       <GameControlPanelTopToolbar />
-      <GameMoves game={game} />
+      <GameMoves game={game} onRewindToMove={onRewindToMove} />
       <GameControlPanelBottomToolbar />
       <GameControlPanelUserName
         game={game}

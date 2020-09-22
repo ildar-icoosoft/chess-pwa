@@ -133,6 +133,25 @@ describe("GameControlPanel", () => {
 
         expect(gameMoves.props.game).toBe(gameSample);
       });
+
+      it("onRewindToMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameMoves = testInstance.findByType(GameMoves);
+
+        expect(gameMoves.props.onRewindToMove).toBeUndefined();
+
+        const onRewindToMove = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel game={gameSample} onRewindToMove={onRewindToMove} />
+        );
+
+        expect(gameMoves.props.onRewindToMove).toBe(onRewindToMove);
+      });
     });
   });
 
