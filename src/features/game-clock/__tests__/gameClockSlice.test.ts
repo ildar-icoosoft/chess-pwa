@@ -1,7 +1,7 @@
 import gameClockReducer, {
   oneSecondPassed,
   startGameClock,
-} from "../../game-clock/gameClockSlice";
+} from "../gameClockSlice";
 import { defaultState } from "../../../test-utils/data-sample/state";
 
 jest.useFakeTimers();

@@ -1,6 +1,5 @@
-import React from "react";
+import React, { FC } from "react";
 import Game from "../../interfaces/Game";
-import { FC } from "react";
 import { PieceColor } from "../../types/PieceColor";
 import { GameClock } from "./GameClock";
 import { GameMoves } from "./GameMoves";

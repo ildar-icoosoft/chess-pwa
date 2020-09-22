@@ -1,3 +1,6 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable @typescript-eslint/no-empty-interface */
+
 import { createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from "../../app/store";
 

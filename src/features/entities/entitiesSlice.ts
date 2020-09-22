@@ -81,7 +81,9 @@ const entitiesSlice = createSlice({
     },
     [makeMoveSuccess.type]: getNormalizedDataReducer,
     [oneSecondPassed.type]: (state: EntitiesState) => {
-      for (const gameId in state.games) {
+      const gameIds = Object.keys(state.games);
+
+      gameIds.forEach((gameId) => {
         if (state.games[gameId].status === "started") {
           const timePropName =
             state.games[gameId].turn === "white" ? "wtime" : "btime";
@@ -91,7 +93,7 @@ const entitiesSlice = createSlice({
             state.games[gameId][timePropName] = 0;
           }
         }
-      }
+      });
     },
   },
 });
