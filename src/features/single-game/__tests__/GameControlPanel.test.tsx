@@ -153,6 +153,115 @@ describe("GameControlPanel", () => {
         expect(gameMoves.props.onRewindToMove).toBe(onRewindToMove);
       });
     });
+
+    describe("GameControlPanelTopToolbar", () => {
+      it("onFlipBoard", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        expect(topToolbar.props.onFlipBoard).toBeUndefined();
+
+        const onFlipBoard = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel game={gameSample} onFlipBoard={onFlipBoard} />
+        );
+
+        expect(topToolbar.props.onFlipBoard).toBe(onFlipBoard);
+      });
+
+      it("onRewindToPrevMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        expect(topToolbar.props.onRewindToPrevMove).toBeUndefined();
+
+        const onRewindToPrevMove = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel
+            game={gameSample}
+            onRewindToPrevMove={onRewindToPrevMove}
+          />
+        );
+
+        expect(topToolbar.props.onRewindToPrevMove).toBe(onRewindToPrevMove);
+      });
+
+      it("onRewindToNextMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        expect(topToolbar.props.onRewindToNextMove).toBeUndefined();
+
+        const onRewindToNextMove = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel
+            game={gameSample}
+            onRewindToNextMove={onRewindToNextMove}
+          />
+        );
+
+        expect(topToolbar.props.onRewindToNextMove).toBe(onRewindToNextMove);
+      });
+
+      it("onRewindToFirstMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        expect(topToolbar.props.onRewindToFirstMove).toBeUndefined();
+
+        const onRewindToFirstMove = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel
+            game={gameSample}
+            onRewindToFirstMove={onRewindToFirstMove}
+          />
+        );
+
+        expect(topToolbar.props.onRewindToFirstMove).toBe(onRewindToFirstMove);
+      });
+
+      it("onRewindToLastMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        expect(topToolbar.props.onRewindToLastMove).toBeUndefined();
+
+        const onRewindToLastMove = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel
+            game={gameSample}
+            onRewindToLastMove={onRewindToLastMove}
+          />
+        );
+
+        expect(topToolbar.props.onRewindToLastMove).toBe(onRewindToLastMove);
+      });
+    });
   });
 
   describe("DOM structure", () => {

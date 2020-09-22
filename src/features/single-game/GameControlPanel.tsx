@@ -12,12 +12,22 @@ export interface GameControlPanelProps {
   game?: Game;
   orientation?: PieceColor;
   onRewindToMove?(moveIndex: number): void;
+  onFlipBoard?(): void;
+  onRewindToPrevMove?(): void;
+  onRewindToNextMove?(): void;
+  onRewindToFirstMove?(): void;
+  onRewindToLastMove?(): void;
 }
 
 export const GameControlPanel: FC<GameControlPanelProps> = ({
   game,
   orientation = "white",
   onRewindToMove,
+  onFlipBoard,
+  onRewindToPrevMove,
+  onRewindToNextMove,
+  onRewindToFirstMove,
+  onRewindToLastMove,
 }) => {
   if (!game) {
     return null;
@@ -30,7 +40,13 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
         game={game}
         color={orientation === "white" ? "black" : "white"}
       />
-      <GameControlPanelTopToolbar />
+      <GameControlPanelTopToolbar
+        onFlipBoard={onFlipBoard}
+        onRewindToPrevMove={onRewindToPrevMove}
+        onRewindToNextMove={onRewindToNextMove}
+        onRewindToFirstMove={onRewindToFirstMove}
+        onRewindToLastMove={onRewindToLastMove}
+      />
       <GameMoves game={game} onRewindToMove={onRewindToMove} />
       <GameControlPanelBottomToolbar />
       <GameControlPanelUserName
