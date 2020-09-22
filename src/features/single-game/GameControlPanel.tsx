@@ -17,6 +17,9 @@ export interface GameControlPanelProps {
   onRewindToNextMove?(): void;
   onRewindToFirstMove?(): void;
   onRewindToLastMove?(): void;
+  onAbortGame?(): void;
+  onOfferDraw?(): void;
+  onResignGame?(): void;
 }
 
 export const GameControlPanel: FC<GameControlPanelProps> = ({
@@ -28,6 +31,9 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
   onRewindToNextMove,
   onRewindToFirstMove,
   onRewindToLastMove,
+  onAbortGame,
+  onOfferDraw,
+  onResignGame,
 }) => {
   if (!game) {
     return null;
@@ -48,7 +54,11 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
         onRewindToLastMove={onRewindToLastMove}
       />
       <GameMoves game={game} onRewindToMove={onRewindToMove} />
-      <GameControlPanelBottomToolbar />
+      <GameControlPanelBottomToolbar
+        onAbortGame={onAbortGame}
+        onOfferDraw={onOfferDraw}
+        onResignGame={onResignGame}
+      />
       <GameControlPanelUserName
         game={game}
         color={orientation === "white" ? "white" : "black"}

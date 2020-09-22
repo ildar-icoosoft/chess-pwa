@@ -262,6 +262,71 @@ describe("GameControlPanel", () => {
         expect(topToolbar.props.onRewindToLastMove).toBe(onRewindToLastMove);
       });
     });
+
+    describe("GameControlPanelBottomToolbar", () => {
+      it("onFlipBoard", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const bottomToolbar = testInstance.findByType(
+          GameControlPanelBottomToolbar
+        );
+
+        expect(bottomToolbar.props.onAbortGame).toBeUndefined();
+
+        const onAbortGame = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel game={gameSample} onAbortGame={onAbortGame} />
+        );
+
+        expect(bottomToolbar.props.onAbortGame).toBe(onAbortGame);
+      });
+
+      it("onFlipBoard", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const bottomToolbar = testInstance.findByType(
+          GameControlPanelBottomToolbar
+        );
+
+        expect(bottomToolbar.props.onOfferDraw).toBeUndefined();
+
+        const onOfferDraw = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel game={gameSample} onOfferDraw={onOfferDraw} />
+        );
+
+        expect(bottomToolbar.props.onOfferDraw).toBe(onOfferDraw);
+      });
+
+      it("onResignGame", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const bottomToolbar = testInstance.findByType(
+          GameControlPanelBottomToolbar
+        );
+
+        expect(bottomToolbar.props.onResignGame).toBeUndefined();
+
+        const onResignGame = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel game={gameSample} onResignGame={onResignGame} />
+        );
+
+        expect(bottomToolbar.props.onResignGame).toBe(onResignGame);
+      });
+    });
   });
 
   describe("DOM structure", () => {
