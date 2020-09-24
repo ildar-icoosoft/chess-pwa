@@ -16,6 +16,7 @@ interface SingleGameItemState {
   isLoading: boolean;
   error: string | null;
   isFlipped: boolean;
+  rewindToMove: number | null;
 }
 
 interface SingleGameState {
@@ -26,6 +27,7 @@ export const defaultSingleGameItemState: SingleGameItemState = {
   isLoading: true,
   error: null,
   isFlipped: false,
+  rewindToMove: null,
 };
 
 const initialState: SingleGameState = {};

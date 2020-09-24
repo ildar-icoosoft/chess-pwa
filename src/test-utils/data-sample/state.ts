@@ -88,6 +88,7 @@ export const stateWithDataSample2: RootState = {
       isLoading: true,
       error: null,
       isFlipped: false,
+      rewindToMove: null,
     },
   },
   ongoingGames: {
@@ -140,6 +141,7 @@ export const stateWithDataSample3: RootState = {
       isLoading: true,
       error: null,
       isFlipped: true,
+      rewindToMove: null,
     },
   },
   ongoingGames: {
