@@ -229,6 +229,16 @@ describe("SingleGame", () => {
         );
         // black because current user plays black
         expect(board.props.orientation).toBe(PieceColor.BLACK);
+
+        testRenderer.update(
+          <SingleGame
+            currentUser={userSample}
+            game={gameSample2}
+            isFlipped={true}
+          />
+        );
+        // white because flipped is true
+        expect(board.props.orientation).toBe(PieceColor.WHITE);
       });
 
       it("lastMoveSquares", () => {
@@ -301,6 +311,16 @@ describe("SingleGame", () => {
         );
 
         expect(gameMeta.props.orientation).toBe("black");
+
+        testRenderer.update(
+          <SingleGame
+            game={gameSample2}
+            currentUser={userSample}
+            isFlipped={true}
+          />
+        );
+
+        expect(gameMeta.props.orientation).toBe("white");
       });
 
       it("onFlipBoard", () => {

@@ -9,6 +9,7 @@ import { fetchGame, flipBoard } from "../singleGameSlice";
 import {
   stateWithDataSample,
   stateWithDataSample2,
+  stateWithDataSample3,
 } from "../../../test-utils/data-sample/state";
 
 jest.useFakeTimers();
@@ -87,6 +88,31 @@ describe("SingleGameContainer", () => {
         testRenderer.update(<SingleGameContainer id={1} />);
 
         expect(singleGame.props.currentUser).toBeUndefined();
+      });
+
+      it("isFlipped", async () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGameContainer id={1} />
+        );
+        const testInstance = testRenderer.root;
+
+        const singleGame = testInstance.findByType(SingleGame);
+
+        expect(singleGame.props.isFlipped).toBeFalsy();
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithDataSample2)
+        );
+
+        testRenderer.update(<SingleGameContainer id={1} />);
+        expect(singleGame.props.isFlipped).toBeFalsy();
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithDataSample3)
+        );
+
+        testRenderer.update(<SingleGameContainer id={1} />);
+        expect(singleGame.props.isFlipped).toBeTruthy();
       });
     });
   });

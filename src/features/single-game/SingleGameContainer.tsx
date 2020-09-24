@@ -6,7 +6,11 @@ import { SingleGame } from "./SingleGame";
 import { AppDispatch } from "../../app/store";
 import { RootState } from "../../app/rootReducer";
 import gameSchema from "../../normalizr/schemas/gameSchema";
-import { fetchGame, flipBoard } from "./singleGameSlice";
+import {
+  defaultSingleGameItemState,
+  fetchGame,
+  flipBoard,
+} from "./singleGameSlice";
 import { makeMove } from "../move/moveSlice";
 import User from "../../interfaces/User";
 import userSchema from "../../normalizr/schemas/userSchema";
@@ -29,6 +33,10 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
     return undefined;
   });
 
+  const singleGameItemState =
+    useSelector((state: RootState) => state.singleGame[id]) ||
+    defaultSingleGameItemState;
+
   useEffect(() => {
     dispatch(fetchGame(id));
   }, [dispatch, id]);
@@ -50,6 +58,7 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
         currentUser={currentUser}
         onMove={onMove}
         onFlipBoard={onFlipBoard}
+        isFlipped={singleGameItemState.isFlipped}
       />
     );
   }

@@ -21,7 +21,7 @@ interface SingleGameState {
   [gameId: string]: SingleGameItemState;
 }
 
-const defaultGameItemState: SingleGameItemState = {
+export const defaultSingleGameItemState: SingleGameItemState = {
   isLoading: true,
   error: null,
   isFlipped: false,
@@ -36,7 +36,7 @@ const singleGameSlice = createSlice({
     getSingleGameRequest(state, action: PayloadAction<number>) {
       state[action.payload] = Object.assign(
         {},
-        defaultGameItemState,
+        defaultSingleGameItemState,
         state[action.payload],
         {
           isLoading: true,
@@ -47,7 +47,7 @@ const singleGameSlice = createSlice({
     getSingleGameSuccess(state, action: PayloadAction<NormalizedData<number>>) {
       state[action.payload.result] = Object.assign(
         {},
-        defaultGameItemState,
+        defaultSingleGameItemState,
         state[action.payload.result],
         {
           isLoading: false,
@@ -58,7 +58,7 @@ const singleGameSlice = createSlice({
     getSingleGameError(state, action: PayloadAction<ItemErrorPayload>) {
       state[action.payload.itemId] = Object.assign(
         {},
-        defaultGameItemState,
+        defaultSingleGameItemState,
         state[action.payload.itemId],
         {
           isLoading: false,
