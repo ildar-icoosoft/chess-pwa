@@ -42,6 +42,7 @@ const singleGameSlice = createSlice({
         error: action.payload.error,
       };
     },
+    flipBoard(state, action: PayloadAction<number>) {},
   },
   extraReducers: {},
 });
@@ -50,6 +51,7 @@ export const {
   getSingleGameRequest,
   getSingleGameSuccess,
   getSingleGameError,
+  flipBoard,
 } = singleGameSlice.actions;
 
 export default singleGameSlice.reducer;

@@ -5,7 +5,7 @@ import { SingleGameContainer } from "../SingleGameContainer";
 import { SingleGame } from "../SingleGame";
 import mountTest from "../../../test-utils/mountTest";
 import { makeMove } from "../../move/moveSlice";
-import { fetchGame } from "../singleGameSlice";
+import { fetchGame, flipBoard } from "../singleGameSlice";
 import {
   stateWithDataSample,
   stateWithDataSample2,
@@ -116,6 +116,29 @@ describe("SingleGameContainer", () => {
       expect(makeMoveFn).toBeCalledWith(1, "e2e4");
 
       expect(dispatch).toBeCalledWith(makeMoveReturnedValue);
+    });
+
+    it("should call dispatch(flipBoard())", () => {
+      const dispatch = useDispatch<jest.Mock>();
+      const flipBoardReturnedValue = Symbol("flipBoard");
+
+      const testRenderer = TestRenderer.create(<SingleGameContainer id={1} />);
+      const testInstance = testRenderer.root;
+
+      const singleGame = testInstance.findByType(SingleGame);
+
+      const flipBoardFn = flipBoard as jest.Mock;
+      flipBoardFn.mockClear();
+      flipBoardFn.mockReturnValue(flipBoardReturnedValue);
+
+      TestRenderer.act(() => {
+        singleGame.props.onFlipBoard();
+      });
+
+      expect(flipBoardFn).toBeCalledTimes(1);
+      expect(flipBoardFn).toBeCalledWith(1);
+
+      expect(dispatch).toBeCalledWith(flipBoardReturnedValue);
     });
 
     it("should call dispatch(fetchGame())", () => {
