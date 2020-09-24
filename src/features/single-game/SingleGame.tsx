@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { ChessInstance } from "chess.js";
 import {
   Board,
@@ -80,11 +80,20 @@ export const SingleGame: FC<SingleGameProps> = ({
     lastMoveSquares = [lastMove.from, lastMove.to];
   }
 
-  const handleRewindToMove = (moveIndex: number) => {
+  const handleRewindToMove = useCallback(
+    (moveIndex: number) => {
+      if (onRewindToMove) {
+        onRewindToMove(moveIndex);
+      }
+    },
+    [onRewindToMove]
+  );
+
+  const handleRewindToLastMove = useCallback(() => {
     if (onRewindToMove) {
-      onRewindToMove(moveIndex);
+      onRewindToMove(null);
     }
-  };
+  }, [onRewindToMove]);
 
   return (
     <>
@@ -94,6 +103,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         orientation={orientation as AppPieceColor}
         onFlipBoard={onFlipBoard}
         onRewindToMove={handleRewindToMove}
+        onRewindToLastMove={handleRewindToLastMove}
       />
       <Board
         allowMarkers

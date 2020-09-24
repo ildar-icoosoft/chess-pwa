@@ -332,24 +332,46 @@ describe("SingleGame", () => {
   });
 
   describe("Events", () => {
-    it("onRewindToMove", () => {
-      const onRewindToMove = jest.fn();
+    describe("onRewindToMove", () => {
+      it("from onRewindToMove", () => {
+        const onRewindToMove = jest.fn();
 
-      const testInstance = TestRenderer.create(
-        <SingleGame
-          game={gameWithMovesSample}
-          onRewindToMove={onRewindToMove}
-        />
-      ).root;
+        const testInstance = TestRenderer.create(
+          <SingleGame
+            game={gameWithMovesSample}
+            onRewindToMove={onRewindToMove}
+          />
+        ).root;
 
-      const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
-        GameControlPanel
-      );
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
 
-      gameControlPanel.props.onRewindToMove(2);
+        gameControlPanel.props.onRewindToMove(2);
 
-      expect(onRewindToMove).toBeCalledTimes(1);
-      expect(onRewindToMove).toBeCalledWith(2);
+        expect(onRewindToMove).toBeCalledTimes(1);
+        expect(onRewindToMove).toBeCalledWith(2);
+      });
+
+      it("from onRewindToLastMove", () => {
+        const onRewindToMove = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame
+            game={gameWithMovesSample}
+            onRewindToMove={onRewindToMove}
+          />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        gameControlPanel.props.onRewindToLastMove();
+
+        expect(onRewindToMove).toBeCalledTimes(1);
+        expect(onRewindToMove).toBeCalledWith(null);
+      });
     });
   });
 });
