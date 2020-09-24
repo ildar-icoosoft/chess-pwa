@@ -50,6 +50,9 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
 
   const isLastMove = rewindToMoveIndex === null ? true : false;
 
+  const hasPrevMove =
+    movesHistory.length === 0 || rewindToMoveIndex === 0 ? false : true;
+
   return (
     <div>
       <GameClock time={orientation === "white" ? game.btime : game.wtime} />
@@ -60,6 +63,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
       <GameControlPanelTopToolbar
         isFirstMove={isFirstMove}
         isLastMove={isLastMove}
+        hasPrevMove={hasPrevMove}
         onFlipBoard={onFlipBoard}
         onRewindToPrevMove={onRewindToPrevMove}
         onRewindToNextMove={onRewindToNextMove}

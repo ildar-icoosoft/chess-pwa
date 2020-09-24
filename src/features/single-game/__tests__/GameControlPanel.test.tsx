@@ -200,6 +200,30 @@ describe("GameControlPanel", () => {
         expect(topToolbar.props.isLastMove).toBeFalsy();
       });
 
+      it("hasPrevMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameWithMovesSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        // hasPrevMove because gameWithMovesSample.moves is not empty and rewindToMoveIndex is not 0
+        expect(topToolbar.props.hasPrevMove).toBeTruthy();
+
+        testRenderer.update(<GameControlPanel game={gameSample} />);
+
+        // hasPrevMove false because gameWithMovesSample.moves is empty
+        expect(topToolbar.props.hasPrevMove).toBeFalsy();
+
+        testRenderer.update(
+          <GameControlPanel game={gameWithMovesSample} rewindToMoveIndex={0} />
+        );
+
+        // hasPrevMove false because gameWithMovesSample.moves is empty
+        expect(topToolbar.props.hasPrevMove).toBeFalsy();
+      });
+
       it("onFlipBoard", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />
