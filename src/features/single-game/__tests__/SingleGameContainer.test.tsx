@@ -5,7 +5,7 @@ import { SingleGameContainer } from "../SingleGameContainer";
 import { SingleGame } from "../SingleGame";
 import mountTest from "../../../test-utils/mountTest";
 import { makeMove } from "../../move/moveSlice";
-import { fetchGame, flipBoard } from "../singleGameSlice";
+import { fetchGame, flipBoard, rewindToMove } from "../singleGameSlice";
 import {
   stateWithDataSample,
   stateWithDataSample2,
@@ -197,6 +197,38 @@ describe("SingleGameContainer", () => {
       expect(fetchGameFn).toBeCalledWith(2);
 
       expect(dispatch).toBeCalledWith(fetchGameReturnedValue);
+    });
+
+    it("should call dispatch(onRewindToMove())", () => {
+      const dispatch = useDispatch<jest.Mock>();
+      const rewindToMoveReturnedValue = Symbol("rewindToMove");
+
+      const testRenderer = TestRenderer.create(<SingleGameContainer id={1} />);
+      const testInstance = testRenderer.root;
+
+      const singleGame = testInstance.findByType(SingleGame);
+
+      const rewindToMoveFn = (rewindToMove as unknown) as jest.Mock;
+      rewindToMoveFn.mockClear();
+      rewindToMoveFn.mockReturnValue(rewindToMoveReturnedValue);
+
+      TestRenderer.act(() => {
+        singleGame.props.onRewindToMove(2);
+      });
+
+      expect(rewindToMoveFn).toBeCalledTimes(1);
+      expect(rewindToMoveFn).toBeCalledWith(2);
+
+      expect(dispatch).toBeCalledWith(rewindToMoveReturnedValue);
+
+      TestRenderer.act(() => {
+        singleGame.props.onRewindToMove(null);
+      });
+
+      expect(rewindToMoveFn).toBeCalledTimes(2);
+      expect(rewindToMoveFn).toHaveBeenNthCalledWith(2, null);
+
+      expect(dispatch).toBeCalledWith(rewindToMoveReturnedValue);
     });
   });
 });

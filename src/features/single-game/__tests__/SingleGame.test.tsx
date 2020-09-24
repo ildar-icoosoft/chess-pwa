@@ -336,7 +336,10 @@ describe("SingleGame", () => {
       const onRewindToMove = jest.fn();
 
       const testInstance = TestRenderer.create(
-        <SingleGame game={gameSample} onRewindToMove={onRewindToMove} />
+        <SingleGame
+          game={gameWithMovesSample}
+          onRewindToMove={onRewindToMove}
+        />
       ).root;
 
       const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(

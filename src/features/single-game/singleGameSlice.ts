@@ -70,6 +70,7 @@ const singleGameSlice = createSlice({
     flipBoard(state, action: PayloadAction<number>) {
       state[action.payload].isFlipped = !state[action.payload].isFlipped;
     },
+    rewindToMove(state, action: PayloadAction<number | null>) {},
   },
   extraReducers: {},
 });
@@ -79,6 +80,7 @@ export const {
   getSingleGameSuccess,
   getSingleGameError,
   flipBoard,
+  rewindToMove,
 } = singleGameSlice.actions;
 
 export default singleGameSlice.reducer;
