@@ -231,11 +231,7 @@ describe("SingleGame", () => {
         expect(board.props.orientation).toBe(PieceColor.BLACK);
 
         testRenderer.update(
-          <SingleGame
-            currentUser={userSample}
-            game={gameSample2}
-            isFlipped={true}
-          />
+          <SingleGame currentUser={userSample} game={gameSample2} isFlipped />
         );
         // white because flipped is true
         expect(board.props.orientation).toBe(PieceColor.WHITE);
@@ -313,11 +309,7 @@ describe("SingleGame", () => {
         expect(gameMeta.props.orientation).toBe("black");
 
         testRenderer.update(
-          <SingleGame
-            game={gameSample2}
-            currentUser={userSample}
-            isFlipped={true}
-          />
+          <SingleGame game={gameSample2} currentUser={userSample} isFlipped />
         );
 
         expect(gameMeta.props.orientation).toBe("white");
