@@ -298,21 +298,44 @@ describe("SingleGame", () => {
         );
         const testInstance = testRenderer.root;
 
-        const gameMeta = testInstance.findByType(GameControlPanel);
+        const gameControlPanel = testInstance.findByType(GameControlPanel);
 
-        expect(gameMeta.props.orientation).toBe("white");
+        expect(gameControlPanel.props.orientation).toBe("white");
 
         testRenderer.update(
           <SingleGame game={gameSample2} currentUser={userSample} />
         );
 
-        expect(gameMeta.props.orientation).toBe("black");
+        expect(gameControlPanel.props.orientation).toBe("black");
 
         testRenderer.update(
           <SingleGame game={gameSample2} currentUser={userSample} isFlipped />
         );
 
-        expect(gameMeta.props.orientation).toBe("white");
+        expect(gameControlPanel.props.orientation).toBe("white");
+      });
+
+      it("rewindToMoveIndex", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameControlPanel = testInstance.findByType(GameControlPanel);
+
+        expect(gameControlPanel.props.rewindToMoveIndex).toBeNull();
+
+        testRenderer.update(
+          <SingleGame game={gameSample} rewindToMoveIndex={3} />
+        );
+
+        expect(gameControlPanel.props.rewindToMoveIndex).toBe(3);
+
+        testRenderer.update(
+          <SingleGame game={gameSample} rewindToMoveIndex={0} />
+        );
+
+        expect(gameControlPanel.props.rewindToMoveIndex).toBe(0);
       });
 
       it("onFlipBoard", () => {

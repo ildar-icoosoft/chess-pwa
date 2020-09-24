@@ -131,6 +131,7 @@ export const SingleGame: FC<SingleGameProps> = ({
       <GameControlPanel
         game={game}
         orientation={orientation as AppPieceColor}
+        rewindToMoveIndex={rewindToMoveIndex}
         onFlipBoard={onFlipBoard}
         onRewindToMove={handleRewindToMove}
         onRewindToFirstMove={handleRewindToFirstMove}

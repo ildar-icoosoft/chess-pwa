@@ -10,6 +10,7 @@ import { GameControlPanelBottomToolbar } from "./GameControlPanelBottomToolbar";
 export interface GameControlPanelProps {
   game?: Game;
   orientation?: PieceColor;
+  rewindToMoveIndex?: number | null;
   onRewindToMove?(moveIndex: number): void;
   onFlipBoard?(): void;
   onRewindToPrevMove?(): void;
