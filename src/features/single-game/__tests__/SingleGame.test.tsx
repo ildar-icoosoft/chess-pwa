@@ -426,6 +426,41 @@ describe("SingleGame", () => {
         expect(onRewindToMove).toBeCalledTimes(2);
         expect(onRewindToMove).toHaveBeenNthCalledWith(2, 1);
       });
+
+      it("from onRewindToNextMove", () => {
+        const onRewindToMove = jest.fn();
+
+        const testRenderer = TestRenderer.create(
+          <SingleGame
+            game={gameWithMovesSample}
+            rewindToMoveIndex={0}
+            onRewindToMove={onRewindToMove}
+          />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        gameControlPanel.props.onRewindToNextMove();
+
+        expect(onRewindToMove).toBeCalledTimes(1);
+        expect(onRewindToMove).toBeCalledWith(1);
+
+        testRenderer.update(
+          <SingleGame
+            game={gameWithMovesSample}
+            rewindToMoveIndex={2}
+            onRewindToMove={onRewindToMove}
+          />
+        );
+
+        gameControlPanel.props.onRewindToNextMove();
+
+        expect(onRewindToMove).toBeCalledTimes(2);
+        expect(onRewindToMove).toHaveBeenNthCalledWith(2, null);
+      });
     });
   });
 });

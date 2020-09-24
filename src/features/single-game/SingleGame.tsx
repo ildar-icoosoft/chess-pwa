@@ -82,28 +82,29 @@ export const SingleGame: FC<SingleGameProps> = ({
     lastMoveSquares = [lastMove.from, lastMove.to];
   }
 
-  const handleRewindToMove = useCallback(
-    (moveIndex: number) => {
-      if (onRewindToMove) {
-        onRewindToMove(moveIndex);
-      }
-    },
-    [onRewindToMove]
-  );
+  // @todo. use useCallback hook
+  const handleRewindToMove = (moveIndex: number) => {
+    if (onRewindToMove) {
+      onRewindToMove(moveIndex);
+    }
+  };
 
-  const handleRewindToFirstMove = useCallback(() => {
+  // @todo. use useCallback hook
+  const handleRewindToFirstMove = () => {
     if (onRewindToMove) {
       onRewindToMove(0);
     }
-  }, [onRewindToMove]);
+  };
 
-  const handleRewindToLastMove = useCallback(() => {
+  // @todo. use useCallback hook
+  const handleRewindToLastMove = () => {
     if (onRewindToMove) {
       onRewindToMove(null);
     }
-  }, [onRewindToMove]);
+  };
 
-  const handleRewindToPrevMove = useCallback(() => {
+  // @todo. use useCallback hook
+  const handleRewindToPrevMove = () => {
     if (onRewindToMove) {
       if (rewindToMoveIndex === null) {
         onRewindToMove(movesHistory.length - 2);
@@ -111,7 +112,18 @@ export const SingleGame: FC<SingleGameProps> = ({
         onRewindToMove(rewindToMoveIndex - 1);
       }
     }
-  }, [onRewindToMove, movesHistory, rewindToMoveIndex]);
+  };
+
+  // @todo. use useCallback hook
+  const handleRewindToNextMove = () => {
+    if (onRewindToMove) {
+      if (rewindToMoveIndex === movesHistory.length - 2) {
+        onRewindToMove(null);
+      } else {
+        onRewindToMove((rewindToMoveIndex as number) + 1);
+      }
+    }
+  };
 
   return (
     <>
@@ -124,6 +136,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         onRewindToFirstMove={handleRewindToFirstMove}
         onRewindToLastMove={handleRewindToLastMove}
         onRewindToPrevMove={handleRewindToPrevMove}
+        onRewindToNextMove={handleRewindToNextMove}
       />
       <Board
         allowMarkers
