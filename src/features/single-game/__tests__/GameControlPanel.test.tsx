@@ -224,6 +224,28 @@ describe("GameControlPanel", () => {
         expect(topToolbar.props.hasPrevMove).toBeFalsy();
       });
 
+      it("hasNextMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameWithMovesSample} rewindToMoveIndex={2} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        // hasNextMove because gameWithMovesSample.moves is not empty and rewindToMoveIndex is not null
+        expect(topToolbar.props.hasNextMove).toBeTruthy();
+
+        testRenderer.update(<GameControlPanel game={gameSample} />);
+
+        // hasNextMove false because gameWithMovesSample.moves is empty
+        expect(topToolbar.props.hasNextMove).toBeFalsy();
+
+        testRenderer.update(<GameControlPanel game={gameWithMovesSample} />);
+
+        // hasNextMove false because rewindToMoveIndex is null
+        expect(topToolbar.props.hasNextMove).toBeFalsy();
+      });
+
       it("onFlipBoard", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />
