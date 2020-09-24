@@ -89,6 +89,12 @@ export const SingleGame: FC<SingleGameProps> = ({
     [onRewindToMove]
   );
 
+  const handleRewindToFirstMove = useCallback(() => {
+    if (onRewindToMove) {
+      onRewindToMove(0);
+    }
+  }, [onRewindToMove]);
+
   const handleRewindToLastMove = useCallback(() => {
     if (onRewindToMove) {
       onRewindToMove(null);
@@ -103,6 +109,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         orientation={orientation as AppPieceColor}
         onFlipBoard={onFlipBoard}
         onRewindToMove={handleRewindToMove}
+        onRewindToFirstMove={handleRewindToFirstMove}
         onRewindToLastMove={handleRewindToLastMove}
       />
       <Board

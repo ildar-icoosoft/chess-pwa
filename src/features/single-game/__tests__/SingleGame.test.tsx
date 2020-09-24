@@ -353,6 +353,26 @@ describe("SingleGame", () => {
         expect(onRewindToMove).toBeCalledWith(2);
       });
 
+      it("from onRewindToFirstMove", () => {
+        const onRewindToMove = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame
+            game={gameWithMovesSample}
+            onRewindToMove={onRewindToMove}
+          />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        gameControlPanel.props.onRewindToFirstMove();
+
+        expect(onRewindToMove).toBeCalledTimes(1);
+        expect(onRewindToMove).toBeCalledWith(0);
+      });
+
       it("from onRewindToLastMove", () => {
         const onRewindToMove = jest.fn();
 
