@@ -10,6 +10,7 @@ import makeChessInstance from "../../utils/makeChessInstance";
 
 export interface GameMovesProps {
   game?: Game;
+  rewindToMoveIndex?: number | null;
   onRewindToMove?(moveIndex: number): void;
 }
 

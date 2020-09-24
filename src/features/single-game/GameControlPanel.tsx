@@ -74,7 +74,11 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
         onRewindToFirstMove={onRewindToFirstMove}
         onRewindToLastMove={onRewindToLastMove}
       />
-      <GameMoves game={game} onRewindToMove={onRewindToMove} />
+      <GameMoves
+        game={game}
+        rewindToMoveIndex={rewindToMoveIndex}
+        onRewindToMove={onRewindToMove}
+      />
       <GameControlPanelBottomToolbar
         onAbortGame={onAbortGame}
         onOfferDraw={onOfferDraw}

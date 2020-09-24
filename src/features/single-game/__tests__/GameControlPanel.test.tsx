@@ -137,6 +137,23 @@ describe("GameControlPanel", () => {
         expect(gameMoves.props.game).toBe(gameSample);
       });
 
+      it("rewindToMoveIndex", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameWithMovesSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameMoves = testInstance.findByType(GameMoves);
+
+        expect(gameMoves.props.rewindToMoveIndex).toBeNull();
+
+        testRenderer.update(
+          <GameControlPanel game={gameWithMovesSample} rewindToMoveIndex={3} />
+        );
+
+        expect(gameMoves.props.rewindToMoveIndex).toBe(3);
+      });
+
       it("onRewindToMove", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />
