@@ -30,7 +30,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: false,
             error: "error text",
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -43,7 +43,7 @@ describe("singleGameSlice reducer", () => {
         isLoading: true,
         error: null,
         isFlipped: true,
-        rewindToMove: 2,
+        rewindToMoveIndex: 2,
       },
     });
 
@@ -54,7 +54,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: false,
             error: "error text",
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -67,13 +67,13 @@ describe("singleGameSlice reducer", () => {
         isLoading: false,
         error: "error text",
         isFlipped: true,
-        rewindToMove: 2,
+        rewindToMoveIndex: 2,
       },
       "2": {
         isLoading: true,
         error: null,
         isFlipped: false,
-        rewindToMove: null,
+        rewindToMoveIndex: null,
       },
     });
   });
@@ -86,7 +86,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: true,
             error: "error text",
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -102,7 +102,7 @@ describe("singleGameSlice reducer", () => {
         isLoading: false,
         error: null,
         isFlipped: true,
-        rewindToMove: 2,
+        rewindToMoveIndex: 2,
       },
     });
 
@@ -113,7 +113,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: true,
             error: "error text",
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -129,13 +129,13 @@ describe("singleGameSlice reducer", () => {
         isLoading: true,
         error: "error text",
         isFlipped: true,
-        rewindToMove: 2,
+        rewindToMoveIndex: 2,
       },
       "2": {
         isLoading: false,
         error: null,
         isFlipped: false,
-        rewindToMove: null,
+        rewindToMoveIndex: null,
       },
     });
   });
@@ -148,7 +148,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: true,
             error: null,
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -164,7 +164,7 @@ describe("singleGameSlice reducer", () => {
         isLoading: false,
         error: "error text",
         isFlipped: true,
-        rewindToMove: 2,
+        rewindToMoveIndex: 2,
       },
     });
 
@@ -175,7 +175,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: true,
             error: null,
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -191,13 +191,13 @@ describe("singleGameSlice reducer", () => {
         isLoading: true,
         error: null,
         isFlipped: true,
-        rewindToMove: 2,
+        rewindToMoveIndex: 2,
       },
       "2": {
         isLoading: false,
         error: "error text",
         isFlipped: false,
-        rewindToMove: null,
+        rewindToMoveIndex: null,
       },
     });
   });
@@ -278,7 +278,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: false,
             error: "error text",
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -291,7 +291,7 @@ describe("singleGameSlice reducer", () => {
         isLoading: false,
         error: "error text",
         isFlipped: false,
-        rewindToMove: 2,
+        rewindToMoveIndex: 2,
       },
     });
 
@@ -302,7 +302,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: false,
             error: "error text",
             isFlipped: false,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -315,7 +315,7 @@ describe("singleGameSlice reducer", () => {
         isLoading: false,
         error: "error text",
         isFlipped: true,
-        rewindToMove: 2,
+        rewindToMoveIndex: 2,
       },
     });
   });
@@ -328,7 +328,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: false,
             error: "error text",
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -344,7 +344,7 @@ describe("singleGameSlice reducer", () => {
         isLoading: false,
         error: "error text",
         isFlipped: true,
-        rewindToMove: 3,
+        rewindToMoveIndex: 3,
       },
     });
 
@@ -355,7 +355,7 @@ describe("singleGameSlice reducer", () => {
             isLoading: false,
             error: "error text",
             isFlipped: true,
-            rewindToMove: 2,
+            rewindToMoveIndex: 2,
           },
         },
         {
@@ -371,7 +371,7 @@ describe("singleGameSlice reducer", () => {
         isLoading: false,
         error: "error text",
         isFlipped: true,
-        rewindToMove: null,
+        rewindToMoveIndex: null,
       },
     });
   });

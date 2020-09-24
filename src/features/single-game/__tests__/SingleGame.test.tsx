@@ -392,6 +392,26 @@ describe("SingleGame", () => {
         expect(onRewindToMove).toBeCalledTimes(1);
         expect(onRewindToMove).toBeCalledWith(null);
       });
+
+      /*it("from onRewindToPrevMove", () => {
+        const onRewindToMove = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame
+            game={gameWithMovesSample}
+            onRewindToMove={onRewindToMove}
+          />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        gameControlPanel.props.onRewindToPrevMove();
+
+        expect(onRewindToMove).toBeCalledTimes(1);
+        expect(onRewindToMove).toBeCalledWith(null);
+      });*/
     });
   });
 });

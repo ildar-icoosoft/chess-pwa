@@ -21,7 +21,7 @@ interface SingleGameItemState {
   isLoading: boolean;
   error: string | null;
   isFlipped: boolean;
-  rewindToMove: number | null;
+  rewindToMoveIndex: number | null;
 }
 
 interface SingleGameState {
@@ -32,7 +32,7 @@ export const defaultSingleGameItemState: SingleGameItemState = {
   isLoading: true,
   error: null,
   isFlipped: false,
-  rewindToMove: null,
+  rewindToMoveIndex: null,
 };
 
 const initialState: SingleGameState = {};
@@ -78,7 +78,7 @@ const singleGameSlice = createSlice({
       state[action.payload].isFlipped = !state[action.payload].isFlipped;
     },
     rewindToMove(state, action: PayloadAction<RewindToMovePayload>) {
-      state[action.payload.gameId].rewindToMove = action.payload.moveIndex;
+      state[action.payload.gameId].rewindToMoveIndex = action.payload.moveIndex;
     },
   },
   extraReducers: {},
