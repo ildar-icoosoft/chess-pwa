@@ -19,6 +19,12 @@ export const gameSample: Game = {
 export const gameSampleFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
+// @todo. use this function to create samples.
+export const makeGameSample = (data: Partial<Game>): Game => ({
+  ...gameSample,
+  ...data,
+});
+
 export const gameWith10Plus5MinControlSample: Game = {
   id: 1,
   aiLevel: 3,

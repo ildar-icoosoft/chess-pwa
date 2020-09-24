@@ -2,7 +2,10 @@ import { render } from "@testing-library/react";
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { GameControlPanel } from "../GameControlPanel";
-import { gameSample } from "../../../test-utils/data-sample/game";
+import {
+  gameSample,
+  gameWithMovesSample,
+} from "../../../test-utils/data-sample/game";
 import { GameClock } from "../GameClock";
 import { GameMoves } from "../GameMoves";
 import { GameControlPanelUserName } from "../GameControlPanelUserName";
@@ -155,6 +158,29 @@ describe("GameControlPanel", () => {
     });
 
     describe("GameControlPanelTopToolbar", () => {
+      it("isFirstMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameWithMovesSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        expect(topToolbar.props.isFirstMove).toBeFalsy();
+
+        testRenderer.update(
+          <GameControlPanel game={gameWithMovesSample} rewindToMoveIndex={0} />
+        );
+
+        // isFirstMove because rewindToMoveIndex is 0
+        expect(topToolbar.props.isFirstMove).toBeTruthy();
+
+        testRenderer.update(<GameControlPanel game={gameSample} />);
+
+        // isFirstMove because gameSample.moves is empty
+        expect(topToolbar.props.isFirstMove).toBeTruthy();
+      });
+
       it("onFlipBoard", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />

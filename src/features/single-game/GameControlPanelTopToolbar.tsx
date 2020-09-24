@@ -1,6 +1,10 @@
 import React, { FC, useCallback } from "react";
 
 export interface GameControlPanelTopToolbarProps {
+  isFirstMove?: boolean;
+  isLastMove?: boolean;
+  hasPrevMove?: boolean;
+  hasNextMove?: boolean;
   onFlipBoard?(): void;
   onRewindToPrevMove?(): void;
   onRewindToNextMove?(): void;
