@@ -343,7 +343,7 @@ describe("SingleGame", () => {
         GameControlPanel
       );
 
-      gameControlPanel.props.onRewindToPrevMove(2);
+      gameControlPanel.props.onRewindToMove(2);
 
       expect(onRewindToMove).toBeCalledTimes(1);
       expect(onRewindToMove).toBeCalledWith(2);

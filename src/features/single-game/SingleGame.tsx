@@ -80,6 +80,12 @@ export const SingleGame: FC<SingleGameProps> = ({
     lastMoveSquares = [lastMove.from, lastMove.to];
   }
 
+  const handleRewindToMove = (moveIndex: number) => {
+    if (onRewindToMove) {
+      onRewindToMove(moveIndex);
+    }
+  };
+
   return (
     <>
       <GameMeta game={game} />
@@ -87,6 +93,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         game={game}
         orientation={orientation as AppPieceColor}
         onFlipBoard={onFlipBoard}
+        onRewindToMove={handleRewindToMove}
       />
       <Board
         allowMarkers
