@@ -18,6 +18,7 @@ export interface SingleGameProps {
   game?: Game;
   currentUser?: User;
   isFlipped?: boolean;
+  rewindToMoveIndex?: number;
   onMove?(move: Move): void;
   onFlipBoard?(): void;
   onRewindToMove?(moveIndex: number | null): void;
@@ -27,6 +28,7 @@ export const SingleGame: FC<SingleGameProps> = ({
   game,
   currentUser,
   isFlipped = false,
+  rewindToMoveIndex = null,
   onMove,
   onFlipBoard,
   onRewindToMove,
@@ -101,6 +103,16 @@ export const SingleGame: FC<SingleGameProps> = ({
     }
   }, [onRewindToMove]);
 
+  const handleRewindToPrevMove = useCallback(() => {
+    if (onRewindToMove) {
+      if (rewindToMoveIndex === null) {
+        onRewindToMove(movesHistory.length - 2);
+      } else {
+        onRewindToMove(rewindToMoveIndex - 1);
+      }
+    }
+  }, [onRewindToMove, movesHistory, rewindToMoveIndex]);
+
   return (
     <>
       <GameMeta game={game} />
@@ -111,6 +123,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         onRewindToMove={handleRewindToMove}
         onRewindToFirstMove={handleRewindToFirstMove}
         onRewindToLastMove={handleRewindToLastMove}
+        onRewindToPrevMove={handleRewindToPrevMove}
       />
       <Board
         allowMarkers

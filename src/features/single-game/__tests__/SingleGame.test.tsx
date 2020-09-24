@@ -393,15 +393,16 @@ describe("SingleGame", () => {
         expect(onRewindToMove).toBeCalledWith(null);
       });
 
-      /*it("from onRewindToPrevMove", () => {
+      it("from onRewindToPrevMove", () => {
         const onRewindToMove = jest.fn();
 
-        const testInstance = TestRenderer.create(
+        const testRenderer = TestRenderer.create(
           <SingleGame
             game={gameWithMovesSample}
             onRewindToMove={onRewindToMove}
           />
-        ).root;
+        );
+        const testInstance = testRenderer.root;
 
         const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
           GameControlPanel
@@ -410,8 +411,21 @@ describe("SingleGame", () => {
         gameControlPanel.props.onRewindToPrevMove();
 
         expect(onRewindToMove).toBeCalledTimes(1);
-        expect(onRewindToMove).toBeCalledWith(null);
-      });*/
+        expect(onRewindToMove).toBeCalledWith(2);
+
+        testRenderer.update(
+          <SingleGame
+            game={gameWithMovesSample}
+            rewindToMoveIndex={2}
+            onRewindToMove={onRewindToMove}
+          />
+        );
+
+        gameControlPanel.props.onRewindToPrevMove();
+
+        expect(onRewindToMove).toBeCalledTimes(2);
+        expect(onRewindToMove).toHaveBeenNthCalledWith(2, 1);
+      });
     });
   });
 });
