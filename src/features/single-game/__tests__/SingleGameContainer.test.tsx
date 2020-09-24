@@ -60,7 +60,7 @@ describe("SingleGameContainer", () => {
           turn: "white",
           wtime: 300000,
           btime: 300000,
-          moves: "",
+          moves: "e2e4 e7e5 g1f3 g8f6",
           status: "started",
           white: null,
           black: null,
@@ -113,6 +113,31 @@ describe("SingleGameContainer", () => {
 
         testRenderer.update(<SingleGameContainer id={1} />);
         expect(singleGame.props.isFlipped).toBeTruthy();
+      });
+
+      it("rewindToMoveIndex", async () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGameContainer id={1} />
+        );
+        const testInstance = testRenderer.root;
+
+        const singleGame = testInstance.findByType(SingleGame);
+
+        expect(singleGame.props.rewindToMoveIndex).toBeNull();
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithDataSample2)
+        );
+
+        testRenderer.update(<SingleGameContainer id={1} />);
+        expect(singleGame.props.rewindToMoveIndex).toBe(2);
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithDataSample3)
+        );
+
+        testRenderer.update(<SingleGameContainer id={1} />);
+        expect(singleGame.props.rewindToMoveIndex).toBe(0);
       });
     });
   });

@@ -18,7 +18,7 @@ export interface SingleGameProps {
   game?: Game;
   currentUser?: User;
   isFlipped?: boolean;
-  rewindToMoveIndex?: number;
+  rewindToMoveIndex?: number | null;
   onMove?(move: Move): void;
   onFlipBoard?(): void;
   onRewindToMove?(moveIndex: number | null): void;

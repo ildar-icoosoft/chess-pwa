@@ -69,6 +69,7 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
       <SingleGame
         game={game}
         currentUser={currentUser}
+        rewindToMoveIndex={singleGameItemState.rewindToMoveIndex}
         onMove={handleMove}
         onFlipBoard={handleFlipBoard}
         onRewindToMove={handleRewindToMove}
