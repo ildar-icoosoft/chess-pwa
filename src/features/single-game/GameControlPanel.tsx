@@ -45,8 +45,10 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
 
   const movesHistory = chess.history();
 
-  const isFirstMove: boolean =
+  const isFirstMove =
     movesHistory.length === 0 || rewindToMoveIndex === 0 ? true : false;
+
+  const isLastMove = rewindToMoveIndex === null ? true : false;
 
   return (
     <div>
@@ -57,6 +59,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
       />
       <GameControlPanelTopToolbar
         isFirstMove={isFirstMove}
+        isLastMove={isLastMove}
         onFlipBoard={onFlipBoard}
         onRewindToPrevMove={onRewindToPrevMove}
         onRewindToNextMove={onRewindToNextMove}

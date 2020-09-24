@@ -181,6 +181,25 @@ describe("GameControlPanel", () => {
         expect(topToolbar.props.isFirstMove).toBeTruthy();
       });
 
+      it("isLastMove", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameWithMovesSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(GameControlPanelTopToolbar);
+
+        // isLastMove true because rewindToMoveIndex is null
+        expect(topToolbar.props.isLastMove).toBeTruthy();
+
+        testRenderer.update(
+          <GameControlPanel game={gameWithMovesSample} rewindToMoveIndex={2} />
+        );
+
+        // isLastMove false because rewindToMoveIndex is not null
+        expect(topToolbar.props.isLastMove).toBeFalsy();
+      });
+
       it("onFlipBoard", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />
