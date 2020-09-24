@@ -17,12 +17,14 @@ export interface SingleGameProps {
   game?: Game;
   currentUser?: User;
   onMove?(move: Move): void;
+  onFlipBoard?(): void;
 }
 
 export const SingleGame: FC<SingleGameProps> = ({
   game,
   currentUser,
   onMove,
+  onFlipBoard,
 }) => {
   if (!game) {
     return null;
@@ -72,7 +74,11 @@ export const SingleGame: FC<SingleGameProps> = ({
   return (
     <>
       <GameMeta game={game} />
-      <GameControlPanel game={game} orientation={orientation} />
+      <GameControlPanel
+        game={game}
+        orientation={orientation}
+        onFlipBoard={onFlipBoard}
+      />
       <Board
         allowMarkers
         check={check}

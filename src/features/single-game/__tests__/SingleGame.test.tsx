@@ -245,6 +245,20 @@ describe("SingleGame", () => {
         testRenderer.update(<SingleGame game={gameWithMovesSample} />);
         expect(board.props.lastMoveSquares).toEqual(["e7", "e5"]);
       });
+
+      it("onMove", () => {
+        const onMove = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame game={gameSample} onMove={onMove} />
+        ).root;
+
+        const board: TestRenderer.ReactTestInstance = testInstance.findByType(
+          Board
+        );
+
+        expect(board.props.onMove).toBe(onMove);
+      });
     });
 
     describe("GameMeta", () => {
@@ -288,33 +302,19 @@ describe("SingleGame", () => {
 
         expect(gameMeta.props.orientation).toBe("black");
       });
-    });
-  });
 
-  describe("Events", () => {
-    it("onMove", () => {
-      const onMove = jest.fn();
+      it("onFlipBoard", () => {
+        const onFlipBoard = jest.fn();
 
-      const testInstance = TestRenderer.create(
-        <SingleGame game={gameSample} onMove={onMove} />
-      ).root;
+        const testInstance = TestRenderer.create(
+          <SingleGame game={gameSample} onFlipBoard={onFlipBoard} />
+        ).root;
 
-      const board: TestRenderer.ReactTestInstance = testInstance.findByType(
-        Board
-      );
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
 
-      TestRenderer.act(() => {
-        board.props.onMove({
-          from: "e2",
-          to: "e4",
-        });
-      });
-
-      expect(onMove).toBeCalledTimes(1);
-
-      expect(onMove).toBeCalledWith({
-        from: "e2",
-        to: "e4",
+        expect(gameControlPanel.props.onFlipBoard).toBe(onFlipBoard);
       });
     });
   });
