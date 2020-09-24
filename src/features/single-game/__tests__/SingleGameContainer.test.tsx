@@ -127,7 +127,7 @@ describe("SingleGameContainer", () => {
 
       const singleGame = testInstance.findByType(SingleGame);
 
-      const flipBoardFn = flipBoard as jest.Mock;
+      const flipBoardFn = (flipBoard as unknown) as jest.Mock;
       flipBoardFn.mockClear();
       flipBoardFn.mockReturnValue(flipBoardReturnedValue);
 
