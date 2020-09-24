@@ -21,7 +21,10 @@ describe("GameControlPanelTopToolbar", () => {
       const onRewindToPrevMove = jest.fn();
 
       const { getByTestId } = render(
-        <GameControlPanelTopToolbar onRewindToPrevMove={onRewindToPrevMove} />
+        <GameControlPanelTopToolbar
+          onRewindToPrevMove={onRewindToPrevMove}
+          hasPrevMove={true}
+        />
       );
 
       fireEvent.click(getByTestId("rewind-to-prev-move-btn"));
@@ -34,7 +37,10 @@ describe("GameControlPanelTopToolbar", () => {
       const onRewindToNextMove = jest.fn();
 
       const { getByTestId } = render(
-        <GameControlPanelTopToolbar onRewindToNextMove={onRewindToNextMove} />
+        <GameControlPanelTopToolbar
+          onRewindToNextMove={onRewindToNextMove}
+          hasNextMove={true}
+        />
       );
 
       fireEvent.click(getByTestId("rewind-to-next-move-btn"));
@@ -67,6 +73,56 @@ describe("GameControlPanelTopToolbar", () => {
 
       expect(onRewindToLastMove).toBeCalledTimes(1);
       expect(onRewindToLastMove).toBeCalledWith();
+    });
+  });
+
+  describe("DOM structure", () => {
+    it("rewind-to-prev-move-btn", () => {
+      const { getByTestId, rerender } = render(<GameControlPanelTopToolbar />);
+
+      const btn = getByTestId("rewind-to-prev-move-btn");
+
+      expect(btn).toBeDisabled();
+
+      rerender(<GameControlPanelTopToolbar hasPrevMove={true} />);
+
+      expect(btn).not.toBeDisabled();
+    });
+
+    it("rewind-to-next-move-btn", () => {
+      const { getByTestId, rerender } = render(<GameControlPanelTopToolbar />);
+
+      const btn = getByTestId("rewind-to-next-move-btn");
+
+      expect(btn).toBeDisabled();
+
+      rerender(<GameControlPanelTopToolbar hasNextMove={true} />);
+
+      expect(btn).not.toBeDisabled();
+    });
+
+    it("rewind-to-first-move-btn", () => {
+      const { getByTestId, rerender } = render(<GameControlPanelTopToolbar />);
+
+      const btn = getByTestId("rewind-to-first-move-btn");
+
+      expect(btn).not.toBeDisabled();
+
+      rerender(<GameControlPanelTopToolbar isFirstMove={true} />);
+
+      expect(btn).toBeDisabled();
+    });
+
+    it("rewind-to-last-move-btn", () => {
+      const { getByTestId, rerender } = render(<GameControlPanelTopToolbar />);
+
+      const btn = getByTestId("rewind-to-last-move-btn");
+
+      expect(btn).not.toBeDisabled();
+
+      rerender(<GameControlPanelTopToolbar isLastMove={true} />);
+
+      expect(btn).toBeDisabled();
     });
   });
 });

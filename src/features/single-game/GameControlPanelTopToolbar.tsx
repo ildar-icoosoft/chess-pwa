@@ -13,6 +13,10 @@ export interface GameControlPanelTopToolbarProps {
 }
 
 export const GameControlPanelTopToolbar: FC<GameControlPanelTopToolbarProps> = ({
+  isFirstMove = false,
+  isLastMove = false,
+  hasPrevMove = false,
+  hasNextMove = false,
   onFlipBoard,
   onRewindToPrevMove,
   onRewindToNextMove,
@@ -58,6 +62,7 @@ export const GameControlPanelTopToolbar: FC<GameControlPanelTopToolbarProps> = (
         type="button"
         data-testid="rewind-to-prev-move-btn"
         onClick={handleRewindToPrevMove}
+        disabled={!hasPrevMove}
       >
         Rewind to prev move
       </button>
@@ -65,6 +70,7 @@ export const GameControlPanelTopToolbar: FC<GameControlPanelTopToolbarProps> = (
         type="button"
         data-testid="rewind-to-first-move-btn"
         onClick={handleRewindToFirstMove}
+        disabled={isFirstMove}
       >
         Rewind to first move
       </button>
@@ -72,6 +78,7 @@ export const GameControlPanelTopToolbar: FC<GameControlPanelTopToolbarProps> = (
         type="button"
         data-testid="rewind-to-last-move-btn"
         onClick={handleRewindToLastMove}
+        disabled={isLastMove}
       >
         Rewind to last move
       </button>
@@ -79,6 +86,7 @@ export const GameControlPanelTopToolbar: FC<GameControlPanelTopToolbarProps> = (
         type="button"
         data-testid="rewind-to-next-move-btn"
         onClick={handleRewindToNextMove}
+        disabled={!hasNextMove}
       >
         Rewind to next move
       </button>
