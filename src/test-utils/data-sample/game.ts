@@ -137,14 +137,14 @@ export const gameWithMovesSample: Game = {
   turn: "white",
   wtime: 300000,
   btime: 300000,
-  moves: "e2e4 e7e5",
+  moves: "e2e4 e7e5 g1f3 g8f6",
   status: "started",
   white: null,
   black: null,
   winner: null,
 };
 export const gameWithMovesSampleFen =
-  "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2";
+  "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3";
 
 export const gameWithCheckmateByWhiteSample: Game = {
   id: 3,
