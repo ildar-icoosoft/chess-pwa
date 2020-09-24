@@ -54,7 +54,12 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
 
   const handleRewindToMove = useCallback(
     (moveIndex: number | null) => {
-      dispatch(rewindToMove(moveIndex));
+      dispatch(
+        rewindToMove({
+          moveIndex,
+          gameId: id,
+        })
+      );
     },
     [dispatch, id]
   );

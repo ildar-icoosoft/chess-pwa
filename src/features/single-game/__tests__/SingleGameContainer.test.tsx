@@ -217,7 +217,10 @@ describe("SingleGameContainer", () => {
       });
 
       expect(rewindToMoveFn).toBeCalledTimes(1);
-      expect(rewindToMoveFn).toBeCalledWith(2);
+      expect(rewindToMoveFn).toBeCalledWith({
+        gameId: 1,
+        moveIndex: 2,
+      });
 
       expect(dispatch).toBeCalledWith(rewindToMoveReturnedValue);
 
@@ -226,7 +229,10 @@ describe("SingleGameContainer", () => {
       });
 
       expect(rewindToMoveFn).toBeCalledTimes(2);
-      expect(rewindToMoveFn).toHaveBeenNthCalledWith(2, null);
+      expect(rewindToMoveFn).toHaveBeenNthCalledWith(2, {
+        gameId: 1,
+        moveIndex: null,
+      });
 
       expect(dispatch).toBeCalledWith(rewindToMoveReturnedValue);
     });

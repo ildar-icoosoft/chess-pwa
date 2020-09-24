@@ -5,6 +5,7 @@ import singleGameReducer, {
   getSingleGameError,
   fetchGame,
   flipBoard,
+  rewindToMove,
 } from "../singleGameSlice";
 import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
@@ -315,6 +316,62 @@ describe("singleGameSlice reducer", () => {
         error: "error text",
         isFlipped: true,
         rewindToMove: 2,
+      },
+    });
+  });
+
+  it("should handle rewindToMove", () => {
+    expect(
+      singleGameReducer(
+        {
+          "1": {
+            isLoading: false,
+            error: "error text",
+            isFlipped: true,
+            rewindToMove: 2,
+          },
+        },
+        {
+          type: rewindToMove.type,
+          payload: {
+            gameId: 1,
+            moveIndex: 3,
+          },
+        }
+      )
+    ).toEqual({
+      "1": {
+        isLoading: false,
+        error: "error text",
+        isFlipped: true,
+        rewindToMove: 3,
+      },
+    });
+
+    expect(
+      singleGameReducer(
+        {
+          "1": {
+            isLoading: false,
+            error: "error text",
+            isFlipped: true,
+            rewindToMove: 2,
+          },
+        },
+        {
+          type: rewindToMove.type,
+          payload: {
+            gameId: 1,
+            moveIndex: null,
+          },
+        }
+      )
+    ).toEqual({
+      "1": {
+        isLoading: false,
+        error: "error text",
+        isFlipped: true,
+        rewindToMove: null,
       },
     });
   });
