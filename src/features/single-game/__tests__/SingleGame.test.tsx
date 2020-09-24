@@ -328,6 +328,25 @@ describe("SingleGame", () => {
 
         expect(gameControlPanel.props.onFlipBoard).toBe(onFlipBoard);
       });
+
+      it("onRewindToPrevMove", () => {
+        const onRewindToPrevMove = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame
+            game={gameSample}
+            onRewindToPrevMove={onRewindToPrevMove}
+          />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onRewindToPrevMove).toBe(
+          onRewindToPrevMove
+        );
+      });
     });
   });
 });

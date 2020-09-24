@@ -20,6 +20,7 @@ export interface SingleGameProps {
   isFlipped?: boolean;
   onMove?(move: Move): void;
   onFlipBoard?(): void;
+  onRewindToPrevMove?(): void;
 }
 
 export const SingleGame: FC<SingleGameProps> = ({
@@ -28,6 +29,7 @@ export const SingleGame: FC<SingleGameProps> = ({
   isFlipped = false,
   onMove,
   onFlipBoard,
+  onRewindToPrevMove,
 }) => {
   if (!game) {
     return null;
@@ -85,6 +87,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         game={game}
         orientation={orientation as AppPieceColor}
         onFlipBoard={onFlipBoard}
+        onRewindToPrevMove={onRewindToPrevMove}
       />
       <Board
         allowMarkers
