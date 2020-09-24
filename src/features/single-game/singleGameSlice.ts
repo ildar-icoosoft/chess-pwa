@@ -11,12 +11,21 @@ import gameSchema from "../../normalizr/schemas/gameSchema";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 
-interface SingleGameState {
-  [gameId: string]: {
-    isLoading: boolean;
-    error: string | null;
-  };
+interface SingleGameItemState {
+  isLoading: boolean;
+  error: string | null;
+  isFlipped: boolean;
 }
+
+interface SingleGameState {
+  [gameId: string]: SingleGameItemState;
+}
+
+const defaultGameItemState: SingleGameItemState = {
+  isLoading: true,
+  error: null,
+  isFlipped: false,
+};
 
 const initialState: SingleGameState = {};
 
@@ -25,24 +34,41 @@ const singleGameSlice = createSlice({
   initialState,
   reducers: {
     getSingleGameRequest(state, action: PayloadAction<number>) {
-      state[action.payload] = {
-        isLoading: true,
-        error: null,
-      };
+      state[action.payload] = Object.assign(
+        {},
+        defaultGameItemState,
+        state[action.payload],
+        {
+          isLoading: true,
+          error: null,
+        }
+      );
     },
     getSingleGameSuccess(state, action: PayloadAction<NormalizedData<number>>) {
-      state[action.payload.result] = {
-        isLoading: false,
-        error: null,
-      };
+      state[action.payload.result] = Object.assign(
+        {},
+        defaultGameItemState,
+        state[action.payload.result],
+        {
+          isLoading: false,
+          error: null,
+        }
+      );
     },
     getSingleGameError(state, action: PayloadAction<ItemErrorPayload>) {
-      state[action.payload.itemId] = {
-        isLoading: false,
-        error: action.payload.error,
-      };
+      state[action.payload.itemId] = Object.assign(
+        {},
+        defaultGameItemState,
+        state[action.payload.itemId],
+        {
+          isLoading: false,
+          error: action.payload.error,
+        }
+      );
     },
-    flipBoard(state, action: PayloadAction<number>) {},
+    flipBoard(state, action: PayloadAction<number>) {
+      state[action.payload].isFlipped = !state[action.payload].isFlipped;
+    },
   },
   extraReducers: {},
 });
