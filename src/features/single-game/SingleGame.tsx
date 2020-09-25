@@ -96,7 +96,11 @@ export const SingleGame: FC<SingleGameProps> = ({
   // @todo. use useCallback hook
   const handleRewindToMove = (moveIndex: number) => {
     if (onRewindToMove) {
-      onRewindToMove(moveIndex);
+      if (moveIndex === movesHistory.length - 1) {
+        onRewindToMove(null);
+      } else {
+        onRewindToMove(moveIndex);
+      }
     }
   };
 

@@ -399,6 +399,11 @@ describe("SingleGame", () => {
 
         expect(onRewindToMove).toBeCalledTimes(1);
         expect(onRewindToMove).toBeCalledWith(2);
+
+        gameControlPanel.props.onRewindToMove(3);
+
+        expect(onRewindToMove).toBeCalledTimes(2);
+        expect(onRewindToMove).toHaveBeenNthCalledWith(2, null);
       });
 
       it("from onRewindToFirstMove", () => {
