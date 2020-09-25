@@ -270,6 +270,11 @@ describe("SingleGame", () => {
 
         testRenderer.update(<SingleGame game={gameWithMovesSample} />);
         expect(board.props.lastMoveSquares).toEqual(["g8", "f6"]);
+
+        testRenderer.update(
+          <SingleGame game={gameWithMovesSample} rewindToMoveIndex={2} />
+        );
+        expect(board.props.lastMoveSquares).toEqual(["g1", "f3"]);
       });
 
       it("onMove", () => {
@@ -337,7 +342,7 @@ describe("SingleGame", () => {
 
       it("rewindToMoveIndex", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGame game={gameSample} />
+          <SingleGame game={gameWithMovesSample} />
         );
         const testInstance = testRenderer.root;
 
@@ -346,13 +351,13 @@ describe("SingleGame", () => {
         expect(gameControlPanel.props.rewindToMoveIndex).toBeNull();
 
         testRenderer.update(
-          <SingleGame game={gameSample} rewindToMoveIndex={3} />
+          <SingleGame game={gameWithMovesSample} rewindToMoveIndex={2} />
         );
 
-        expect(gameControlPanel.props.rewindToMoveIndex).toBe(3);
+        expect(gameControlPanel.props.rewindToMoveIndex).toBe(2);
 
         testRenderer.update(
-          <SingleGame game={gameSample} rewindToMoveIndex={0} />
+          <SingleGame game={gameWithMovesSample} rewindToMoveIndex={0} />
         );
 
         expect(gameControlPanel.props.rewindToMoveIndex).toBe(0);

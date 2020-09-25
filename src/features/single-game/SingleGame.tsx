@@ -83,8 +83,13 @@ export const SingleGame: FC<SingleGameProps> = ({
   const movesHistory = chessWithAllMoves.history({ verbose: true });
 
   let lastMoveSquares: string[] | undefined;
-  if (movesHistory.length) {
-    const lastMove = movesHistory[movesHistory.length - 1];
+  if (rewindToMoveIndex === null) {
+    if (movesHistory.length) {
+      const lastMove = movesHistory[movesHistory.length - 1];
+      lastMoveSquares = [lastMove.from, lastMove.to];
+    }
+  } else {
+    const lastMove = movesHistory[rewindToMoveIndex];
     lastMoveSquares = [lastMove.from, lastMove.to];
   }
 
