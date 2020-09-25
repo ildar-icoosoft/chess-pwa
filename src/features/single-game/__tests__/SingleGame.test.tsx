@@ -15,6 +15,7 @@ import {
   gameWithSmallAmountOfPiecesSample,
   gameWithSmallAmountOfPiecesSampleValidMoves,
   gameWithMovesAndUserSample,
+  gameWithMovesRewoundToIndex2SampleFen,
 } from "../../../test-utils/data-sample/game";
 import userSample from "../../../test-utils/data-sample/user";
 import { GameMeta } from "../GameMeta";
@@ -71,6 +72,14 @@ describe("SingleGame", () => {
         testRenderer.update(<SingleGame game={gameWithMovesSample} />);
 
         expect(board.props.position).toBe(gameWithMovesSampleFen);
+
+        testRenderer.update(
+          <SingleGame game={gameWithMovesSample} rewindToMoveIndex={2} />
+        );
+
+        expect(board.props.position).toBe(
+          gameWithMovesRewoundToIndex2SampleFen
+        );
       });
 
       it("allowMarkers", () => {

@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { FC } from "react";
 import { ChessInstance } from "chess.js";
 import {
   Board,
@@ -37,7 +37,12 @@ export const SingleGame: FC<SingleGameProps> = ({
     return null;
   }
 
-  const chess: ChessInstance = makeChessInstance(game);
+  const chessWithAllMoves: ChessInstance = makeChessInstance(game);
+
+  const chess: ChessInstance =
+    rewindToMoveIndex === null
+      ? chessWithAllMoves
+      : makeChessInstance(game, rewindToMoveIndex);
 
   const check: boolean = chess.in_check();
 
@@ -75,7 +80,7 @@ export const SingleGame: FC<SingleGameProps> = ({
       orientation === PieceColor.WHITE ? PieceColor.BLACK : PieceColor.WHITE;
   }
 
-  const movesHistory = chess.history({ verbose: true });
+  const movesHistory = chessWithAllMoves.history({ verbose: true });
 
   let lastMoveSquares: string[] | undefined;
   if (movesHistory.length) {
