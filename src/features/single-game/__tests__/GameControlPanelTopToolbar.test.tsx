@@ -23,7 +23,7 @@ describe("GameControlPanelTopToolbar", () => {
       const { getByTestId } = render(
         <GameControlPanelTopToolbar
           onRewindToPrevMove={onRewindToPrevMove}
-          hasPrevMove={true}
+          hasPrevMove
         />
       );
 
@@ -39,7 +39,7 @@ describe("GameControlPanelTopToolbar", () => {
       const { getByTestId } = render(
         <GameControlPanelTopToolbar
           onRewindToNextMove={onRewindToNextMove}
-          hasNextMove={true}
+          hasNextMove
         />
       );
 
@@ -84,7 +84,7 @@ describe("GameControlPanelTopToolbar", () => {
 
       expect(btn).toBeDisabled();
 
-      rerender(<GameControlPanelTopToolbar hasPrevMove={true} />);
+      rerender(<GameControlPanelTopToolbar hasPrevMove />);
 
       expect(btn).not.toBeDisabled();
     });
@@ -96,7 +96,7 @@ describe("GameControlPanelTopToolbar", () => {
 
       expect(btn).toBeDisabled();
 
-      rerender(<GameControlPanelTopToolbar hasNextMove={true} />);
+      rerender(<GameControlPanelTopToolbar hasNextMove />);
 
       expect(btn).not.toBeDisabled();
     });
@@ -108,7 +108,7 @@ describe("GameControlPanelTopToolbar", () => {
 
       expect(btn).not.toBeDisabled();
 
-      rerender(<GameControlPanelTopToolbar isFirstMove={true} />);
+      rerender(<GameControlPanelTopToolbar isFirstMove />);
 
       expect(btn).toBeDisabled();
     });
@@ -120,7 +120,7 @@ describe("GameControlPanelTopToolbar", () => {
 
       expect(btn).not.toBeDisabled();
 
-      rerender(<GameControlPanelTopToolbar isLastMove={true} />);
+      rerender(<GameControlPanelTopToolbar isLastMove />);
 
       expect(btn).toBeDisabled();
     });
