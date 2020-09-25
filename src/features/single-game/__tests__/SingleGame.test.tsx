@@ -14,6 +14,7 @@ import {
   gameSample3,
   gameWithSmallAmountOfPiecesSample,
   gameWithSmallAmountOfPiecesSampleValidMoves,
+  gameWithMovesAndUserSample,
 } from "../../../test-utils/data-sample/game";
 import userSample from "../../../test-utils/data-sample/user";
 import { GameMeta } from "../GameMeta";
@@ -174,6 +175,16 @@ describe("SingleGame", () => {
           <SingleGame currentUser={userSample} game={gameSample} />
         );
         // true because currentUser is not a gamer of this game
+        expect(board.props.viewOnly).toBeTruthy();
+
+        testRenderer.update(
+          <SingleGame
+            currentUser={userSample}
+            game={gameWithMovesAndUserSample}
+            rewindToMoveIndex={2}
+          />
+        );
+        // false because currentUser is a gamer of this game and game is not over
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(

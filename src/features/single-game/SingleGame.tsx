@@ -52,7 +52,8 @@ export const SingleGame: FC<SingleGameProps> = ({
   if (
     currentUser &&
     (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
-    game.status === "started"
+    game.status === "started" &&
+    rewindToMoveIndex === null
   ) {
     viewOnly = false;
   }

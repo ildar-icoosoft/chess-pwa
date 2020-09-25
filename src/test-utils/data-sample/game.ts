@@ -152,6 +152,25 @@ export const gameWithMovesSample: Game = {
 export const gameWithMovesSampleFen =
   "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3";
 
+export const gameWithMovesAndUserSample: Game = {
+  id: 2,
+  aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
+  initialFen: "startpos",
+  turn: "white",
+  wtime: 300000,
+  btime: 300000,
+  moves: "e2e4 e7e5 g1f3 g8f6",
+  status: "started",
+  white: {
+    id: 1,
+    fullName: "Thomas Miller",
+  },
+  black: null,
+  winner: null,
+};
+
 export const gameWithCheckmateByWhiteSample: Game = {
   id: 3,
   aiLevel: 3,
