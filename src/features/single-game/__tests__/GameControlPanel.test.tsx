@@ -4,7 +4,6 @@ import TestRenderer from "react-test-renderer";
 import { GameControlPanel } from "../GameControlPanel";
 import {
   gameSample,
-  gameThatCanBeAbortedSample,
   gameWithMovesSample,
 } from "../../../test-utils/data-sample/game";
 import { GameClock } from "../GameClock";

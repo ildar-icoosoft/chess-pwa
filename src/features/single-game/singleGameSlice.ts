@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-cycle */
 /* eslint-disable prefer-object-spread */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JWR } from "sails.io.js";
