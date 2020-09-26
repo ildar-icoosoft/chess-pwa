@@ -191,10 +191,10 @@ export const gameThatCanBeAbortedSample: Game = {
   clockIncrement: 3,
   drawOffer: null,
   initialFen: "startpos",
-  turn: "white",
+  turn: "black",
   wtime: 300000,
   btime: 300000,
-  moves: "e2e4 e7e5",
+  moves: "e2e4",
   status: "started",
   white: null,
   black: {
