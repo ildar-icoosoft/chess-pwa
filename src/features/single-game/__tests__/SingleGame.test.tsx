@@ -467,6 +467,34 @@ describe("SingleGame", () => {
         expect(gameControlPanel.props.onAbortGame).toBe(onAbortGame);
       });
 
+      it("onAbortGame", () => {
+        const onAbortGame = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame game={gameSample} onAbortGame={onAbortGame} />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onAbortGame).toBe(onAbortGame);
+      });
+
+      it("onOfferDraw", () => {
+        const onOfferDraw = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame game={gameSample} onOfferDraw={onOfferDraw} />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onOfferDraw).toBe(onOfferDraw);
+      });
+
       it("onResignGame", () => {
         const onResignGame = jest.fn();
 

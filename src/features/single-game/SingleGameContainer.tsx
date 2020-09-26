@@ -13,6 +13,7 @@ import {
   fetchGame,
   flipBoard,
   rewindToMove,
+  offerDraw,
 } from "./singleGameSlice";
 import { makeMove } from "../move/moveSlice";
 import User from "../../interfaces/User";
@@ -52,6 +53,10 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
     dispatch(resignGame(id));
   }, [dispatch, id]);
 
+  const handleOfferDraw = useCallback(() => {
+    dispatch(offerDraw(id));
+  }, [dispatch, id]);
+
   const handleMove = useCallback(
     (move: Move) => {
       dispatch(makeMove(id, `${move.from}${move.to}`));
@@ -81,6 +86,7 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
         currentUser={currentUser}
         rewindToMoveIndex={singleGameItemState.rewindToMoveIndex}
         onAbortGame={handleAbortGame}
+        onOfferDraw={handleOfferDraw}
         onResignGame={handleResignGame}
         onMove={handleMove}
         onFlipBoard={handleFlipBoard}
