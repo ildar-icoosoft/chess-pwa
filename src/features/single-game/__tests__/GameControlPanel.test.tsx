@@ -141,6 +141,54 @@ describe("GameControlPanel", () => {
       });
     });
 
+    describe("DrawOfferDialog", () => {
+      it("onAccept", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} drawOfferSentByOpponent />
+        );
+        const testInstance = testRenderer.root;
+
+        const drawOfferDialog = testInstance.findByType(DrawOfferDialog);
+
+        expect(drawOfferDialog.props.onAccept).toBeUndefined();
+
+        const onAccept = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel
+            game={gameSample}
+            drawOfferSentByOpponent
+            onAccept={onAccept}
+          />
+        );
+
+        expect(drawOfferDialog.props.onAccept).toBe(onAccept);
+      });
+
+      it("onDecline", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameSample} drawOfferSentByOpponent />
+        );
+        const testInstance = testRenderer.root;
+
+        const drawOfferDialog = testInstance.findByType(DrawOfferDialog);
+
+        expect(drawOfferDialog.props.onAccept).toBeUndefined();
+
+        const onDecline = jest.fn();
+
+        testRenderer.update(
+          <GameControlPanel
+            game={gameSample}
+            drawOfferSentByOpponent
+            onDecline={onDecline}
+          />
+        );
+
+        expect(drawOfferDialog.props.onDecline).toBe(onDecline);
+      });
+    });
+
     describe("GameMoves", () => {
       it("game", () => {
         const testRenderer = TestRenderer.create(
@@ -426,7 +474,7 @@ describe("GameControlPanel", () => {
         expect(topToolbar.props.canResignGame).toBeTruthy();
       });
 
-      it("onFlipBoard", () => {
+      it("onAbortGame", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />
         );
