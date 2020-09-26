@@ -119,6 +119,25 @@ export const SingleGame: FC<SingleGameProps> = ({
     canResignGame = true;
   }
 
+  let playerPiecesColor: AppPieceColor | null = null;
+  if (currentUser) {
+    if (currentUser.id === game.white?.id) {
+      playerPiecesColor = "white";
+    } else if (currentUser.id === game.black?.id) {
+      playerPiecesColor = "black";
+    }
+  }
+
+  let drawOfferSentByCurrentUser = false;
+  if (
+    currentUser &&
+    (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
+    game.status === "started" &&
+    game.drawOffer === playerPiecesColor
+  ) {
+    drawOfferSentByCurrentUser = true;
+  }
+
   // @todo. use useCallback hook
   const handleRewindToMove = (moveIndex: number) => {
     if (onRewindToMove) {
@@ -175,6 +194,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         rewindToMoveIndex={rewindToMoveIndex}
         canAbortGame={canAbortGame}
         canResignGame={canResignGame}
+        drawOfferSentByCurrentUser={drawOfferSentByCurrentUser}
         onFlipBoard={onFlipBoard}
         onAbortGame={onAbortGame}
         onOfferDraw={onOfferDraw}
