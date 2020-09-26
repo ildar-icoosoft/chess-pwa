@@ -474,6 +474,25 @@ describe("GameControlPanel", () => {
         expect(topToolbar.props.canResignGame).toBeTruthy();
       });
 
+      it("canOfferDraw", () => {
+        const testRenderer = TestRenderer.create(
+          <GameControlPanel game={gameWithMovesSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const topToolbar = testInstance.findByType(
+          GameControlPanelBottomToolbar
+        );
+
+        expect(topToolbar.props.canOfferDraw).toBeFalsy();
+
+        testRenderer.update(
+          <GameControlPanel game={gameWithMovesSample} canOfferDraw />
+        );
+
+        expect(topToolbar.props.canOfferDraw).toBeTruthy();
+      });
+
       it("onAbortGame", () => {
         const testRenderer = TestRenderer.create(
           <GameControlPanel game={gameSample} />

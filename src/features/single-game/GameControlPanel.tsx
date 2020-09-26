@@ -37,6 +37,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
   orientation = "white",
   rewindToMoveIndex = null,
   canAbortGame = false,
+  canOfferDraw = false,
   canResignGame = false,
   drawOfferSentByCurrentUser = false,
   drawOfferSentByOpponent = false,
@@ -102,6 +103,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
       )}
       <GameControlPanelBottomToolbar
         canAbortGame={canAbortGame}
+        canOfferDraw={canOfferDraw}
         canResignGame={canResignGame}
         onAbortGame={onAbortGame}
         onOfferDraw={onOfferDraw}
