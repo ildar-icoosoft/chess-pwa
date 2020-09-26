@@ -17,6 +17,7 @@ import {
   gameWithMovesAndUserSample,
   gameWithMovesRewoundToIndex2SampleFen,
   gameThatCanBeAbortedSample,
+  makeGameSample,
 } from "../../../test-utils/data-sample/game";
 import userSample from "../../../test-utils/data-sample/user";
 import { GameMeta } from "../GameMeta";
@@ -382,6 +383,22 @@ describe("SingleGame", () => {
         );
 
         expect(gameControlPanel.props.canAbortGame).toBeTruthy();
+
+        const gameSampleWithOutOfTimeStatus = makeGameSample(
+          {
+            status: "outoftime",
+          },
+          gameThatCanBeAbortedSample
+        );
+
+        testRenderer.update(
+          <SingleGame
+            game={gameSampleWithOutOfTimeStatus}
+            currentUser={userSample}
+          />
+        );
+
+        expect(gameControlPanel.props.canAbortGame).toBeFalsy();
       });
 
       it("onFlipBoard", () => {

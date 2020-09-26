@@ -20,8 +20,11 @@ export const gameSampleFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 // @todo. use this function to create samples.
-export const makeGameSample = (data: Partial<Game>): Game => ({
-  ...gameSample,
+export const makeGameSample = (
+  data: Partial<Game>,
+  originalGameSample = gameSample
+): Game => ({
+  ...originalGameSample,
   ...data,
 });
 

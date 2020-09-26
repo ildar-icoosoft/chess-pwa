@@ -99,6 +99,7 @@ export const SingleGame: FC<SingleGameProps> = ({
   if (
     currentUser &&
     (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
+    game.status === "started" &&
     movesHistory.length < 3
   ) {
     canAbortGame = true;
