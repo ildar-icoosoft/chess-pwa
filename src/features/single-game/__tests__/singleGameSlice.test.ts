@@ -594,6 +594,7 @@ describe("singleGameSlice reducer", () => {
     });
   });
 
+  /* Offer draw (begin) */
   it("should handle offerDrawRequest", () => {
     expect(
       singleGameReducer(
@@ -745,8 +746,93 @@ describe("singleGameSlice reducer", () => {
       });
     });
   });
+  /* Offer draw (end) */
 
   /* Accept draw offer (begin) */
+  it("should handle acceptDrawOfferRequest", () => {
+    expect(
+      singleGameReducer(
+        {
+          "1": {
+            isLoading: true,
+            error: null,
+            isFlipped: true,
+            rewindToMoveIndex: 2,
+          },
+        },
+        {
+          type: acceptDrawOfferRequest.type,
+          payload: 1,
+        }
+      )
+    ).toEqual({
+      "1": {
+        isLoading: true,
+        error: null,
+        isFlipped: true,
+        rewindToMoveIndex: 2,
+      },
+    });
+  });
+
+  it("should handle acceptDrawOfferSuccess", () => {
+    expect(
+      singleGameReducer(
+        {
+          "1": {
+            isLoading: true,
+            error: null,
+            isFlipped: true,
+            rewindToMoveIndex: 2,
+          },
+        },
+        {
+          type: acceptDrawOfferSuccess.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      "1": {
+        isLoading: true,
+        error: null,
+        isFlipped: true,
+        rewindToMoveIndex: 2,
+      },
+    });
+  });
+
+  it("should handle acceptDrawOfferError", () => {
+    expect(
+      singleGameReducer(
+        {
+          "1": {
+            isLoading: true,
+            error: null,
+            isFlipped: true,
+            rewindToMoveIndex: 2,
+          },
+        },
+        {
+          type: acceptDrawOfferError.type,
+          payload: {
+            itemId: 1,
+            error: "error text",
+          },
+        }
+      )
+    ).toEqual({
+      "1": {
+        isLoading: true,
+        error: null,
+        isFlipped: true,
+        rewindToMoveIndex: 2,
+      },
+    });
+  });
+
   describe("should handle acceptDrawOffer", () => {
     it("success", async () => {
       const dispatch = jest.fn();
@@ -817,6 +903,90 @@ describe("singleGameSlice reducer", () => {
   /* Accept draw offer (end) */
 
   /* Decline draw offer (begin) */
+  it("should handle declineDrawOfferRequest", () => {
+    expect(
+      singleGameReducer(
+        {
+          "1": {
+            isLoading: true,
+            error: null,
+            isFlipped: true,
+            rewindToMoveIndex: 2,
+          },
+        },
+        {
+          type: declineDrawOfferRequest.type,
+          payload: 1,
+        }
+      )
+    ).toEqual({
+      "1": {
+        isLoading: true,
+        error: null,
+        isFlipped: true,
+        rewindToMoveIndex: 2,
+      },
+    });
+  });
+
+  it("should handle declineDrawOfferSuccess", () => {
+    expect(
+      singleGameReducer(
+        {
+          "1": {
+            isLoading: true,
+            error: null,
+            isFlipped: true,
+            rewindToMoveIndex: 2,
+          },
+        },
+        {
+          type: declineDrawOfferSuccess.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      "1": {
+        isLoading: true,
+        error: null,
+        isFlipped: true,
+        rewindToMoveIndex: 2,
+      },
+    });
+  });
+
+  it("should handle declineDrawOfferError", () => {
+    expect(
+      singleGameReducer(
+        {
+          "1": {
+            isLoading: true,
+            error: null,
+            isFlipped: true,
+            rewindToMoveIndex: 2,
+          },
+        },
+        {
+          type: declineDrawOfferError.type,
+          payload: {
+            itemId: 1,
+            error: "error text",
+          },
+        }
+      )
+    ).toEqual({
+      "1": {
+        isLoading: true,
+        error: null,
+        isFlipped: true,
+        rewindToMoveIndex: 2,
+      },
+    });
+  });
+
   describe("should handle declineDrawOffer", () => {
     it("success", async () => {
       const dispatch = jest.fn();
