@@ -392,6 +392,33 @@ describe("SingleGame", () => {
         expect(gameControlPanel.props.drawOfferSentByCurrentUser).toBeTruthy();
       });
 
+      it("drawOfferSentByOpponent", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameSample3} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameControlPanel = testInstance.findByType(GameControlPanel);
+
+        expect(gameControlPanel.props.drawOfferSentByOpponent).toBeFalsy();
+
+        const gameWithdrawOfferSentByOpponent = makeGameSample(
+          {
+            drawOffer: "black",
+          },
+          gameSample3
+        );
+
+        testRenderer.update(
+          <SingleGame
+            game={gameWithdrawOfferSentByOpponent}
+            currentUser={userSample}
+          />
+        );
+
+        expect(gameControlPanel.props.drawOfferSentByOpponent).toBeTruthy();
+      });
+
       it("canAbortGame", () => {
         const testRenderer = TestRenderer.create(
           <SingleGame game={gameWithMovesSample} />

@@ -138,6 +138,17 @@ export const SingleGame: FC<SingleGameProps> = ({
     drawOfferSentByCurrentUser = true;
   }
 
+  let drawOfferSentByOpponent = false;
+  if (
+    currentUser &&
+    (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
+    game.status === "started" &&
+    game.drawOffer !== null &&
+    game.drawOffer !== playerPiecesColor
+  ) {
+    drawOfferSentByOpponent = true;
+  }
+
   // @todo. use useCallback hook
   const handleRewindToMove = (moveIndex: number) => {
     if (onRewindToMove) {
@@ -195,6 +206,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         canAbortGame={canAbortGame}
         canResignGame={canResignGame}
         drawOfferSentByCurrentUser={drawOfferSentByCurrentUser}
+        drawOfferSentByOpponent={drawOfferSentByOpponent}
         onFlipBoard={onFlipBoard}
         onAbortGame={onAbortGame}
         onOfferDraw={onOfferDraw}
