@@ -130,20 +130,23 @@ export const abortGame = (id: number): AppThunk<Promise<Game>> => (
   dispatch(abortGameRequest(id));
 
   return new Promise((resolve, reject) => {
-    ioClient.socket.post(`/game/${id}/abort`, (body: unknown, jwr: JWR) => {
-      if (jwr.statusCode === 200) {
-        const normalizedGame = normalize(body as Game, gameSchema);
-        dispatch(abortGameSuccess(normalizedGame));
-        resolve(body as Game);
-      } else {
-        dispatch(
-          abortGameError({
-            itemId: id,
-            error: body as string,
-          })
-        );
-        reject(jwr);
+    ioClient.socket.post(
+      `/api/v1/board/game/${id}/abort`,
+      (body: unknown, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          const normalizedGame = normalize(body as Game, gameSchema);
+          dispatch(abortGameSuccess(normalizedGame));
+          resolve(body as Game);
+        } else {
+          dispatch(
+            abortGameError({
+              itemId: id,
+              error: body as string,
+            })
+          );
+          reject(jwr);
+        }
       }
-    });
+    );
   });
 };
