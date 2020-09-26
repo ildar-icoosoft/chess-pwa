@@ -62,7 +62,7 @@ describe("GameControlPanelBottomToolbar", () => {
       expect(btn).not.toBeDisabled();
     });
 
-    it("abort-game-btn", () => {
+    it("offer-draw-btn", () => {
       const { getByTestId, rerender } = render(
         <GameControlPanelBottomToolbar />
       );

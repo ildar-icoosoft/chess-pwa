@@ -23,7 +23,6 @@ import {
 import userSample from "../../../test-utils/data-sample/user";
 import { GameMeta } from "../GameMeta";
 import { GameControlPanel } from "../GameControlPanel";
-import { DrawOfferDialog } from "../DrawOfferDialog";
 
 describe("SingleGame", () => {
   describe("children components", () => {
