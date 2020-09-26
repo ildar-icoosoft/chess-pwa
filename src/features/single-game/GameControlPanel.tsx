@@ -55,7 +55,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
 
   const hasPrevMove = movesHistory.length > 1 && rewindToMoveIndex !== 0;
 
-  const hasNextMove = movesHistory.length > 0 && rewindToMoveIndex !== null;
+  const hasNextMove = rewindToMoveIndex !== null;
 
   return (
     <div>
