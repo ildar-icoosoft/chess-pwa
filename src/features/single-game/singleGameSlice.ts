@@ -74,9 +74,9 @@ const singleGameSlice = createSlice({
         }
       );
     },
-    abortGameRequest(state, action: PayloadAction<number>) {},
-    abortGameSuccess(state, action: PayloadAction<NormalizedData<number>>) {},
-    abortGameError(state, action: PayloadAction<ItemErrorPayload>) {},
+    abortGameRequest(_state, _action: PayloadAction<number>) {},
+    abortGameSuccess(_state, _action: PayloadAction<NormalizedData<number>>) {},
+    abortGameError(_state, _action: PayloadAction<ItemErrorPayload>) {},
     flipBoard(state, action: PayloadAction<number>) {
       state[action.payload].isFlipped = !state[action.payload].isFlipped;
     },
