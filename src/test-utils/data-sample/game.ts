@@ -183,6 +183,28 @@ export const gameWithMovesAndUserSample: Game = {
   black: null,
   winner: null,
 };
+export const gameWithMovesAndUserVsUserSample: Game = {
+  id: 2,
+  aiLevel: 0,
+  clockLimit: 300,
+  clockIncrement: 3,
+  drawOffer: null,
+  initialFen: "startpos",
+  turn: "white",
+  wtime: 300000,
+  btime: 300000,
+  moves: "e2e4 e7e5 g1f3 g8f6",
+  status: "started",
+  white: {
+    id: 1,
+    fullName: "Thomas Miller",
+  },
+  black: {
+    id: 2,
+    fullName: "William Garcia",
+  },
+  winner: null,
+};
 
 export const gameThatCanBeAbortedSample: Game = {
   id: 2,

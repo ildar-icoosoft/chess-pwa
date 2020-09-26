@@ -14,6 +14,8 @@ export interface GameControlPanelProps {
   orientation?: PieceColor;
   rewindToMoveIndex?: number | null;
   canAbortGame?: boolean;
+  canDrawOffer?: boolean;
+  canOfferDraw?: boolean;
   canResignGame?: boolean;
   drawOfferSentByCurrentUser?: boolean;
   drawOfferSentByOpponent?: boolean;

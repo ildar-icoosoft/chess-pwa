@@ -123,6 +123,18 @@ export const SingleGame: FC<SingleGameProps> = ({
     canResignGame = true;
   }
 
+  let canOfferDraw = false;
+  if (
+    currentUser &&
+    (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
+    game.drawOffer === null &&
+    game.aiLevel === 0 &&
+    game.status === "started" &&
+    movesHistory.length > 1
+  ) {
+    canOfferDraw = true;
+  }
+
   let playerPiecesColor: AppPieceColor | null = null;
   if (currentUser) {
     if (currentUser.id === game.white?.id) {
@@ -209,6 +221,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         rewindToMoveIndex={rewindToMoveIndex}
         canAbortGame={canAbortGame}
         canResignGame={canResignGame}
+        canOfferDraw={canOfferDraw}
         drawOfferSentByCurrentUser={drawOfferSentByCurrentUser}
         drawOfferSentByOpponent={drawOfferSentByOpponent}
         onAcceptDrawOffer={onAcceptDrawOffer}

@@ -18,6 +18,7 @@ import {
   gameWithMovesRewoundToIndex2SampleFen,
   gameThatCanBeAbortedSample,
   makeGameSample,
+  gameWithMovesAndUserVsUserSample,
 } from "../../../test-utils/data-sample/game";
 import userSample from "../../../test-utils/data-sample/user";
 import { GameMeta } from "../GameMeta";
@@ -309,43 +310,6 @@ describe("SingleGame", () => {
     });
 
     describe("GameControlPanel", () => {
-      it("onAcceptDrawOffer", () => {
-        const onAcceptDrawOffer = jest.fn();
-
-        const testInstance = TestRenderer.create(
-          <SingleGame game={gameSample} onAcceptDrawOffer={onAcceptDrawOffer} />
-        ).root;
-
-        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
-          GameControlPanel
-        );
-
-        expect(gameControlPanel.props.onAcceptDrawOffer).toBe(
-          onAcceptDrawOffer
-        );
-      });
-
-      it("onDeclineDrawOffer", () => {
-        const onDeclineDrawOffer = jest.fn();
-
-        const testInstance = TestRenderer.create(
-          <SingleGame
-            game={gameSample}
-            onDeclineDrawOffer={onDeclineDrawOffer}
-          />
-        ).root;
-
-        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
-          GameControlPanel
-        );
-
-        expect(gameControlPanel.props.onDeclineDrawOffer).toBe(
-          onDeclineDrawOffer
-        );
-      });
-    });
-
-    describe("GameControlPanel", () => {
       it("game", () => {
         const testRenderer = TestRenderer.create(
           <SingleGame game={gameSample} />
@@ -531,6 +495,71 @@ describe("SingleGame", () => {
         expect(gameControlPanel.props.canResignGame).toBeFalsy();
       });
 
+      it("canOfferDraw", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameWithMovesAndUserVsUserSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameControlPanel = testInstance.findByType(GameControlPanel);
+
+        // not authenticated
+        expect(gameControlPanel.props.canOfferDraw).toBeFalsy();
+
+        testRenderer.update(
+          <SingleGame
+            game={gameWithMovesAndUserVsUserSample}
+            currentUser={userSample}
+          />
+        );
+
+        expect(gameControlPanel.props.canOfferDraw).toBeTruthy();
+
+        const gameWithOutOfTimeStatus = makeGameSample(
+          {
+            status: "outoftime",
+            winner: "white",
+          },
+          gameWithMovesAndUserVsUserSample
+        );
+
+        testRenderer.update(
+          <SingleGame game={gameWithOutOfTimeStatus} currentUser={userSample} />
+        );
+
+        // out of time
+        expect(gameControlPanel.props.canOfferDraw).toBeFalsy();
+
+        const gameWithDrawOffer = makeGameSample(
+          {
+            drawOffer: "white",
+          },
+          gameWithMovesAndUserVsUserSample
+        );
+
+        testRenderer.update(
+          <SingleGame game={gameWithDrawOffer} currentUser={userSample} />
+        );
+
+        // draw is already offered
+        expect(gameControlPanel.props.canOfferDraw).toBeFalsy();
+
+        const gameVsAI = makeGameSample(
+          {
+            aiLevel: 2,
+            black: null,
+          },
+          gameWithMovesAndUserVsUserSample
+        );
+
+        testRenderer.update(
+          <SingleGame game={gameVsAI} currentUser={userSample} />
+        );
+
+        // game VS AI
+        expect(gameControlPanel.props.canOfferDraw).toBeFalsy();
+      });
+
       it("onFlipBoard", () => {
         const onFlipBoard = jest.fn();
 
@@ -543,6 +572,41 @@ describe("SingleGame", () => {
         );
 
         expect(gameControlPanel.props.onFlipBoard).toBe(onFlipBoard);
+      });
+
+      it("onAcceptDrawOffer", () => {
+        const onAcceptDrawOffer = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame game={gameSample} onAcceptDrawOffer={onAcceptDrawOffer} />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onAcceptDrawOffer).toBe(
+          onAcceptDrawOffer
+        );
+      });
+
+      it("onDeclineDrawOffer", () => {
+        const onDeclineDrawOffer = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame
+            game={gameSample}
+            onDeclineDrawOffer={onDeclineDrawOffer}
+          />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onDeclineDrawOffer).toBe(
+          onDeclineDrawOffer
+        );
       });
 
       it("onAbortGame", () => {
