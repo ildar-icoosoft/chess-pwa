@@ -11,6 +11,7 @@ import { GameMoves } from "../GameMoves";
 import { GameControlPanelUserName } from "../GameControlPanelUserName";
 import { GameControlPanelBottomToolbar } from "../GameControlPanelBottomToolbar";
 import { GameControlPanelTopToolbar } from "../GameControlPanelTopToolbar";
+import { DrawOfferDialog } from "../DrawOfferDialog";
 
 describe("GameControlPanel", () => {
   describe("children components", () => {
@@ -30,6 +31,21 @@ describe("GameControlPanel", () => {
       const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(GameMoves).length).toBe(1);
+    });
+
+    it("contains DrawOfferDialog", () => {
+      const testRenderer = TestRenderer.create(
+        <GameControlPanel game={gameSample} />
+      );
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(DrawOfferDialog).length).toBe(0);
+
+      testRenderer.update(
+        <GameControlPanel game={gameSample} drawOfferSentByOpponent />
+      );
+
+      expect(testInstance.findAllByType(DrawOfferDialog).length).toBe(1);
     });
 
     it("contains GameControlPanelUserName", () => {
@@ -479,6 +495,20 @@ describe("GameControlPanel", () => {
     it("should contain nothing if no game", () => {
       const { container } = render(<GameControlPanel />);
       expect(container).toBeEmptyDOMElement();
+    });
+
+    it("should contain draw offer sent message", () => {
+      const { queryByTestId, rerender } = render(
+        <GameControlPanel game={gameSample} />
+      );
+
+      expect(queryByTestId("draw-offer-sent-message")).not.toBeInTheDocument();
+
+      rerender(
+        <GameControlPanel game={gameSample} drawOfferSentByCurrentUser />
+      );
+
+      expect(queryByTestId("draw-offer-sent-message")).toBeInTheDocument();
     });
   });
 });

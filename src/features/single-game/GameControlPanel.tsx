@@ -7,6 +7,7 @@ import { GameControlPanelUserName } from "./GameControlPanelUserName";
 import { GameControlPanelTopToolbar } from "./GameControlPanelTopToolbar";
 import { GameControlPanelBottomToolbar } from "./GameControlPanelBottomToolbar";
 import makeChessInstance from "../../utils/makeChessInstance";
+import { DrawOfferDialog } from "./DrawOfferDialog";
 
 export interface GameControlPanelProps {
   game?: Game;
@@ -14,6 +15,8 @@ export interface GameControlPanelProps {
   rewindToMoveIndex?: number | null;
   canAbortGame?: boolean;
   canResignGame?: boolean;
+  drawOfferSentByCurrentUser?: boolean;
+  drawOfferSentByOpponent?: boolean;
   onRewindToMove?(moveIndex: number): void;
   onFlipBoard?(): void;
   onRewindToPrevMove?(): void;
@@ -31,6 +34,8 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
   rewindToMoveIndex = null,
   canAbortGame = false,
   canResignGame = false,
+  drawOfferSentByCurrentUser = false,
+  drawOfferSentByOpponent = false,
   onRewindToMove,
   onFlipBoard,
   onRewindToPrevMove,
@@ -80,6 +85,10 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
         rewindToMoveIndex={rewindToMoveIndex}
         onRewindToMove={onRewindToMove}
       />
+      {drawOfferSentByOpponent && <DrawOfferDialog />}
+      {drawOfferSentByCurrentUser && (
+        <div data-testid="draw-offer-sent-message">Draw offer sent</div>
+      )}
       <GameControlPanelBottomToolbar
         canAbortGame={canAbortGame}
         canResignGame={canResignGame}
