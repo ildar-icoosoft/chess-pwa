@@ -84,9 +84,25 @@ const singleGameSlice = createSlice({
       _action: PayloadAction<NormalizedData<number>>
     ) {},
     resignGameError(_state, _action: PayloadAction<ItemErrorPayload>) {},
+
     offerDrawRequest(_state, _action: PayloadAction<number>) {},
     offerDrawSuccess(_state, _action: PayloadAction<NormalizedData<number>>) {},
     offerDrawError(_state, _action: PayloadAction<ItemErrorPayload>) {},
+
+    acceptDrawOfferRequest(_state, _action: PayloadAction<number>) {},
+    acceptDrawOfferSuccess(
+      _state,
+      _action: PayloadAction<NormalizedData<number>>
+    ) {},
+    acceptDrawOfferError(_state, _action: PayloadAction<ItemErrorPayload>) {},
+
+    declineDrawOfferRequest(_state, _action: PayloadAction<number>) {},
+    declineDrawOfferSuccess(
+      _state,
+      _action: PayloadAction<NormalizedData<number>>
+    ) {},
+    declineDrawOfferError(_state, _action: PayloadAction<ItemErrorPayload>) {},
+
     flipBoard(state, action: PayloadAction<number>) {
       state[action.payload].isFlipped = !state[action.payload].isFlipped;
     },
@@ -112,6 +128,12 @@ export const {
   offerDrawRequest,
   offerDrawSuccess,
   offerDrawError,
+  acceptDrawOfferRequest,
+  acceptDrawOfferSuccess,
+  acceptDrawOfferError,
+  declineDrawOfferRequest,
+  declineDrawOfferSuccess,
+  declineDrawOfferError,
 } = singleGameSlice.actions;
 
 export default singleGameSlice.reducer;
@@ -221,5 +243,55 @@ export const offerDraw = (id: number): AppThunk<Promise<Game>> => (
   });
 };
 
-export const acceptDrawOffer = (id: number): any => {};
-export const declineDrawOffer = (id: number): any => {};
+export const acceptDrawOffer = (id: number): AppThunk<Promise<Game>> => (
+  dispatch
+) => {
+  dispatch(acceptDrawOfferRequest(id));
+
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(
+      `/api/v1/board/game/${id}/draw/yes`,
+      (body: unknown, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          const normalizedGame = normalize(body as Game, gameSchema);
+          dispatch(acceptDrawOfferSuccess(normalizedGame));
+          resolve(body as Game);
+        } else {
+          dispatch(
+            acceptDrawOfferError({
+              itemId: id,
+              error: body as string,
+            })
+          );
+          reject(jwr);
+        }
+      }
+    );
+  });
+};
+export const declineDrawOffer = (id: number): AppThunk<Promise<Game>> => (
+  dispatch
+) => {
+  dispatch(declineDrawOfferRequest(id));
+
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(
+      `/api/v1/board/game/${id}/draw/no`,
+      (body: unknown, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          const normalizedGame = normalize(body as Game, gameSchema);
+          dispatch(declineDrawOfferSuccess(normalizedGame));
+          resolve(body as Game);
+        } else {
+          dispatch(
+            declineDrawOfferError({
+              itemId: id,
+              error: body as string,
+            })
+          );
+          reject(jwr);
+        }
+      }
+    );
+  });
+};
