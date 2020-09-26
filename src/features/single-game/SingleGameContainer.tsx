@@ -14,6 +14,8 @@ import {
   flipBoard,
   rewindToMove,
   offerDraw,
+  acceptDrawOffer,
+  declineDrawOffer,
 } from "./singleGameSlice";
 import { makeMove } from "../move/moveSlice";
 import User from "../../interfaces/User";
@@ -43,6 +45,14 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
 
   useEffect(() => {
     dispatch(fetchGame(id));
+  }, [dispatch, id]);
+
+  const handleAcceptDrawOffer = useCallback(() => {
+    dispatch(acceptDrawOffer(id));
+  }, [dispatch, id]);
+
+  const handleDeclineDrawOffer = useCallback(() => {
+    dispatch(declineDrawOffer(id));
   }, [dispatch, id]);
 
   const handleAbortGame = useCallback(() => {
@@ -85,6 +95,8 @@ export const SingleGameContainer: FC<SingleGameContainerProps> = ({ id }) => {
         game={game}
         currentUser={currentUser}
         rewindToMoveIndex={singleGameItemState.rewindToMoveIndex}
+        onAcceptDrawOffer={handleAcceptDrawOffer}
+        onDeclineDrawOffer={handleDeclineDrawOffer}
         onAbortGame={handleAbortGame}
         onOfferDraw={handleOfferDraw}
         onResignGame={handleResignGame}

@@ -220,3 +220,6 @@ export const offerDraw = (id: number): AppThunk<Promise<Game>> => (
     );
   });
 };
+
+export const acceptDrawOffer = (id: number): any => {};
+export const declineDrawOffer = (id: number): any => {};
