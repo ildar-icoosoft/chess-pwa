@@ -19,6 +19,8 @@ export interface SingleGameProps {
   currentUser?: User;
   isFlipped?: boolean;
   rewindToMoveIndex?: number | null;
+  onAcceptDrawOffer?(): void;
+  onDeclineDrawOffer?(): void;
   onMove?(move: Move): void;
   onAbortGame?(): void;
   onOfferDraw?(): void;
@@ -32,6 +34,8 @@ export const SingleGame: FC<SingleGameProps> = ({
   currentUser,
   isFlipped = false,
   rewindToMoveIndex = null,
+  onAcceptDrawOffer,
+  onDeclineDrawOffer,
   onAbortGame,
   onOfferDraw,
   onResignGame,
@@ -207,6 +211,8 @@ export const SingleGame: FC<SingleGameProps> = ({
         canResignGame={canResignGame}
         drawOfferSentByCurrentUser={drawOfferSentByCurrentUser}
         drawOfferSentByOpponent={drawOfferSentByOpponent}
+        onAcceptDrawOffer={onAcceptDrawOffer}
+        onDeclineDrawOffer={onDeclineDrawOffer}
         onFlipBoard={onFlipBoard}
         onAbortGame={onAbortGame}
         onOfferDraw={onOfferDraw}

@@ -22,6 +22,7 @@ import {
 import userSample from "../../../test-utils/data-sample/user";
 import { GameMeta } from "../GameMeta";
 import { GameControlPanel } from "../GameControlPanel";
+import { DrawOfferDialog } from "../DrawOfferDialog";
 
 describe("SingleGame", () => {
   describe("children components", () => {
@@ -308,6 +309,43 @@ describe("SingleGame", () => {
     });
 
     describe("GameControlPanel", () => {
+      it("onAcceptDrawOffer", () => {
+        const onAcceptDrawOffer = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame game={gameSample} onAcceptDrawOffer={onAcceptDrawOffer} />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onAcceptDrawOffer).toBe(
+          onAcceptDrawOffer
+        );
+      });
+
+      it("onDeclineDrawOffer", () => {
+        const onDeclineDrawOffer = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame
+            game={gameSample}
+            onDeclineDrawOffer={onDeclineDrawOffer}
+          />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onDeclineDrawOffer).toBe(
+          onDeclineDrawOffer
+        );
+      });
+    });
+
+    describe("GameControlPanel", () => {
       it("game", () => {
         const testRenderer = TestRenderer.create(
           <SingleGame game={gameSample} />
@@ -505,20 +543,6 @@ describe("SingleGame", () => {
         );
 
         expect(gameControlPanel.props.onFlipBoard).toBe(onFlipBoard);
-      });
-
-      it("onAbortGame", () => {
-        const onAbortGame = jest.fn();
-
-        const testInstance = TestRenderer.create(
-          <SingleGame game={gameSample} onAbortGame={onAbortGame} />
-        ).root;
-
-        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
-          GameControlPanel
-        );
-
-        expect(gameControlPanel.props.onAbortGame).toBe(onAbortGame);
       });
 
       it("onAbortGame", () => {

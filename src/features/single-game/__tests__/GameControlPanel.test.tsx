@@ -152,17 +152,17 @@ describe("GameControlPanel", () => {
 
         expect(drawOfferDialog.props.onAccept).toBeUndefined();
 
-        const onAccept = jest.fn();
+        const onAcceptDrawOffer = jest.fn();
 
         testRenderer.update(
           <GameControlPanel
             game={gameSample}
             drawOfferSentByOpponent
-            onAccept={onAccept}
+            onAcceptDrawOffer={onAcceptDrawOffer}
           />
         );
 
-        expect(drawOfferDialog.props.onAccept).toBe(onAccept);
+        expect(drawOfferDialog.props.onAccept).toBe(onAcceptDrawOffer);
       });
 
       it("onDecline", () => {
@@ -175,17 +175,17 @@ describe("GameControlPanel", () => {
 
         expect(drawOfferDialog.props.onAccept).toBeUndefined();
 
-        const onDecline = jest.fn();
+        const onDeclineDrawOffer = jest.fn();
 
         testRenderer.update(
           <GameControlPanel
             game={gameSample}
             drawOfferSentByOpponent
-            onDecline={onDecline}
+            onDeclineDrawOffer={onDeclineDrawOffer}
           />
         );
 
-        expect(drawOfferDialog.props.onDecline).toBe(onDecline);
+        expect(drawOfferDialog.props.onDecline).toBe(onDeclineDrawOffer);
       });
     });
 

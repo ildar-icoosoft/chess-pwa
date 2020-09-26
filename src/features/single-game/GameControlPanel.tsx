@@ -17,8 +17,8 @@ export interface GameControlPanelProps {
   canResignGame?: boolean;
   drawOfferSentByCurrentUser?: boolean;
   drawOfferSentByOpponent?: boolean;
-  onAccept?(): void;
-  onDecline?(): void;
+  onAcceptDrawOffer?(): void;
+  onDeclineDrawOffer?(): void;
   onRewindToMove?(moveIndex: number): void;
   onFlipBoard?(): void;
   onRewindToPrevMove?(): void;
@@ -38,8 +38,8 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
   canResignGame = false,
   drawOfferSentByCurrentUser = false,
   drawOfferSentByOpponent = false,
-  onAccept,
-  onDecline,
+  onAcceptDrawOffer,
+  onDeclineDrawOffer,
   onRewindToMove,
   onFlipBoard,
   onRewindToPrevMove,
@@ -90,7 +90,10 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
         onRewindToMove={onRewindToMove}
       />
       {drawOfferSentByOpponent && (
-        <DrawOfferDialog onAccept={onAccept} onDecline={onDecline} />
+        <DrawOfferDialog
+          onAccept={onAcceptDrawOffer}
+          onDecline={onDeclineDrawOffer}
+        />
       )}
       {drawOfferSentByCurrentUser && (
         <div data-testid="draw-offer-sent-message">Draw offer sent</div>
