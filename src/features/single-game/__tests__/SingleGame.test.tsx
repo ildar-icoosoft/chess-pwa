@@ -376,6 +376,20 @@ describe("SingleGame", () => {
 
         expect(gameControlPanel.props.onFlipBoard).toBe(onFlipBoard);
       });
+
+      it("onAbortGame", () => {
+        const onAbortGame = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame game={gameSample} onAbortGame={onAbortGame} />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onAbortGame).toBe(onAbortGame);
+      });
     });
   });
 

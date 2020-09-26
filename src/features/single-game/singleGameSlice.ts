@@ -74,6 +74,9 @@ const singleGameSlice = createSlice({
         }
       );
     },
+    abortGameRequest(state, action: PayloadAction<number>) {},
+    abortGameSuccess(state, action: PayloadAction<NormalizedData<number>>) {},
+    abortGameError(state, action: PayloadAction<ItemErrorPayload>) {},
     flipBoard(state, action: PayloadAction<number>) {
       state[action.payload].isFlipped = !state[action.payload].isFlipped;
     },
@@ -90,6 +93,9 @@ export const {
   getSingleGameError,
   flipBoard,
   rewindToMove,
+  abortGameRequest,
+  abortGameSuccess,
+  abortGameError,
 } = singleGameSlice.actions;
 
 export default singleGameSlice.reducer;
@@ -108,6 +114,30 @@ export const fetchGame = (id: number): AppThunk<Promise<Game>> => (
       } else {
         dispatch(
           getSingleGameError({
+            itemId: id,
+            error: body as string,
+          })
+        );
+        reject(jwr);
+      }
+    });
+  });
+};
+
+export const abortGame = (id: number): AppThunk<Promise<Game>> => (
+  dispatch
+) => {
+  dispatch(abortGameRequest(id));
+
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(`/game/${id}/abort`, (body: unknown, jwr: JWR) => {
+      if (jwr.statusCode === 200) {
+        const normalizedGame = normalize(body as Game, gameSchema);
+        dispatch(abortGameSuccess(normalizedGame));
+        resolve(body as Game);
+      } else {
+        dispatch(
+          abortGameError({
             itemId: id,
             error: body as string,
           })

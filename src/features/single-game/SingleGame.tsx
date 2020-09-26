@@ -20,6 +20,7 @@ export interface SingleGameProps {
   isFlipped?: boolean;
   rewindToMoveIndex?: number | null;
   onMove?(move: Move): void;
+  onAbortGame?(): void;
   onFlipBoard?(): void;
   onRewindToMove?(moveIndex: number | null): void;
 }
@@ -29,6 +30,7 @@ export const SingleGame: FC<SingleGameProps> = ({
   currentUser,
   isFlipped = false,
   rewindToMoveIndex = null,
+  onAbortGame,
   onMove,
   onFlipBoard,
   onRewindToMove,
@@ -148,6 +150,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         orientation={orientation as AppPieceColor}
         rewindToMoveIndex={rewindToMoveIndex}
         onFlipBoard={onFlipBoard}
+        onAbortGame={onAbortGame}
         onRewindToMove={handleRewindToMove}
         onRewindToFirstMove={handleRewindToFirstMove}
         onRewindToLastMove={handleRewindToLastMove}
