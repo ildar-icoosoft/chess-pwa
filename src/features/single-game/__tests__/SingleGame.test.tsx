@@ -428,6 +428,20 @@ describe("SingleGame", () => {
 
         expect(gameControlPanel.props.onAbortGame).toBe(onAbortGame);
       });
+
+      it("onResignGame", () => {
+        const onResignGame = jest.fn();
+
+        const testInstance = TestRenderer.create(
+          <SingleGame game={gameSample} onResignGame={onResignGame} />
+        ).root;
+
+        const gameControlPanel: TestRenderer.ReactTestInstance = testInstance.findByType(
+          GameControlPanel
+        );
+
+        expect(gameControlPanel.props.onResignGame).toBe(onResignGame);
+      });
     });
   });
 

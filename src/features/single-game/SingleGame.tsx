@@ -21,6 +21,7 @@ export interface SingleGameProps {
   rewindToMoveIndex?: number | null;
   onMove?(move: Move): void;
   onAbortGame?(): void;
+  onResignGame?(): void;
   onFlipBoard?(): void;
   onRewindToMove?(moveIndex: number | null): void;
 }
@@ -31,6 +32,7 @@ export const SingleGame: FC<SingleGameProps> = ({
   isFlipped = false,
   rewindToMoveIndex = null,
   onAbortGame,
+  onResignGame,
   onMove,
   onFlipBoard,
   onRewindToMove,
@@ -162,6 +164,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         canAbortGame={canAbortGame}
         onFlipBoard={onFlipBoard}
         onAbortGame={onAbortGame}
+        onResignGame={onResignGame}
         onRewindToMove={handleRewindToMove}
         onRewindToFirstMove={handleRewindToFirstMove}
         onRewindToLastMove={handleRewindToLastMove}
