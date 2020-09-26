@@ -13,6 +13,7 @@ import {
   getSingleGameSuccess,
   abortGameSuccess,
   resignGameSuccess,
+  offerDrawSuccess,
 } from "../single-game/singleGameSlice";
 import { challengeAiSuccess } from "../challenge/challengeSlice";
 import { oneSecondPassed } from "../game-clock/gameClockSlice";
@@ -73,6 +74,7 @@ const entitiesSlice = createSlice({
     [getSingleGameSuccess.type]: getNormalizedDataReducer,
     [abortGameSuccess.type]: getNormalizedDataReducer,
     [resignGameSuccess.type]: getNormalizedDataReducer,
+    [offerDrawSuccess.type]: getNormalizedDataReducer,
     [challengeAiSuccess.type]: getNormalizedDataReducer,
     [updateGameBySubscription.type]: getNormalizedDataReducer,
     [createGameBySubscription.type]: getNormalizedDataReducer,

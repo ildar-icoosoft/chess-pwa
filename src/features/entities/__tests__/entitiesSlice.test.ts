@@ -6,6 +6,7 @@ import {
   abortGameSuccess,
   getSingleGameSuccess,
   resignGameSuccess,
+  offerDrawSuccess,
 } from "../../single-game/singleGameSlice";
 import { challengeAiSuccess } from "../../challenge/challengeSlice";
 import { oneSecondPassed } from "../../game-clock/gameClockSlice";
@@ -209,6 +210,18 @@ describe("entitiesSlice reducer", () => {
     expect(
       entitiesReducer(entitiesSample, {
         type: resignGameSuccess.type,
+        payload: {
+          result: 2,
+          entities: addGamePayloadSample,
+        },
+      })
+    ).toEqual(entitiesAfterAddingGameSample);
+  });
+
+  it("should handle resignGameSuccess", () => {
+    expect(
+      entitiesReducer(entitiesSample, {
+        type: offerDrawSuccess.type,
         payload: {
           result: 2,
           entities: addGamePayloadSample,
