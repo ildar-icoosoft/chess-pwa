@@ -95,6 +95,15 @@ export const SingleGame: FC<SingleGameProps> = ({
     lastMoveSquares = [lastMove.from, lastMove.to];
   }
 
+  let canAbortGame = false;
+  if (
+    currentUser &&
+    (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
+    movesHistory.length < 3
+  ) {
+    canAbortGame = true;
+  }
+
   // @todo. use useCallback hook
   const handleRewindToMove = (moveIndex: number) => {
     if (onRewindToMove) {
@@ -149,6 +158,7 @@ export const SingleGame: FC<SingleGameProps> = ({
         game={game}
         orientation={orientation as AppPieceColor}
         rewindToMoveIndex={rewindToMoveIndex}
+        canAbortGame={canAbortGame}
         onFlipBoard={onFlipBoard}
         onAbortGame={onAbortGame}
         onRewindToMove={handleRewindToMove}

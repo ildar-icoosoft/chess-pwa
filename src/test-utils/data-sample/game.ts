@@ -172,6 +172,25 @@ export const gameWithMovesAndUserSample: Game = {
   winner: null,
 };
 
+export const gameThatCanBeAbortedSample: Game = {
+  id: 2,
+  aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
+  initialFen: "startpos",
+  turn: "white",
+  wtime: 300000,
+  btime: 300000,
+  moves: "e2e4 e7e5",
+  status: "started",
+  white: null,
+  black: {
+    id: 1,
+    fullName: "Thomas Miller",
+  },
+  winner: null,
+};
+
 export const gameWithCheckmateByWhiteSample: Game = {
   id: 3,
   aiLevel: 3,

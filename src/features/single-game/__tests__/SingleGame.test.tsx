@@ -16,6 +16,7 @@ import {
   gameWithSmallAmountOfPiecesSampleValidMoves,
   gameWithMovesAndUserSample,
   gameWithMovesRewoundToIndex2SampleFen,
+  gameThatCanBeAbortedSample,
 } from "../../../test-utils/data-sample/game";
 import userSample from "../../../test-utils/data-sample/user";
 import { GameMeta } from "../GameMeta";
@@ -361,6 +362,26 @@ describe("SingleGame", () => {
         );
 
         expect(gameControlPanel.props.rewindToMoveIndex).toBe(0);
+      });
+
+      it("canAbortGame", () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGame game={gameWithMovesSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gameControlPanel = testInstance.findByType(GameControlPanel);
+
+        expect(gameControlPanel.props.canAbortGame).toBeFalsy();
+
+        testRenderer.update(
+          <SingleGame
+            game={gameThatCanBeAbortedSample}
+            currentUser={userSample}
+          />
+        );
+
+        expect(gameControlPanel.props.canAbortGame).toBeTruthy();
       });
 
       it("onFlipBoard", () => {
