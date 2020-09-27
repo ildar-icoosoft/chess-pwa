@@ -1,10 +1,12 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
+import { denormalize } from "normalizr";
+import { useDispatch, useSelector } from "react-redux";
 import { Header } from "./Header";
 import User from "../../interfaces/User";
-import { useSelector } from "react-redux";
 import { RootState } from "../../app/rootReducer";
-import { denormalize } from "normalizr";
 import userSchema from "../../normalizr/schemas/userSchema";
+import { logout } from "../current-user/currentUserSlice";
+import { showAuthModal } from "../auth-modal/authModalSlice";
 
 const HeaderContainer: FC<unknown> = () => {
   const currentUser: User | null = useSelector((state: RootState) => {
@@ -14,7 +16,23 @@ const HeaderContainer: FC<unknown> = () => {
     return null;
   });
 
-  return <Header currentUser={currentUser} />;
+  const dispatch = useDispatch();
+
+  const handleLogout = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
+  const handleShowAuthModal = useCallback(() => {
+    dispatch(showAuthModal());
+  }, [dispatch]);
+
+  return (
+    <Header
+      currentUser={currentUser}
+      onLogout={handleLogout}
+      onShowAuthModal={handleShowAuthModal}
+    />
+  );
 };
 
 export default HeaderContainer;

@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 
 export interface HeaderProps {
   currentUser?: User | null;
+  onLogout?(): void;
+  onShowAuthModal?(): void;
 }
 
 export const Header: FC<HeaderProps> = ({ currentUser = null }) => {
