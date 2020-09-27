@@ -1,14 +1,11 @@
 import React, { FC } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import OngoingGamesContainer from "../ongoing-games/OngoingGamesContainer";
 import ChallengeAiFormContainer from "../challenge-ai-modal/ChallengeAiFormContainer";
 
 import { RootState } from "../../app/rootReducer";
-import {
-  hideChallengeAiModal,
-  showChallengeAiModal,
-} from "../challenge-ai-modal/challengeAiModalSlice";
+import { hideChallengeAiModal } from "../challenge-ai-modal/challengeAiModalSlice";
 import { AppDispatch } from "../../app/store";
 import ChallengeButtonsContainer from "./ChallengeButtonsContainer";
 
@@ -34,12 +31,6 @@ const HomePage: FC<unknown> = () => {
           <ChallengeAiFormContainer />
         </Modal.Body>
       </Modal>
-      <Button
-        variant="primary"
-        onClick={() => dispatch(showChallengeAiModal())}
-      >
-        Play with the computer
-      </Button>
 
       <ChallengeButtonsContainer />
       <OngoingGamesContainer />
