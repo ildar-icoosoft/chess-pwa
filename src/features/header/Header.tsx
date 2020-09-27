@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from "react";
 import User from "../../interfaces/User";
-import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export interface HeaderProps {
   currentUser?: User | null;
@@ -26,27 +26,43 @@ export const Header: FC<HeaderProps> = ({
   }, [onShowAuthModal]);
 
   return (
-    <>
-      {currentUser ? (
-        <>
-          <div>Hi, {currentUser.fullName}</div>
-          <Button
-            variant="primary"
-            data-testid="logout-btn"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-        </>
-      ) : (
-        <Button
-          variant="primary"
-          data-testid="login-btn"
-          onClick={handleShowAuthModal}
-        >
-          Login / Register
-        </Button>
-      )}
-    </>
+    <header className="blog-header py-3">
+      <div className="row flex-nowrap justify-content-between align-items-center">
+        <div className="offset-4 col-4 text-center">
+          <Link className="blog-header-logo text-dark" to="/">
+            Chess PWA
+          </Link>
+        </div>
+        <div className="col-4 d-flex justify-content-end align-items-center">
+          {currentUser ? (
+            <>
+              <div className="mr-2">Hi, {currentUser.fullName}</div>
+              <a
+                className="btn btn-sm btn-danger mr-2"
+                data-testid="logout-btn"
+                onClick={handleLogout}
+              >
+                Logout
+              </a>
+            </>
+          ) : (
+            <a
+              className="btn btn-sm btn-success mr-2"
+              data-testid="login-btn"
+              onClick={handleShowAuthModal}
+            >
+              Login / Register
+            </a>
+          )}
+
+          <a href="#">
+            <img
+              src={process.env.PUBLIC_URL + "/imgs/GitHub-Mark-32px.png"}
+              alt=""
+            />
+          </a>
+        </div>
+      </div>
+    </header>
   );
 };
