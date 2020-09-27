@@ -5,6 +5,7 @@ import mountTest from "../../../test-utils/mountTest";
 import HomePage from "../HomePage";
 import OngoingGamesContainer from "../../ongoing-games/OngoingGamesContainer";
 import { defaultState } from "../../../test-utils/data-sample/state";
+import ChallengeButtonsContainer from "../ChallengeButtonsContainer";
 
 describe("HomePage", () => {
   beforeEach(() => {
@@ -14,6 +15,15 @@ describe("HomePage", () => {
   mountTest(HomePage);
 
   describe("children components", () => {
+    it("contains ChallengeButtonsContainer", () => {
+      const testRenderer = TestRenderer.create(<HomePage />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(ChallengeButtonsContainer).length).toBe(
+        1
+      );
+    });
+
     it("contains OngoingGamesContainer", () => {
       const testRenderer = TestRenderer.create(<HomePage />);
       const testInstance = testRenderer.root;

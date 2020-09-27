@@ -1,7 +1,8 @@
-import { FC } from "react";
+import React, { FC } from "react";
+import { ChallengeButtons } from "./ChallengeButtons";
 
 const ChallengeButtonsContainer: FC<unknown> = () => {
-  return null;
+  return <ChallengeButtons />;
 };
 
 export default ChallengeButtonsContainer;

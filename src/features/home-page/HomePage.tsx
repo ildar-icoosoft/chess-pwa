@@ -10,6 +10,7 @@ import {
   showChallengeAiModal,
 } from "../challenge-ai-modal/challengeAiModalSlice";
 import { AppDispatch } from "../../app/store";
+import ChallengeButtonsContainer from "./ChallengeButtonsContainer";
 
 const HomePage: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -39,6 +40,8 @@ const HomePage: FC<unknown> = () => {
       >
         Play with the computer
       </Button>
+
+      <ChallengeButtonsContainer />
       <OngoingGamesContainer />
     </>
   );
