@@ -9,6 +9,7 @@ import { fetchCurrentUser } from "../../features/current-user/currentUserSlice";
 import { watchGames } from "../../features/data-subscription/dataSubscriptionSlice";
 import { defaultState } from "../../test-utils/data-sample/state";
 import { startGameClock } from "../../features/game-clock/gameClockSlice";
+import HeaderContainer from "../../features/header/HeaderContainer";
 
 jest.useFakeTimers();
 
@@ -33,6 +34,13 @@ describe("App", () => {
   });
 
   describe("children components", () => {
+    it("contains HeaderContainer", () => {
+      const testRenderer = TestRenderer.create(<App />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(HeaderContainer).length).toBe(1);
+    });
+
     it("contains HomePage", () => {
       const testRenderer = TestRenderer.create(<App />);
       const testInstance = testRenderer.root;
