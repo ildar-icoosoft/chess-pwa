@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import OngoingGamesContainer from "../features/ongoing-games/OngoingGamesContainer";
-import ChallengeAiFormContainer from "../features/challenge-ai-modal/ChallengeAiFormContainer";
+import OngoingGamesContainer from "../ongoing-games/OngoingGamesContainer";
+import ChallengeAiFormContainer from "../challenge-ai-modal/ChallengeAiFormContainer";
 
-import { RootState } from "../app/rootReducer";
+import { RootState } from "../../app/rootReducer";
 import {
   hideChallengeAiModal,
   showChallengeAiModal,
-} from "../features/challenge-ai-modal/challengeAiModalSlice";
-import { AppDispatch } from "../app/store";
+} from "../challenge-ai-modal/challengeAiModalSlice";
+import { AppDispatch } from "../../app/store";
 
 const HomePage: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();

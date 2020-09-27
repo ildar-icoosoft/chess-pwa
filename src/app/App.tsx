@@ -1,9 +1,9 @@
 import React, { FC, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomePage from "../pages/HomePage";
+import HomePage from "../features/home-page/HomePage";
 import GamePage from "../pages/GamePage";
 import LoginTabsContainer from "../features/auth-modal/LoginTabsContainer";
 import { RootState } from "./rootReducer";

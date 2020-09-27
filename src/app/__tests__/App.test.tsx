@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { render } from "@testing-library/react";
 import App from "../App";
 import mountTest from "../../test-utils/mountTest";
-import HomePage from "../../pages/HomePage";
+import HomePage from "../../features/home-page/HomePage";
 import { fetchCurrentUser } from "../../features/current-user/currentUserSlice";
 import { watchGames } from "../../features/data-subscription/dataSubscriptionSlice";
 import { defaultState } from "../../test-utils/data-sample/state";
@@ -49,18 +49,7 @@ describe("App", () => {
     });
   });
 
-  // @todo. add tests for App contains HomePage and GamePage
   // @todo. add tests for other content
-  // @todo. add tests for auth modal
-  // @todo. add tests for AppContext
-
-  describe("DOM structure", () => {
-    it("renders learn react link", () => {
-      const { getByText } = render(<App />);
-      const linkElement = getByText(/Home/i);
-      expect(linkElement).toBeInTheDocument();
-    });
-  });
 
   describe("dispatch() calls", () => {
     it("should call dispatch(startGameClock())", () => {

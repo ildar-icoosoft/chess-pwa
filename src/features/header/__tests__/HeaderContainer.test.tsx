@@ -16,11 +16,11 @@ jest.mock("../../current-user/currentUserSlice");
 jest.mock("../../auth-modal/authModalSlice");
 
 describe("HeaderContainer", () => {
-  mountTest(HeaderContainer);
-
   beforeEach(() => {
     (useSelector as jest.Mock).mockImplementation((cb) => cb(defaultState));
   });
+
+  mountTest(HeaderContainer);
 
   describe("children components", () => {
     it("contains Header", () => {
