@@ -10,6 +10,7 @@ import { watchGames } from "../../features/data-subscription/dataSubscriptionSli
 import { defaultState } from "../../test-utils/data-sample/state";
 import { startGameClock } from "../../features/game-clock/gameClockSlice";
 import HeaderContainer from "../../features/header/HeaderContainer";
+import { AuthModalContainer } from "../../features/auth-modal/AuthModalContainer";
 
 jest.useFakeTimers();
 
@@ -46,6 +47,13 @@ describe("App", () => {
       const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(HomePage).length).toBe(1);
+    });
+
+    it("contains AuthModalContainer", () => {
+      const testRenderer = TestRenderer.create(<App />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(AuthModalContainer).length).toBe(1);
     });
   });
 

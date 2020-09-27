@@ -1,24 +1,17 @@
 import React, { FC, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "../features/home-page/HomePage";
 import GamePage from "../pages/GamePage";
-import LoginTabsContainer from "../features/auth-modal/LoginTabsContainer";
-import { RootState } from "./rootReducer";
 import { fetchCurrentUser } from "../features/current-user/currentUserSlice";
-import { hideAuthModal } from "../features/auth-modal/authModalSlice";
 import { watchGames } from "../features/data-subscription/dataSubscriptionSlice";
 import { startGameClock } from "../features/game-clock/gameClockSlice";
 import HeaderContainer from "../features/header/HeaderContainer";
+import { AuthModalContainer } from "../features/auth-modal/AuthModalContainer";
 
 const App: FC = () => {
   const dispatch = useDispatch();
-
-  const { isAuthModalVisible } = useSelector(
-    (state: RootState) => state.authModal
-  );
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -30,20 +23,7 @@ const App: FC = () => {
     <div className="container">
       <Router>
         <HeaderContainer />
-
-        <Modal
-          show={isAuthModalVisible}
-          onHide={() => dispatch(hideAuthModal())}
-          animation={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <LoginTabsContainer />
-          </Modal.Body>
-        </Modal>
+        <AuthModalContainer />
 
         <Switch>
           <Route path="/game/:id">
