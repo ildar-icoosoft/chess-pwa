@@ -8,6 +8,9 @@ import {
   makeStateSample,
 } from "../../../test-utils/data-sample/state";
 import { useDispatch, useSelector } from "react-redux";
+import { hideAuthModal } from "../authModalSlice";
+
+jest.mock("../authModalSlice");
 
 describe("AuthModalContainer", () => {
   beforeEach(() => {
@@ -53,6 +56,31 @@ describe("AuthModalContainer", () => {
 
         expect(authModal.props.show).toBeTruthy();
       });
+    });
+  });
+
+  describe("dispatch() calls", () => {
+    it("should call dispatch(hideAuthModal())", () => {
+      const dispatch = useDispatch<jest.Mock>();
+      const hideAuthModalReturnedValue = Symbol("hideAuthModal");
+
+      const testRenderer = TestRenderer.create(<AuthModalContainer />);
+      const testInstance = testRenderer.root;
+
+      const challengeAiModal = testInstance.findByType(AuthModal);
+
+      const hideAuthModalFn = (hideAuthModal as unknown) as jest.Mock;
+      hideAuthModalFn.mockClear();
+      hideAuthModalFn.mockReturnValue(hideAuthModalReturnedValue);
+
+      TestRenderer.act(() => {
+        challengeAiModal.props.onHide();
+      });
+
+      expect(hideAuthModalFn).toBeCalledTimes(1);
+      expect(hideAuthModalFn).toBeCalledWith();
+
+      expect(dispatch).toBeCalledWith(hideAuthModalReturnedValue);
     });
   });
 });
