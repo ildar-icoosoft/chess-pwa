@@ -44,24 +44,15 @@ const App: FC = () => {
             <LoginTabsContainer />
           </Modal.Body>
         </Modal>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-            </ul>
-          </nav>
 
-          <Switch>
-            <Route path="/game/:id">
-              <GamePage />
-            </Route>
-            <Route path="/">
-              <HomePage />
-            </Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/game/:id">
+            <GamePage />
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
       </Router>
     </div>
   );
