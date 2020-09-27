@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   defaultState,
   makeStateSample,
-  stateWithDataSample,
 } from "../../../test-utils/data-sample/state";
+import { hideChallengeAiModal } from "../../challenge-ai-modal/challengeAiModalSlice";
+
+jest.mock("../../challenge-ai-modal/challengeAiModalSlice");
 
 describe("ChallengeAiModalContainer", () => {
   beforeEach(() => {
@@ -54,6 +56,31 @@ describe("ChallengeAiModalContainer", () => {
 
         expect(challengeAiModal.props.show).toBeTruthy();
       });
+    });
+  });
+
+  describe("dispatch() calls", () => {
+    it("should call dispatch(hideChallengeAiModal())", () => {
+      const dispatch = useDispatch<jest.Mock>();
+      const hideChallengeAiModalReturnedValue = Symbol("hideChallengeAiModal");
+
+      const testRenderer = TestRenderer.create(<ChallengeAiModalContainer />);
+      const testInstance = testRenderer.root;
+
+      const challengeAiModal = testInstance.findByType(ChallengeAiModal);
+
+      const hideChallengeAiModalFn = (hideChallengeAiModal as unknown) as jest.Mock;
+      hideChallengeAiModalFn.mockClear();
+      hideChallengeAiModalFn.mockReturnValue(hideChallengeAiModalReturnedValue);
+
+      TestRenderer.act(() => {
+        challengeAiModal.props.onHide();
+      });
+
+      expect(hideChallengeAiModalFn).toBeCalledTimes(1);
+      expect(hideChallengeAiModalFn).toBeCalledWith();
+
+      expect(dispatch).toBeCalledWith(hideChallengeAiModalReturnedValue);
     });
   });
 });
