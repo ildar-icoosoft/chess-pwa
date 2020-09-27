@@ -12,16 +12,14 @@ export const ChallengeAiModal: FC<ChallengeAiModalProps> = ({
   onHide,
 }) => {
   return (
-    <div>
-      <Modal show={show} onHide={onHide} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Play with the computer</Modal.Title>
-        </Modal.Header>
+    <Modal show={show} onHide={onHide} animation={false}>
+      <Modal.Header closeButton>
+        <Modal.Title>Play with the computer</Modal.Title>
+      </Modal.Header>
 
-        <Modal.Body>
-          <ChallengeAiFormContainer />
-        </Modal.Body>
-      </Modal>
-    </div>
+      <Modal.Body>
+        <ChallengeAiFormContainer />
+      </Modal.Body>
+    </Modal>
   );
 };

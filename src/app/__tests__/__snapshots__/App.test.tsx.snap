@@ -36,7 +36,6 @@ exports[`App Snapshot 1`] = `
       </a>
     </div>
   </header>
-  <div />
   <button
     className="btn btn-primary"
     data-testid="challenge-ai-btn"
