@@ -1,9 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import User from "../../interfaces/User";
 import { Button } from "react-bootstrap";
-import { logout } from "../current-user/currentUserSlice";
-import { showAuthModal } from "../auth-modal/authModalSlice";
-import { useDispatch } from "react-redux";
 
 export interface HeaderProps {
   currentUser?: User | null;
@@ -11,20 +8,42 @@ export interface HeaderProps {
   onShowAuthModal?(): void;
 }
 
-export const Header: FC<HeaderProps> = ({ currentUser = null }) => {
-  const dispatch = useDispatch();
+export const Header: FC<HeaderProps> = ({
+  currentUser = null,
+  onLogout,
+  onShowAuthModal,
+}) => {
+  const handleLogout = useCallback(() => {
+    if (onLogout) {
+      onLogout();
+    }
+  }, [onLogout]);
+
+  const handleShowAuthModal = useCallback(() => {
+    if (onShowAuthModal) {
+      onShowAuthModal();
+    }
+  }, [onShowAuthModal]);
 
   return (
     <>
       {currentUser ? (
         <>
           <div>Hi, {currentUser.fullName}</div>
-          <Button variant="primary" onClick={() => dispatch(logout())}>
+          <Button
+            variant="primary"
+            data-testid="logout-btn"
+            onClick={handleLogout}
+          >
             Logout
           </Button>
         </>
       ) : (
-        <Button variant="primary" onClick={() => dispatch(showAuthModal())}>
+        <Button
+          variant="primary"
+          data-testid="login-btn"
+          onClick={handleShowAuthModal}
+        >
           Login / Register
         </Button>
       )}
