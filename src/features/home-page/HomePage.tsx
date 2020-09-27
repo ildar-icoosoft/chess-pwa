@@ -8,6 +8,7 @@ import { RootState } from "../../app/rootReducer";
 import { hideChallengeAiModal } from "../challenge-ai-modal/challengeAiModalSlice";
 import { AppDispatch } from "../../app/store";
 import ChallengeButtonsContainer from "./ChallengeButtonsContainer";
+import { ChallengeAiModalContainer } from "./ChallengeAiModalContainer";
 
 const HomePage: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +33,7 @@ const HomePage: FC<unknown> = () => {
         </Modal.Body>
       </Modal>
 
+      <ChallengeAiModalContainer />
       <ChallengeButtonsContainer />
       <OngoingGamesContainer />
     </>
