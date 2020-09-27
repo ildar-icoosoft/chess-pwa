@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from "react";
 import User from "../../interfaces/User";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export interface HeaderProps {
   currentUser?: User | null;
@@ -37,25 +38,29 @@ export const Header: FC<HeaderProps> = ({
           {currentUser ? (
             <>
               <div className="mr-2">Hi, {currentUser.fullName}</div>
-              <a
+              <Button
                 className="btn btn-sm btn-danger mr-2"
                 data-testid="logout-btn"
                 onClick={handleLogout}
               >
                 Logout
-              </a>
+              </Button>
             </>
           ) : (
-            <a
+            <Button
               className="btn btn-sm btn-success mr-2"
               data-testid="login-btn"
               onClick={handleShowAuthModal}
             >
               Login / Register
-            </a>
+            </Button>
           )}
 
-          <a href="#">
+          <a
+            href="https://github.com/ildar-icoosoft/chess-pwa"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src={process.env.PUBLIC_URL + "/imgs/GitHub-Mark-32px.png"}
               alt=""
