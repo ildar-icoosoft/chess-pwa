@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Snapshot 1`] = `
-Array [
+<div
+  className="container"
+>
   <header
     className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow"
   >
@@ -33,7 +35,7 @@ Array [
         />
       </a>
     </div>
-  </header>,
+  </header>
   <div>
     <nav>
       <ul>
@@ -53,6 +55,6 @@ Array [
     <div
       className="grid"
     />
-  </div>,
-]
+  </div>
+</div>
 `;

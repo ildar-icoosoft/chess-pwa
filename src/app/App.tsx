@@ -27,41 +27,43 @@ const App: FC = () => {
   }, [dispatch]);
 
   return (
-    <Router>
-      <HeaderContainer />
+    <div className="container">
+      <Router>
+        <HeaderContainer />
 
-      <Modal
-        show={isAuthModalVisible}
-        onHide={() => dispatch(hideAuthModal())}
-        animation={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
+        <Modal
+          show={isAuthModalVisible}
+          onHide={() => dispatch(hideAuthModal())}
+          animation={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Login</Modal.Title>
+          </Modal.Header>
 
-        <Modal.Body>
-          <LoginTabsContainer />
-        </Modal.Body>
-      </Modal>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
-        </nav>
+          <Modal.Body>
+            <LoginTabsContainer />
+          </Modal.Body>
+        </Modal>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+            </ul>
+          </nav>
 
-        <Switch>
-          <Route path="/game/:id">
-            <GamePage />
-          </Route>
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            <Route path="/game/:id">
+              <GamePage />
+            </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </div>
   );
 };
 
