@@ -23,141 +23,8 @@ describe("gamesListSlice reducer", () => {
         type: "",
       })
     ).toEqual({
-      items: [],
       isLoading: true,
       error: null,
-    });
-  });
-
-  it("should handle challengeAiSuccess", () => {
-    expect(
-      gamesListReducer(
-        {
-          items: [1],
-          isLoading: true,
-          error: "error text",
-        },
-        {
-          type: challengeAiSuccess.type,
-          payload: {
-            result: 2,
-            entities: {},
-          },
-        }
-      )
-    ).toEqual({
-      items: [2, 1],
-      isLoading: true,
-      error: "error text",
-    });
-
-    expect(
-      gamesListReducer(
-        {
-          items: [1],
-          isLoading: true,
-          error: "error text",
-        },
-        {
-          type: challengeAiSuccess.type,
-          payload: {
-            result: 1,
-            entities: {},
-          },
-        }
-      )
-    ).toEqual({
-      items: [1],
-      isLoading: true,
-      error: "error text",
-    });
-  });
-
-  it("should handle createGameBySubscription", () => {
-    expect(
-      gamesListReducer(
-        {
-          items: [1],
-          isLoading: true,
-          error: "error text",
-        },
-        {
-          type: createGameBySubscription.type,
-          payload: {
-            result: 2,
-            entities: {},
-          },
-        }
-      )
-    ).toEqual({
-      items: [2, 1],
-      isLoading: true,
-      error: "error text",
-    });
-
-    expect(
-      gamesListReducer(
-        {
-          items: [1],
-          isLoading: true,
-          error: "error text",
-        },
-        {
-          type: createGameBySubscription.type,
-          payload: {
-            result: 1,
-            entities: {},
-          },
-        }
-      )
-    ).toEqual({
-      items: [1],
-      isLoading: true,
-      error: "error text",
-    });
-  });
-
-  it("should handle updateGameBySubscription", () => {
-    expect(
-      gamesListReducer(
-        {
-          items: [1],
-          isLoading: true,
-          error: "error text",
-        },
-        {
-          type: updateGameBySubscription.type,
-          payload: {
-            result: 2,
-            entities: {},
-          },
-        }
-      )
-    ).toEqual({
-      items: [2, 1],
-      isLoading: true,
-      error: "error text",
-    });
-
-    expect(
-      gamesListReducer(
-        {
-          items: [1],
-          isLoading: true,
-          error: "error text",
-        },
-        {
-          type: updateGameBySubscription.type,
-          payload: {
-            result: 1,
-            entities: {},
-          },
-        }
-      )
-    ).toEqual({
-      items: [1],
-      isLoading: true,
-      error: "error text",
     });
   });
 
@@ -165,7 +32,6 @@ describe("gamesListSlice reducer", () => {
     expect(
       gamesListReducer(
         {
-          items: [1],
           isLoading: false,
           error: "error text",
         },
@@ -174,7 +40,6 @@ describe("gamesListSlice reducer", () => {
         }
       )
     ).toEqual({
-      items: [1],
       isLoading: true,
       error: null,
     });
@@ -184,7 +49,6 @@ describe("gamesListSlice reducer", () => {
     expect(
       gamesListReducer(
         {
-          items: [1],
           isLoading: true,
           error: "error text",
         },
@@ -197,7 +61,6 @@ describe("gamesListSlice reducer", () => {
         }
       )
     ).toEqual({
-      items: [2, 3],
       isLoading: false,
       error: null,
     });
@@ -207,7 +70,6 @@ describe("gamesListSlice reducer", () => {
     expect(
       gamesListReducer(
         {
-          items: [1],
           isLoading: true,
           error: null,
         },
@@ -217,7 +79,6 @@ describe("gamesListSlice reducer", () => {
         }
       )
     ).toEqual({
-      items: [1],
       isLoading: false,
       error: "error text",
     });
