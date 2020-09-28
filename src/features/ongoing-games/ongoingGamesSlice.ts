@@ -90,7 +90,7 @@ export const fetchOngoingGames = (): AppThunk<Promise<Game[]>> => (
   dispatch(getOngoingGamesRequest());
 
   return new Promise((resolve, reject) => {
-    ioClient.socket.get("/game", (body: unknown, jwr: JWR) => {
+    ioClient.socket.get("/api/v1/game/playing", (body: unknown, jwr: JWR) => {
       if (jwr.statusCode === 200) {
         const normalizedGames = normalize(body as Game[], [gameSchema]);
         dispatch(getOngoingGamesSuccess(normalizedGames));
