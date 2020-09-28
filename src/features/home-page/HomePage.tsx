@@ -7,7 +7,11 @@ const HomePage: FC<unknown> = () => {
   return (
     <>
       <ChallengeAiModalContainer />
-      <ChallengeButtonsContainer />
+      <div className="d-flex justify-content-center">
+        <ChallengeButtonsContainer />
+      </div>
+
+      <h3>Ongoing Games</h3>
       <OngoingGamesContainer />
     </>
   );
