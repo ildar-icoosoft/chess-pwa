@@ -7,7 +7,7 @@ import gameSchema from "../../normalizr/schemas/gameSchema";
 import Game from "../../interfaces/Game";
 
 const OngoingGamesContainer: FC<unknown> = () => {
-  const items = useSelector((state: RootState) =>
+  const games = useSelector((state: RootState) =>
     denormalize(
       Object.keys(state.entities.games),
       [gameSchema],
@@ -15,7 +15,7 @@ const OngoingGamesContainer: FC<unknown> = () => {
     ).filter((game: Game) => game.status === "started")
   );
 
-  return <GamePreviewsList games={items} />;
+  return <GamePreviewsList games={games} />;
 };
 
 export default OngoingGamesContainer;

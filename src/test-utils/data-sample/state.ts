@@ -14,7 +14,6 @@ export const defaultState: RootState = {
   },
   singleGame: {},
   gamesList: {
-    items: [],
     isLoading: false,
     error: null,
   },
@@ -48,7 +47,6 @@ export const stateWithDataSample: RootState = {
   },
   singleGame: {},
   gamesList: {
-    items: [1],
     isLoading: false,
     error: null,
   },
@@ -102,7 +100,6 @@ export const stateWithDataSample2: RootState = {
     },
   },
   gamesList: {
-    items: [1],
     isLoading: false,
     error: null,
   },
@@ -156,7 +153,6 @@ export const stateWithDataSample3: RootState = {
     },
   },
   gamesList: {
-    items: [1],
     isLoading: false,
     error: null,
   },
