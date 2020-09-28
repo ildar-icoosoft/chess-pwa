@@ -3,18 +3,18 @@ import { denormalize } from "normalizr";
 import { useDispatch, useSelector } from "react-redux";
 import { GamePreviewsList } from "./GamePreviewsList";
 import { RootState } from "../../app/rootReducer";
-import { fetchOngoingGames } from "./ongoingGamesSlice";
+import { fetchGames } from "./gamesListSlice";
 import gameSchema from "../../normalizr/schemas/gameSchema";
 
 const OngoingGamesContainer: FC<unknown> = () => {
   const dispatch = useDispatch();
 
   const items = useSelector((state: RootState) =>
-    denormalize(state.ongoingGames.items, [gameSchema], state.entities)
+    denormalize(state.gamesList.items, [gameSchema], state.entities)
   );
 
   useEffect(() => {
-    dispatch(fetchOngoingGames());
+    dispatch(fetchGames());
   }, [dispatch]);
 
   return <GamePreviewsList games={items} />;
