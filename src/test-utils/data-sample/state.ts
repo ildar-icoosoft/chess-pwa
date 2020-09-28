@@ -15,7 +15,7 @@ export const defaultState: RootState = {
     isChallengeAiModalVisible: false,
   },
   singleGame: {},
-  ongoingGames: {
+  gamesList: {
     items: [],
     isLoading: false,
     error: null,
@@ -49,7 +49,7 @@ export const stateWithDataSample: RootState = {
     isChallengeAiModalVisible: false,
   },
   singleGame: {},
-  ongoingGames: {
+  gamesList: {
     items: [1],
     isLoading: false,
     error: null,
@@ -103,7 +103,7 @@ export const stateWithDataSample2: RootState = {
       rewindToMoveIndex: 2,
     },
   },
-  ongoingGames: {
+  gamesList: {
     items: [1],
     isLoading: false,
     error: null,
@@ -157,7 +157,7 @@ export const stateWithDataSample3: RootState = {
       rewindToMoveIndex: 0,
     },
   },
-  ongoingGames: {
+  gamesList: {
     items: [1],
     isLoading: false,
     error: null,

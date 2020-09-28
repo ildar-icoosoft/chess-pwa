@@ -3,7 +3,7 @@ import TestRenderer from "react-test-renderer";
 import { useSelector } from "react-redux";
 import mountTest from "../../../test-utils/mountTest";
 import HomePage from "../HomePage";
-import OngoingGamesContainer from "../../ongoing-games/OngoingGamesContainer";
+import OngoingGamesContainer from "../../games-list/OngoingGamesContainer";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import ChallengeButtonsContainer from "../ChallengeButtonsContainer";
 import { ChallengeAiModalContainer } from "../ChallengeAiModalContainer";

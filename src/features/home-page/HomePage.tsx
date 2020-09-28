@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import OngoingGamesContainer from "../ongoing-games/OngoingGamesContainer";
+import OngoingGamesContainer from "../games-list/OngoingGamesContainer";
 import ChallengeButtonsContainer from "./ChallengeButtonsContainer";
 import { ChallengeAiModalContainer } from "./ChallengeAiModalContainer";
 
