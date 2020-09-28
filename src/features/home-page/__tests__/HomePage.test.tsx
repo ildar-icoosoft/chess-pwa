@@ -7,6 +7,7 @@ import OngoingGamesContainer from "../../games-list/OngoingGamesContainer";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import ChallengeButtonsContainer from "../ChallengeButtonsContainer";
 import ChallengeAiModalContainer from "../ChallengeAiModalContainer";
+import CompletedGamesContainer from "../../games-list/CompletedGamesContainer";
 
 describe("HomePage", () => {
   beforeEach(() => {
@@ -30,6 +31,15 @@ describe("HomePage", () => {
       const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(OngoingGamesContainer).length).toBe(1);
+    });
+
+    it("contains CompletedGamesContainer", () => {
+      const testRenderer = TestRenderer.create(<HomePage />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(CompletedGamesContainer).length).toBe(
+        1
+      );
     });
 
     it("contains ChallengeAiModalContainer", () => {
