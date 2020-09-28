@@ -183,3 +183,81 @@ export const stateWithDataSample3: RootState = {
     },
   },
 };
+
+// many games
+export const stateWithDataSample4: RootState = {
+  currentUser: {
+    userId: 1,
+    isLoading: false,
+    error: null,
+  },
+  authModal: {
+    isAuthModalVisible: false,
+  },
+  challengeAiModal: {
+    isChallengeAiModalVisible: false,
+  },
+  singleGame: {},
+  gamesList: {
+    isLoading: false,
+    error: null,
+  },
+  entities: {
+    users: {
+      "1": {
+        id: 1,
+        fullName: "Thomas Miller",
+      },
+    },
+    games: {
+      "1": {
+        id: 1,
+        aiLevel: 3,
+        clockLimit: 300,
+        clockIncrement: 3,
+        drawOffer: null,
+        initialFen: "startpos",
+        turn: "white",
+        wtime: 300000,
+        btime: 300000,
+        moves: "e2e4 e7e5 g1f3 g8f6",
+        status: "started",
+        white: null,
+        black: null,
+        winner: null,
+      },
+      "2": {
+        id: 2,
+        aiLevel: 3,
+        clockLimit: 300,
+        clockIncrement: 3,
+        drawOffer: null,
+        initialFen: "startpos",
+        turn: "white",
+        wtime: 300000,
+        btime: 300000,
+        moves: "e2e4 e7e5 g1f3 g8f6",
+        status: "outoftime",
+        white: null,
+        black: null,
+        winner: "white",
+      },
+      "3": {
+        id: 3,
+        aiLevel: 3,
+        clockLimit: 300,
+        clockIncrement: 3,
+        drawOffer: null,
+        initialFen: "startpos",
+        turn: "white",
+        wtime: 300000,
+        btime: 300000,
+        moves: "e2e4 e7e5 g1f3 g8f6",
+        status: "aborted",
+        white: null,
+        black: null,
+        winner: null,
+      },
+    },
+  },
+};

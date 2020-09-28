@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import OngoingGamesContainer from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../GamePreviewsList";
 import mountTest from "../../../test-utils/mountTest";
-import { fetchGames } from "../gamesListSlice";
 import {
   defaultState,
-  stateWithDataSample,
+  stateWithDataSample4,
 } from "../../../test-utils/data-sample/state";
 
 describe("OngoingGamesContainer", () => {
@@ -39,7 +38,7 @@ describe("OngoingGamesContainer", () => {
         expect(gamePreviewsComponent.props.games).toEqual([]);
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample)
+          cb(stateWithDataSample4)
         );
 
         testRenderer.update(<OngoingGamesContainer />);
