@@ -1,8 +1,8 @@
+import React from "react";
+import { fireEvent, render } from "@testing-library/react";
 import mountTest from "../../../test-utils/mountTest";
 import { Header } from "../Header";
-import React from "react";
 import userSample from "../../../test-utils/data-sample/user";
-import { fireEvent, render } from "@testing-library/react";
 
 describe("Header", () => {
   mountTest(Header);

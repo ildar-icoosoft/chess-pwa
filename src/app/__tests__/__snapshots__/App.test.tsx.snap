@@ -37,15 +37,22 @@ exports[`App Snapshot 1`] = `
     </div>
   </header>
   <div />
-  <button
-    className="btn btn-primary"
-    data-testid="challenge-ai-btn"
-    disabled={false}
-    onClick={[Function]}
-    type="button"
+  <div
+    className="d-flex justify-content-center"
   >
-    Play with the computer
-  </button>
+    <button
+      className="btn btn-primary"
+      data-testid="challenge-ai-btn"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Play with the computer
+    </button>
+  </div>
+  <h3>
+    Ongoing Games
+  </h3>
   <div
     className="grid"
   />

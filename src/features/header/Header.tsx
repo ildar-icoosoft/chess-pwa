@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
-import User from "../../interfaces/User";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import User from "../../interfaces/User";
 
 export interface HeaderProps {
   currentUser?: User | null;
@@ -61,7 +61,7 @@ export const Header: FC<HeaderProps> = ({
           rel="noopener noreferrer"
         >
           <img
-            src={process.env.PUBLIC_URL + "/imgs/GitHub-Mark-32px.png"}
+            src={`${process.env.PUBLIC_URL}/imgs/GitHub-Mark-32px.png`}
             alt=""
           />
         </a>

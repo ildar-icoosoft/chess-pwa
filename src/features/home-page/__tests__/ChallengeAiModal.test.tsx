@@ -1,8 +1,8 @@
-import mountTest from "../../../test-utils/mountTest";
-import { ChallengeAiModal } from "../ChallengeAiModal";
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { Modal } from "react-bootstrap";
+import mountTest from "../../../test-utils/mountTest";
+import { ChallengeAiModal } from "../ChallengeAiModal";
 
 describe("ChallengeAiModal", () => {
   mountTest(ChallengeAiModal);

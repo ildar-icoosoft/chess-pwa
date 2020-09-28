@@ -1,6 +1,4 @@
 import { RootState } from "../../app/rootReducer";
-import Game from "../../interfaces/Game";
-import { gameSample } from "./game";
 
 export const defaultState: RootState = {
   currentUser: {

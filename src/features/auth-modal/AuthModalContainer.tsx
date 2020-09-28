@@ -1,10 +1,10 @@
 import React, { FC, useCallback } from "react";
-import { AuthModal } from "./AuthModal";
 import { useDispatch, useSelector } from "react-redux";
+import { AuthModal } from "./AuthModal";
 import { RootState } from "../../app/rootReducer";
 import { hideAuthModal } from "./authModalSlice";
 
-export const AuthModalContainer: FC<unknown> = () => {
+const AuthModalContainer: FC<unknown> = () => {
   const { isAuthModalVisible } = useSelector(
     (state: RootState) => state.authModal
   );
@@ -17,3 +17,5 @@ export const AuthModalContainer: FC<unknown> = () => {
 
   return <AuthModal show={isAuthModalVisible} onHide={handleHide} />;
 };
+
+export default AuthModalContainer;

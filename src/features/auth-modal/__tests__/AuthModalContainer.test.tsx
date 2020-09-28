@@ -1,13 +1,14 @@
-import mountTest from "../../../test-utils/mountTest";
 import TestRenderer from "react-test-renderer";
 import React from "react";
-import { AuthModalContainer } from "../AuthModalContainer";
+import { useDispatch, useSelector } from "react-redux";
+import mountTest from "../../../test-utils/mountTest";
+import AuthModalContainer from "../AuthModalContainer";
 import { AuthModal } from "../AuthModal";
 import {
   defaultState,
   makeStateSample,
 } from "../../../test-utils/data-sample/state";
-import { useDispatch, useSelector } from "react-redux";
+
 import { hideAuthModal } from "../authModalSlice";
 
 jest.mock("../authModalSlice");

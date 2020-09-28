@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import TestRenderer from "react-test-renderer";
 import { useDispatch, useSelector } from "react-redux";
-import { render } from "@testing-library/react";
 import App from "../App";
 import mountTest from "../../test-utils/mountTest";
 import HomePage from "../../features/home-page/HomePage";
@@ -10,7 +9,7 @@ import { watchGames } from "../../features/data-subscription/dataSubscriptionSli
 import { defaultState } from "../../test-utils/data-sample/state";
 import { startGameClock } from "../../features/game-clock/gameClockSlice";
 import HeaderContainer from "../../features/header/HeaderContainer";
-import { AuthModalContainer } from "../../features/auth-modal/AuthModalContainer";
+import AuthModalContainer from "../../features/auth-modal/AuthModalContainer";
 
 jest.useFakeTimers();
 

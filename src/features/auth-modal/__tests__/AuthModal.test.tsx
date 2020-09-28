@@ -1,9 +1,8 @@
-import mountTest from "../../../test-utils/mountTest";
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { Modal } from "react-bootstrap";
+import mountTest from "../../../test-utils/mountTest";
 import { AuthModal } from "../AuthModal";
-import { ChallengeAiModal } from "../../home-page/ChallengeAiModal";
 
 describe("AuthModal", () => {
   mountTest(AuthModal);

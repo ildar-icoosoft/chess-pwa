@@ -1,9 +1,9 @@
-import mountTest from "../../../test-utils/mountTest";
-import { ChallengeAiModalContainer } from "../ChallengeAiModalContainer";
 import TestRenderer from "react-test-renderer";
 import React from "react";
-import { ChallengeAiModal } from "../ChallengeAiModal";
 import { useDispatch, useSelector } from "react-redux";
+import mountTest from "../../../test-utils/mountTest";
+import ChallengeAiModalContainer from "../ChallengeAiModalContainer";
+import { ChallengeAiModal } from "../ChallengeAiModal";
 import {
   defaultState,
   makeStateSample,

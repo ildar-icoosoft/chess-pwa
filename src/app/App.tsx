@@ -8,7 +8,7 @@ import { fetchCurrentUser } from "../features/current-user/currentUserSlice";
 import { watchGames } from "../features/data-subscription/dataSubscriptionSlice";
 import { startGameClock } from "../features/game-clock/gameClockSlice";
 import HeaderContainer from "../features/header/HeaderContainer";
-import { AuthModalContainer } from "../features/auth-modal/AuthModalContainer";
+import AuthModalContainer from "../features/auth-modal/AuthModalContainer";
 
 const App: FC = () => {
   const dispatch = useDispatch();
