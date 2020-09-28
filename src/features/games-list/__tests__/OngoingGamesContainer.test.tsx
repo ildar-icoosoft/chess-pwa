@@ -10,10 +10,6 @@ import {
   stateWithDataSample,
 } from "../../../test-utils/data-sample/state";
 
-jest.useFakeTimers();
-
-jest.mock("../../games-list/gamesListSlice");
-
 describe("OngoingGamesContainer", () => {
   beforeEach(() => {
     (useSelector as jest.Mock).mockImplementation((cb) => cb(defaultState));
@@ -67,27 +63,6 @@ describe("OngoingGamesContainer", () => {
           },
         ]);
       });
-    });
-  });
-
-  describe("dispatch() calls", () => {
-    it("should call dispatch(fetchGames())", () => {
-      const dispatch = useDispatch<jest.Mock>();
-
-      (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
-
-      const fetchGamesReturnedValue = Symbol("fetchGames");
-
-      const fetchGamesFn = fetchGames as jest.Mock;
-      fetchGamesFn.mockClear();
-      fetchGamesFn.mockReturnValue(fetchGamesReturnedValue);
-
-      TestRenderer.create(<OngoingGamesContainer />);
-
-      expect(fetchGamesFn).toBeCalledTimes(1);
-      expect(fetchGamesFn).toBeCalledWith();
-
-      expect(dispatch).toBeCalledWith(fetchGamesReturnedValue);
     });
   });
 });
