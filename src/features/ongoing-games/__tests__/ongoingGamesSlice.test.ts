@@ -1,10 +1,10 @@
 import { JWR, RequestCallback } from "sails.io.js";
-import gamesListReducer, {
-  getGamesListRequest,
-  getGamesListSuccess,
-  getGamesListError,
-  fetchGames,
-} from "../gamesListSlice";
+import ongoingGamesReducer, {
+  getOngoingGamesRequest,
+  getOngoingGamesSuccess,
+  getOngoingGamesError,
+  fetchOngoingGames,
+} from "../ongoingGamesSlice";
 import { challengeAiSuccess } from "../../challenge/challengeSlice";
 import ioClient from "../../../services/ioClient";
 import {
@@ -16,10 +16,10 @@ import { gameSample } from "../../../test-utils/data-sample/game";
 
 jest.mock("../../../services/ioClient");
 
-describe("gamesListSlice reducer", () => {
+describe("ongoingGamesSlice reducer", () => {
   it("should handle initial state", () => {
     expect(
-      gamesListReducer(undefined, {
+      ongoingGamesReducer(undefined, {
         type: "",
       })
     ).toEqual({
@@ -31,7 +31,7 @@ describe("gamesListSlice reducer", () => {
 
   it("should handle challengeAiSuccess", () => {
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: true,
@@ -52,7 +52,7 @@ describe("gamesListSlice reducer", () => {
     });
 
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: true,
@@ -75,7 +75,7 @@ describe("gamesListSlice reducer", () => {
 
   it("should handle createGameBySubscription", () => {
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: true,
@@ -96,7 +96,7 @@ describe("gamesListSlice reducer", () => {
     });
 
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: true,
@@ -119,7 +119,7 @@ describe("gamesListSlice reducer", () => {
 
   it("should handle updateGameBySubscription", () => {
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: true,
@@ -140,7 +140,7 @@ describe("gamesListSlice reducer", () => {
     });
 
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: true,
@@ -161,16 +161,16 @@ describe("gamesListSlice reducer", () => {
     });
   });
 
-  it("should handle getGamesListRequest", () => {
+  it("should handle getOngoingGamesRequest", () => {
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: false,
           error: "error text",
         },
         {
-          type: getGamesListRequest.type,
+          type: getOngoingGamesRequest.type,
         }
       )
     ).toEqual({
@@ -180,16 +180,16 @@ describe("gamesListSlice reducer", () => {
     });
   });
 
-  it("should handle getGamesListSuccess", () => {
+  it("should handle getOngoingGamesSuccess", () => {
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: true,
           error: "error text",
         },
         {
-          type: getGamesListSuccess.type,
+          type: getOngoingGamesSuccess.type,
           payload: {
             result: [2, 3],
             entities: {},
@@ -203,16 +203,16 @@ describe("gamesListSlice reducer", () => {
     });
   });
 
-  it("should handle getGamesListError", () => {
+  it("should handle getOngoingGamesError", () => {
     expect(
-      gamesListReducer(
+      ongoingGamesReducer(
         {
           items: [1],
           isLoading: true,
           error: null,
         },
         {
-          type: getGamesListError.type,
+          type: getOngoingGamesError.type,
           payload: "error text",
         }
       )
@@ -223,7 +223,7 @@ describe("gamesListSlice reducer", () => {
     });
   });
 
-  describe("should handle fetchGames", () => {
+  describe("should handle fetchOngoingGames", () => {
     it("success", async () => {
       const dispatch = jest.fn();
 
@@ -236,16 +236,16 @@ describe("gamesListSlice reducer", () => {
         }
       );
 
-      const result = fetchGames()(dispatch, () => defaultState, null);
+      const result = fetchOngoingGames()(dispatch, () => defaultState, null);
 
       await expect(result).resolves.toEqual([gameSample]);
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: getGamesListRequest.type,
+        type: getOngoingGamesRequest.type,
       });
       expect(dispatch).toHaveBeenNthCalledWith(2, {
-        type: getGamesListSuccess.type,
+        type: getOngoingGamesSuccess.type,
         payload: {
           result: [1],
           entities: {
@@ -269,7 +269,7 @@ describe("gamesListSlice reducer", () => {
         }
       );
 
-      const result = fetchGames()(dispatch, () => defaultState, null);
+      const result = fetchOngoingGames()(dispatch, () => defaultState, null);
 
       await expect(result).rejects.toEqual({
         body: "internal server error",
@@ -278,10 +278,10 @@ describe("gamesListSlice reducer", () => {
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: getGamesListRequest.type,
+        type: getOngoingGamesRequest.type,
       });
       expect(dispatch).toHaveBeenNthCalledWith(2, {
-        type: getGamesListError.type,
+        type: getOngoingGamesError.type,
         payload: "internal server error",
       });
     });

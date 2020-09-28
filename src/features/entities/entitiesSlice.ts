@@ -8,7 +8,7 @@ import {
   loginSuccess,
   registerSuccess,
 } from "../current-user/currentUserSlice";
-import { getGamesListSuccess } from "../games-list/gamesListSlice";
+import { getOngoingGamesSuccess } from "../ongoing-games/ongoingGamesSlice";
 import {
   getSingleGameSuccess,
   abortGameSuccess,
@@ -72,7 +72,7 @@ const entitiesSlice = createSlice({
     },
     [loginSuccess.type]: getNormalizedDataReducer,
     [registerSuccess.type]: getNormalizedDataReducer,
-    [getGamesListSuccess.type]: getNormalizedDataReducer,
+    [getOngoingGamesSuccess.type]: getNormalizedDataReducer,
     [getSingleGameSuccess.type]: getNormalizedDataReducer,
     [abortGameSuccess.type]: getNormalizedDataReducer,
     [resignGameSuccess.type]: getNormalizedDataReducer,

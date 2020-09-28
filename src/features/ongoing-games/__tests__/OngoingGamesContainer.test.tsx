@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import OngoingGamesContainer from "../OngoingGamesContainer";
 import { GamePreviewsList } from "../GamePreviewsList";
 import mountTest from "../../../test-utils/mountTest";
-import { fetchGames } from "../gamesListSlice";
+import { fetchOngoingGames } from "../ongoingGamesSlice";
 import {
   defaultState,
   stateWithDataSample,
@@ -12,7 +12,7 @@ import {
 
 jest.useFakeTimers();
 
-jest.mock("../../games-list/gamesListSlice");
+jest.mock("../../ongoing-games/ongoingGamesSlice");
 
 describe("OngoingGamesContainer", () => {
   beforeEach(() => {
@@ -71,23 +71,23 @@ describe("OngoingGamesContainer", () => {
   });
 
   describe("dispatch() calls", () => {
-    it("should call dispatch(fetchGames())", () => {
+    it("should call dispatch(fetchOngoingGames())", () => {
       const dispatch = useDispatch<jest.Mock>();
 
       (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
 
-      const fetchGamesReturnedValue = Symbol("fetchGames");
+      const fetchOngoingGamesReturnedValue = Symbol("fetchOngoingGames");
 
-      const fetchGamesFn = fetchGames as jest.Mock;
-      fetchGamesFn.mockClear();
-      fetchGamesFn.mockReturnValue(fetchGamesReturnedValue);
+      const fetchOngoingGamesFn = fetchOngoingGames as jest.Mock;
+      fetchOngoingGamesFn.mockClear();
+      fetchOngoingGamesFn.mockReturnValue(fetchOngoingGamesReturnedValue);
 
       TestRenderer.create(<OngoingGamesContainer />);
 
-      expect(fetchGamesFn).toBeCalledTimes(1);
-      expect(fetchGamesFn).toBeCalledWith();
+      expect(fetchOngoingGamesFn).toBeCalledTimes(1);
+      expect(fetchOngoingGamesFn).toBeCalledWith();
 
-      expect(dispatch).toBeCalledWith(fetchGamesReturnedValue);
+      expect(dispatch).toBeCalledWith(fetchOngoingGamesReturnedValue);
     });
   });
 });

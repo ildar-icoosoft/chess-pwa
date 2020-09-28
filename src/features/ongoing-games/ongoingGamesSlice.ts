@@ -15,27 +15,27 @@ import {
   updateGameBySubscription,
 } from "../data-subscription/dataSubscriptionSlice";
 
-interface GamesListState {
+interface OngoingGamesState {
   items: number[];
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: GamesListState = {
+const initialState: OngoingGamesState = {
   items: [],
   isLoading: true,
   error: null,
 };
 
-const gamesListSlice = createSlice({
-  name: "games",
+const ongoingGamesSlice = createSlice({
+  name: "ongoingGames",
   initialState,
   reducers: {
-    getGamesListRequest(state) {
+    getOngoingGamesRequest(state) {
       state.isLoading = true;
       state.error = null;
     },
-    getGamesListSuccess(
+    getOngoingGamesSuccess(
       state,
       action: PayloadAction<NormalizedData<number[]>>
     ) {
@@ -43,7 +43,7 @@ const gamesListSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     },
-    getGamesListError(state, action: PayloadAction<string>) {
+    getOngoingGamesError(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -77,25 +77,27 @@ const gamesListSlice = createSlice({
 });
 
 export const {
-  getGamesListRequest,
-  getGamesListSuccess,
-  getGamesListError,
-} = gamesListSlice.actions;
+  getOngoingGamesRequest,
+  getOngoingGamesSuccess,
+  getOngoingGamesError,
+} = ongoingGamesSlice.actions;
 
-export default gamesListSlice.reducer;
+export default ongoingGamesSlice.reducer;
 
-export const fetchGames = (): AppThunk<Promise<Game[]>> => (dispatch) => {
-  dispatch(getGamesListRequest());
+export const fetchOngoingGames = (): AppThunk<Promise<Game[]>> => (
+  dispatch
+) => {
+  dispatch(getOngoingGamesRequest());
 
   return new Promise((resolve, reject) => {
     ioClient.socket.get("/game", (body: unknown, jwr: JWR) => {
       if (jwr.statusCode === 200) {
         const normalizedGames = normalize(body as Game[], [gameSchema]);
-        dispatch(getGamesListSuccess(normalizedGames));
+        dispatch(getOngoingGamesSuccess(normalizedGames));
 
         resolve(body as Game[]);
       } else {
-        dispatch(getGamesListError(body as string));
+        dispatch(getOngoingGamesError(body as string));
         reject(jwr);
       }
     });
