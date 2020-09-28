@@ -5,12 +5,7 @@ import gamesListReducer, {
   getGamesListError,
   fetchGames,
 } from "../gamesListSlice";
-import { challengeAiSuccess } from "../../challenge/challengeSlice";
 import ioClient from "../../../services/ioClient";
-import {
-  createGameBySubscription,
-  updateGameBySubscription,
-} from "../../data-subscription/dataSubscriptionSlice";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import { gameSample } from "../../../test-utils/data-sample/game";
 
