@@ -12,7 +12,6 @@ import {
 import React from "react";
 import { GameControlPanel } from "../GameControlPanel";
 import { SingleGameControlPanelWrapper } from "../SingleGameControlPanelWrapper";
-import { SingleGame } from "../SingleGame";
 import userSample from "../../../test-utils/data-sample/user";
 
 describe("SingleGameControlPanelWrapper", () => {
