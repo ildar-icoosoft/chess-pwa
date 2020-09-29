@@ -12,10 +12,10 @@ const HomePage: FC<unknown> = () => {
         <ChallengeButtonsContainer />
       </div>
 
-      <h3>Ongoing Games</h3>
+      <h3>Playing right now</h3>
       <OngoingGamesContainer />
 
-      <h3>Completed Games</h3>
+      <h3>Finished</h3>
       <CompletedGamesContainer />
     </>
   );
