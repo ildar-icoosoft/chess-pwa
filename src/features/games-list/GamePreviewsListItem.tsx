@@ -6,6 +6,7 @@ import makeChessInstance from "../../utils/makeChessInstance";
 import css from "./GamePreviewsListItem.module.scss";
 import { GamePreviewUserName } from "./GamePreviewUserName";
 import { GamePreviewResult } from "./GamePreviewResult";
+import { GamePreviewClock } from "./GamePreviewClock";
 
 export interface GamePreviewsListItemProps {
   game?: Game;
@@ -24,10 +25,10 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
     <div className={css.gamePreview}>
       <div className={css.player}>
         <GamePreviewUserName game={game} color="black" />
+        {game.status === "started" && <GamePreviewClock />}
         {game.status !== "started" && game.status !== "aborted" && (
           <GamePreviewResult game={game} color="black" />
         )}
-        {/*<span className={cx(css.clock, css.clockRun)}>02:14</span>*/}
       </div>
       <div className={css.board}>
         <Link to={`/game/${game.id}`}>
@@ -36,10 +37,10 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
       </div>
       <div className={css.player}>
         <GamePreviewUserName game={game} color="white" />
+        {game.status === "started" && <GamePreviewClock />}
         {game.status !== "started" && game.status !== "aborted" && (
           <GamePreviewResult game={game} color="white" />
         )}
-        {/*<span className={css.clock}>03:15</span>*/}
       </div>
     </div>
   );

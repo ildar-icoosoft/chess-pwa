@@ -14,6 +14,7 @@ import {
 import { render } from "@testing-library/react";
 import { GamePreviewUserName } from "../GamePreviewUserName";
 import { GamePreviewResult } from "../GamePreviewResult";
+import { GamePreviewClock } from "../GamePreviewClock";
 
 describe("GamePreviewsListItem", () => {
   mountTest(GamePreviewsListItem);
@@ -52,9 +53,11 @@ describe("GamePreviewsListItem", () => {
       );
       const testInstance = testRenderer.root;
 
-      const links = testInstance.findAllByType(GamePreviewUserName);
+      const gamePreviewUserNames = testInstance.findAllByType(
+        GamePreviewUserName
+      );
 
-      expect(links.length).toBe(2);
+      expect(gamePreviewUserNames.length).toBe(2);
     });
 
     it("contains GamePreviewResult", () => {
@@ -63,9 +66,9 @@ describe("GamePreviewsListItem", () => {
       );
       const testInstance = testRenderer.root;
 
-      let links = testInstance.findAllByType(GamePreviewResult);
+      let gamePreviewResults = testInstance.findAllByType(GamePreviewResult);
 
-      expect(links.length).toBe(0);
+      expect(gamePreviewResults.length).toBe(0);
 
       const gameSampleWithResult = makeGameSample({
         winner: "black",
@@ -74,9 +77,31 @@ describe("GamePreviewsListItem", () => {
 
       testRenderer.update(<GamePreviewsListItem game={gameSampleWithResult} />);
 
-      links = testInstance.findAllByType(GamePreviewResult);
+      gamePreviewResults = testInstance.findAllByType(GamePreviewResult);
 
-      expect(links.length).toBe(2);
+      expect(gamePreviewResults.length).toBe(2);
+    });
+
+    it("contains GamePreviewClock", () => {
+      const testRenderer = TestRenderer.create(
+        <GamePreviewsListItem game={defaultGameSample} />
+      );
+      const testInstance = testRenderer.root;
+
+      let gamePreviewClocks = testInstance.findAllByType(GamePreviewClock);
+
+      expect(gamePreviewClocks.length).toBe(2);
+
+      const gameSampleWithResult = makeGameSample({
+        winner: "black",
+        status: "mate",
+      });
+
+      testRenderer.update(<GamePreviewsListItem game={gameSampleWithResult} />);
+
+      gamePreviewClocks = testInstance.findAllByType(GamePreviewClock);
+
+      expect(gamePreviewClocks.length).toBe(0);
     });
   });
 
