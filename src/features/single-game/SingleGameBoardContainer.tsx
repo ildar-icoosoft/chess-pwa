@@ -3,21 +3,19 @@ import { useSelector } from "react-redux";
 import { denormalize } from "normalizr";
 import { RootState } from "../../app/rootReducer";
 import gameSchema from "../../normalizr/schemas/gameSchema";
-import { GameMeta } from "./GameMeta";
+import { SingleGameBoard } from "./SingleGameBoard";
 
-export interface SingleGameMetaContainerProps {
+export interface SingleGameBoardProps {
   id: number;
 }
 
-export const SingleGameMetaContainer: FC<SingleGameMetaContainerProps> = ({
-  id,
-}) => {
+export const SingleGameBoardContainer: FC<SingleGameBoardProps> = ({ id }) => {
   const game = useSelector((state: RootState) =>
     denormalize(id, gameSchema, state.entities)
   );
 
   if (game) {
-    return <GameMeta game={game} />;
+    return <SingleGameBoard game={game} />;
   }
   return null;
 };
