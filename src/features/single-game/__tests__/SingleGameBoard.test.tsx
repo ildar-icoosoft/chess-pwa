@@ -17,7 +17,6 @@ import {
 } from "../../../test-utils/data-sample/game";
 import React from "react";
 import { SingleGameBoard } from "../SingleGameBoard";
-import { SingleGame } from "../SingleGame";
 import userSample from "../../../test-utils/data-sample/user";
 
 describe("SingleGameBoard", () => {
