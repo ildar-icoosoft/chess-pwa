@@ -51,13 +51,13 @@ exports[`App Snapshot 1`] = `
     </button>
   </div>
   <h3>
-    Ongoing Games
+    Playing right now
   </h3>
   <div
     className="grid"
   />
   <h3>
-    Completed Games
+    Finished
   </h3>
   <div
     className="grid"
