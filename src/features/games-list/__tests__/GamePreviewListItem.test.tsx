@@ -12,6 +12,9 @@ import {
 } from "../../../test-utils/data-sample/game";
 import { render } from "@testing-library/react";
 import { GamePreviewsList } from "../GamePreviewsList";
+import { GamePreviewUserName } from "../GamePreviewUserName";
+import { GameControlPanel } from "../../single-game/GameControlPanel";
+import { GameControlPanelUserName } from "../../single-game/GameControlPanelUserName";
 
 describe("GamePreviewsListItem", () => {
   mountTest(GamePreviewsListItem);
@@ -42,6 +45,17 @@ describe("GamePreviewsListItem", () => {
       const links = testInstance.findAllByType(Link);
 
       expect(links.length).toBe(1);
+    });
+
+    it("contains GamePreviewUserName", () => {
+      const testRenderer = TestRenderer.create(
+        <GamePreviewsListItem game={gameSample} />
+      );
+      const testInstance = testRenderer.root;
+
+      const links = testInstance.findAllByType(GamePreviewUserName);
+
+      expect(links.length).toBe(2);
     });
   });
 
@@ -85,6 +99,36 @@ describe("GamePreviewsListItem", () => {
         const link = testInstance.findByType(Link);
 
         expect(link.props.to).toBe("/game/1");
+      });
+    });
+
+    describe("GamePreviewUserName", () => {
+      it("game", () => {
+        const testRenderer = TestRenderer.create(
+          <GamePreviewsListItem game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const GamePreviewUserNames = testInstance.findAllByType(
+          GamePreviewUserName
+        );
+
+        expect(GamePreviewUserNames[0].props.game).toBe(gameSample);
+        expect(GamePreviewUserNames[1].props.game).toBe(gameSample);
+      });
+
+      it("color", () => {
+        const testRenderer = TestRenderer.create(
+          <GamePreviewsListItem game={gameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const GamePreviewUserNames = testInstance.findAllByType(
+          GamePreviewUserName
+        );
+
+        expect(GamePreviewUserNames[0].props.color).toBe("black");
+        expect(GamePreviewUserNames[1].props.color).toBe("white");
       });
     });
   });

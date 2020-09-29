@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Board } from "ii-react-chessboard";
 import makeChessInstance from "../../utils/makeChessInstance";
 import css from "./GamePreviewsListItem.module.scss";
+import { GamePreviewUserName } from "./GamePreviewUserName";
 
 export interface GamePreviewsListItemProps {
   game?: Game;
@@ -22,7 +23,7 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
   return (
     <div className={css.gamePreview}>
       <div className={css.player}>
-        <span className={css.user}>Mr Nobody</span>
+        <GamePreviewUserName game={game} color="black" />
         {/*<span className={cx(css.clock, css.clockRun)}>02:14</span>*/}
         <span className={css.result}>1</span>
       </div>
@@ -32,7 +33,7 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
         </Link>
       </div>
       <div className={css.player}>
-        <span className={css.user}>Mr Nobody</span>
+        <GamePreviewUserName game={game} color="white" />
         {/*<span className={css.clock}>03:15</span>*/}
         <span className={css.result}>0</span>
       </div>
