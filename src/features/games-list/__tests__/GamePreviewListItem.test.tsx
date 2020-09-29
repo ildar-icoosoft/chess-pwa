@@ -11,10 +11,8 @@ import {
   gameWithMovesSampleFen,
 } from "../../../test-utils/data-sample/game";
 import { render } from "@testing-library/react";
-import { GamePreviewsList } from "../GamePreviewsList";
 import { GamePreviewUserName } from "../GamePreviewUserName";
-import { GameControlPanel } from "../../single-game/GameControlPanel";
-import { GameControlPanelUserName } from "../../single-game/GameControlPanelUserName";
+import { GamePreviewResult } from "../GamePreviewResult";
 
 describe("GamePreviewsListItem", () => {
   mountTest(GamePreviewsListItem);
@@ -54,6 +52,17 @@ describe("GamePreviewsListItem", () => {
       const testInstance = testRenderer.root;
 
       const links = testInstance.findAllByType(GamePreviewUserName);
+
+      expect(links.length).toBe(2);
+    });
+
+    it("contains GamePreviewResult", () => {
+      const testRenderer = TestRenderer.create(
+        <GamePreviewsListItem game={defaultGameSample} />
+      );
+      const testInstance = testRenderer.root;
+
+      const links = testInstance.findAllByType(GamePreviewResult);
 
       expect(links.length).toBe(2);
     });
@@ -125,6 +134,36 @@ describe("GamePreviewsListItem", () => {
 
         const GamePreviewUserNames = testInstance.findAllByType(
           GamePreviewUserName
+        );
+
+        expect(GamePreviewUserNames[0].props.color).toBe("black");
+        expect(GamePreviewUserNames[1].props.color).toBe("white");
+      });
+    });
+
+    describe("GamePreviewResult", () => {
+      it("game", () => {
+        const testRenderer = TestRenderer.create(
+          <GamePreviewsListItem game={defaultGameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const GamePreviewUserNames = testInstance.findAllByType(
+          GamePreviewResult
+        );
+
+        expect(GamePreviewUserNames[0].props.game).toBe(defaultGameSample);
+        expect(GamePreviewUserNames[1].props.game).toBe(defaultGameSample);
+      });
+
+      it("color", () => {
+        const testRenderer = TestRenderer.create(
+          <GamePreviewsListItem game={defaultGameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const GamePreviewUserNames = testInstance.findAllByType(
+          GamePreviewResult
         );
 
         expect(GamePreviewUserNames[0].props.color).toBe("black");

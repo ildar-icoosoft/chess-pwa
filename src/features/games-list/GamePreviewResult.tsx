@@ -3,6 +3,7 @@
 import React, { FC } from "react";
 import Game from "../../interfaces/Game";
 import { PieceColor } from "../../types/PieceColor";
+import css from "./GamePreviewResult.module.scss";
 
 export interface GamePreviewResultProps {
   game?: Game;
@@ -26,5 +27,5 @@ export const GamePreviewResult: FC<GamePreviewResultProps> = ({
     }
   }
 
-  return <span>{result}</span>;
+  return <span className={css.result}>{result}</span>;
 };
