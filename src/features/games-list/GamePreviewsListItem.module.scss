@@ -1,0 +1,24 @@
+.gamePreview {
+  width: 240px;
+}
+
+.player {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .9em;
+}
+
+.user {
+
+}
+
+.clock {
+
+}
+
+.clockRun {
+  color: #d64f00;
+  font-weight: bold;
+}
