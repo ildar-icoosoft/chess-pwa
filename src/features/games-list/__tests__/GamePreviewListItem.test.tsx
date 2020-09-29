@@ -9,6 +9,7 @@ import {
   gameSampleFen,
   gameWithMovesSample,
   gameWithMovesSampleFen,
+  makeGameSample,
 } from "../../../test-utils/data-sample/game";
 import { render } from "@testing-library/react";
 import { GamePreviewUserName } from "../GamePreviewUserName";
@@ -62,7 +63,18 @@ describe("GamePreviewsListItem", () => {
       );
       const testInstance = testRenderer.root;
 
-      const links = testInstance.findAllByType(GamePreviewResult);
+      let links = testInstance.findAllByType(GamePreviewResult);
+
+      expect(links.length).toBe(0);
+
+      const gameSampleWithResult = makeGameSample({
+        winner: "black",
+        status: "mate",
+      });
+
+      testRenderer.update(<GamePreviewsListItem game={gameSampleWithResult} />);
+
+      links = testInstance.findAllByType(GamePreviewResult);
 
       expect(links.length).toBe(2);
     });
@@ -143,8 +155,13 @@ describe("GamePreviewsListItem", () => {
 
     describe("GamePreviewResult", () => {
       it("game", () => {
+        const gameSampleWithResult = makeGameSample({
+          winner: "black",
+          status: "mate",
+        });
+
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSampleWithResult} />
         );
         const testInstance = testRenderer.root;
 
@@ -152,13 +169,18 @@ describe("GamePreviewsListItem", () => {
           GamePreviewResult
         );
 
-        expect(GamePreviewUserNames[0].props.game).toBe(defaultGameSample);
-        expect(GamePreviewUserNames[1].props.game).toBe(defaultGameSample);
+        expect(GamePreviewUserNames[0].props.game).toBe(gameSampleWithResult);
+        expect(GamePreviewUserNames[1].props.game).toBe(gameSampleWithResult);
       });
 
       it("color", () => {
+        const gameSampleWithResult = makeGameSample({
+          winner: "black",
+          status: "mate",
+        });
+
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSampleWithResult} />
         );
         const testInstance = testRenderer.root;
 
