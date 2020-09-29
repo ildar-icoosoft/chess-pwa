@@ -23,7 +23,8 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
     <div className={css.gamePreview}>
       <div className={css.player}>
         <span className={css.user}>Mr Nobody</span>
-        <span className={cx(css.clock, css.clockRun)}>02:14</span>
+        {/*<span className={cx(css.clock, css.clockRun)}>02:14</span>*/}
+        <span className={css.result}>1</span>
       </div>
       <div className="pb-2">
         <Link to={`/game/${game.id}`}>
@@ -32,7 +33,8 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
       </div>
       <div className={css.player}>
         <span className={css.user}>Mr Nobody</span>
-        <span className={css.clock}>03:15</span>
+        {/*<span className={css.clock}>03:15</span>*/}
+        <span className={css.result}>0</span>
       </div>
     </div>
   );
