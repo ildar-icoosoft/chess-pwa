@@ -4,16 +4,7 @@ import React, { useEffect } from "react";
 import mountTest from "../../../test-utils/mountTest";
 import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
 import TestRenderer from "react-test-renderer";
-import { SingleGame } from "../SingleGame";
-import {
-  defaultGameSample,
-  gameSampleFen,
-  gameWithMovesRewoundToIndex2SampleFen,
-  gameWithMovesSample,
-  gameWithMovesSampleFen,
-} from "../../../test-utils/data-sample/game";
 import { SingleGameBoard } from "../SingleGameBoard";
-import { SingleGameContainer } from "../SingleGameContainer";
 
 describe("SingleGameBoardContainer", () => {
   beforeEach(() => {
