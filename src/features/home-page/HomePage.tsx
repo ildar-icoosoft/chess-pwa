@@ -3,6 +3,7 @@ import OngoingGamesContainer from "../games-list/OngoingGamesContainer";
 import ChallengeButtonsContainer from "./ChallengeButtonsContainer";
 import ChallengeAiModalContainer from "./ChallengeAiModalContainer";
 import CompletedGamesContainer from "../games-list/CompletedGamesContainer";
+import { Card } from "react-bootstrap";
 
 const HomePage: FC<unknown> = () => {
   return (
@@ -11,12 +12,19 @@ const HomePage: FC<unknown> = () => {
       <div className="d-flex justify-content-center">
         <ChallengeButtonsContainer />
       </div>
+      <Card className="mb-3">
+        <Card.Body>
+          <Card.Title>Playing right now</Card.Title>
+          <OngoingGamesContainer />
+        </Card.Body>
+      </Card>
 
-      <h3>Playing right now</h3>
-      <OngoingGamesContainer />
-
-      <h3>Finished</h3>
-      <CompletedGamesContainer />
+      <Card>
+        <Card.Body>
+          <Card.Title>Finished</Card.Title>
+          <CompletedGamesContainer />
+        </Card.Body>
+      </Card>
     </>
   );
 };

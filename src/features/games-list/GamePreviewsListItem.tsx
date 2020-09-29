@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import Game from "../../interfaces/Game";
 import { Link } from "react-router-dom";
-import css from "./GamePreviewsList.module.scss";
 import { Board } from "ii-react-chessboard";
 import makeChessInstance from "../../utils/makeChessInstance";
 
@@ -20,9 +19,7 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
 
   return (
     <Link to={`/game/${game.id}`}>
-      <div className={css.cell}>
-        <Board position={fen} viewOnly={false} width={240} />
-      </div>
+      <Board position={fen} viewOnly={false} width={240} />
     </Link>
   );
 };
