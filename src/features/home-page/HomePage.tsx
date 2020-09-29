@@ -1,9 +1,9 @@
 import React, { FC } from "react";
+import { Card } from "react-bootstrap";
 import OngoingGamesContainer from "../games-list/OngoingGamesContainer";
 import ChallengeButtonsContainer from "./ChallengeButtonsContainer";
 import ChallengeAiModalContainer from "./ChallengeAiModalContainer";
 import CompletedGamesContainer from "../games-list/CompletedGamesContainer";
-import { Card } from "react-bootstrap";
 
 const HomePage: FC<unknown> = () => {
   return (

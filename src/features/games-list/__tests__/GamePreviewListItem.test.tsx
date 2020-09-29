@@ -1,9 +1,8 @@
-import mountTest from "../../../test-utils/mountTest";
-import { GamePreviewsListItem } from "../GamePreviewsListItem";
 import TestRenderer from "react-test-renderer";
 import { Board } from "ii-react-chessboard";
 import { Link } from "react-router-dom";
 import React from "react";
+import { render } from "@testing-library/react";
 import {
   defaultGameSample,
   gameSampleFen,
@@ -11,10 +10,12 @@ import {
   gameWithMovesSampleFen,
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
-import { render } from "@testing-library/react";
+
 import { GamePreviewUserName } from "../GamePreviewUserName";
 import { GamePreviewResult } from "../GamePreviewResult";
 import { GamePreviewClock } from "../GamePreviewClock";
+import mountTest from "../../../test-utils/mountTest";
+import { GamePreviewsListItem } from "../GamePreviewsListItem";
 
 describe("GamePreviewsListItem", () => {
   mountTest(GamePreviewsListItem);

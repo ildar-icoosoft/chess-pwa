@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import Game from "../../interfaces/Game";
 import { Link } from "react-router-dom";
 import { Board } from "ii-react-chessboard";
+import Game from "../../interfaces/Game";
 import makeChessInstance from "../../utils/makeChessInstance";
 import css from "./GamePreviewsListItem.module.scss";
 import { GamePreviewUserName } from "./GamePreviewUserName";
