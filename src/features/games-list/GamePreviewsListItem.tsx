@@ -29,7 +29,7 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
         )}
         {/*<span className={cx(css.clock, css.clockRun)}>02:14</span>*/}
       </div>
-      <div className="pb-2">
+      <div className={css.board}>
         <Link to={`/game/${game.id}`}>
           <Board position={fen} viewOnly={false} width={240} />
         </Link>
