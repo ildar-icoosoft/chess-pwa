@@ -18,6 +18,7 @@ export interface SingleGameControlPanelWrapperProps {
   onAbortGame?(): void;
   onOfferDraw?(): void;
   onResignGame?(): void;
+  onRewindToMove?(moveIndex: number | null): void;
 }
 
 export const SingleGameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = ({
@@ -31,6 +32,7 @@ export const SingleGameControlPanelWrapper: FC<SingleGameControlPanelWrapperProp
   onAbortGame,
   onOfferDraw,
   onResignGame,
+  onRewindToMove,
 }) => {
   if (!game) {
     return null;
@@ -116,22 +118,74 @@ export const SingleGameControlPanelWrapper: FC<SingleGameControlPanelWrapperProp
     canOfferDraw = true;
   }
 
+  // @todo. use useCallback hook
+  const handleRewindToMove = (moveIndex: number) => {
+    if (onRewindToMove) {
+      if (moveIndex === movesHistory.length - 1) {
+        onRewindToMove(null);
+      } else {
+        onRewindToMove(moveIndex);
+      }
+    }
+  };
+
+  // @todo. use useCallback hook
+  const handleRewindToFirstMove = () => {
+    if (onRewindToMove) {
+      onRewindToMove(0);
+    }
+  };
+
+  // @todo. use useCallback hook
+  const handleRewindToLastMove = () => {
+    if (onRewindToMove) {
+      onRewindToMove(null);
+    }
+  };
+
+  // @todo. use useCallback hook
+  const handleRewindToPrevMove = () => {
+    if (onRewindToMove) {
+      if (rewindToMoveIndex === null) {
+        onRewindToMove(movesHistory.length - 2);
+      } else {
+        onRewindToMove(rewindToMoveIndex - 1);
+      }
+    }
+  };
+
+  // @todo. use useCallback hook
+  const handleRewindToNextMove = () => {
+    if (onRewindToMove) {
+      if (rewindToMoveIndex === movesHistory.length - 2) {
+        onRewindToMove(null);
+      } else {
+        onRewindToMove((rewindToMoveIndex as number) + 1);
+      }
+    }
+  };
+
   return (
     <GameControlPanel
-      canAbortGame={canAbortGame}
-      canOfferDraw={canOfferDraw}
-      canResignGame={canResignGame}
       game={game}
+      orientation={orientation as AppPieceColor}
+      rewindToMoveIndex={rewindToMoveIndex}
+      canAbortGame={canAbortGame}
+      canResignGame={canResignGame}
+      canOfferDraw={canOfferDraw}
+      drawOfferSentByCurrentUser={drawOfferSentByCurrentUser}
+      drawOfferSentByOpponent={drawOfferSentByOpponent}
       onAcceptDrawOffer={onAcceptDrawOffer}
       onDeclineDrawOffer={onDeclineDrawOffer}
       onFlipBoard={onFlipBoard}
       onAbortGame={onAbortGame}
       onOfferDraw={onOfferDraw}
       onResignGame={onResignGame}
-      orientation={orientation}
-      rewindToMoveIndex={rewindToMoveIndex}
-      drawOfferSentByCurrentUser={drawOfferSentByCurrentUser}
-      drawOfferSentByOpponent={drawOfferSentByOpponent}
+      onRewindToMove={handleRewindToMove}
+      onRewindToFirstMove={handleRewindToFirstMove}
+      onRewindToLastMove={handleRewindToLastMove}
+      onRewindToPrevMove={handleRewindToPrevMove}
+      onRewindToNextMove={handleRewindToNextMove}
     />
   );
 };
