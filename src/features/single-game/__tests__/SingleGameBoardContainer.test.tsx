@@ -172,10 +172,3 @@ describe("SingleGameBoardContainer", () => {
     });
   });
 });
-
-/*
-currentUser,
-  game,
-  isFlipped = false,
-  onMove,
-  rewindToMoveIndex = null,*/
