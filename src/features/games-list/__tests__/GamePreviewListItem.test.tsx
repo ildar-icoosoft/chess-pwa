@@ -217,5 +217,47 @@ describe("GamePreviewsListItem", () => {
         expect(GamePreviewUserNames[1].props.color).toBe("white");
       });
     });
+
+    describe("GamePreviewClock", () => {
+      it("time", () => {
+        const testRenderer = TestRenderer.create(
+          <GamePreviewsListItem game={defaultGameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        const gamePreviewClocks = testInstance.findAllByType(GamePreviewClock);
+
+        expect(gamePreviewClocks[0].props.time).toBe(365000);
+        expect(gamePreviewClocks[1].props.time).toBe(310000);
+      });
+
+      it("isRunning", () => {
+        const testRenderer = TestRenderer.create(
+          <GamePreviewsListItem game={defaultGameSample} />
+        );
+        const testInstance = testRenderer.root;
+
+        let gamePreviewClocks = testInstance.findAllByType(GamePreviewClock);
+
+        expect(gamePreviewClocks[0].props.isRunning).toBeFalsy();
+        expect(gamePreviewClocks[1].props.isRunning).toBeTruthy();
+
+        const gameSampleWithBlackTurn = makeGameSample(
+          {
+            turn: "black",
+          },
+          defaultGameSample
+        );
+
+        testRenderer.update(
+          <GamePreviewsListItem game={gameSampleWithBlackTurn} />
+        );
+
+        gamePreviewClocks = testInstance.findAllByType(GamePreviewClock);
+
+        expect(gamePreviewClocks[0].props.isRunning).toBeTruthy();
+        expect(gamePreviewClocks[1].props.isRunning).toBeFalsy();
+      });
+    });
   });
 });

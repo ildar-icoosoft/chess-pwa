@@ -25,7 +25,12 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
     <div className={css.gamePreview}>
       <div className={css.player}>
         <GamePreviewUserName game={game} color="black" />
-        {game.status === "started" && <GamePreviewClock />}
+        {game.status === "started" && (
+          <GamePreviewClock
+            time={game.btime}
+            isRunning={game.turn === "black"}
+          />
+        )}
         {game.status !== "started" && game.status !== "aborted" && (
           <GamePreviewResult game={game} color="black" />
         )}
@@ -37,7 +42,12 @@ export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = ({
       </div>
       <div className={css.player}>
         <GamePreviewUserName game={game} color="white" />
-        {game.status === "started" && <GamePreviewClock />}
+        {game.status === "started" && (
+          <GamePreviewClock
+            time={game.wtime}
+            isRunning={game.turn === "white"}
+          />
+        )}
         {game.status !== "started" && game.status !== "aborted" && (
           <GamePreviewResult game={game} color="white" />
         )}
