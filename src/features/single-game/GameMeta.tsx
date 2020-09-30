@@ -14,7 +14,7 @@ export const GameMeta: FC<GameMetaProps> = ({ game }) => {
   }
 
   return (
-    <Card className="mb-3">
+    <Card>
       <Card.Body>
         <div>
           Time Control: {game.clockLimit / 60} + {game.clockIncrement}
