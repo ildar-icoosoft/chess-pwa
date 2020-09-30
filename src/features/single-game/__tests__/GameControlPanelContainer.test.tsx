@@ -7,8 +7,8 @@ import {
   stateWithDataSample3,
 } from "../../../test-utils/data-sample/state";
 import mountTest from "../../../test-utils/mountTest";
-import { SingleGameControlPanelContainer } from "../SingleGameControlPanelContainer";
-import { SingleGameControlPanelWrapper } from "../SingleGameControlPanelWrapper";
+import { GameControlPanelContainer } from "../GameControlPanelContainer";
+import { GameControlPanelWrapper } from "../GameControlPanelWrapper";
 import {
   abortGame,
   acceptDrawOffer,
@@ -21,7 +21,7 @@ import {
 
 jest.mock("../singleGameSlice");
 
-describe("SingleGameControlPanelContainer", () => {
+describe("GameControlPanelContainer", () => {
   beforeEach(() => {
     (useSelector as jest.Mock).mockImplementation((cb) =>
       cb(stateWithDataSample)
@@ -30,37 +30,37 @@ describe("SingleGameControlPanelContainer", () => {
     (useEffect as jest.Mock).mockReset();
   });
 
-  mountTest(SingleGameControlPanelContainer, { id: 1 });
+  mountTest(GameControlPanelContainer, { id: 1 });
 
   describe("children components", () => {
-    it("contains SingleGameControlPanelWrapper", async () => {
+    it("contains GameControlPanelWrapper", async () => {
       const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelContainer id={2} />
+        <GameControlPanelContainer id={2} />
       );
       const testInstance = testRenderer.root;
 
-      expect(
-        testInstance.findAllByType(SingleGameControlPanelWrapper).length
-      ).toBe(0);
+      expect(testInstance.findAllByType(GameControlPanelWrapper).length).toBe(
+        0
+      );
 
-      testRenderer.update(<SingleGameControlPanelContainer id={1} />);
+      testRenderer.update(<GameControlPanelContainer id={1} />);
 
-      expect(
-        testInstance.findAllByType(SingleGameControlPanelWrapper).length
-      ).toBe(1);
+      expect(testInstance.findAllByType(GameControlPanelWrapper).length).toBe(
+        1
+      );
     });
   });
 
   describe("children components props", () => {
-    describe("SingleGameControlPanelWrapper", () => {
+    describe("GameControlPanelWrapper", () => {
       it("game", async () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelContainer id={1} />
+          <GameControlPanelContainer id={1} />
         );
         const testInstance = testRenderer.root;
 
         const singleGameControlPanelWrapper = testInstance.findByType(
-          SingleGameControlPanelWrapper
+          GameControlPanelWrapper
         );
 
         expect(singleGameControlPanelWrapper.props.game).toEqual({
@@ -84,12 +84,12 @@ describe("SingleGameControlPanelContainer", () => {
 
       it("currentUser", async () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelContainer id={1} />
+          <GameControlPanelContainer id={1} />
         );
         const testInstance = testRenderer.root;
 
         const singleGameControlPanelWrapper = testInstance.findByType(
-          SingleGameControlPanelWrapper
+          GameControlPanelWrapper
         );
 
         expect(singleGameControlPanelWrapper.props.currentUser).toEqual({
@@ -101,19 +101,19 @@ describe("SingleGameControlPanelContainer", () => {
           cb(stateWithDataSample2)
         );
 
-        testRenderer.update(<SingleGameControlPanelContainer id={1} />);
+        testRenderer.update(<GameControlPanelContainer id={1} />);
 
         expect(singleGameControlPanelWrapper.props.currentUser).toBeUndefined();
       });
 
       it("isFlipped", async () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelContainer id={1} />
+          <GameControlPanelContainer id={1} />
         );
         const testInstance = testRenderer.root;
 
         const singleGameControlPanelWrapper = testInstance.findByType(
-          SingleGameControlPanelWrapper
+          GameControlPanelWrapper
         );
 
         expect(singleGameControlPanelWrapper.props.isFlipped).toBeFalsy();
@@ -122,25 +122,25 @@ describe("SingleGameControlPanelContainer", () => {
           cb(stateWithDataSample2)
         );
 
-        testRenderer.update(<SingleGameControlPanelContainer id={1} />);
+        testRenderer.update(<GameControlPanelContainer id={1} />);
         expect(singleGameControlPanelWrapper.props.isFlipped).toBeFalsy();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
           cb(stateWithDataSample3)
         );
 
-        testRenderer.update(<SingleGameControlPanelContainer id={1} />);
+        testRenderer.update(<GameControlPanelContainer id={1} />);
         expect(singleGameControlPanelWrapper.props.isFlipped).toBeTruthy();
       });
 
       it("rewindToMoveIndex", async () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelContainer id={1} />
+          <GameControlPanelContainer id={1} />
         );
         const testInstance = testRenderer.root;
 
         const singleGameControlPanelWrapper = testInstance.findByType(
-          SingleGameControlPanelWrapper
+          GameControlPanelWrapper
         );
 
         expect(
@@ -151,14 +151,14 @@ describe("SingleGameControlPanelContainer", () => {
           cb(stateWithDataSample2)
         );
 
-        testRenderer.update(<SingleGameControlPanelContainer id={1} />);
+        testRenderer.update(<GameControlPanelContainer id={1} />);
         expect(singleGameControlPanelWrapper.props.rewindToMoveIndex).toBe(2);
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
           cb(stateWithDataSample3)
         );
 
-        testRenderer.update(<SingleGameControlPanelContainer id={1} />);
+        testRenderer.update(<GameControlPanelContainer id={1} />);
         expect(singleGameControlPanelWrapper.props.rewindToMoveIndex).toBe(0);
       });
     });
@@ -170,12 +170,12 @@ describe("SingleGameControlPanelContainer", () => {
       const flipBoardReturnedValue = Symbol("flipBoard");
 
       const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelContainer id={1} />
+        <GameControlPanelContainer id={1} />
       );
       const testInstance = testRenderer.root;
 
       const singleGameControlPanelWrapper = testInstance.findByType(
-        SingleGameControlPanelWrapper
+        GameControlPanelWrapper
       );
 
       const flipBoardFn = (flipBoard as unknown) as jest.Mock;
@@ -197,12 +197,12 @@ describe("SingleGameControlPanelContainer", () => {
       const abortGameReturnedValue = Symbol("abortGame");
 
       const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelContainer id={1} />
+        <GameControlPanelContainer id={1} />
       );
       const testInstance = testRenderer.root;
 
       const singleGameControlPanelWrapper = testInstance.findByType(
-        SingleGameControlPanelWrapper
+        GameControlPanelWrapper
       );
 
       const abortGameFn = (abortGame as unknown) as jest.Mock;
@@ -224,12 +224,12 @@ describe("SingleGameControlPanelContainer", () => {
       const resignGameReturnedValue = Symbol("resignGame");
 
       const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelContainer id={1} />
+        <GameControlPanelContainer id={1} />
       );
       const testInstance = testRenderer.root;
 
       const singleGameControlPanelWrapper = testInstance.findByType(
-        SingleGameControlPanelWrapper
+        GameControlPanelWrapper
       );
 
       const resignGameFn = (resignGame as unknown) as jest.Mock;
@@ -251,12 +251,12 @@ describe("SingleGameControlPanelContainer", () => {
       const acceptDrawOfferReturnedValue = Symbol("acceptDrawOffer");
 
       const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelContainer id={1} />
+        <GameControlPanelContainer id={1} />
       );
       const testInstance = testRenderer.root;
 
       const singleGameControlPanelWrapper = testInstance.findByType(
-        SingleGameControlPanelWrapper
+        GameControlPanelWrapper
       );
 
       const acceptDrawOfferFn = (acceptDrawOffer as unknown) as jest.Mock;
@@ -278,12 +278,12 @@ describe("SingleGameControlPanelContainer", () => {
       const declineDrawOfferReturnedValue = Symbol("declineDrawOffer");
 
       const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelContainer id={1} />
+        <GameControlPanelContainer id={1} />
       );
       const testInstance = testRenderer.root;
 
       const singleGameControlPanelWrapper = testInstance.findByType(
-        SingleGameControlPanelWrapper
+        GameControlPanelWrapper
       );
 
       const declineDrawOfferFn = (declineDrawOffer as unknown) as jest.Mock;
@@ -305,12 +305,12 @@ describe("SingleGameControlPanelContainer", () => {
       const offerDrawReturnedValue = Symbol("offerDraw");
 
       const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelContainer id={1} />
+        <GameControlPanelContainer id={1} />
       );
       const testInstance = testRenderer.root;
 
       const singleGameControlPanelWrapper = testInstance.findByType(
-        SingleGameControlPanelWrapper
+        GameControlPanelWrapper
       );
 
       const offerDrawFn = (offerDraw as unknown) as jest.Mock;
@@ -332,12 +332,12 @@ describe("SingleGameControlPanelContainer", () => {
       const rewindToMoveReturnedValue = Symbol("rewindToMove");
 
       const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelContainer id={1} />
+        <GameControlPanelContainer id={1} />
       );
       const testInstance = testRenderer.root;
 
       const singleGameControlPanelWrapper = testInstance.findByType(
-        SingleGameControlPanelWrapper
+        GameControlPanelWrapper
       );
 
       const rewindToMoveFn = (rewindToMove as unknown) as jest.Mock;

@@ -9,9 +9,7 @@ export interface SingleGameMetaContainerProps {
   id: number;
 }
 
-export const SingleGameMetaContainer: FC<SingleGameMetaContainerProps> = ({
-  id,
-}) => {
+export const GameMetaContainer: FC<SingleGameMetaContainerProps> = ({ id }) => {
   const game = useSelector((state: RootState) =>
     denormalize(id, gameSchema, state.entities)
   );

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { denormalize } from "normalizr";
 import { RootState } from "../../app/rootReducer";
 import gameSchema from "../../normalizr/schemas/gameSchema";
-import { SingleGameControlPanelWrapper } from "./SingleGameControlPanelWrapper";
+import { GameControlPanelWrapper } from "./GameControlPanelWrapper";
 import User from "../../interfaces/User";
 import userSchema from "../../normalizr/schemas/userSchema";
 import {
@@ -22,7 +22,7 @@ export interface SingleGameControlPanelContainerProps {
   id: number;
 }
 
-export const SingleGameControlPanelContainer: FC<SingleGameControlPanelContainerProps> = ({
+export const GameControlPanelContainer: FC<SingleGameControlPanelContainerProps> = ({
   id,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -80,7 +80,7 @@ export const SingleGameControlPanelContainer: FC<SingleGameControlPanelContainer
 
   if (game) {
     return (
-      <SingleGameControlPanelWrapper
+      <GameControlPanelWrapper
         game={game}
         currentUser={currentUser}
         isFlipped={singleGameItemState.isFlipped}

@@ -3,8 +3,8 @@ import TestRenderer from "react-test-renderer";
 import { MemoryRouter, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import GamePage from "../GamePage";
-import { SingleGameMetaContainer } from "../SingleGameMetaContainer";
-import { SingleGameControlPanelContainer } from "../SingleGameControlPanelContainer";
+import { GameMetaContainer } from "../GameMetaContainer";
+import { GameControlPanelContainer } from "../GameControlPanelContainer";
 import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
 import { fetchGame } from "../singleGameSlice";
 import { stateWithDataSample } from "../../../test-utils/data-sample/state";
@@ -21,7 +21,7 @@ describe("GamePage", () => {
   });
 
   describe("children components", () => {
-    it("contains SingleGameMetaContainer", () => {
+    it("contains GameMetaContainer", () => {
       const testRenderer = TestRenderer.create(
         <MemoryRouter initialEntries={["/game/1"]}>
           <Route path="/game/:id">
@@ -31,12 +31,10 @@ describe("GamePage", () => {
       );
       const testInstance = testRenderer.root;
 
-      expect(testInstance.findAllByType(SingleGameMetaContainer).length).toBe(
-        1
-      );
+      expect(testInstance.findAllByType(GameMetaContainer).length).toBe(1);
     });
 
-    it("contains SingleGameControlPanelContainer", () => {
+    it("contains GameControlPanelContainer", () => {
       const testRenderer = TestRenderer.create(
         <MemoryRouter initialEntries={["/game/1"]}>
           <Route path="/game/:id">
@@ -46,9 +44,9 @@ describe("GamePage", () => {
       );
       const testInstance = testRenderer.root;
 
-      expect(
-        testInstance.findAllByType(SingleGameControlPanelContainer).length
-      ).toBe(1);
+      expect(testInstance.findAllByType(GameControlPanelContainer).length).toBe(
+        1
+      );
     });
 
     it("contains SingleGameBoardContainer", () => {
@@ -68,7 +66,7 @@ describe("GamePage", () => {
   });
 
   describe("children components props", () => {
-    describe("singleGameMetaContainer", () => {
+    describe("GameMetaContainer", () => {
       it("id", () => {
         const testRenderer = TestRenderer.create(
           <MemoryRouter initialEntries={["/game/2"]}>
@@ -80,14 +78,14 @@ describe("GamePage", () => {
         const testInstance = testRenderer.root;
 
         const singleGameMetaContainer = testInstance.findByType(
-          SingleGameMetaContainer
+          GameMetaContainer
         );
 
         expect(singleGameMetaContainer.props.id).toBe(2);
       });
     });
 
-    describe("SingleGameControlPanelContainer", () => {
+    describe("GameControlPanelContainer", () => {
       it("id", () => {
         const testRenderer = TestRenderer.create(
           <MemoryRouter initialEntries={["/game/2"]}>
@@ -99,7 +97,7 @@ describe("GamePage", () => {
         const testInstance = testRenderer.root;
 
         const singleGameControlPanelContainer = testInstance.findByType(
-          SingleGameControlPanelContainer
+          GameControlPanelContainer
         );
 
         expect(singleGameControlPanelContainer.props.id).toBe(2);

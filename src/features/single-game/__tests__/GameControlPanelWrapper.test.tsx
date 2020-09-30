@@ -11,22 +11,18 @@ import {
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
 import { GameControlPanel } from "../GameControlPanel";
-import { SingleGameControlPanelWrapper } from "../SingleGameControlPanelWrapper";
+import { GameControlPanelWrapper } from "../GameControlPanelWrapper";
 import userSample from "../../../test-utils/data-sample/user";
 
-describe("SingleGameControlPanelWrapper", () => {
+describe("GameControlPanelWrapper", () => {
   describe("children components", () => {
     it("contains GameControlPanel", () => {
-      const testRenderer = TestRenderer.create(
-        <SingleGameControlPanelWrapper />
-      );
+      const testRenderer = TestRenderer.create(<GameControlPanelWrapper />);
       const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(GameControlPanel).length).toBe(0);
 
-      testRenderer.update(
-        <SingleGameControlPanelWrapper game={defaultGameSample} />
-      );
+      testRenderer.update(<GameControlPanelWrapper game={defaultGameSample} />);
 
       expect(testInstance.findAllByType(GameControlPanel).length).toBe(1);
     });
@@ -36,7 +32,7 @@ describe("SingleGameControlPanelWrapper", () => {
     describe("GameControlPanel", () => {
       it("game", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper game={defaultGameSample} />
+          <GameControlPanelWrapper game={defaultGameSample} />
         );
         const testInstance = testRenderer.root;
 
@@ -47,7 +43,7 @@ describe("SingleGameControlPanelWrapper", () => {
 
       it("orientation", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper game={defaultGameSample} />
+          <GameControlPanelWrapper game={defaultGameSample} />
         );
         const testInstance = testRenderer.root;
 
@@ -56,7 +52,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(gameControlPanel.props.orientation).toBe("white");
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameSample2}
             currentUser={userSample}
           />
@@ -65,7 +61,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(gameControlPanel.props.orientation).toBe("black");
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameSample2}
             currentUser={userSample}
             isFlipped
@@ -77,7 +73,7 @@ describe("SingleGameControlPanelWrapper", () => {
 
       it("rewindToMoveIndex", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper game={gameWithMovesSample} />
+          <GameControlPanelWrapper game={gameWithMovesSample} />
         );
         const testInstance = testRenderer.root;
 
@@ -86,7 +82,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(gameControlPanel.props.rewindToMoveIndex).toBeNull();
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             rewindToMoveIndex={2}
           />
@@ -95,7 +91,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(gameControlPanel.props.rewindToMoveIndex).toBe(2);
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             rewindToMoveIndex={0}
           />
@@ -106,7 +102,7 @@ describe("SingleGameControlPanelWrapper", () => {
 
       it("drawOfferSentByCurrentUser", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper game={gameSample3} />
+          <GameControlPanelWrapper game={gameSample3} />
         );
         const testInstance = testRenderer.root;
 
@@ -122,7 +118,7 @@ describe("SingleGameControlPanelWrapper", () => {
         );
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithdrawOfferSentByCurrentUser}
             currentUser={userSample}
           />
@@ -133,7 +129,7 @@ describe("SingleGameControlPanelWrapper", () => {
 
       it("drawOfferSentByOpponent", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper game={gameSample3} />
+          <GameControlPanelWrapper game={gameSample3} />
         );
         const testInstance = testRenderer.root;
 
@@ -149,7 +145,7 @@ describe("SingleGameControlPanelWrapper", () => {
         );
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithdrawOfferSentByOpponent}
             currentUser={userSample}
           />
@@ -160,7 +156,7 @@ describe("SingleGameControlPanelWrapper", () => {
 
       it("canAbortGame", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper game={gameWithMovesSample} />
+          <GameControlPanelWrapper game={gameWithMovesSample} />
         );
         const testInstance = testRenderer.root;
 
@@ -169,7 +165,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(gameControlPanel.props.canAbortGame).toBeFalsy();
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameThatCanBeAbortedSample}
             currentUser={userSample}
           />
@@ -186,7 +182,7 @@ describe("SingleGameControlPanelWrapper", () => {
         );
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameSampleWithOutOfTimeStatus}
             currentUser={userSample}
           />
@@ -197,7 +193,7 @@ describe("SingleGameControlPanelWrapper", () => {
 
       it("canResignGame", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper game={gameThatCanBeAbortedSample} />
+          <GameControlPanelWrapper game={gameThatCanBeAbortedSample} />
         );
         const testInstance = testRenderer.root;
 
@@ -206,7 +202,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(gameControlPanel.props.canResignGame).toBeFalsy();
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesAndUserSample}
             currentUser={userSample}
           />
@@ -223,7 +219,7 @@ describe("SingleGameControlPanelWrapper", () => {
         );
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameSampleWithOutOfTimeStatus}
             currentUser={userSample}
           />
@@ -234,9 +230,7 @@ describe("SingleGameControlPanelWrapper", () => {
 
       it("canOfferDraw", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper
-            game={gameWithMovesAndUserVsUserSample}
-          />
+          <GameControlPanelWrapper game={gameWithMovesAndUserVsUserSample} />
         );
         const testInstance = testRenderer.root;
 
@@ -246,7 +240,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(gameControlPanel.props.canOfferDraw).toBeFalsy();
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesAndUserVsUserSample}
             currentUser={userSample}
           />
@@ -263,7 +257,7 @@ describe("SingleGameControlPanelWrapper", () => {
         );
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithOutOfTimeStatus}
             currentUser={userSample}
           />
@@ -280,7 +274,7 @@ describe("SingleGameControlPanelWrapper", () => {
         );
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithDrawOffer}
             currentUser={userSample}
           />
@@ -298,10 +292,7 @@ describe("SingleGameControlPanelWrapper", () => {
         );
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
-            game={gameVsAI}
-            currentUser={userSample}
-          />
+          <GameControlPanelWrapper game={gameVsAI} currentUser={userSample} />
         );
 
         // game VS AI
@@ -312,7 +303,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onFlipBoard = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={defaultGameSample}
             onFlipBoard={onFlipBoard}
           />
@@ -329,7 +320,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onAcceptDrawOffer = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={defaultGameSample}
             onAcceptDrawOffer={onAcceptDrawOffer}
           />
@@ -348,7 +339,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onDeclineDrawOffer = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={defaultGameSample}
             onDeclineDrawOffer={onDeclineDrawOffer}
           />
@@ -367,7 +358,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onAbortGame = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={defaultGameSample}
             onAbortGame={onAbortGame}
           />
@@ -384,7 +375,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onOfferDraw = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={defaultGameSample}
             onOfferDraw={onOfferDraw}
           />
@@ -401,7 +392,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onResignGame = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={defaultGameSample}
             onResignGame={onResignGame}
           />
@@ -422,7 +413,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             onRewindToMove={onRewindToMove}
           />
@@ -447,7 +438,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             onRewindToMove={onRewindToMove}
           />
@@ -467,7 +458,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             onRewindToMove={onRewindToMove}
           />
@@ -487,7 +478,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onRewindToMove = jest.fn();
 
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             onRewindToMove={onRewindToMove}
           />
@@ -504,7 +495,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(onRewindToMove).toBeCalledWith(2);
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             rewindToMoveIndex={2}
             onRewindToMove={onRewindToMove}
@@ -521,7 +512,7 @@ describe("SingleGameControlPanelWrapper", () => {
         const onRewindToMove = jest.fn();
 
         const testRenderer = TestRenderer.create(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             rewindToMoveIndex={0}
             onRewindToMove={onRewindToMove}
@@ -539,7 +530,7 @@ describe("SingleGameControlPanelWrapper", () => {
         expect(onRewindToMove).toBeCalledWith(1);
 
         testRenderer.update(
-          <SingleGameControlPanelWrapper
+          <GameControlPanelWrapper
             game={gameWithMovesSample}
             rewindToMoveIndex={2}
             onRewindToMove={onRewindToMove}

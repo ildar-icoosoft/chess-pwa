@@ -3,10 +3,10 @@ import TestRenderer from "react-test-renderer";
 import React, { useEffect } from "react";
 import { stateWithDataSample } from "../../../test-utils/data-sample/state";
 import mountTest from "../../../test-utils/mountTest";
-import { SingleGameMetaContainer } from "../SingleGameMetaContainer";
+import { GameMetaContainer } from "../GameMetaContainer";
 import { GameMeta } from "../GameMeta";
 
-describe("SingleGameMetaContainer", () => {
+describe("GameMetaContainer", () => {
   beforeEach(() => {
     (useSelector as jest.Mock).mockImplementation((cb) =>
       cb(stateWithDataSample)
@@ -15,18 +15,16 @@ describe("SingleGameMetaContainer", () => {
     (useEffect as jest.Mock).mockReset();
   });
 
-  mountTest(SingleGameMetaContainer, { id: 1 });
+  mountTest(GameMetaContainer, { id: 1 });
 
   describe("children components", () => {
     it("contains GameMeta", async () => {
-      const testRenderer = TestRenderer.create(
-        <SingleGameMetaContainer id={2} />
-      );
+      const testRenderer = TestRenderer.create(<GameMetaContainer id={2} />);
       const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(GameMeta).length).toBe(0);
 
-      testRenderer.update(<SingleGameMetaContainer id={1} />);
+      testRenderer.update(<GameMetaContainer id={1} />);
 
       expect(testInstance.findAllByType(GameMeta).length).toBe(1);
     });
@@ -35,9 +33,7 @@ describe("SingleGameMetaContainer", () => {
   describe("children components props", () => {
     describe("GameMeta", () => {
       it("game", async () => {
-        const testRenderer = TestRenderer.create(
-          <SingleGameMetaContainer id={1} />
-        );
+        const testRenderer = TestRenderer.create(<GameMetaContainer id={1} />);
         const testInstance = testRenderer.root;
 
         const gameMeta = testInstance.findByType(GameMeta);

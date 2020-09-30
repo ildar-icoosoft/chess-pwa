@@ -21,7 +21,7 @@ export interface SingleGameControlPanelWrapperProps {
   onRewindToMove?(moveIndex: number | null): void;
 }
 
-export const SingleGameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = ({
+export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = ({
   game,
   currentUser,
   isFlipped = false,
