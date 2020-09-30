@@ -6,8 +6,20 @@ import gameSchema from "../../normalizr/schemas/gameSchema";
 import { SingleGameControlPanelWrapper } from "./SingleGameControlPanelWrapper";
 import User from "../../interfaces/User";
 import userSchema from "../../normalizr/schemas/userSchema";
-import { defaultSingleGameItemState, flipBoard } from "./singleGameSlice";
+import {
+  abortGame,
+  acceptDrawOffer,
+  declineDrawOffer,
+  defaultSingleGameItemState,
+  flipBoard,
+  offerDraw,
+  resignGame,
+  rewindToMove,
+} from "./singleGameSlice";
 import { AppDispatch } from "../../app/store";
+import { SingleGame } from "./SingleGame";
+import { Move } from "ii-react-chessboard";
+import { makeMove } from "../move/moveSlice";
 
 export interface SingleGameControlPanelContainerProps {
   id: number;
@@ -37,6 +49,38 @@ export const SingleGameControlPanelContainer: FC<SingleGameControlPanelContainer
     dispatch(flipBoard(id));
   }, [dispatch, id]);
 
+  const handleAbortGame = useCallback(() => {
+    dispatch(abortGame(id));
+  }, [dispatch, id]);
+
+  const handleAcceptDrawOffer = useCallback(() => {
+    dispatch(acceptDrawOffer(id));
+  }, [dispatch, id]);
+
+  const handleDeclineDrawOffer = useCallback(() => {
+    dispatch(declineDrawOffer(id));
+  }, [dispatch, id]);
+
+  const handleResignGame = useCallback(() => {
+    dispatch(resignGame(id));
+  }, [dispatch, id]);
+
+  const handleOfferDraw = useCallback(() => {
+    dispatch(offerDraw(id));
+  }, [dispatch, id]);
+
+  const handleRewindToMove = useCallback(
+    (moveIndex: number | null) => {
+      dispatch(
+        rewindToMove({
+          moveIndex,
+          gameId: id,
+        })
+      );
+    },
+    [dispatch, id]
+  );
+
   if (game) {
     return (
       <SingleGameControlPanelWrapper
@@ -45,6 +89,12 @@ export const SingleGameControlPanelContainer: FC<SingleGameControlPanelContainer
         isFlipped={singleGameItemState.isFlipped}
         rewindToMoveIndex={singleGameItemState.rewindToMoveIndex}
         onFlipBoard={handleFlipBoard}
+        onAbortGame={handleAbortGame}
+        onAcceptDrawOffer={handleAcceptDrawOffer}
+        onDeclineDrawOffer={handleDeclineDrawOffer}
+        onOfferDraw={handleOfferDraw}
+        onResignGame={handleResignGame}
+        onRewindToMove={handleRewindToMove}
       />
     );
   }
