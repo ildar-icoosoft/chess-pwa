@@ -71,7 +71,10 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
 
   return (
     <div>
-      <GameClock time={orientation === "white" ? game.btime : game.wtime} />
+      <GameClock
+        time={orientation === "white" ? game.btime : game.wtime}
+        isRunning={game.turn !== orientation}
+      />
       <GameControlPanelUserName
         game={game}
         color={orientation === "white" ? "black" : "white"}
@@ -113,7 +116,10 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
         game={game}
         color={orientation === "white" ? "white" : "black"}
       />
-      <GameClock time={orientation === "white" ? game.wtime : game.btime} />
+      <GameClock
+        time={orientation === "white" ? game.wtime : game.btime}
+        isRunning={game.turn === orientation}
+      />
     </div>
   );
 };
