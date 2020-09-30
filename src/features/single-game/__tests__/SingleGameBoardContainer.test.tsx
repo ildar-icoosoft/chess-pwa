@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import TestRenderer from "react-test-renderer";
 import {
   stateWithDataSample,
   stateWithDataSample2,
   stateWithDataSample3,
 } from "../../../test-utils/data-sample/state";
-import React, { useEffect } from "react";
 import mountTest from "../../../test-utils/mountTest";
 import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
-import TestRenderer from "react-test-renderer";
 import { SingleGameBoard } from "../SingleGameBoard";
 import { makeMove } from "../../move/moveSlice";
 

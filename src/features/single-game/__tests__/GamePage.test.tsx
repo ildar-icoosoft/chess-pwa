@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import TestRenderer from "react-test-renderer";
 import { MemoryRouter, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import GamePage from "../GamePage";
 import { SingleGameMetaContainer } from "../SingleGameMetaContainer";
 import { SingleGameControlPanelContainer } from "../SingleGameControlPanelContainer";
 import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchGame } from "../singleGameSlice";
 import { stateWithDataSample } from "../../../test-utils/data-sample/state";
 
@@ -138,7 +138,7 @@ describe("GamePage", () => {
       fetchGameFn.mockClear();
       fetchGameFn.mockReturnValue(fetchGameReturnedValue);
 
-      const testRenderer = TestRenderer.create(
+      TestRenderer.create(
         <MemoryRouter initialEntries={["/game/1"]}>
           <Route path="/game/:id">
             <GamePage />
@@ -152,7 +152,8 @@ describe("GamePage", () => {
       expect(dispatch).toBeCalledWith(fetchGameReturnedValue);
 
       // @todo. fix the commented code
-      /*fetchGameFn.mockClear();
+      /*
+      fetchGameFn.mockClear();
       dispatch.mockClear();
       (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
 
@@ -167,7 +168,8 @@ describe("GamePage", () => {
       expect(fetchGameFn).toBeCalledTimes(1);
       expect(fetchGameFn).toBeCalledWith(2);
 
-      expect(dispatch).toBeCalledWith(fetchGameReturnedValue);*/
+      expect(dispatch).toBeCalledWith(fetchGameReturnedValue);
+      */
     });
   });
 });

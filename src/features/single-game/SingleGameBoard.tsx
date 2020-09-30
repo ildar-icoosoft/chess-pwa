@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import Game from "../../interfaces/Game";
 import {
   Board,
   getValidMoves,
@@ -8,6 +7,7 @@ import {
   ValidMoves,
 } from "ii-react-chessboard";
 import { ChessInstance } from "chess.js";
+import Game from "../../interfaces/Game";
 import makeChessInstance from "../../utils/makeChessInstance";
 import User from "../../interfaces/User";
 

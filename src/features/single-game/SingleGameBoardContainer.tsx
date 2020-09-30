@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Move } from "ii-react-chessboard";
 import { denormalize } from "normalizr";
 import { RootState } from "../../app/rootReducer";
 import gameSchema from "../../normalizr/schemas/gameSchema";
@@ -7,7 +8,6 @@ import { SingleGameBoard } from "./SingleGameBoard";
 import User from "../../interfaces/User";
 import userSchema from "../../normalizr/schemas/userSchema";
 import { defaultSingleGameItemState } from "./singleGameSlice";
-import { Move } from "ii-react-chessboard";
 import { makeMove } from "../move/moveSlice";
 import { AppDispatch } from "../../app/store";
 

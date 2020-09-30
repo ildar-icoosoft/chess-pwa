@@ -17,9 +17,6 @@ import {
   rewindToMove,
 } from "./singleGameSlice";
 import { AppDispatch } from "../../app/store";
-import { SingleGame } from "./SingleGame";
-import { Move } from "ii-react-chessboard";
-import { makeMove } from "../move/moveSlice";
 
 export interface SingleGameControlPanelContainerProps {
   id: number;

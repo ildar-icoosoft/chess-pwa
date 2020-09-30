@@ -1,23 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import TestRenderer from "react-test-renderer";
 import {
   stateWithDataSample,
   stateWithDataSample2,
   stateWithDataSample3,
 } from "../../../test-utils/data-sample/state";
-import React, { useEffect } from "react";
 import mountTest from "../../../test-utils/mountTest";
 import { SingleGameControlPanelContainer } from "../SingleGameControlPanelContainer";
-import TestRenderer from "react-test-renderer";
-import { GameControlPanel } from "../GameControlPanel";
 import { SingleGameControlPanelWrapper } from "../SingleGameControlPanelWrapper";
-import { SingleGameContainer } from "../SingleGameContainer";
-import { SingleGame } from "../SingleGame";
-import { makeMove } from "../../move/moveSlice";
 import {
   abortGame,
   acceptDrawOffer,
   declineDrawOffer,
-  fetchGame,
   flipBoard,
   offerDraw,
   resignGame,
@@ -56,7 +51,7 @@ describe("SingleGameControlPanelContainer", () => {
     });
   });
 
-  describe("children components", () => {
+  describe("children components props", () => {
     describe("SingleGameControlPanelWrapper", () => {
       it("game", async () => {
         const testRenderer = TestRenderer.create(

@@ -1,5 +1,6 @@
 import TestRenderer from "react-test-renderer";
 import { Board, PieceColor } from "ii-react-chessboard";
+import React from "react";
 import {
   blackTurnGameSample,
   defaultGameSample,
@@ -15,7 +16,6 @@ import {
   gameWithSmallAmountOfPiecesSampleValidMoves,
   whiteTurnGameSample,
 } from "../../../test-utils/data-sample/game";
-import React from "react";
 import { SingleGameBoard } from "../SingleGameBoard";
 import userSample from "../../../test-utils/data-sample/user";
 

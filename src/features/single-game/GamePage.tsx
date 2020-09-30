@@ -1,10 +1,10 @@
 import React, { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { SingleGameMetaContainer } from "./SingleGameMetaContainer";
 import { SingleGameControlPanelContainer } from "./SingleGameControlPanelContainer";
 import { SingleGameBoardContainer } from "./SingleGameBoardContainer";
 import { fetchGame } from "./singleGameSlice";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
 
 interface GamePageParams {

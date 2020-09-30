@@ -1,10 +1,10 @@
 import React, { FC } from "react";
+import { ChessInstance } from "chess.js";
+import { PieceColor } from "ii-react-chessboard";
 import Game from "../../interfaces/Game";
 import { GameControlPanel } from "./GameControlPanel";
 import User from "../../interfaces/User";
-import { PieceColor } from "ii-react-chessboard";
 import { PieceColor as AppPieceColor } from "../../types/PieceColor";
-import { ChessInstance } from "chess.js";
 import makeChessInstance from "../../utils/makeChessInstance";
 
 export interface SingleGameControlPanelWrapperProps {
@@ -39,11 +39,6 @@ export const SingleGameControlPanelWrapper: FC<SingleGameControlPanelWrapperProp
   }
 
   const chessWithAllMoves: ChessInstance = makeChessInstance(game);
-
-  const chess: ChessInstance =
-    rewindToMoveIndex === null
-      ? chessWithAllMoves
-      : makeChessInstance(game, rewindToMoveIndex);
 
   const movesHistory = chessWithAllMoves.history({ verbose: true });
 

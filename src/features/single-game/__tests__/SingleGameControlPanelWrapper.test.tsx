@@ -1,4 +1,5 @@
 import TestRenderer from "react-test-renderer";
+import React from "react";
 import {
   defaultGameSample,
   gameSample2,
@@ -9,7 +10,6 @@ import {
   gameWithMovesSample,
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
-import React from "react";
 import { GameControlPanel } from "../GameControlPanel";
 import { SingleGameControlPanelWrapper } from "../SingleGameControlPanelWrapper";
 import userSample from "../../../test-utils/data-sample/user";
