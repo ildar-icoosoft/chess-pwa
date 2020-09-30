@@ -1,18 +1,26 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { SingleGameContainer } from "./SingleGameContainer";
 import { SingleGameMetaContainer } from "./SingleGameMetaContainer";
 import { SingleGameControlPanelContainer } from "./SingleGameControlPanelContainer";
 import { SingleGameBoardContainer } from "./SingleGameBoardContainer";
+import { fetchGame } from "./singleGameSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../app/store";
 
 interface GamePageParams {
   id: string;
 }
 
 const GamePage: FC<unknown> = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const { id } = useParams<GamePageParams>();
 
   const idAsNumber = Number(id);
+
+  useEffect(() => {
+    dispatch(fetchGame(idAsNumber));
+  }, [dispatch, idAsNumber]);
 
   return (
     <>
