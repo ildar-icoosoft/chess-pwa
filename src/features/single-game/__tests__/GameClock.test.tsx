@@ -8,10 +8,10 @@ describe("GameClock", () => {
     it("should display time", () => {
       const { rerender, getByTestId } = render(<GameClock time={310000} />);
 
-      expect(getByTestId("time")).toHaveTextContent("05 : 10");
+      expect(getByTestId("time")).toHaveTextContent("05:10");
 
       rerender(<GameClock time={365000} />);
-      expect(getByTestId("time")).toHaveTextContent("06 : 05");
+      expect(getByTestId("time")).toHaveTextContent("06:05");
     });
 
     it("should contain clockRun class", () => {

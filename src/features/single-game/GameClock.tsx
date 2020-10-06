@@ -15,10 +15,13 @@ export const GameClock: FC<GameClockProps> = ({
   const formattedTime = moment()
     .startOf("day")
     .milliseconds(time)
-    .format("mm : ss");
+    .format("mm:ss");
 
   return (
-    <div data-testid="time" className={cx({ [css.clockRun]: isRunning })}>
+    <div
+      data-testid="time"
+      className={cx(css.clock, { [css.clockRun]: isRunning })}
+    >
       {formattedTime}
     </div>
   );
