@@ -20,7 +20,10 @@ export const GameClock: FC<GameClockProps> = ({
   return (
     <div
       data-testid="time"
-      className={cx(css.clock, { [css.clockRun]: isRunning })}
+      className={cx(css.clock, {
+        [css.clockRun]: isRunning,
+        [css.clockEmerg]: time < 10000,
+      })}
     >
       {formattedTime}
     </div>
