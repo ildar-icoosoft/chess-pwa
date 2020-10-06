@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import css from "./GameControlPanel.module.scss";
 import Game from "../../interfaces/Game";
 import { PieceColor } from "../../types/PieceColor";
 import { GameClock } from "./GameClock";
@@ -8,7 +9,6 @@ import { GameControlPanelTopToolbar } from "./GameControlPanelTopToolbar";
 import { GameControlPanelBottomToolbar } from "./GameControlPanelBottomToolbar";
 import makeChessInstance from "../../utils/makeChessInstance";
 import { DrawOfferDialog } from "./DrawOfferDialog";
-import { Card } from "react-bootstrap";
 
 export interface GameControlPanelProps {
   game?: Game;
@@ -71,12 +71,12 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
   const hasNextMove = rewindToMoveIndex !== null;
 
   return (
-    <Card>
-      <Card.Body>
-        <GameClock
-          time={orientation === "white" ? game.btime : game.wtime}
-          isRunning={game.turn !== orientation}
-        />
+    <div>
+      <GameClock
+        time={orientation === "white" ? game.btime : game.wtime}
+        isRunning={game.turn !== orientation}
+      />
+      <div className={css.controlPanelInner}>
         <GameControlPanelUserName
           game={game}
           color={orientation === "white" ? "black" : "white"}
@@ -118,11 +118,11 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
           game={game}
           color={orientation === "white" ? "white" : "black"}
         />
-        <GameClock
-          time={orientation === "white" ? game.wtime : game.btime}
-          isRunning={game.turn === orientation}
-        />
-      </Card.Body>
-    </Card>
+      </div>
+      <GameClock
+        time={orientation === "white" ? game.wtime : game.btime}
+        isRunning={game.turn === orientation}
+      />
+    </div>
   );
 };
