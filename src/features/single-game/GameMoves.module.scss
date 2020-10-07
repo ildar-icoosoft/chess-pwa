@@ -2,6 +2,10 @@
   display: flex;
   flex-flow: row wrap;
   flex: 0 0 7.4rem;
+  line-height: 1.7;
+  align-items: center;
+  overflow-y: auto;
+  align-content: flex-start;
 }
 
 .moveNumber {
