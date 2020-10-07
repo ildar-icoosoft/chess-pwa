@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Game from "../../interfaces/Game";
 import getGameStatusText from "../../utils/getGameStatusText";
+import css from "./GameControlPanelStatus.module.scss";
 
 export interface GameControlPanelStatusProps {
   game?: Game;
@@ -23,9 +24,13 @@ export const GameControlPanelStatus: FC<GameControlPanelStatusProps> = ({
   }
 
   return (
-    <>
-      <div data-testid="game-status">{getGameStatusText(game)}</div>
-      <div data-testid="game-result">{result}</div>
-    </>
+    <div className={css.container}>
+      <div className={css.result} data-testid="game-result">
+        {result}
+      </div>
+      <div className={css.status} data-testid="game-status">
+        {getGameStatusText(game)}
+      </div>
+    </div>
   );
 };
