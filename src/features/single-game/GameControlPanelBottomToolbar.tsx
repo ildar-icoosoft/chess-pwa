@@ -1,5 +1,4 @@
 import React, { FC, useCallback } from "react";
-import css from "./GameControlPanelBottomToolbar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFlag,
@@ -7,6 +6,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
+import css from "./GameControlPanelBottomToolbar.module.scss";
 
 export interface GameControlPanelBottomToolbarProps {
   canAbortGame?: boolean;

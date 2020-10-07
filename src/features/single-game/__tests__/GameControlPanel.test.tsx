@@ -13,8 +13,6 @@ import { GameControlPanelUserName } from "../GameControlPanelUserName";
 import { GameControlPanelBottomToolbar } from "../GameControlPanelBottomToolbar";
 import { GameControlPanelTopToolbar } from "../GameControlPanelTopToolbar";
 import { DrawOfferDialog } from "../DrawOfferDialog";
-import { GamePreviewsListItem } from "../../games-list/GamePreviewsListItem";
-import { GamePreviewClock } from "../../games-list/GamePreviewClock";
 
 describe("GameControlPanel", () => {
   describe("children components", () => {

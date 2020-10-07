@@ -1,11 +1,11 @@
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
+import TestRenderer from "react-test-renderer";
 import { GameMoves } from "../GameMoves";
 import {
   gameWithMovesSample,
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
-import TestRenderer from "react-test-renderer";
 import { GameControlPanelStatus } from "../GameControlPanelStatus";
 
 describe("GameMoves", () => {
