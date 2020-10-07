@@ -13,9 +13,19 @@ export const GameControlPanelStatus: FC<GameControlPanelStatusProps> = ({
     return null;
   }
 
+  let result = "½-½";
+  if (game.winner) {
+    if (game.winner === "white") {
+      result = "1-0";
+    } else {
+      result = "0-1";
+    }
+  }
+
   return (
     <>
       <div data-testid="game-status">{getGameStatusText(game)}</div>
+      <div data-testid="game-result">{result}</div>
     </>
   );
 };
