@@ -1,4 +1,12 @@
 import React, { FC, useCallback } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faRetweet,
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
+  faAngleLeft,
+  faAngleRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 export interface GameControlPanelTopToolbarProps {
   isFirstMove?: boolean;
@@ -56,39 +64,48 @@ export const GameControlPanelTopToolbar: FC<GameControlPanelTopToolbarProps> = (
         data-testid="flip-board-btn"
         onClick={handleFlipBoard}
       >
-        Flip board
+        <FontAwesomeIcon icon={faRetweet} />
+        <span className="sr-only">Flip board</span>
       </button>
-      <button
-        type="button"
-        data-testid="rewind-to-prev-move-btn"
-        onClick={handleRewindToPrevMove}
-        disabled={!hasPrevMove}
-      >
-        Rewind to prev move
-      </button>
+
       <button
         type="button"
         data-testid="rewind-to-first-move-btn"
         onClick={handleRewindToFirstMove}
         disabled={isFirstMove}
       >
-        Rewind to first move
+        <FontAwesomeIcon icon={faAngleDoubleLeft} />
+        <span className="sr-only">Rewind to first move</span>
       </button>
+
       <button
         type="button"
-        data-testid="rewind-to-last-move-btn"
-        onClick={handleRewindToLastMove}
-        disabled={isLastMove}
+        data-testid="rewind-to-prev-move-btn"
+        onClick={handleRewindToPrevMove}
+        disabled={!hasPrevMove}
       >
-        Rewind to last move
+        <FontAwesomeIcon icon={faAngleLeft} />
+        <span className="sr-only">Rewind to prev move</span>
       </button>
+
       <button
         type="button"
         data-testid="rewind-to-next-move-btn"
         onClick={handleRewindToNextMove}
         disabled={!hasNextMove}
       >
-        Rewind to next move
+        <FontAwesomeIcon icon={faAngleRight} />
+        <span className="sr-only">Rewind to next move</span>
+      </button>
+
+      <button
+        type="button"
+        data-testid="rewind-to-last-move-btn"
+        onClick={handleRewindToLastMove}
+        disabled={isLastMove}
+      >
+        <FontAwesomeIcon icon={faAngleDoubleRight} />
+        <span className="sr-only">Rewind to last move</span>
       </button>
     </>
   );
