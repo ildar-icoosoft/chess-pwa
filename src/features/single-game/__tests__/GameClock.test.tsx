@@ -6,8 +6,11 @@ import { GamePreviewClock } from "../../games-list/GamePreviewClock";
 describe("GameClock", () => {
   describe("DOM structure", () => {
     it("should display time", () => {
-      const { rerender, getByTestId } = render(<GameClock time={310000} />);
+      const { rerender, getByTestId } = render(<GameClock />);
 
+      expect(getByTestId("time")).toHaveTextContent("00:00");
+
+      rerender(<GameClock time={310000} />);
       expect(getByTestId("time")).toHaveTextContent("05:10");
 
       rerender(<GameClock time={365000} />);
