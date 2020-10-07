@@ -9,6 +9,7 @@ import cx from "classnames";
 import Game from "../../interfaces/Game";
 import makeChessInstance from "../../utils/makeChessInstance";
 import css from "./GameMoves.module.scss";
+import { GameControlPanelStatus } from "./GameControlPanelStatus";
 
 export interface GameMovesProps {
   game?: Game;
@@ -72,6 +73,8 @@ export const GameMoves: FC<GameMovesProps> = ({
           )}
         </React.Fragment>
       ))}
+
+      {game.status !== "started" && <GameControlPanelStatus game={game} />}
     </div>
   );
 };
