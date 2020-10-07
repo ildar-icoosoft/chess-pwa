@@ -17,9 +17,13 @@ export const GameMeta: FC<GameMetaProps> = ({ game }) => {
     <Card>
       <Card.Body>
         <div>
-          Time Control: {game.clockLimit / 60} + {game.clockIncrement}
+          Time Control:{" "}
+          <span data-testid="time-control">
+            {game.clockLimit / 60} + {game.clockIncrement}
+          </span>
         </div>
         <div
+          data-testid="game-status"
           className={cx({
             "text-success": game.status === "started",
             "text-danger": game.status !== "started",
