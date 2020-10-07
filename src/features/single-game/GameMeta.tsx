@@ -34,7 +34,7 @@ export const GameMeta: FC<GameMetaProps> = ({ game }) => {
               cy="9"
               r="6"
               stroke="black"
-              stroke-width="1"
+              strokeWidth="1"
               fill="#fff"
             />
           </svg>
@@ -47,7 +47,7 @@ export const GameMeta: FC<GameMetaProps> = ({ game }) => {
               cy="8"
               r="6"
               stroke="black"
-              stroke-width="1"
+              strokeWidth="1"
               fill="#000"
             />
           </svg>
