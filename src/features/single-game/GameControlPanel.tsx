@@ -71,7 +71,7 @@ export const GameControlPanel: FC<GameControlPanelProps> = ({
   const hasNextMove = rewindToMoveIndex !== null;
 
   return (
-    <div>
+    <div className={css.controlPanel}>
       <GameClock
         time={orientation === "white" ? game.btime : game.wtime}
         isRunning={game.turn !== orientation}
