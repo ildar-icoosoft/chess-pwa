@@ -114,7 +114,7 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
   // @todo. use useCallback hook
   const handleRewindToMove = (moveIndex: number) => {
     if (onRewindToMove) {
-      if (moveIndex === movesHistory.length - 1) {
+      if (moveIndex === movesHistory.length) {
         onRewindToMove(null);
       } else {
         onRewindToMove(moveIndex);
