@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */ // @todo
 /* eslint-disable jsx-a11y/interactive-supports-focus */ // @todo
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import { chunk as _chunk } from "lodash";
 import { Move } from "chess.js";
 import cx from "classnames";
@@ -10,6 +10,7 @@ import Game from "../../interfaces/Game";
 import makeChessInstance from "../../utils/makeChessInstance";
 import css from "./GameMoves.module.scss";
 import { GameControlPanelStatus } from "./GameControlPanelStatus";
+import GameStatus from "../../types/GameStatus";
 
 export interface GameMovesProps {
   game?: Game;
@@ -26,6 +27,30 @@ export const GameMoves: FC<GameMovesProps> = ({
   rewindToMoveIndex = null,
   onRewindToMove,
 }) => {
+  const scrollToElementRef = useRef<HTMLDivElement>(null);
+  const lastMovesQnt = useRef<number>(-1);
+  const lastGameStatus = useRef<GameStatus>();
+
+  // @todo. add unit test
+  useEffect(() => {
+    if (!game) {
+      return;
+    }
+
+    if (
+      (lastMovesQnt.current !== movesHistory.length ||
+        lastGameStatus.current !== game.status) &&
+      rewindToMoveIndex === null
+    ) {
+      if (scrollToElementRef.current) {
+        scrollToElementRef.current.scrollTop =
+          scrollToElementRef.current.scrollHeight;
+      }
+    }
+    lastMovesQnt.current = movesHistory.length;
+    lastGameStatus.current = game.status;
+  });
+
   if (!game) {
     return null;
   }
@@ -47,7 +72,7 @@ export const GameMoves: FC<GameMovesProps> = ({
   };
 
   return (
-    <div className={css.movesWrapper}>
+    <div className={css.movesWrapper} ref={scrollToElementRef}>
       {movesPairs.map((pair, index) => {
         const whiteMoveIndex = index * 2 + 1;
         const blackMoveIndex = index * 2 + 2;
