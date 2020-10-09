@@ -50,22 +50,22 @@ export const GameMoves: FC<GameMovesProps> = ({
         <React.Fragment key={`move-${index}`}>
           <div className={css.moveNumber}>{index + 1}</div>
           <div
-            data-testid={`move-${index * 2}`}
-            onClick={makeRewindToMoveHandler(index * 2)}
+            data-testid={`move-${index * 2 + 1}`}
+            onClick={makeRewindToMoveHandler(index * 2 + 1)}
             role="button"
             className={cx(css.move, {
-              [css.selected]: rewindToMoveIndex === index * 2,
+              [css.selected]: rewindToMoveIndex === index * 2 + 1,
             })}
           >
             {formatMove(pair[0])}
           </div>
           {pair[1] && (
             <div
-              data-testid={`move-${index * 2 + 1}`}
-              onClick={makeRewindToMoveHandler(index * 2 + 1)}
+              data-testid={`move-${index * 2 + 2}`}
+              onClick={makeRewindToMoveHandler(index * 2 + 2)}
               role="button"
               className={cx(css.move, {
-                [css.selected]: rewindToMoveIndex === index * 2 + 1,
+                [css.selected]: rewindToMoveIndex === index * 2 + 2,
               })}
             >
               {formatMove(pair[1])}
