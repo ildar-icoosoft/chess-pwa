@@ -34,6 +34,8 @@ export const GameMoves: FC<GameMovesProps> = ({
 
   const movesHistory = chess.history({ verbose: true });
 
+  const movesQnt = movesHistory.length;
+
   const movesPairs = _chunk(movesHistory, 2);
 
   const makeRewindToMoveHandler = (moveIndex: number) => {
@@ -46,33 +48,42 @@ export const GameMoves: FC<GameMovesProps> = ({
 
   return (
     <div className={css.movesWrapper}>
-      {movesPairs.map((pair, index) => (
-        <React.Fragment key={`move-${index}`}>
-          <div className={css.moveNumber}>{index + 1}</div>
-          <div
-            data-testid={`move-${index * 2 + 1}`}
-            onClick={makeRewindToMoveHandler(index * 2 + 1)}
-            role="button"
-            className={cx(css.move, {
-              [css.selected]: rewindToMoveIndex === index * 2 + 1,
-            })}
-          >
-            {formatMove(pair[0])}
-          </div>
-          {pair[1] && (
+      {movesPairs.map((pair, index) => {
+        const whiteMoveIndex = index * 2 + 1;
+        const blackMoveIndex = index * 2 + 2;
+
+        return (
+          <React.Fragment key={`move-${index}`}>
+            <div className={css.moveNumber}>{index + 1}</div>
             <div
-              data-testid={`move-${index * 2 + 2}`}
-              onClick={makeRewindToMoveHandler(index * 2 + 2)}
+              data-testid={`move-${whiteMoveIndex}`}
+              onClick={makeRewindToMoveHandler(whiteMoveIndex)}
               role="button"
               className={cx(css.move, {
-                [css.selected]: rewindToMoveIndex === index * 2 + 2,
+                [css.selected]:
+                  rewindToMoveIndex === whiteMoveIndex ||
+                  (rewindToMoveIndex === null && movesQnt === whiteMoveIndex),
               })}
             >
-              {formatMove(pair[1])}
+              {formatMove(pair[0])}
             </div>
-          )}
-        </React.Fragment>
-      ))}
+            {pair[1] && (
+              <div
+                data-testid={`move-${blackMoveIndex}`}
+                onClick={makeRewindToMoveHandler(blackMoveIndex)}
+                role="button"
+                className={cx(css.move, {
+                  [css.selected]:
+                    rewindToMoveIndex === blackMoveIndex ||
+                    (rewindToMoveIndex === null && movesQnt === blackMoveIndex),
+                })}
+              >
+                {formatMove(pair[1])}
+              </div>
+            )}
+          </React.Fragment>
+        );
+      })}
 
       {game.status !== "started" && <GameControlPanelStatus game={game} />}
     </div>

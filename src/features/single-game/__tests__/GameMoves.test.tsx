@@ -78,11 +78,21 @@ describe("GameMoves", () => {
       expect(getByTestId("move-1")).not.toHaveClass("selected");
       expect(getByTestId("move-2")).not.toHaveClass("selected");
       expect(getByTestId("move-3")).not.toHaveClass("selected");
-      expect(getByTestId("move-4")).not.toHaveClass("selected");
+      expect(getByTestId("move-4")).toHaveClass("selected");
 
       rerender(<GameMoves game={gameWithMovesSample} rewindToMoveIndex={1} />);
 
       expect(getByTestId("move-1")).toHaveClass("selected");
+      expect(getByTestId("move-2")).not.toHaveClass("selected");
+      expect(getByTestId("move-3")).not.toHaveClass("selected");
+      expect(getByTestId("move-4")).not.toHaveClass("selected");
+
+      rerender(<GameMoves game={gameWithMovesSample} rewindToMoveIndex={0} />);
+
+      expect(getByTestId("move-1")).not.toHaveClass("selected");
+      expect(getByTestId("move-2")).not.toHaveClass("selected");
+      expect(getByTestId("move-3")).not.toHaveClass("selected");
+      expect(getByTestId("move-4")).not.toHaveClass("selected");
     });
   });
 
