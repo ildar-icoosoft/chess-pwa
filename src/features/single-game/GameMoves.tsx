@@ -49,7 +49,13 @@ export const GameMoves: FC<GameMovesProps> = ({
     }
     lastMovesQnt.current = movesHistory.length;
     lastGameStatus.current = game.status;
-  });
+  }, [
+    game,
+    lastMovesQnt,
+    lastGameStatus,
+    rewindToMoveIndex,
+    scrollToElementRef,
+  ]);
 
   if (!game) {
     return null;
