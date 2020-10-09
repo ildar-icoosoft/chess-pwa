@@ -248,11 +248,16 @@ describe("SingleGameBoard", () => {
         // no moves
         expect(board.props.lastMoveSquares).toBeUndefined();
 
+        testRenderer.update(
+          <SingleGameBoard game={gameWithMovesSample} rewindToMoveIndex={0} />
+        );
+        expect(board.props.lastMoveSquares).toBeUndefined();
+
         testRenderer.update(<SingleGameBoard game={gameWithMovesSample} />);
         expect(board.props.lastMoveSquares).toEqual(["g8", "f6"]);
 
         testRenderer.update(
-          <SingleGameBoard game={gameWithMovesSample} rewindToMoveIndex={2} />
+          <SingleGameBoard game={gameWithMovesSample} rewindToMoveIndex={3} />
         );
         expect(board.props.lastMoveSquares).toEqual(["g1", "f3"]);
       });
