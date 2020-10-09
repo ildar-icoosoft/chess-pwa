@@ -27,6 +27,8 @@ export const GameMoves: FC<GameMovesProps> = ({
   rewindToMoveIndex = null,
   onRewindToMove,
 }) => {
+  let movesHistory: Move[] = [];
+
   const scrollToElementRef = useRef<HTMLDivElement>(null);
   const lastMovesQnt = useRef<number>(-1);
   const lastGameStatus = useRef<GameStatus>();
@@ -53,6 +55,7 @@ export const GameMoves: FC<GameMovesProps> = ({
     game,
     lastMovesQnt,
     lastGameStatus,
+    movesHistory.length,
     rewindToMoveIndex,
     scrollToElementRef,
   ]);
@@ -63,7 +66,7 @@ export const GameMoves: FC<GameMovesProps> = ({
 
   const chess = makeChessInstance(game);
 
-  const movesHistory = chess.history({ verbose: true });
+  movesHistory = chess.history({ verbose: true });
 
   const movesQnt = movesHistory.length;
 
