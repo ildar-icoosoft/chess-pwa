@@ -1,10 +1,10 @@
 import { Formik, FormikHelpers } from "formik";
 import React, { FC, FormEvent } from "react";
-import { CreateSeekData } from "../../interfaces/CreateSeekData";
-import { ChallengeAiData } from "../../interfaces/ChallengeAiData";
 import { Alert, Form } from "react-bootstrap";
 import cx from "classnames";
-import css from "../challenge-ai-modal/ChallengeAiForm.module.scss";
+import { CreateSeekData } from "../../interfaces/CreateSeekData";
+import { ChallengeAiData } from "../../interfaces/ChallengeAiData";
+import css from "./CreateSeekForm.module.scss";
 
 export interface CreateSeekFormProps {
   onSubmit?(
