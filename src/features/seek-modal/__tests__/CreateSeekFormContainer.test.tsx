@@ -8,6 +8,7 @@ import { CreateSeekForm } from "../CreateSeekForm";
 import ChallengeAiFormContainer from "../../challenge-ai-modal/ChallengeAiFormContainer";
 import { ChallengeAiForm } from "../../challenge-ai-modal/ChallengeAiForm";
 import { challengeAi, createSeek } from "../../challenge/challengeSlice";
+import { defaultGameSample } from "../../../test-utils/data-sample/game";
 
 jest.mock("../../challenge/challengeSlice");
 
@@ -60,6 +61,63 @@ describe("CreateSeekFormContainer", () => {
       });
 
       expect(dispatch).toBeCalledWith(createSeekReturnedValue);
+    });
+
+    it("should handle dispatch(createSeek()) success", async () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() => Promise.resolve(defaultGameSample));
+
+      const testRenderer = TestRenderer.create(<CreateSeekFormContainer />);
+      const testInstance = testRenderer.root;
+
+      const createSeekForm = testInstance.findByType(CreateSeekForm);
+
+      await TestRenderer.act(async () => {
+        createSeekForm.props.onSubmit({
+          color: "random",
+          clockLimit: 300,
+          clockIncrement: 10,
+        });
+      });
+
+      const push = useHistory().push as jest.Mock;
+
+      expect(push).toBeCalledTimes(1);
+      expect(push).toBeCalledWith("/game/1");
+    });
+
+    it("should handle dispatch(createSeek()) fail 401", async () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() =>
+        Promise.reject({
+          statusCode: 401,
+        })
+      );
+
+      const testRenderer = TestRenderer.create(<CreateSeekFormContainer />);
+      const testInstance = testRenderer.root;
+
+      const createSeekForm = testInstance.findByType(CreateSeekForm);
+
+      const formikSetStatusFn = jest.fn();
+
+      await TestRenderer.act(async () => {
+        createSeekForm.props.onSubmit(
+          {
+            color: "random",
+            clockLimit: 300,
+            clockIncrement: 10,
+          },
+          {
+            setStatus: formikSetStatusFn,
+          }
+        );
+      });
+
+      expect(formikSetStatusFn).toBeCalledTimes(1);
+      expect(formikSetStatusFn).toBeCalledWith(
+        "You must log in to create a game"
+      );
     });
   });
 });

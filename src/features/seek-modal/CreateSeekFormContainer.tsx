@@ -3,18 +3,21 @@ import { CreateSeekForm } from "./CreateSeekForm";
 import { FormikHelpers } from "formik";
 import { createSeek } from "../challenge/challengeSlice";
 import { CreateSeekData } from "../../interfaces/CreateSeekData";
-import { CreateSeekResult } from "../../interfaces/CreateSeekResult";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
+import Game from "../../interfaces/Game";
+import { useHistory } from "react-router-dom";
 
 const CreateSeekFormContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const history = useHistory();
+
   const handleSubmit = useCallback(
     (values: CreateSeekData, formikHelpers: FormikHelpers<CreateSeekData>) => {
       return dispatch(createSeek(values))
-        .then((result: CreateSeekResult) => {
-          // history.push(`/game/${game.id}`);
+        .then((game: Game) => {
+          history.push(`/game/${game.id}`);
         })
         .catch((err) => {
           if (err.statusCode === 401) {

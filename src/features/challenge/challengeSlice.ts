@@ -12,7 +12,7 @@ import Game from "../../interfaces/Game";
 import ioClient from "../../services/ioClient";
 import gameSchema from "../../normalizr/schemas/gameSchema";
 import { CreateSeekData } from "../../interfaces/CreateSeekData";
-import { CreateSeekResult } from "../../interfaces/CreateSeekResult";
+import { defaultGameSample } from "../../test-utils/data-sample/game";
 
 interface ChallengeState {}
 
@@ -64,12 +64,10 @@ export const challengeAi = (data: ChallengeAiData): AppThunk<Promise<Game>> => (
   });
 };
 
-export const createSeek = (
-  data: CreateSeekData
-): AppThunk<Promise<CreateSeekResult>> => (dispatch) => {
-  return Promise.resolve({
-    gameId: 1,
-  });
+export const createSeek = (data: CreateSeekData): AppThunk<Promise<Game>> => (
+  dispatch
+) => {
+  return Promise.resolve(defaultGameSample);
 
   /*dispatch(challengeAiRequest());
 
