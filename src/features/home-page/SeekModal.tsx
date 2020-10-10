@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Modal } from "react-bootstrap";
+import CreateSeekFormContainer from "../seek-modal/CreateSeekFormContainer";
 
 export interface SeekModalProps {
   show?: boolean;
@@ -13,7 +14,9 @@ export const SeekModal: FC<SeekModalProps> = ({ show = false, onHide }) => {
         <Modal.Title>Create a game</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>ok</Modal.Body>
+      <Modal.Body>
+        <CreateSeekFormContainer />
+      </Modal.Body>
     </Modal>
   );
 };
