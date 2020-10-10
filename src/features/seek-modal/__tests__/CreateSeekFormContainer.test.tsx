@@ -5,9 +5,7 @@ import { useHistory } from "react-router-dom";
 import mountTest from "../../../test-utils/mountTest";
 import CreateSeekFormContainer from "../CreateSeekFormContainer";
 import { CreateSeekForm } from "../CreateSeekForm";
-import ChallengeAiFormContainer from "../../challenge-ai-modal/ChallengeAiFormContainer";
-import { ChallengeAiForm } from "../../challenge-ai-modal/ChallengeAiForm";
-import { challengeAi, createSeek } from "../../challenge/challengeSlice";
+import { createSeek } from "../../challenge/challengeSlice";
 import { defaultGameSample } from "../../../test-utils/data-sample/game";
 
 jest.mock("../../challenge/challengeSlice");
