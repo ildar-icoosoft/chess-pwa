@@ -119,5 +119,37 @@ describe("CreateSeekFormContainer", () => {
         "You must log in to create a game"
       );
     });
+
+    it("should handle dispatch(createSeek()) fail NOT 401", async () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() =>
+        Promise.reject({
+          statusCode: 500,
+        })
+      );
+
+      const testRenderer = TestRenderer.create(<CreateSeekFormContainer />);
+      const testInstance = testRenderer.root;
+
+      const createSeekForm = testInstance.findByType(CreateSeekForm);
+
+      const formikSetStatusFn = jest.fn();
+
+      await TestRenderer.act(async () => {
+        createSeekForm.props.onSubmit(
+          {
+            color: "random",
+            clockLimit: 300,
+            clockIncrement: 10,
+          },
+          {
+            setStatus: formikSetStatusFn,
+          }
+        );
+      });
+
+      expect(formikSetStatusFn).toBeCalledTimes(1);
+      expect(formikSetStatusFn).toBeCalledWith("Internal server error");
+    });
   });
 });
