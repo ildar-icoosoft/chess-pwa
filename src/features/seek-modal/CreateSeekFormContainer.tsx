@@ -27,7 +27,7 @@ const CreateSeekFormContainer: FC<unknown> = () => {
           }
         });
     },
-    [dispatch]
+    [dispatch, history]
   );
 
   return <CreateSeekForm onSubmit={handleSubmit} />;
