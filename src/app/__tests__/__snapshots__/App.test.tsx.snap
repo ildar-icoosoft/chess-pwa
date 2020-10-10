@@ -42,6 +42,15 @@ exports[`App Snapshot 1`] = `
   >
     <button
       className="btn btn-primary"
+      data-testid="create-game-btn"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Create a game
+    </button>
+    <button
+      className="btn btn-primary"
       data-testid="challenge-ai-btn"
       disabled={false}
       onClick={[Function]}

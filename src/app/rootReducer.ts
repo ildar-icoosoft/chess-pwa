@@ -5,9 +5,9 @@ import gamesListReducer from "../features/games-list/gamesListSlice";
 import currentUserReducer from "../features/current-user/currentUserSlice";
 import authModalReducer from "../features/auth-modal/authModalSlice";
 import challengeAiModalReducer from "../features/challenge-ai-modal/challengeAiModalSlice";
+import seekModalReducer from "../features/seek-modal/seekModalSlice";
 import entitiesReducer from "../features/entities/entitiesSlice";
 import singleGameReducer from "../features/single-game/singleGameSlice";
-// import dataSubscriptionReducer from "../redux/slices/dataSubscriptionSlice";
 
 const rootReducer = combineReducers({
   authModal: authModalReducer,
@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
   entities: entitiesReducer,
   // dataSubscription: dataSubscriptionReducer,
   singleGame: singleGameReducer,
+  seekModal: seekModalReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
