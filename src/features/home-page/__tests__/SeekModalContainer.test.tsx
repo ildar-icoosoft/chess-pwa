@@ -8,6 +8,7 @@ import {
 } from "../../../test-utils/data-sample/state";
 import SeekModalContainer from "../SeekModalContainer";
 import { SeekModal } from "../SeekModal";
+import { hideSeekModal } from "../../seek-modal/seekModalSlice";
 
 jest.mock("../../seek-modal/seekModalSlice");
 
@@ -58,30 +59,28 @@ describe("SeekModalContainer", () => {
     });
   });
 
-  /*
-
   describe("dispatch() calls", () => {
     it("should call dispatch(hideChallengeAiModal())", () => {
       const dispatch = useDispatch<jest.Mock>();
-      const hideChallengeAiModalReturnedValue = Symbol("hideChallengeAiModal");
+      const hideSeekModalReturnedValue = Symbol("hideChallengeAiModal");
 
-      const testRenderer = TestRenderer.create(<ChallengeAiModalContainer />);
+      const testRenderer = TestRenderer.create(<SeekModalContainer />);
       const testInstance = testRenderer.root;
 
-      const challengeAiModal = testInstance.findByType(ChallengeAiModal);
+      const seekModal = testInstance.findByType(SeekModal);
 
-      const hideChallengeAiModalFn = (hideChallengeAiModal as unknown) as jest.Mock;
-      hideChallengeAiModalFn.mockClear();
-      hideChallengeAiModalFn.mockReturnValue(hideChallengeAiModalReturnedValue);
+      const hideSeekModalFn = (hideSeekModal as unknown) as jest.Mock;
+      hideSeekModalFn.mockClear();
+      hideSeekModalFn.mockReturnValue(hideSeekModalReturnedValue);
 
       TestRenderer.act(() => {
-        challengeAiModal.props.onHide();
+        seekModal.props.onHide();
       });
 
-      expect(hideChallengeAiModalFn).toBeCalledTimes(1);
-      expect(hideChallengeAiModalFn).toBeCalledWith();
+      expect(hideSeekModalFn).toBeCalledTimes(1);
+      expect(hideSeekModalFn).toBeCalledWith();
 
-      expect(dispatch).toBeCalledWith(hideChallengeAiModalReturnedValue);
+      expect(dispatch).toBeCalledWith(hideSeekModalReturnedValue);
     });
-  });*/
+  });
 });

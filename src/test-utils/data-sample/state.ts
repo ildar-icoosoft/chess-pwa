@@ -48,6 +48,9 @@ export const stateWithDataSample: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  seekModal: {
+    isSeekModalVisible: false,
+  },
   singleGame: {},
   gamesList: {
     isLoading: false,
@@ -94,6 +97,9 @@ export const stateWithDataSample2: RootState = {
   },
   challengeAiModal: {
     isChallengeAiModalVisible: false,
+  },
+  seekModal: {
+    isSeekModalVisible: false,
   },
   singleGame: {
     "1": {
@@ -149,6 +155,9 @@ export const stateWithDataSample3: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  seekModal: {
+    isSeekModalVisible: false,
+  },
   singleGame: {
     "1": {
       isLoading: true,
@@ -202,6 +211,9 @@ export const stateWithDataSample4: RootState = {
   },
   challengeAiModal: {
     isChallengeAiModalVisible: false,
+  },
+  seekModal: {
+    isSeekModalVisible: false,
   },
   singleGame: {},
   gamesList: {
