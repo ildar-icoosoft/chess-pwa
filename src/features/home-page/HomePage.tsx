@@ -4,11 +4,13 @@ import OngoingGamesContainer from "../games-list/OngoingGamesContainer";
 import ChallengeButtonsContainer from "./ChallengeButtonsContainer";
 import ChallengeAiModalContainer from "./ChallengeAiModalContainer";
 import CompletedGamesContainer from "../games-list/CompletedGamesContainer";
+import SeekModalContainer from "./SeekModalContainer";
 
 const HomePage: FC<unknown> = () => {
   return (
     <>
       <ChallengeAiModalContainer />
+      <SeekModalContainer />
       <div className="d-flex justify-content-center">
         <ChallengeButtonsContainer />
       </div>

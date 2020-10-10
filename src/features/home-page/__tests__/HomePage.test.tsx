@@ -8,6 +8,7 @@ import { defaultState } from "../../../test-utils/data-sample/state";
 import ChallengeButtonsContainer from "../ChallengeButtonsContainer";
 import ChallengeAiModalContainer from "../ChallengeAiModalContainer";
 import CompletedGamesContainer from "../../games-list/CompletedGamesContainer";
+import SeekModalContainer from "../SeekModalContainer";
 
 describe("HomePage", () => {
   beforeEach(() => {
@@ -49,6 +50,13 @@ describe("HomePage", () => {
       expect(testInstance.findAllByType(ChallengeAiModalContainer).length).toBe(
         1
       );
+    });
+
+    it("contains SeekModalContainer", () => {
+      const testRenderer = TestRenderer.create(<HomePage />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(SeekModalContainer).length).toBe(1);
     });
   });
 });
