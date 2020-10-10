@@ -1,12 +1,16 @@
 import React, { FC } from "react";
 import { SeekModal } from "./SeekModal";
+import { RootState } from "../../app/rootReducer";
+import { useSelector } from "react-redux";
 
 const SeekModalContainer: FC<unknown> = () => {
-  return <SeekModal />;
-
-  /*const { isSeekModalVisible } = useSelector(
+  const { isSeekModalVisible } = useSelector(
     (state: RootState) => state.seekModal
   );
+
+  return <SeekModal show={isSeekModalVisible} />;
+
+  /*
 
   const dispatch = useDispatch();
 

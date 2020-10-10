@@ -2,7 +2,10 @@ import TestRenderer from "react-test-renderer";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import mountTest from "../../../test-utils/mountTest";
-import { defaultState } from "../../../test-utils/data-sample/state";
+import {
+  defaultState,
+  makeStateSample,
+} from "../../../test-utils/data-sample/state";
 import SeekModalContainer from "../SeekModalContainer";
 import { SeekModal } from "../SeekModal";
 
@@ -17,7 +20,7 @@ describe("SeekModalContainer", () => {
   mountTest(SeekModalContainer);
 
   describe("children components", () => {
-    it("contains ChallengeAiModal", () => {
+    it("contains SeekModal", () => {
       const testRenderer = TestRenderer.create(<SeekModalContainer />);
       const testInstance = testRenderer.root;
 
@@ -25,35 +28,37 @@ describe("SeekModalContainer", () => {
     });
   });
 
-  /*describe("children components props", () => {
-    describe("ChallengeAiModal", () => {
+  describe("children components props", () => {
+    describe("SeekModal", () => {
       it("show", () => {
-        const testRenderer = TestRenderer.create(<ChallengeAiModalContainer />);
+        const testRenderer = TestRenderer.create(<SeekModalContainer />);
         const testInstance = testRenderer.root;
 
-        const challengeAiModal = testInstance.findByType(ChallengeAiModal);
+        const seekModal = testInstance.findByType(SeekModal);
 
-        expect(challengeAiModal.props.show).toBeFalsy();
+        expect(seekModal.props.show).toBeFalsy();
 
-        const stateWithChallengeAiModal = makeStateSample(
+        const stateWithSeekModal = makeStateSample(
           {
-            challengeAiModal: {
-              isChallengeAiModalVisible: true,
+            seekModal: {
+              isSeekModalVisible: true,
             },
           },
           defaultState
         );
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithChallengeAiModal)
+          cb(stateWithSeekModal)
         );
 
-        testRenderer.update(<ChallengeAiModalContainer />);
+        testRenderer.update(<SeekModalContainer />);
 
-        expect(challengeAiModal.props.show).toBeTruthy();
+        expect(seekModal.props.show).toBeTruthy();
       });
     });
   });
+
+  /*
 
   describe("dispatch() calls", () => {
     it("should call dispatch(hideChallengeAiModal())", () => {

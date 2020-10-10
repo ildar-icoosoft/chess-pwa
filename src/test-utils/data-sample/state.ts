@@ -12,6 +12,9 @@ export const defaultState: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  seekModal: {
+    isSeekModalVisible: false,
+  },
   singleGame: {},
   gamesList: {
     isLoading: false,
