@@ -11,6 +11,8 @@ import { AppThunk } from "../../app/store";
 import Game from "../../interfaces/Game";
 import ioClient from "../../services/ioClient";
 import gameSchema from "../../normalizr/schemas/gameSchema";
+import { CreateSeekData } from "../../interfaces/CreateSeekData";
+import { CreateSeekResult } from "../../interfaces/CreateSeekResult";
 
 interface ChallengeState {}
 
@@ -60,4 +62,32 @@ export const challengeAi = (data: ChallengeAiData): AppThunk<Promise<Game>> => (
       }
     );
   });
+};
+
+export const createSeek = (
+  data: CreateSeekData
+): AppThunk<Promise<CreateSeekResult>> => (dispatch) => {
+  return Promise.resolve({
+    gameId: 1,
+  });
+
+  /*dispatch(challengeAiRequest());
+
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(
+      `/api/v1/challenge/ai`,
+      data,
+      (body: unknown, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          const normalizedGame = normalize(body as Game, gameSchema);
+
+          dispatch(challengeAiSuccess(normalizedGame));
+          resolve(body as Game);
+        } else {
+          dispatch(challengeAiError(body as string));
+          reject(jwr);
+        }
+      }
+    );
+  });*/
 };
