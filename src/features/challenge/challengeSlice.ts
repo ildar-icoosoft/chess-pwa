@@ -28,6 +28,12 @@ const challengeSlice = createSlice({
       _action: PayloadAction<NormalizedData<number>>
     ) {},
     challengeAiError(_state, _action: PayloadAction<string>) {},
+    createSeekRequest() {},
+    createSeekSuccess(
+      _state,
+      _action: PayloadAction<NormalizedData<number>>
+    ) {},
+    createSeekError(_state, _action: PayloadAction<string>) {},
   },
   extraReducers: {},
 });
@@ -36,6 +42,9 @@ export const {
   challengeAiRequest,
   challengeAiSuccess,
   challengeAiError,
+  createSeekRequest,
+  createSeekSuccess,
+  createSeekError,
 } = challengeSlice.actions;
 
 export default challengeSlice.reducer;
@@ -67,25 +76,23 @@ export const challengeAi = (data: ChallengeAiData): AppThunk<Promise<Game>> => (
 export const createSeek = (data: CreateSeekData): AppThunk<Promise<Game>> => (
   dispatch
 ) => {
-  return Promise.resolve(defaultGameSample);
-
-  /*dispatch(challengeAiRequest());
+  dispatch(createSeekRequest());
 
   return new Promise((resolve, reject) => {
     ioClient.socket.post(
-      `/api/v1/challenge/ai`,
+      `/api/v1/board/seek`,
       data,
       (body: unknown, jwr: JWR) => {
         if (jwr.statusCode === 200) {
           const normalizedGame = normalize(body as Game, gameSchema);
 
-          dispatch(challengeAiSuccess(normalizedGame));
+          dispatch(createSeekSuccess(normalizedGame));
           resolve(body as Game);
         } else {
-          dispatch(challengeAiError(body as string));
+          dispatch(createSeekError(body as string));
           reject(jwr);
         }
       }
     );
-  });*/
+  });
 };
