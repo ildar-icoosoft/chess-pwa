@@ -1,5 +1,5 @@
 import { Formik, FormikHelpers } from "formik";
-import React, { FC, FormEvent } from "react";
+import React, { FC, FormEvent, useCallback } from "react";
 import { Alert, Button, Form, Spinner } from "react-bootstrap";
 import cx from "classnames";
 import { CreateSeekData } from "../../interfaces/CreateSeekData";
@@ -11,9 +11,19 @@ export interface CreateSeekFormProps {
     values: CreateSeekData,
     formikHelpers: FormikHelpers<CreateSeekData>
   ): void | Promise<any>;
+  onAbort?(): void;
 }
 
-export const CreateSeekForm: FC<CreateSeekFormProps> = ({ onSubmit }) => {
+export const CreateSeekForm: FC<CreateSeekFormProps> = ({
+  onSubmit,
+  onAbort,
+}) => {
+  const handleAbort = useCallback(() => {
+    if (onAbort) {
+      onAbort();
+    }
+  }, [onAbort]);
+
   return (
     <Formik
       initialValues={{
@@ -117,7 +127,11 @@ export const CreateSeekForm: FC<CreateSeekFormProps> = ({ onSubmit }) => {
                 <span className="sr-only">Waiting for opponent...</span>
               </Spinner>
 
-              <Button variant="danger" className={css.spinnerButton}>
+              <Button
+                variant="danger"
+                className={css.spinnerButton}
+                onClick={handleAbort}
+              >
                 Abort
               </Button>
             </div>
