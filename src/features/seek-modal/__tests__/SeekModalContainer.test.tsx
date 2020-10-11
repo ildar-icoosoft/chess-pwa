@@ -43,6 +43,7 @@ describe("SeekModalContainer", () => {
           {
             seekModal: {
               isSeekModalVisible: true,
+              allowCloseSeekModal: true,
             },
           },
           defaultState
@@ -55,6 +56,33 @@ describe("SeekModalContainer", () => {
         testRenderer.update(<SeekModalContainer />);
 
         expect(seekModal.props.show).toBeTruthy();
+      });
+
+      it("allowClose", () => {
+        const testRenderer = TestRenderer.create(<SeekModalContainer />);
+        const testInstance = testRenderer.root;
+
+        const seekModal = testInstance.findByType(SeekModal);
+
+        expect(seekModal.props.allowClose).toBeTruthy();
+
+        const stateWithSeekModal = makeStateSample(
+          {
+            seekModal: {
+              isSeekModalVisible: true,
+              allowCloseSeekModal: false,
+            },
+          },
+          defaultState
+        );
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithSeekModal)
+        );
+
+        testRenderer.update(<SeekModalContainer />);
+
+        expect(seekModal.props.allowClose).toBeFalsy();
       });
     });
   });

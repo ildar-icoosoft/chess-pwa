@@ -5,7 +5,7 @@ import { RootState } from "../../app/rootReducer";
 import { hideSeekModal } from "./seekModalSlice";
 
 const SeekModalContainer: FC<unknown> = () => {
-  const { isSeekModalVisible } = useSelector(
+  const { isSeekModalVisible, allowCloseSeekModal } = useSelector(
     (state: RootState) => state.seekModal
   );
 
@@ -15,7 +15,13 @@ const SeekModalContainer: FC<unknown> = () => {
     dispatch(hideSeekModal());
   }, [dispatch]);
 
-  return <SeekModal show={isSeekModalVisible} onHide={handleHide} />;
+  return (
+    <SeekModal
+      allowClose={allowCloseSeekModal}
+      show={isSeekModalVisible}
+      onHide={handleHide}
+    />
+  );
 };
 
 export default SeekModalContainer;

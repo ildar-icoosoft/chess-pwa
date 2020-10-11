@@ -14,6 +14,7 @@ export const defaultState: RootState = {
   },
   seekModal: {
     isSeekModalVisible: false,
+    allowCloseSeekModal: true,
   },
   singleGame: {},
   gamesList: {
@@ -50,6 +51,7 @@ export const stateWithDataSample: RootState = {
   },
   seekModal: {
     isSeekModalVisible: false,
+    allowCloseSeekModal: true,
   },
   singleGame: {},
   gamesList: {
@@ -100,6 +102,7 @@ export const stateWithDataSample2: RootState = {
   },
   seekModal: {
     isSeekModalVisible: false,
+    allowCloseSeekModal: true,
   },
   singleGame: {
     "1": {
@@ -157,6 +160,7 @@ export const stateWithDataSample3: RootState = {
   },
   seekModal: {
     isSeekModalVisible: false,
+    allowCloseSeekModal: true,
   },
   singleGame: {
     "1": {
@@ -214,6 +218,7 @@ export const stateWithDataSample4: RootState = {
   },
   seekModal: {
     isSeekModalVisible: false,
+    allowCloseSeekModal: true,
   },
   singleGame: {},
   gamesList: {
