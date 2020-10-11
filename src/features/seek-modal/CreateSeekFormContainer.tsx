@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import Game from "../../interfaces/Game";
 import { useHistory } from "react-router-dom";
+import ioClient from "../../services/ioClient";
 
 const CreateSeekFormContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,6 +23,8 @@ const CreateSeekFormContainer: FC<unknown> = () => {
         .catch((err) => {
           if (err.statusCode === 401) {
             formikHelpers.setStatus("You must log in to create a game");
+          } else if (err.statusCode === 0) {
+            // request is aborted by client. do nothing
           } else {
             formikHelpers.setStatus("Internal server error");
           }
@@ -30,7 +33,15 @@ const CreateSeekFormContainer: FC<unknown> = () => {
     [dispatch, history]
   );
 
-  return <CreateSeekForm onSubmit={handleSubmit} />;
+  // @todo. This is temporary solution. We need to use HTTP requests instead of sockets and we need
+  //  to abort the createSeek HTTP request instead of sockets disconnect.
+  const handleAbort = useCallback(() => {
+    // @ts-ignore
+    ioClient.socket.disconnect();
+    ioClient.socket.reconnect();
+  }, []);
+
+  return <CreateSeekForm onSubmit={handleSubmit} onAbort={handleAbort} />;
 };
 
 export default CreateSeekFormContainer;

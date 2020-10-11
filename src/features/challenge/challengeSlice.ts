@@ -5,6 +5,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JWR } from "sails.io.js";
 import { normalize } from "normalizr";
+import { isString as _isString } from "lodash";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 import { ChallengeAiData } from "../../interfaces/ChallengeAiData";
 import { AppThunk } from "../../app/store";
@@ -88,7 +89,9 @@ export const createSeek = (data: CreateSeekData): AppThunk<Promise<Game>> => (
           dispatch(createSeekSuccess(normalizedGame));
           resolve(body as Game);
         } else {
-          dispatch(createSeekError(body as string));
+          dispatch(
+            createSeekError(_isString(body) ? body : "Internal server error")
+          );
           reject(jwr);
         }
       }

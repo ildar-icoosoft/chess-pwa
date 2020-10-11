@@ -7,8 +7,11 @@ import CreateSeekFormContainer from "../CreateSeekFormContainer";
 import { CreateSeekForm } from "../CreateSeekForm";
 import { createSeek } from "../../challenge/challengeSlice";
 import { defaultGameSample } from "../../../test-utils/data-sample/game";
+import ioClient from "../../../services/ioClient";
+import { JWR, RequestCallback } from "sails.io.js";
 
 jest.mock("../../challenge/challengeSlice");
+jest.mock("../../../services/ioClient");
 
 describe("CreateSeekFormContainer", () => {
   beforeEach(() => {
@@ -118,7 +121,39 @@ describe("CreateSeekFormContainer", () => {
       );
     });
 
-    it("should handle dispatch(createSeek()) fail NOT 401", async () => {
+    // 0 statusCode is for aborted request
+    it("should handle dispatch(createSeek()) fail 0", async () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() =>
+        Promise.reject({
+          statusCode: 0,
+        })
+      );
+
+      const testRenderer = TestRenderer.create(<CreateSeekFormContainer />);
+      const testInstance = testRenderer.root;
+
+      const createSeekForm = testInstance.findByType(CreateSeekForm);
+
+      const formikSetStatusFn = jest.fn();
+
+      await TestRenderer.act(async () => {
+        createSeekForm.props.onSubmit(
+          {
+            color: "random",
+            clockLimit: 300,
+            clockIncrement: 10,
+          },
+          {
+            setStatus: formikSetStatusFn,
+          }
+        );
+      });
+
+      expect(formikSetStatusFn).toBeCalledTimes(0);
+    });
+
+    it("should handle dispatch(createSeek()) fail NOT 401 and NOT 0", async () => {
       const dispatch = useDispatch<jest.Mock>();
       dispatch.mockImplementationOnce(() =>
         Promise.reject({
@@ -149,5 +184,26 @@ describe("CreateSeekFormContainer", () => {
       expect(formikSetStatusFn).toBeCalledTimes(1);
       expect(formikSetStatusFn).toBeCalledWith("Internal server error");
     });
+  });
+
+  it("should abort createSeek() request", () => {
+    const testRenderer = TestRenderer.create(<CreateSeekFormContainer />);
+    const testInstance = testRenderer.root;
+
+    const createSeekForm = testInstance.findByType(CreateSeekForm);
+
+    // @ts-ignore
+    const disconnectFn = ioClient.socket.disconnect as jest.Mock;
+    const reconnectFn = ioClient.socket.reconnect as jest.Mock;
+
+    TestRenderer.act(() => {
+      createSeekForm.props.onAbort();
+    });
+
+    expect(disconnectFn).toBeCalledTimes(1);
+    expect(disconnectFn).toBeCalledWith();
+
+    expect(reconnectFn).toBeCalledTimes(1);
+    expect(reconnectFn).toBeCalledWith();
   });
 });
