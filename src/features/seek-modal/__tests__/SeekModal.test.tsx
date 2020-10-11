@@ -4,6 +4,8 @@ import { Modal } from "react-bootstrap";
 import mountTest from "../../../test-utils/mountTest";
 import { SeekModal } from "../SeekModal";
 
+// @todo. need to test content of Modal
+
 describe("SeekModal", () => {
   mountTest(SeekModal);
 
@@ -18,6 +20,19 @@ describe("SeekModal", () => {
 
   describe("children components props", () => {
     describe("Modal", () => {
+      it("backdrop", () => {
+        const testRenderer = TestRenderer.create(<SeekModal />);
+        const testInstance = testRenderer.root;
+
+        const modal = testInstance.findByType(Modal);
+
+        expect(modal.props.backdrop).toBe(true);
+
+        testRenderer.update(<SeekModal allowClose={false} />);
+
+        expect(modal.props.backdrop).toBe("static");
+      });
+
       it("show", () => {
         const testRenderer = TestRenderer.create(<SeekModal />);
         const testInstance = testRenderer.root;
