@@ -1,6 +1,6 @@
 import { Formik, FormikHelpers } from "formik";
 import React, { FC, FormEvent } from "react";
-import { Alert, Form } from "react-bootstrap";
+import { Alert, Button, Form, Spinner } from "react-bootstrap";
 import cx from "classnames";
 import { CreateSeekData } from "../../interfaces/CreateSeekData";
 import { ChallengeAiData } from "../../interfaces/ChallengeAiData";
@@ -110,6 +110,18 @@ export const CreateSeekForm: FC<CreateSeekFormProps> = ({ onSubmit }) => {
               <i />
             </button>
           </div>
+
+          {isSubmitting && (
+            <div className={css.spinnerWrapper}>
+              <Spinner animation="border" className={css.spinner}>
+                <span className="sr-only">Waiting for opponent...</span>
+              </Spinner>
+
+              <Button variant="danger" className={css.spinnerButton}>
+                Abort
+              </Button>
+            </div>
+          )}
         </Form>
       )}
     </Formik>

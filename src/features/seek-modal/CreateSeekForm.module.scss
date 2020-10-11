@@ -65,3 +65,15 @@
   width: 65px;
   height: 65px;
 }
+
+.spinnerWrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.spinner {
+}
+.spinnerButton {
+  align-self: stretch;
+}
