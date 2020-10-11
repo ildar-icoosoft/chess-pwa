@@ -23,11 +23,12 @@ export const ChallengeButtons: FC<ChallengeButtonsProps> = ({
   }, [onCreateGame]);
 
   return (
-    <>
+    <div className="mb-3">
       <Button
         variant="primary"
         onClick={handleCreateGame}
         data-testid="create-game-btn"
+        className="mr-3"
       >
         Create a game
       </Button>
@@ -38,6 +39,6 @@ export const ChallengeButtons: FC<ChallengeButtonsProps> = ({
       >
         Play with the computer
       </Button>
-    </>
+    </div>
   );
 };
