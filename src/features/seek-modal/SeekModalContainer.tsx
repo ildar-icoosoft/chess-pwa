@@ -2,7 +2,7 @@ import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SeekModal } from "./SeekModal";
 import { RootState } from "../../app/rootReducer";
-import { hideSeekModal } from "../seek-modal/seekModalSlice";
+import { hideSeekModal } from "./seekModalSlice";
 
 const SeekModalContainer: FC<unknown> = () => {
   const { isSeekModalVisible } = useSelector(

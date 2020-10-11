@@ -8,9 +8,9 @@ import {
 } from "../../../test-utils/data-sample/state";
 import SeekModalContainer from "../SeekModalContainer";
 import { SeekModal } from "../SeekModal";
-import { hideSeekModal } from "../../seek-modal/seekModalSlice";
+import { hideSeekModal } from "../seekModalSlice";
 
-jest.mock("../../seek-modal/seekModalSlice");
+jest.mock("../seekModalSlice");
 
 describe("SeekModalContainer", () => {
   beforeEach(() => {

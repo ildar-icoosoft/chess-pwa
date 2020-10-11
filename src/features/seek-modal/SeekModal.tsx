@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Modal } from "react-bootstrap";
-import CreateSeekFormContainer from "../seek-modal/CreateSeekFormContainer";
+import CreateSeekFormContainer from "./CreateSeekFormContainer";
 
 export interface SeekModalProps {
   show?: boolean;

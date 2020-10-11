@@ -8,7 +8,7 @@ import { defaultState } from "../../../test-utils/data-sample/state";
 import ChallengeButtonsContainer from "../ChallengeButtonsContainer";
 import ChallengeAiModalContainer from "../ChallengeAiModalContainer";
 import CompletedGamesContainer from "../../games-list/CompletedGamesContainer";
-import SeekModalContainer from "../SeekModalContainer";
+import SeekModalContainer from "../../seek-modal/SeekModalContainer";
 
 describe("HomePage", () => {
   beforeEach(() => {
