@@ -64,6 +64,7 @@ export const CreateSeekForm: FC<CreateSeekFormProps> = ({
                 Minutes per side: {values.clockLimit / 60}
               </Form.Label>
               <Form.Control
+                disabled={isSubmitting}
                 type="range"
                 name="clockLimit"
                 onBlur={handleBlur}
@@ -80,6 +81,7 @@ export const CreateSeekForm: FC<CreateSeekFormProps> = ({
                 Increment in seconds: {values.clockIncrement}
               </Form.Label>
               <Form.Control
+                disabled={isSubmitting}
                 type="range"
                 name="clockIncrement"
                 onBlur={handleBlur}
