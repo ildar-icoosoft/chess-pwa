@@ -26,9 +26,9 @@ export const normalizedDefaultSeekSample: NormalizedSeekEntity = {
 export const seekSample2: Seek = {
   id: 2,
   color: "black",
-  clockLimit: 300,
+  clockLimit: 600,
   createdAt: 0,
-  clockIncrement: 5,
+  clockIncrement: 3,
   createdBy: userSample,
   game: defaultGameSample,
 };

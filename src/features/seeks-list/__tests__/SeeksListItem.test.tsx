@@ -2,9 +2,10 @@ import mountTest from "../../../test-utils/mountTest";
 import { render } from "@testing-library/react";
 import React from "react";
 import { SeeksListItem } from "../SeeksListItem";
-import { GameMeta } from "../../single-game/GameMeta";
-import { gameSample3 } from "../../../test-utils/data-sample/game";
-import { defaultSeekSample } from "../../../test-utils/data-sample/seek";
+import {
+  defaultSeekSample,
+  seekSample2,
+} from "../../../test-utils/data-sample/seek";
 
 describe("SeeksListItem", () => {
   mountTest(SeeksListItem);
@@ -21,6 +22,32 @@ describe("SeeksListItem", () => {
       );
 
       expect(getByTestId("user-name")).toHaveTextContent("Thomas Miller");
+    });
+
+    it("should contain time control", () => {
+      const { queryByTestId, rerender } = render(
+        <SeeksListItem seek={defaultSeekSample} />
+      );
+
+      const timeControl = queryByTestId("time-control");
+
+      expect(timeControl).toHaveTextContent("5 + 5");
+
+      rerender(<SeeksListItem seek={seekSample2} />);
+
+      expect(timeControl).toHaveTextContent("10 + 3");
+    });
+
+    it("should contain play button", () => {
+      const { queryByTestId, rerender } = render(
+        <SeeksListItem seek={defaultSeekSample} />
+      );
+
+      expect(queryByTestId("play-btn-1")).toBeInTheDocument();
+
+      render(<SeeksListItem seek={seekSample2} />);
+
+      expect(queryByTestId("play-btn-2")).toBeInTheDocument();
     });
   });
 });
