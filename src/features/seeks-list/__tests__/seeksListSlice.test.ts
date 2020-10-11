@@ -2,7 +2,15 @@ import seeksListReducer, {
   getSeeksListRequest,
   getSeeksListSuccess,
   getSeeksListError,
+  fetchSeeks,
 } from "../seeksListSlice";
+import ioClient from "../../../services/ioClient";
+import { JWR, RequestCallback } from "sails.io.js";
+import { defaultState } from "../../../test-utils/data-sample/state";
+import {
+  defaultSeekSample,
+  normalizedDefaultSeekSample,
+} from "../../../test-utils/data-sample/seek";
 
 jest.mock("../../../services/ioClient");
 
@@ -78,6 +86,76 @@ describe("seeksListSlice reducer", () => {
       isLoading: false,
       error: "error text",
       items: [],
+    });
+  });
+
+  describe("should handle fetchSeeks", () => {
+    it("success", async () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.get as jest.Mock).mockImplementationOnce(
+        (url: string, cb: RequestCallback) => {
+          cb([defaultSeekSample], {
+            body: [defaultSeekSample],
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+
+      const result = fetchSeeks()(dispatch, () => defaultState, null);
+
+      await expect(result).resolves.toEqual([defaultSeekSample]);
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: getSeeksListRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: getSeeksListSuccess.type,
+        payload: {
+          result: [1],
+          entities: {
+            seeks: {
+              "1": normalizedDefaultSeekSample,
+            },
+            users: {
+              "1": {
+                id: 1,
+                fullName: "Thomas Miller",
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it("fail", async () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.get as jest.Mock).mockImplementationOnce(
+        (url: string, cb: RequestCallback) => {
+          cb("internal server error", {
+            body: "internal server error",
+            statusCode: 500,
+          } as JWR);
+        }
+      );
+
+      const result = fetchSeeks()(dispatch, () => defaultState, null);
+
+      await expect(result).rejects.toEqual({
+        body: "internal server error",
+        statusCode: 500,
+      });
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: getSeeksListRequest.type,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: getSeeksListError.type,
+        payload: "internal server error",
+      });
     });
   });
 });
