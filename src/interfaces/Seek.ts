@@ -8,6 +8,6 @@ export interface Seek {
   clockLimit: number;
   createdAt: number;
   clockIncrement: number;
-  createdBy: User | null;
+  createdBy: User;
   game: Game | null;
 }
