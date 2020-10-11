@@ -1,12 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createSeekSuccess } from "../challenge/challengeSlice";
+import {
+  createSeekRequest,
+  createSeekSuccess,
+  createSeekError,
+} from "../challenge/challengeSlice";
 
 interface SeekModalState {
   isSeekModalVisible: boolean;
+  allowCloseSeekModal: boolean;
 }
 
 const initialState: SeekModalState = {
   isSeekModalVisible: false,
+  allowCloseSeekModal: true,
 };
 
 const seekModalSlice = createSlice({
@@ -21,8 +27,15 @@ const seekModalSlice = createSlice({
     },
   },
   extraReducers: {
+    [createSeekRequest.type]: (state) => {
+      state.allowCloseSeekModal = false;
+    },
     [createSeekSuccess.type]: (state) => {
       state.isSeekModalVisible = false;
+      state.allowCloseSeekModal = true;
+    },
+    [createSeekError.type]: (state) => {
+      state.allowCloseSeekModal = true;
     },
   },
 });

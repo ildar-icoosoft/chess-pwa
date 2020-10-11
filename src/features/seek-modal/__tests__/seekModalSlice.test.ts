@@ -2,7 +2,11 @@ import seekModalReducer, {
   showSeekModal,
   hideSeekModal,
 } from "../seekModalSlice";
-import { createSeekSuccess } from "../../challenge/challengeSlice";
+import {
+  createSeekRequest,
+  createSeekSuccess,
+  createSeekError,
+} from "../../challenge/challengeSlice";
 
 describe("seekModalSlice reducer", () => {
   it("should handle initial state", () => {
@@ -10,7 +14,7 @@ describe("seekModalSlice reducer", () => {
       seekModalReducer(undefined, {
         type: "",
       })
-    ).toEqual({ isSeekModalVisible: false });
+    ).toEqual({ isSeekModalVisible: false, allowCloseSeekModal: true });
   });
 
   it("should handle showSeekModal", () => {
@@ -18,6 +22,7 @@ describe("seekModalSlice reducer", () => {
       seekModalReducer(
         {
           isSeekModalVisible: false,
+          allowCloseSeekModal: false,
         },
         {
           type: showSeekModal.type,
@@ -25,6 +30,7 @@ describe("seekModalSlice reducer", () => {
       )
     ).toEqual({
       isSeekModalVisible: true,
+      allowCloseSeekModal: false,
     });
   });
 
@@ -33,6 +39,7 @@ describe("seekModalSlice reducer", () => {
       seekModalReducer(
         {
           isSeekModalVisible: true,
+          allowCloseSeekModal: false,
         },
         {
           type: hideSeekModal.type,
@@ -40,14 +47,33 @@ describe("seekModalSlice reducer", () => {
       )
     ).toEqual({
       isSeekModalVisible: false,
+      allowCloseSeekModal: false,
     });
   });
 
-  it("should handle challengeAiSuccess", () => {
+  it("should handle createSeekRequest", () => {
     expect(
       seekModalReducer(
         {
           isSeekModalVisible: true,
+          allowCloseSeekModal: true,
+        },
+        {
+          type: createSeekRequest.type,
+        }
+      )
+    ).toEqual({
+      isSeekModalVisible: true,
+      allowCloseSeekModal: false,
+    });
+  });
+
+  it("should handle createSeekSuccess", () => {
+    expect(
+      seekModalReducer(
+        {
+          isSeekModalVisible: true,
+          allowCloseSeekModal: false,
         },
         {
           type: createSeekSuccess.type,
@@ -59,6 +85,25 @@ describe("seekModalSlice reducer", () => {
       )
     ).toEqual({
       isSeekModalVisible: false,
+      allowCloseSeekModal: true,
+    });
+  });
+
+  it("should handle createSeekError", () => {
+    expect(
+      seekModalReducer(
+        {
+          isSeekModalVisible: true,
+          allowCloseSeekModal: false,
+        },
+        {
+          type: createSeekError.type,
+          payload: "error text",
+        }
+      )
+    ).toEqual({
+      isSeekModalVisible: true,
+      allowCloseSeekModal: true,
     });
   });
 });
