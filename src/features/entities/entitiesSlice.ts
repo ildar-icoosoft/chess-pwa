@@ -17,7 +17,10 @@ import {
   acceptDrawOfferSuccess,
   declineDrawOfferSuccess,
 } from "../single-game/singleGameSlice";
-import { challengeAiSuccess } from "../challenge/challengeSlice";
+import {
+  challengeAiSuccess,
+  createSeekSuccess,
+} from "../challenge/challengeSlice";
 import { oneSecondPassed } from "../game-clock/gameClockSlice";
 import {
   updateGameBySubscription,
@@ -82,6 +85,7 @@ const entitiesSlice = createSlice({
     [acceptDrawOfferSuccess.type]: getNormalizedDataReducer,
     [declineDrawOfferSuccess.type]: getNormalizedDataReducer,
     [challengeAiSuccess.type]: getNormalizedDataReducer,
+    [createSeekSuccess.type]: getNormalizedDataReducer,
     [updateGameBySubscription.type]: getNormalizedDataReducer,
     [createGameBySubscription.type]: getNormalizedDataReducer,
     [makeMoveRequest.type]: (

@@ -2,6 +2,7 @@ import seekModalReducer, {
   showSeekModal,
   hideSeekModal,
 } from "../seekModalSlice";
+import { createSeekSuccess } from "../../challenge/challengeSlice";
 
 describe("seekModalSlice reducer", () => {
   it("should handle initial state", () => {
@@ -35,6 +36,25 @@ describe("seekModalSlice reducer", () => {
         },
         {
           type: hideSeekModal.type,
+        }
+      )
+    ).toEqual({
+      isSeekModalVisible: false,
+    });
+  });
+
+  it("should handle challengeAiSuccess", () => {
+    expect(
+      seekModalReducer(
+        {
+          isSeekModalVisible: true,
+        },
+        {
+          type: createSeekSuccess.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
         }
       )
     ).toEqual({

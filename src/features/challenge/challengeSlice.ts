@@ -12,7 +12,6 @@ import Game from "../../interfaces/Game";
 import ioClient from "../../services/ioClient";
 import gameSchema from "../../normalizr/schemas/gameSchema";
 import { CreateSeekData } from "../../interfaces/CreateSeekData";
-import { defaultGameSample } from "../../test-utils/data-sample/game";
 
 interface ChallengeState {}
 

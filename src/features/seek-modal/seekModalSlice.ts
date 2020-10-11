@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSeekSuccess } from "../challenge/challengeSlice";
 
 interface SeekModalState {
   isSeekModalVisible: boolean;
@@ -16,6 +17,11 @@ const seekModalSlice = createSlice({
       state.isSeekModalVisible = true;
     },
     hideSeekModal(state) {
+      state.isSeekModalVisible = false;
+    },
+  },
+  extraReducers: {
+    [createSeekSuccess.type]: (state) => {
       state.isSeekModalVisible = false;
     },
   },

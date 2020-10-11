@@ -10,7 +10,10 @@ import {
   acceptDrawOfferSuccess,
   declineDrawOfferSuccess,
 } from "../../single-game/singleGameSlice";
-import { challengeAiSuccess } from "../../challenge/challengeSlice";
+import {
+  challengeAiSuccess,
+  createSeekSuccess,
+} from "../../challenge/challengeSlice";
 import { oneSecondPassed } from "../../game-clock/gameClockSlice";
 import { makeMoveRequest, makeMoveSuccess } from "../../move/moveSlice";
 import {
@@ -260,6 +263,18 @@ describe("entitiesSlice reducer", () => {
     expect(
       entitiesReducer(entitiesSample, {
         type: challengeAiSuccess.type,
+        payload: {
+          result: 2,
+          entities: addGamePayloadSample,
+        },
+      })
+    ).toEqual(entitiesAfterAddingGameSample);
+  });
+
+  it("createSeekSuccess", () => {
+    expect(
+      entitiesReducer(entitiesSample, {
+        type: createSeekSuccess.type,
         payload: {
           result: 2,
           entities: addGamePayloadSample,
