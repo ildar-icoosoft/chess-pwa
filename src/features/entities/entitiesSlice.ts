@@ -34,15 +34,18 @@ import {
 import NormalizedUserEntity from "../../normalizr/interfaces/NormalizedUserEntity";
 import NormalizedGameEntity from "../../normalizr/interfaces/NormalizedGameEntity";
 import makeChessInstance from "../../utils/makeChessInstance";
+import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
 
 export interface EntitiesState {
   users: Record<string, NormalizedUserEntity>;
   games: Record<string, NormalizedGameEntity>;
+  seeks: Record<string, NormalizedSeekEntity>;
 }
 
 const initialState: EntitiesState = {
   users: {},
   games: {},
+  seeks: {},
 };
 
 const getNormalizedDataReducer = (

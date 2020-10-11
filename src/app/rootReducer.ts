@@ -2,6 +2,7 @@
 
 import { combineReducers } from "@reduxjs/toolkit";
 import gamesListReducer from "../features/games-list/gamesListSlice";
+import seeksListReducer from "../features/seeks-list/seeksListSlice";
 import currentUserReducer from "../features/current-user/currentUserSlice";
 import authModalReducer from "../features/auth-modal/authModalSlice";
 import challengeAiModalReducer from "../features/challenge-ai-modal/challengeAiModalSlice";
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   // dataSubscription: dataSubscriptionReducer,
   singleGame: singleGameReducer,
   seekModal: seekModalReducer,
+  seeksList: seeksListReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

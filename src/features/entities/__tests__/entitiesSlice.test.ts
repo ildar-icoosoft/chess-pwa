@@ -50,6 +50,7 @@ describe("entitiesSlice reducer", () => {
     ).toEqual({
       users: {},
       games: {},
+      seeks: {},
     });
   });
 
