@@ -9,6 +9,7 @@ import {
   registerSuccess,
 } from "../current-user/currentUserSlice";
 import { getGamesListSuccess } from "../games-list/gamesListSlice";
+import { getSeeksListSuccess } from "../seeks-list/seeksListSlice";
 import {
   getSingleGameSuccess,
   abortGameSuccess,
@@ -59,6 +60,7 @@ const getNormalizedDataReducer = (
 ) => {
   Object.assign(state.users, action.payload.entities.users);
   Object.assign(state.games, action.payload.entities.games);
+  Object.assign(state.seeks, action.payload.entities.seeks);
 };
 
 const entitiesSlice = createSlice({
@@ -81,6 +83,7 @@ const entitiesSlice = createSlice({
     [loginSuccess.type]: getNormalizedDataReducer,
     [registerSuccess.type]: getNormalizedDataReducer,
     [getGamesListSuccess.type]: getNormalizedDataReducer,
+    [getSeeksListSuccess.type]: getNormalizedDataReducer,
     [getSingleGameSuccess.type]: getNormalizedDataReducer,
     [abortGameSuccess.type]: getNormalizedDataReducer,
     [resignGameSuccess.type]: getNormalizedDataReducer,

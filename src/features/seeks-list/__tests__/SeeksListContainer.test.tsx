@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   defaultState,
-  stateWithDataSample4,
+  stateWithDataSample5,
 } from "../../../test-utils/data-sample/state";
 import React, { useEffect } from "react";
 import mountTest from "../../../test-utils/mountTest";
 import SeeksListContainer from "../SeeksListContainer";
 import TestRenderer from "react-test-renderer";
 import { SeeksList } from "../SeeksList";
-import OngoingGamesContainer from "../../games-list/OngoingGamesContainer";
-import { GamePreviewsList } from "../../games-list/GamePreviewsList";
 
 describe("SeeksListContainer", () => {
   beforeEach(() => {
@@ -40,45 +38,51 @@ describe("SeeksListContainer", () => {
         expect(seeksListComponent.props.seeks).toEqual([]);
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample4)
+          cb(stateWithDataSample5)
         );
 
-        testRenderer.update(<OngoingGamesContainer />);
+        testRenderer.update(<SeeksListContainer />);
 
-        expect(seeksListComponent.props.games).toEqual([
+        expect(seeksListComponent.props.seeks).toEqual([
           {
-            id: 4,
-            aiLevel: 3,
-            clockLimit: 300,
-            clockIncrement: 3,
-            createdAt: 1,
-            drawOffer: null,
-            initialFen: "startpos",
-            turn: "white",
-            wtime: 300000,
-            btime: 300000,
-            moves: "e2e4 e7e5 g1f3 g8f6",
-            status: "started",
-            white: null,
-            black: null,
-            winner: null,
+            id: 2,
+            color: "black",
+            clockLimit: 600,
+            createdAt: 0,
+            clockIncrement: 10,
+            createdBy: {
+              id: 1,
+              fullName: "Thomas Miller",
+            },
+            game: {
+              id: 1,
+              aiLevel: 3,
+              clockLimit: 300,
+              clockIncrement: 3,
+              createdAt: 0,
+              drawOffer: null,
+              initialFen: "startpos",
+              turn: "white",
+              wtime: 300000,
+              btime: 300000,
+              moves: "e2e4 e7e5 g1f3 g8f6",
+              status: "started",
+              white: null,
+              black: null,
+              winner: null,
+            },
           },
           {
             id: 1,
-            aiLevel: 3,
+            color: "white",
             clockLimit: 300,
-            clockIncrement: 3,
             createdAt: 0,
-            drawOffer: null,
-            initialFen: "startpos",
-            turn: "white",
-            wtime: 300000,
-            btime: 300000,
-            moves: "e2e4 e7e5 g1f3 g8f6",
-            status: "started",
-            white: null,
-            black: null,
-            winner: null,
+            clockIncrement: 5,
+            createdBy: {
+              id: 1,
+              fullName: "Thomas Miller",
+            },
+            game: null,
           },
         ]);
       });

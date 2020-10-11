@@ -2,6 +2,7 @@
 
 import entitiesReducer from "../entitiesSlice";
 import { getGamesListSuccess } from "../../games-list/gamesListSlice";
+import { getSeeksListSuccess } from "../../seeks-list/seeksListSlice";
 import {
   abortGameSuccess,
   getSingleGameSuccess,
@@ -37,6 +38,8 @@ import {
   entitiesBeforeTimeOutSample,
   entitiesAfterTwoMovesSample,
   entitiesAfterTwoMovesAndOneSecondSample,
+  entitiesAfterAddingSeekSample,
+  addSeekPayloadSample,
 } from "../../../test-utils/data-sample/entities";
 
 jest.mock("../../../services/ioClient");
@@ -282,5 +285,17 @@ describe("entitiesSlice reducer", () => {
         },
       })
     ).toEqual(entitiesAfterAddingGameSample);
+  });
+
+  it("should handle getSeeksListSuccess", () => {
+    expect(
+      entitiesReducer(entitiesSample, {
+        type: getSeeksListSuccess.type,
+        payload: {
+          result: [1],
+          entities: addSeekPayloadSample,
+        },
+      })
+    ).toEqual(entitiesAfterAddingSeekSample);
   });
 });
