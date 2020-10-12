@@ -14,6 +14,7 @@ import {
 import {
   challengeAiSuccess,
   createSeekSuccess,
+  acceptSeekSuccess,
 } from "../../challenge/challengeSlice";
 import { oneSecondPassed } from "../../game-clock/gameClockSlice";
 import { makeMoveRequest, makeMoveSuccess } from "../../move/moveSlice";
@@ -297,5 +298,20 @@ describe("entitiesSlice reducer", () => {
         },
       })
     ).toEqual(entitiesAfterAddingSeekSample);
+  });
+
+  it("should handle acceptSeekSuccess", () => {
+    expect(
+      entitiesReducer(entitiesSample, {
+        type: acceptSeekSuccess.type,
+        payload: {
+          seekId: 5,
+          normalizedGame: {
+            result: 2,
+            entities: addGamePayloadSample,
+          },
+        },
+      })
+    ).toEqual(entitiesAfterAddingGameSample);
   });
 });
