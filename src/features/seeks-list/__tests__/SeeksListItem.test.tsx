@@ -1,11 +1,12 @@
 import mountTest from "../../../test-utils/mountTest";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { SeeksListItem } from "../SeeksListItem";
 import {
   defaultSeekSample,
   seekSample2,
 } from "../../../test-utils/data-sample/seek";
+import { ChallengeButtons } from "../../home-page/ChallengeButtons";
 
 describe("SeeksListItem", () => {
   mountTest(SeeksListItem);
@@ -39,15 +40,40 @@ describe("SeeksListItem", () => {
     });
 
     it("should contain play button", () => {
+      const { queryByTestId } = render(
+        <SeeksListItem seek={defaultSeekSample} />
+      );
+
+      expect(queryByTestId("play-btn")).toBeInTheDocument();
+    });
+
+    it("should contain gameIsStarted class", () => {
       const { queryByTestId, rerender } = render(
         <SeeksListItem seek={defaultSeekSample} />
       );
 
-      expect(queryByTestId("play-btn-1")).toBeInTheDocument();
+      const seekWrapper = queryByTestId("seek-wrapper");
 
-      render(<SeeksListItem seek={seekSample2} />);
+      expect(seekWrapper).not.toHaveClass("gameIsStarted");
 
-      expect(queryByTestId("play-btn-2")).toBeInTheDocument();
+      rerender(<SeeksListItem seek={seekSample2} />);
+
+      expect(seekWrapper).toHaveClass("gameIsStarted");
+    });
+  });
+
+  describe("Events", () => {
+    it("onPlay", () => {
+      const onPlay = jest.fn();
+
+      const { getByTestId } = render(
+        <SeeksListItem seek={defaultSeekSample} onPlay={onPlay} />
+      );
+
+      fireEvent.click(getByTestId("play-btn"));
+
+      expect(onPlay).toBeCalledTimes(1);
+      expect(onPlay).toBeCalledWith(1);
     });
   });
 });
