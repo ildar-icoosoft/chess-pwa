@@ -8,6 +8,8 @@ import {
 } from "../../../test-utils/data-sample/seek";
 import { Seek } from "../../../interfaces/Seek";
 import { SeeksListItem } from "../SeeksListItem";
+import { SeekModal } from "../../seek-modal/SeekModal";
+import { Modal } from "react-bootstrap";
 
 const seeksList: Seek[] = [defaultSeekSample, seekSample2];
 
@@ -38,6 +40,25 @@ describe("SeeksList", () => {
 
         expect(seeksListItems[0].props.seek).toBe(defaultSeekSample);
         expect(seeksListItems[1].props.seek).toBe(seekSample2);
+      });
+
+      it("onPlay", () => {
+        const testRenderer = TestRenderer.create(
+          <SeeksList seeks={seeksList} />
+        );
+        const testInstance = testRenderer.root;
+
+        const seeksListItems = testInstance.findAllByType(SeeksListItem);
+
+        expect(seeksListItems[0].props.onPlay).toBeUndefined();
+        expect(seeksListItems[1].props.onPlay).toBeUndefined();
+
+        const onPlay = jest.fn();
+
+        testRenderer.update(<SeeksList seeks={seeksList} onPlay={onPlay} />);
+
+        expect(seeksListItems[0].props.onPlay).toBe(onPlay);
+        expect(seeksListItems[1].props.onPlay).toBe(onPlay);
       });
     });
   });
