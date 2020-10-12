@@ -6,7 +6,6 @@ import {
   defaultSeekSample,
   seekSample2,
 } from "../../../test-utils/data-sample/seek";
-import { ChallengeButtons } from "../../home-page/ChallengeButtons";
 
 describe("SeeksListItem", () => {
   mountTest(SeeksListItem);
@@ -39,14 +38,6 @@ describe("SeeksListItem", () => {
       expect(timeControl).toHaveTextContent("10 + 3");
     });
 
-    it("should contain play button", () => {
-      const { queryByTestId } = render(
-        <SeeksListItem seek={defaultSeekSample} />
-      );
-
-      expect(queryByTestId("play-btn")).toBeInTheDocument();
-    });
-
     it("should contain gameIsStarted class", () => {
       const { queryByTestId, rerender } = render(
         <SeeksListItem seek={defaultSeekSample} />
@@ -59,6 +50,34 @@ describe("SeeksListItem", () => {
       rerender(<SeeksListItem seek={seekSample2} />);
 
       expect(seekWrapper).toHaveClass("gameIsStarted");
+    });
+
+    it("play button disabled if isSubmitting is true", () => {
+      const { queryByTestId, rerender } = render(
+        <SeeksListItem seek={defaultSeekSample} />
+      );
+
+      const playBtn = queryByTestId("play-btn");
+
+      expect(playBtn).not.toBeDisabled();
+
+      rerender(<SeeksListItem seek={defaultSeekSample} isSubmitting />);
+
+      expect(playBtn).toBeDisabled();
+    });
+
+    it("play button disabled if game is started", () => {
+      const { queryByTestId, rerender } = render(
+        <SeeksListItem seek={defaultSeekSample} />
+      );
+
+      const playBtn = queryByTestId("play-btn");
+
+      expect(playBtn).not.toBeDisabled();
+
+      rerender(<SeeksListItem seek={seekSample2} />);
+
+      expect(playBtn).toBeDisabled();
     });
   });
 

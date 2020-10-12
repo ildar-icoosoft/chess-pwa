@@ -6,9 +6,14 @@ import { Button } from "react-bootstrap";
 export interface SeeksListItemProps {
   seek?: Seek;
   onPlay?(seekId: number): void;
+  isSubmitting?: boolean;
 }
 
-export const SeeksListItem: FC<SeeksListItemProps> = ({ seek, onPlay }) => {
+export const SeeksListItem: FC<SeeksListItemProps> = ({
+  seek,
+  onPlay,
+  isSubmitting = false,
+}) => {
   const handlePlay = useCallback(() => {
     if (onPlay) {
       onPlay(seek!.id);
@@ -29,7 +34,11 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({ seek, onPlay }) => {
         {seek.clockLimit / 60} + {seek.clockIncrement}
       </div>
       <div>
-        <Button data-testid="play-btn" onClick={handlePlay}>
+        <Button
+          data-testid="play-btn"
+          onClick={handlePlay}
+          disabled={isSubmitting || !!seek.game}
+        >
           Play
         </Button>
       </div>
