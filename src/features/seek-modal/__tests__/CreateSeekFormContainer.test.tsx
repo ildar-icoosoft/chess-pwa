@@ -8,7 +8,6 @@ import { CreateSeekForm } from "../CreateSeekForm";
 import { createSeek } from "../../challenge/challengeSlice";
 import { defaultGameSample } from "../../../test-utils/data-sample/game";
 import ioClient from "../../../services/ioClient";
-import { JWR, RequestCallback } from "sails.io.js";
 
 jest.mock("../../challenge/challengeSlice");
 jest.mock("../../../services/ioClient");

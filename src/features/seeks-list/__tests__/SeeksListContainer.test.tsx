@@ -8,6 +8,9 @@ import mountTest from "../../../test-utils/mountTest";
 import SeeksListContainer from "../SeeksListContainer";
 import TestRenderer from "react-test-renderer";
 import { SeeksList } from "../SeeksList";
+import { acceptSeek } from "../../challenge/challengeSlice";
+
+jest.mock("../../challenge/challengeSlice");
 
 describe("SeeksListContainer", () => {
   beforeEach(() => {
@@ -86,6 +89,33 @@ describe("SeeksListContainer", () => {
           },
         ]);
       });
+    });
+  });
+
+  describe("dispatch() calls", () => {
+    it("should call dispatch(acceptSeek())", () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() => new Promise(() => {}));
+
+      const testRenderer = TestRenderer.create(<SeeksListContainer />);
+      const testInstance = testRenderer.root;
+
+      const seeksList = testInstance.findByType(SeeksList);
+
+      const acceptSeekReturnedValue = Symbol("acceptSeek");
+
+      const acceptSeekFn = acceptSeek as jest.Mock;
+      acceptSeekFn.mockClear();
+      acceptSeekFn.mockReturnValue(acceptSeekReturnedValue);
+
+      TestRenderer.act(() => {
+        seeksList.props.onPlay(5);
+      });
+
+      expect(acceptSeekFn).toBeCalledTimes(1);
+      expect(acceptSeekFn).toBeCalledWith(5);
+
+      expect(dispatch).toBeCalledWith(acceptSeekReturnedValue);
     });
   });
 });

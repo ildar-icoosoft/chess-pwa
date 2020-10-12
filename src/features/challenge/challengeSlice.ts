@@ -98,3 +98,9 @@ export const createSeek = (data: CreateSeekData): AppThunk<Promise<Game>> => (
     );
   });
 };
+
+export const acceptSeek = (seekId: number): AppThunk<Promise<Game>> => (
+  dispatch
+) => {
+  return new Promise(() => {});
+};
