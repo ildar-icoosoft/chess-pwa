@@ -13,10 +13,16 @@ import Game from "../../interfaces/Game";
 import ioClient from "../../services/ioClient";
 import gameSchema from "../../normalizr/schemas/gameSchema";
 import { CreateSeekData } from "../../interfaces/CreateSeekData";
+import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 
 interface ChallengeState {}
 
 const initialState: ChallengeState = {};
+
+export interface AcceptSeekSuccessPayload {
+  seekId: number;
+  normalizedGame: NormalizedData<number>;
+}
 
 const challengeSlice = createSlice({
   name: "challenge",
@@ -34,6 +40,13 @@ const challengeSlice = createSlice({
       _action: PayloadAction<NormalizedData<number>>
     ) {},
     createSeekError(_state, _action: PayloadAction<string>) {},
+
+    acceptSeekRequest(_state, _seekId: PayloadAction<number>) {},
+    acceptSeekSuccess(
+      _state,
+      _action: PayloadAction<AcceptSeekSuccessPayload>
+    ) {},
+    acceptSeekError(_state, _action: PayloadAction<ItemErrorPayload>) {},
   },
   extraReducers: {},
 });
@@ -45,6 +58,9 @@ export const {
   createSeekRequest,
   createSeekSuccess,
   createSeekError,
+  acceptSeekRequest,
+  acceptSeekSuccess,
+  acceptSeekError,
 } = challengeSlice.actions;
 
 export default challengeSlice.reducer;
@@ -102,5 +118,33 @@ export const createSeek = (data: CreateSeekData): AppThunk<Promise<Game>> => (
 export const acceptSeek = (seekId: number): AppThunk<Promise<Game>> => (
   dispatch
 ) => {
-  return new Promise(() => {});
+  dispatch(acceptSeekRequest(seekId));
+
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(
+      `/api/v1/board/seek/${seekId}/accept`,
+      {},
+      (body: unknown, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          const normalizedGame = normalize(body as Game, gameSchema);
+
+          dispatch(
+            acceptSeekSuccess({
+              seekId,
+              normalizedGame,
+            })
+          );
+          resolve(body as Game);
+        } else {
+          dispatch(
+            acceptSeekError({
+              itemId: seekId,
+              error: _isString(body) ? body : "Internal server error",
+            })
+          );
+          reject(jwr);
+        }
+      }
+    );
+  });
 };
