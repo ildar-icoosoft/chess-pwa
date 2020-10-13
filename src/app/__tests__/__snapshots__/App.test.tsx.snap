@@ -75,16 +75,6 @@ exports[`App Snapshot 1`] = `
         Waiting for opponent
       </div>
       <div
-        aria-atomic="true"
-        aria-live="assertive"
-        className="toast hide"
-        role="alert"
-      >
-        <div
-          className="toast-body"
-        />
-      </div>
-      <div
         className="grid"
       />
     </div>

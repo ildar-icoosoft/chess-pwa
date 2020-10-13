@@ -13,8 +13,6 @@ import { Toast } from "react-bootstrap";
 const SeeksListContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [playError, setPlayError] = useState<string | null>(null);
-
   const history = useHistory();
 
   const currentUserId = useSelector(
@@ -35,39 +33,20 @@ const SeeksListContainer: FC<unknown> = () => {
 
   const handlePlay = useCallback(
     (seekId: number) => {
-      return dispatch(acceptSeek(seekId))
-        .then((game: Game) => {
-          history.push(`/game/${game.id}`);
-        })
-        .catch((err) => {
-          if (err.statusCode === 401) {
-            setPlayError("You must log in to create a game");
-          } else {
-            setPlayError("Internal server error");
-          }
-        });
+      return dispatch(acceptSeek(seekId)).then((game: Game) => {
+        history.push(`/game/${game.id}`);
+      });
     },
     [dispatch, history]
   );
 
   return (
-    <>
-      <Toast
-        onClose={() => setPlayError(null)}
-        show={playError !== null}
-        delay={3000}
-        autohide
-        animation={false}
-      >
-        <Toast.Body>{playError}</Toast.Body>
-      </Toast>
-      <SeeksList
-        currentUserId={currentUserId}
-        seeks={seeks}
-        onPlay={handlePlay}
-        acceptInProcess={acceptInProcess}
-      />
-    </>
+    <SeeksList
+      currentUserId={currentUserId}
+      seeks={seeks}
+      onPlay={handlePlay}
+      acceptInProcess={acceptInProcess}
+    />
   );
 };
 

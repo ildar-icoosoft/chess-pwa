@@ -181,7 +181,5 @@ describe("SeeksListContainer", () => {
       expect(push).toBeCalledTimes(1);
       expect(push).toBeCalledWith("/game/1");
     });
-
-    // @todo. need to test dispatch(acceptSeek()) fail
   });
 });
