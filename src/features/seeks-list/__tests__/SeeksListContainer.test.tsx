@@ -181,5 +181,8 @@ describe("SeeksListContainer", () => {
       expect(push).toBeCalledTimes(1);
       expect(push).toBeCalledWith("/game/1");
     });
+
+    // @todo. we need to test dispatch(acceptSeek()) fail. We should test if acceptSeek() Promise
+    // is rejected then this should be handled in SeeksListContainer (without unhandled Promise rejection)
   });
 });

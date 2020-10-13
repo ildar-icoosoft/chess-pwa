@@ -33,9 +33,11 @@ const SeeksListContainer: FC<unknown> = () => {
 
   const handlePlay = useCallback(
     (seekId: number) => {
-      return dispatch(acceptSeek(seekId)).then((game: Game) => {
-        history.push(`/game/${game.id}`);
-      });
+      return dispatch(acceptSeek(seekId))
+        .then((game: Game) => {
+          history.push(`/game/${game.id}`);
+        })
+        .catch(() => {});
     },
     [dispatch, history]
   );
