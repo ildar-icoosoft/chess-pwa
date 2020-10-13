@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
 import cx from "classnames";
 import { Seek } from "../../interfaces/Seek";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 export interface SeeksListItemProps {
   acceptInProcess?: number | null;
@@ -39,6 +39,11 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
           onClick={handlePlay}
           disabled={acceptInProcess !== null || !!seek.game}
         >
+          {acceptInProcess === seek.id && (
+            <Spinner animation="border" data-testid="play-btn-spinner">
+              <span className="sr-only">Sending...</span>
+            </Spinner>
+          )}
           Play
         </Button>
       </div>

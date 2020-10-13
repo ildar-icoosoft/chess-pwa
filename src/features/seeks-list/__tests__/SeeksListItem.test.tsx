@@ -52,6 +52,23 @@ describe("SeeksListItem", () => {
       expect(seekWrapper).toHaveClass("gameIsStarted");
     });
 
+    it("play button should contain spinner if acceptInProcess contains ID of the seek", () => {
+      const { queryByTestId, rerender } = render(
+        <SeeksListItem seek={defaultSeekSample} />
+      );
+
+      let playBtnSpinner = queryByTestId("play-btn-spinner");
+      expect(playBtnSpinner).not.toBeInTheDocument();
+
+      rerender(<SeeksListItem seek={defaultSeekSample} acceptInProcess={4} />);
+      playBtnSpinner = queryByTestId("play-btn-spinner");
+      expect(playBtnSpinner).not.toBeInTheDocument();
+
+      rerender(<SeeksListItem seek={defaultSeekSample} acceptInProcess={1} />);
+      playBtnSpinner = queryByTestId("play-btn-spinner");
+      expect(playBtnSpinner).toBeInTheDocument();
+    });
+
     it("play button disabled if acceptInProcess is not NULL", () => {
       const { queryByTestId, rerender } = render(
         <SeeksListItem seek={defaultSeekSample} />
