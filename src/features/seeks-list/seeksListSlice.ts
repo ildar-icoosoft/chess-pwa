@@ -1,16 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 import { AppThunk } from "../../app/store";
-import Game from "../../interfaces/Game";
 import ioClient from "../../services/ioClient";
 import { JWR } from "sails.io.js";
 import { normalize } from "normalizr";
-import gameSchema from "../../normalizr/schemas/gameSchema";
-import {
-  getGamesListError,
-  getGamesListRequest,
-  getGamesListSuccess,
-} from "../games-list/gamesListSlice";
 import { Seek } from "../../interfaces/Seek";
 import seekSchema from "../../normalizr/schemas/seekSchema";
 

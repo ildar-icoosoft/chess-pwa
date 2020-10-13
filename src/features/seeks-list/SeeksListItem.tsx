@@ -20,7 +20,7 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
     if (onPlay) {
       onPlay(seek!.id);
     }
-  }, [onPlay]);
+  }, [onPlay, seek]);
 
   if (!seek) {
     return null;
