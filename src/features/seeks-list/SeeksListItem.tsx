@@ -5,12 +5,14 @@ import { Button, Spinner } from "react-bootstrap";
 
 export interface SeeksListItemProps {
   acceptInProcess?: number | null;
+  currentUserId?: number | null;
   seek?: Seek;
   onPlay?(seekId: number): void;
 }
 
 export const SeeksListItem: FC<SeeksListItemProps> = ({
   acceptInProcess = null,
+  currentUserId = null,
   seek,
   onPlay,
 }) => {
@@ -34,18 +36,20 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
         {seek.clockLimit / 60} + {seek.clockIncrement}
       </div>
       <div>
-        <Button
-          data-testid="play-btn"
-          onClick={handlePlay}
-          disabled={acceptInProcess !== null || !!seek.game}
-        >
-          {acceptInProcess === seek.id && (
-            <Spinner animation="border" data-testid="play-btn-spinner">
-              <span className="sr-only">Sending...</span>
-            </Spinner>
-          )}
-          Play
-        </Button>
+        {currentUserId !== seek.createdBy.id && (
+          <Button
+            data-testid="play-btn"
+            onClick={handlePlay}
+            disabled={acceptInProcess !== null || !!seek.game}
+          >
+            {acceptInProcess === seek.id && (
+              <Spinner animation="border" data-testid="play-btn-spinner">
+                <span className="sr-only">Sending...</span>
+              </Spinner>
+            )}
+            Play
+          </Button>
+        )}
       </div>
     </div>
   );

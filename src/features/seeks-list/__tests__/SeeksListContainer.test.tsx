@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   defaultState,
+  makeStateSample,
   stateWithDataSample5,
 } from "../../../test-utils/data-sample/state";
 import React, { useEffect } from "react";
@@ -11,6 +12,14 @@ import { SeeksList } from "../SeeksList";
 import { acceptSeek } from "../../challenge/challengeSlice";
 
 jest.mock("../../challenge/challengeSlice");
+
+const stateWithCurrentUser = makeStateSample({
+  currentUser: {
+    userId: 8,
+    isLoading: false,
+    error: null,
+  },
+});
 
 describe("SeeksListContainer", () => {
   beforeEach(() => {
@@ -105,6 +114,23 @@ describe("SeeksListContainer", () => {
         testRenderer.update(<SeeksListContainer />);
 
         expect(seeksListComponent.props.acceptInProcess).toBe(6);
+      });
+
+      it("currentUserId", () => {
+        const testRenderer = TestRenderer.create(<SeeksListContainer />);
+        const testInstance = testRenderer.root;
+
+        const seeksListComponent = testInstance.findByType(SeeksList);
+
+        expect(seeksListComponent.props.currentUserId).toBeNull();
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithCurrentUser)
+        );
+
+        testRenderer.update(<SeeksListContainer />);
+
+        expect(seeksListComponent.props.currentUserId).toBe(8);
       });
     });
   });

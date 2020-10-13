@@ -96,6 +96,23 @@ describe("SeeksListItem", () => {
 
       expect(playBtn).toBeDisabled();
     });
+
+    it("play button is hidden if current user created the seek", () => {
+      const { queryByTestId, rerender } = render(
+        <SeeksListItem seek={defaultSeekSample} />
+      );
+
+      let playBtn = queryByTestId("play-btn");
+      expect(playBtn).toBeInTheDocument();
+
+      rerender(<SeeksListItem seek={seekSample2} currentUserId={2} />);
+      playBtn = queryByTestId("play-btn");
+      expect(playBtn).toBeInTheDocument();
+
+      rerender(<SeeksListItem seek={seekSample2} currentUserId={1} />);
+      playBtn = queryByTestId("play-btn");
+      expect(playBtn).not.toBeInTheDocument();
+    });
   });
 
   describe("Events", () => {

@@ -61,6 +61,23 @@ describe("SeeksList", () => {
         expect(seeksListItems[1].props.acceptInProcess).toBe(5);
       });
 
+      it("currentUserId", () => {
+        const testRenderer = TestRenderer.create(
+          <SeeksList seeks={seeksList} />
+        );
+        const testInstance = testRenderer.root;
+
+        const seeksListItems = testInstance.findAllByType(SeeksListItem);
+
+        expect(seeksListItems[0].props.currentUserId).toBeNull();
+        expect(seeksListItems[1].props.currentUserId).toBeNull();
+
+        testRenderer.update(<SeeksList seeks={seeksList} currentUserId={8} />);
+
+        expect(seeksListItems[0].props.currentUserId).toBe(8);
+        expect(seeksListItems[1].props.currentUserId).toBe(8);
+      });
+
       it("onPlay", () => {
         const testRenderer = TestRenderer.create(
           <SeeksList seeks={seeksList} />

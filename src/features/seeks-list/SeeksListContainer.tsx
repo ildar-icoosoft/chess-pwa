@@ -10,6 +10,10 @@ import { AppDispatch } from "../../app/store";
 const SeeksListContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const currentUserId = useSelector(
+    (state: RootState) => state.currentUser.userId
+  );
+
   const seeks = useSelector((state: RootState) =>
     denormalize(state.seeksList.items, [seekSchema], state.entities)
   );
@@ -43,6 +47,7 @@ const SeeksListContainer: FC<unknown> = () => {
 
   return (
     <SeeksList
+      currentUserId={currentUserId}
       seeks={seeks}
       onPlay={handlePlay}
       acceptInProcess={acceptInProcess}
