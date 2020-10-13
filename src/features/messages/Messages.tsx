@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { MessageItemState } from "./messagesSlice";
 import { Toast } from "react-bootstrap";
 
@@ -8,11 +8,14 @@ export interface MessagesProps {
 }
 
 export const Messages: FC<MessagesProps> = ({ items = [], onHideMessage }) => {
-  const makeHideMessageCallback = (messageId: string) => () => {
-    if (onHideMessage) {
-      onHideMessage(messageId);
-    }
-  };
+  const makeHideMessageCallback = useCallback(
+    (messageId: string) => () => {
+      if (onHideMessage) {
+        onHideMessage(messageId);
+      }
+    },
+    []
+  );
 
   return (
     <>
