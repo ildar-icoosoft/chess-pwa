@@ -1,4 +1,7 @@
-import messagesReducer, { showMessage } from "../../messages/messagesSlice";
+import messagesReducer, {
+  showMessage,
+  hideMessage,
+} from "../../messages/messagesSlice";
 
 describe("messagesSlice reducer", () => {
   it("should handle initial state", () => {
@@ -31,6 +34,29 @@ describe("messagesSlice reducer", () => {
       },
       message2: {
         body: "some message 2",
+      },
+    });
+  });
+
+  it("should handle hideMessage", () => {
+    expect(
+      messagesReducer(
+        {
+          message1: {
+            body: "some message",
+          },
+          message2: {
+            body: "some message 2",
+          },
+        },
+        {
+          type: hideMessage.type,
+          payload: "message2",
+        }
+      )
+    ).toEqual({
+      message1: {
+        body: "some message",
       },
     });
   });

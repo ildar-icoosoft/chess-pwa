@@ -24,9 +24,12 @@ const messagesSlice = createSlice({
         body: action.payload.body,
       };
     },
+    hideMessage: (state, action: PayloadAction<string>) => {
+      delete state[action.payload];
+    },
   },
 });
 
-export const { showMessage } = messagesSlice.actions;
+export const { showMessage, hideMessage } = messagesSlice.actions;
 
 export default messagesSlice.reducer;
