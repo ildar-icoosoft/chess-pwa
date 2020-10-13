@@ -2,6 +2,7 @@ import messagesReducer, {
   showMessage,
   hideMessage,
 } from "../../messages/messagesSlice";
+import { acceptSeekError } from "../../challenge/challengeSlice";
 
 describe("messagesSlice reducer", () => {
   it("should handle initial state", () => {
@@ -57,6 +58,32 @@ describe("messagesSlice reducer", () => {
     ).toEqual({
       message1: {
         body: "some message",
+      },
+    });
+  });
+
+  it("should handle acceptSeekError", () => {
+    expect(
+      messagesReducer(
+        {
+          message1: {
+            body: "some message",
+          },
+        },
+        {
+          type: acceptSeekError.type,
+          payload: {
+            itemId: 5,
+            error: "error text",
+          },
+        }
+      )
+    ).toEqual({
+      message1: {
+        body: "some message",
+      },
+      acceptSeekError: {
+        body: "error text",
       },
     });
   });

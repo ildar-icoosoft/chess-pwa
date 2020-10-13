@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { acceptSeekError } from "../challenge/challengeSlice";
+import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 
 export interface ShowMessagePayload {
   id: string;
@@ -26,6 +28,16 @@ const messagesSlice = createSlice({
     },
     hideMessage: (state, action: PayloadAction<string>) => {
       delete state[action.payload];
+    },
+  },
+  extraReducers: {
+    [acceptSeekError.type]: (
+      state,
+      action: PayloadAction<ItemErrorPayload>
+    ) => {
+      state.acceptSeekError = {
+        body: action.payload.error,
+      };
     },
   },
 });
