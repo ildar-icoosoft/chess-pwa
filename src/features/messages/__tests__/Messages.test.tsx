@@ -28,6 +28,34 @@ describe("Messages", () => {
     });
   });
 
+  describe("children components", () => {
+    describe("Toast", () => {
+      it("autohide", () => {
+        const testRenderer = TestRenderer.create(
+          <Messages items={[defaultMessageSample, messageSample2]} />
+        );
+        const testInstance = testRenderer.root;
+
+        const toasts = testInstance.findAllByType(Toast);
+
+        expect(toasts[0].props.autohide).toBeTruthy();
+        expect(toasts[1].props.autohide).toBeTruthy();
+      });
+
+      it("show", () => {
+        const testRenderer = TestRenderer.create(
+          <Messages items={[defaultMessageSample, messageSample2]} />
+        );
+        const testInstance = testRenderer.root;
+
+        const toasts = testInstance.findAllByType(Toast);
+
+        expect(toasts[0].props.show).toBeTruthy();
+        expect(toasts[1].props.show).toBeTruthy();
+      });
+    });
+  });
+
   describe("Events", () => {
     it("onHideMessage", () => {
       const onHideMessage = jest.fn();
