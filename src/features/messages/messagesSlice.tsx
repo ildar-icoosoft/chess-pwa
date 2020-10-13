@@ -2,19 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { pullAllBy as _pullAllBy } from "lodash";
 import { acceptSeekError } from "../challenge/challengeSlice";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
+import { Message } from "../../interfaces/Message";
 
-export interface MessageItemState {
-  id: string;
-  body: string;
-}
-
-const initialState: MessageItemState[] = [];
+const initialState: Message[] = [];
 
 const messagesSlice = createSlice({
   name: "messages",
   initialState,
   reducers: {
-    showMessage: (state, action: PayloadAction<MessageItemState>) => {
+    showMessage: (state, action: PayloadAction<Message>) => {
       state.push(action.payload);
     },
     hideMessage: (state, action: PayloadAction<string>) => {

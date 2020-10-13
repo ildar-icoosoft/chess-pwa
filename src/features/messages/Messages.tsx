@@ -1,9 +1,9 @@
 import React, { FC, useCallback } from "react";
-import { MessageItemState } from "./messagesSlice";
 import { Toast } from "react-bootstrap";
+import { Message } from "../../interfaces/Message";
 
 export interface MessagesProps {
-  items?: MessageItemState[];
+  items?: Message[];
   onHideMessage?(messageId: string): void;
 }
 
