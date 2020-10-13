@@ -377,11 +377,11 @@ export const stateWithDataSample4: RootState = {
   },
 };
 
-// with seeks
+// with seeks and accept seek request
 export const stateWithDataSample5: RootState = {
   acceptSeekRequest: {
-    inProcess: false,
-    itemId: null,
+    inProcess: true,
+    itemId: 6,
     error: null,
   },
   currentUser: {

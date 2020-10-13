@@ -14,6 +14,14 @@ const SeeksListContainer: FC<unknown> = () => {
     denormalize(state.seeksList.items, [seekSchema], state.entities)
   );
 
+  const acceptSeekRequest = useSelector(
+    (state: RootState) => state.acceptSeekRequest
+  );
+
+  const acceptInProcess = acceptSeekRequest.inProcess
+    ? acceptSeekRequest.itemId
+    : null;
+
   const handlePlay = useCallback(
     (seekId: number) => {
       return dispatch(acceptSeek(seekId));
@@ -33,7 +41,13 @@ const SeeksListContainer: FC<unknown> = () => {
     [dispatch, history]
   );
 
-  return <SeeksList seeks={seeks} onPlay={handlePlay} />;
+  return (
+    <SeeksList
+      seeks={seeks}
+      onPlay={handlePlay}
+      acceptInProcess={acceptInProcess}
+    />
+  );
 };
 
 export default SeeksListContainer;

@@ -4,6 +4,7 @@ import css from "../games-list/GamePreviewsList.module.scss";
 import { SeeksListItem } from "./SeeksListItem";
 
 export interface SeeksListProps {
+  acceptInProcess?: number | null;
   seeks?: Seek[];
   onPlay?(seekId: number): void;
 }

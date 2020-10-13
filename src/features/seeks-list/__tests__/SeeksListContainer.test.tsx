@@ -89,6 +89,23 @@ describe("SeeksListContainer", () => {
           },
         ]);
       });
+
+      it("acceptInProcess", () => {
+        const testRenderer = TestRenderer.create(<SeeksListContainer />);
+        const testInstance = testRenderer.root;
+
+        const seeksListComponent = testInstance.findByType(SeeksList);
+
+        expect(seeksListComponent.props.acceptInProcess).toBeNull();
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithDataSample5)
+        );
+
+        testRenderer.update(<SeeksListContainer />);
+
+        expect(seeksListComponent.props.acceptInProcess).toBe(6);
+      });
     });
   });
 
