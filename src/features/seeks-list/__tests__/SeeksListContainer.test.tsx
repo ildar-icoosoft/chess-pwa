@@ -10,6 +10,10 @@ import SeeksListContainer from "../SeeksListContainer";
 import TestRenderer from "react-test-renderer";
 import { SeeksList } from "../SeeksList";
 import { acceptSeek } from "../../challenge/challengeSlice";
+import { defaultGameSample } from "../../../test-utils/data-sample/game";
+import CreateSeekFormContainer from "../../seek-modal/CreateSeekFormContainer";
+import { CreateSeekForm } from "../../seek-modal/CreateSeekForm";
+import { useHistory } from "react-router-dom";
 
 jest.mock("../../challenge/challengeSlice");
 
@@ -159,6 +163,25 @@ describe("SeeksListContainer", () => {
       expect(acceptSeekFn).toBeCalledWith(5);
 
       expect(dispatch).toBeCalledWith(acceptSeekReturnedValue);
+    });
+
+    it("should handle dispatch(acceptSeek()) success", async () => {
+      const dispatch = useDispatch<jest.Mock>();
+      dispatch.mockImplementationOnce(() => Promise.resolve(defaultGameSample));
+
+      const testRenderer = TestRenderer.create(<SeeksListContainer />);
+      const testInstance = testRenderer.root;
+
+      const seeksList = testInstance.findByType(SeeksList);
+
+      await TestRenderer.act(async () => {
+        seeksList.props.onPlay(5);
+      });
+
+      const push = useHistory().push as jest.Mock;
+
+      expect(push).toBeCalledTimes(1);
+      expect(push).toBeCalledWith("/game/1");
     });
   });
 });

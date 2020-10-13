@@ -6,9 +6,13 @@ import { RootState } from "../../app/rootReducer";
 import { SeeksList } from "./SeeksList";
 import { acceptSeek } from "../challenge/challengeSlice";
 import { AppDispatch } from "../../app/store";
+import Game from "../../interfaces/Game";
+import { useHistory } from "react-router-dom";
 
 const SeeksListContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const history = useHistory();
 
   const currentUserId = useSelector(
     (state: RootState) => state.currentUser.userId
@@ -28,19 +32,19 @@ const SeeksListContainer: FC<unknown> = () => {
 
   const handlePlay = useCallback(
     (seekId: number) => {
-      return dispatch(acceptSeek(seekId));
-      /*   .then((game: Game) => {
+      return dispatch(acceptSeek(seekId))
+        .then((game: Game) => {
           history.push(`/game/${game.id}`);
         })
         .catch((err) => {
-          if (err.statusCode === 401) {
+          /*if (err.statusCode === 401) {
             formikHelpers.setStatus("You must log in to create a game");
           } else if (err.statusCode === 0) {
             // request is aborted by client. do nothing
           } else {
             formikHelpers.setStatus("Internal server error");
-          }
-        });*/
+          }*/
+        });
     },
     [dispatch, history]
   );
