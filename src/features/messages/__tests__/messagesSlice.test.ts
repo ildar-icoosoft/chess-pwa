@@ -10,17 +10,18 @@ describe("messagesSlice reducer", () => {
       messagesReducer(undefined, {
         type: "",
       })
-    ).toEqual({});
+    ).toEqual([]);
   });
 
   it("should handle showMessage", () => {
     expect(
       messagesReducer(
-        {
-          message1: {
+        [
+          {
+            id: "message1",
             body: "some message",
           },
-        },
+        ],
         {
           type: showMessage.type,
           payload: {
@@ -29,47 +30,53 @@ describe("messagesSlice reducer", () => {
           },
         }
       )
-    ).toEqual({
-      message1: {
+    ).toEqual([
+      {
+        id: "message1",
         body: "some message",
       },
-      message2: {
+      {
+        id: "message2",
         body: "some message 2",
       },
-    });
+    ]);
   });
 
   it("should handle hideMessage", () => {
     expect(
       messagesReducer(
-        {
-          message1: {
+        [
+          {
+            id: "message1",
             body: "some message",
           },
-          message2: {
+          {
+            id: "message2",
             body: "some message 2",
           },
-        },
+        ],
         {
           type: hideMessage.type,
           payload: "message2",
         }
       )
-    ).toEqual({
-      message1: {
+    ).toEqual([
+      {
+        id: "message1",
         body: "some message",
       },
-    });
+    ]);
   });
 
   it("should handle acceptSeekError", () => {
     expect(
       messagesReducer(
-        {
-          message1: {
+        [
+          {
+            id: "message1",
             body: "some message",
           },
-        },
+        ],
         {
           type: acceptSeekError.type,
           payload: {
@@ -78,13 +85,15 @@ describe("messagesSlice reducer", () => {
           },
         }
       )
-    ).toEqual({
-      message1: {
+    ).toEqual([
+      {
+        id: "message1",
         body: "some message",
       },
-      acceptSeekError: {
+      {
+        id: "acceptSeekError",
         body: "error text",
       },
-    });
+    ]);
   });
 });

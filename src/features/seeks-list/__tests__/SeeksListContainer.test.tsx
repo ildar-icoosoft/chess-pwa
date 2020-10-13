@@ -11,8 +11,6 @@ import TestRenderer from "react-test-renderer";
 import { SeeksList } from "../SeeksList";
 import { acceptSeek } from "../../challenge/challengeSlice";
 import { defaultGameSample } from "../../../test-utils/data-sample/game";
-import CreateSeekFormContainer from "../../seek-modal/CreateSeekFormContainer";
-import { CreateSeekForm } from "../../seek-modal/CreateSeekForm";
 import { useHistory } from "react-router-dom";
 
 jest.mock("../../challenge/challengeSlice");
