@@ -12,6 +12,7 @@ import HeaderContainer from "../features/header/HeaderContainer";
 import AuthModalContainer from "../features/auth-modal/AuthModalContainer";
 import { fetchGames } from "../features/games-list/gamesListSlice";
 import { fetchSeeks } from "../features/seeks-list/seeksListSlice";
+import MessagesContainer from "../features/messages/MessagesContainer";
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const App: FC = () => {
       <Router>
         <HeaderContainer />
         <AuthModalContainer />
+        <MessagesContainer />
 
         <Switch>
           <Route path="/game/:id">

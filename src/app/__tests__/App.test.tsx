@@ -12,6 +12,7 @@ import HeaderContainer from "../../features/header/HeaderContainer";
 import AuthModalContainer from "../../features/auth-modal/AuthModalContainer";
 import { fetchGames } from "../../features/games-list/gamesListSlice";
 import { fetchSeeks } from "../../features/seeks-list/seeksListSlice";
+import MessagesContainer from "../../features/messages/MessagesContainer";
 
 jest.mock("../../features/current-user/currentUserSlice");
 jest.mock("../../features/game-clock/gameClockSlice");
@@ -55,6 +56,13 @@ describe("App", () => {
       const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(AuthModalContainer).length).toBe(1);
+    });
+
+    it("contains MessagesContainer", () => {
+      const testRenderer = TestRenderer.create(<App />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(MessagesContainer).length).toBe(1);
     });
   });
 
