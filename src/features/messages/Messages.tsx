@@ -19,9 +19,9 @@ export const Messages: FC<MessagesProps> = ({ items = [], onHideMessage }) => {
 
   return (
     <>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <Toast
-          key={item.id}
+          key={`${item.id}-${index}`}
           onClose={makeHideMessageHandler(item.id)}
           show
           delay={3000}
