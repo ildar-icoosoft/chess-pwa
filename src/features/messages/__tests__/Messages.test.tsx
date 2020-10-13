@@ -8,6 +8,8 @@ import {
   messageSample2,
 } from "../../../test-utils/data-sample/message";
 
+// @todo. we need to test Toast content
+
 describe("Messages", () => {
   mountTest(Messages);
 
@@ -23,6 +25,29 @@ describe("Messages", () => {
       );
 
       expect(testInstance.findAllByType(Toast).length).toBe(2);
+    });
+  });
+
+  describe("Events", () => {
+    it("onHideMessage", () => {
+      const onHideMessage = jest.fn();
+
+      const testRenderer = TestRenderer.create(
+        <Messages
+          items={[defaultMessageSample, messageSample2]}
+          onHideMessage={onHideMessage}
+        />
+      );
+      const testInstance = testRenderer.root;
+
+      const toasts = testInstance.findAllByType(Toast);
+
+      toasts[0].props.onClose();
+      toasts[1].props.onClose();
+
+      expect(onHideMessage).toBeCalledTimes(2);
+      expect(onHideMessage).toHaveBeenNthCalledWith(1, "message1");
+      expect(onHideMessage).toHaveBeenNthCalledWith(2, "message2");
     });
   });
 });
