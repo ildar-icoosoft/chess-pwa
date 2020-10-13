@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { denormalize } from "normalizr";
 import seekSchema from "../../normalizr/schemas/seekSchema";
@@ -8,7 +8,6 @@ import { acceptSeek } from "../challenge/challengeSlice";
 import { AppDispatch } from "../../app/store";
 import Game from "../../interfaces/Game";
 import { useHistory } from "react-router-dom";
-import { Toast } from "react-bootstrap";
 
 const SeeksListContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from "react";
 import { Toast } from "react-bootstrap";
 import { Message } from "../../interfaces/Message";
+import css from "./Messages.module.scss";
 
 export interface MessagesProps {
   items?: Message[];
@@ -18,7 +19,7 @@ export const Messages: FC<MessagesProps> = ({ items = [], onHideMessage }) => {
   );
 
   return (
-    <>
+    <div className={css.messages}>
       {items.map((item, index) => (
         <Toast
           key={`${item.id}-${index}`}
@@ -31,6 +32,6 @@ export const Messages: FC<MessagesProps> = ({ items = [], onHideMessage }) => {
           <Toast.Body>{item.body}</Toast.Body>
         </Toast>
       ))}
-    </>
+    </div>
   );
 };
