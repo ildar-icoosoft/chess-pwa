@@ -136,7 +136,7 @@ export const acceptSeek = (seekId: number): AppThunk<Promise<Game>> => (
           );
           resolve(body as Game);
         } else {
-          let errorMessage = "Internal server error";
+          let errorMessage = body as string;
           if (jwr.statusCode === 401) {
             errorMessage = "You must log in to create a game";
           }
