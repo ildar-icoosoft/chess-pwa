@@ -8,7 +8,7 @@ export interface MessagesProps {
 }
 
 export const Messages: FC<MessagesProps> = ({ items = [], onHideMessage }) => {
-  const makeHideMessageCallback = useCallback(
+  const makeHideMessageHandler = useCallback(
     (messageId: string) => () => {
       if (onHideMessage) {
         onHideMessage(messageId);
@@ -22,7 +22,7 @@ export const Messages: FC<MessagesProps> = ({ items = [], onHideMessage }) => {
       {items.map((item) => (
         <Toast
           key={item.id}
-          onClose={makeHideMessageCallback(item.id)}
+          onClose={makeHideMessageHandler(item.id)}
           show
           delay={3000}
           autohide
