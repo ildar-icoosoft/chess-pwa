@@ -14,7 +14,7 @@ export const Messages: FC<MessagesProps> = ({ items = [], onHideMessage }) => {
         onHideMessage(messageId);
       }
     },
-    []
+    [onHideMessage]
   );
 
   return (
