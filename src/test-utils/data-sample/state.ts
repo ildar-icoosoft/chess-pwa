@@ -1,6 +1,11 @@
 import { RootState } from "../../app/rootReducer";
 
 export const defaultState: RootState = {
+  acceptSeekRequest: {
+    inProcess: false,
+    itemId: null,
+    error: null,
+  },
   currentUser: {
     userId: null,
     isLoading: false,
@@ -44,6 +49,11 @@ export const makeStateSample = (
 
 // authenticated user
 export const stateWithDataSample: RootState = {
+  acceptSeekRequest: {
+    inProcess: false,
+    itemId: null,
+    error: null,
+  },
   currentUser: {
     userId: 1,
     isLoading: false,
@@ -101,6 +111,11 @@ export const stateWithDataSample: RootState = {
 
 // not authenticated user, isFlipped: false
 export const stateWithDataSample2: RootState = {
+  acceptSeekRequest: {
+    inProcess: false,
+    itemId: null,
+    error: null,
+  },
   currentUser: {
     userId: null,
     isLoading: false,
@@ -165,6 +180,11 @@ export const stateWithDataSample2: RootState = {
 
 // not authenticated user, isFlipped: true
 export const stateWithDataSample3: RootState = {
+  acceptSeekRequest: {
+    inProcess: false,
+    itemId: null,
+    error: null,
+  },
   currentUser: {
     userId: null,
     isLoading: false,
@@ -229,6 +249,11 @@ export const stateWithDataSample3: RootState = {
 
 // many games
 export const stateWithDataSample4: RootState = {
+  acceptSeekRequest: {
+    inProcess: false,
+    itemId: null,
+    error: null,
+  },
   currentUser: {
     userId: 1,
     isLoading: false,
@@ -354,6 +379,11 @@ export const stateWithDataSample4: RootState = {
 
 // with seeks
 export const stateWithDataSample5: RootState = {
+  acceptSeekRequest: {
+    inProcess: false,
+    itemId: null,
+    error: null,
+  },
   currentUser: {
     userId: 1,
     isLoading: false,

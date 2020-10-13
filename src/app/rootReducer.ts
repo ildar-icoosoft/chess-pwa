@@ -9,6 +9,7 @@ import challengeAiModalReducer from "../features/challenge-ai-modal/challengeAiM
 import seekModalReducer from "../features/seek-modal/seekModalSlice";
 import entitiesReducer from "../features/entities/entitiesSlice";
 import singleGameReducer from "../features/single-game/singleGameSlice";
+import acceptSeekRequestReducer from "../features/accept-seek-request/acceptSeekRequestSlice";
 
 const rootReducer = combineReducers({
   authModal: authModalReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   singleGame: singleGameReducer,
   seekModal: seekModalReducer,
   seeksList: seeksListReducer,
+  acceptSeekRequest: acceptSeekRequestReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
