@@ -52,7 +52,7 @@ describe("SeeksListItem", () => {
       expect(seekWrapper).toHaveClass("gameIsStarted");
     });
 
-    it("play button disabled if isSubmitting is true", () => {
+    it("play button disabled if acceptInProcess is not NULL", () => {
       const { queryByTestId, rerender } = render(
         <SeeksListItem seek={defaultSeekSample} />
       );
@@ -61,7 +61,7 @@ describe("SeeksListItem", () => {
 
       expect(playBtn).not.toBeDisabled();
 
-      rerender(<SeeksListItem seek={defaultSeekSample} isSubmitting />);
+      rerender(<SeeksListItem seek={defaultSeekSample} acceptInProcess={4} />);
 
       expect(playBtn).toBeDisabled();
     });

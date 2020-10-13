@@ -42,6 +42,25 @@ describe("SeeksList", () => {
         expect(seeksListItems[1].props.seek).toBe(seekSample2);
       });
 
+      it("acceptInProcess", () => {
+        const testRenderer = TestRenderer.create(
+          <SeeksList seeks={seeksList} />
+        );
+        const testInstance = testRenderer.root;
+
+        const seeksListItems = testInstance.findAllByType(SeeksListItem);
+
+        expect(seeksListItems[0].props.acceptInProcess).toBeNull();
+        expect(seeksListItems[1].props.acceptInProcess).toBeNull();
+
+        testRenderer.update(
+          <SeeksList seeks={seeksList} acceptInProcess={5} />
+        );
+
+        expect(seeksListItems[0].props.acceptInProcess).toBe(5);
+        expect(seeksListItems[1].props.acceptInProcess).toBe(5);
+      });
+
       it("onPlay", () => {
         const testRenderer = TestRenderer.create(
           <SeeksList seeks={seeksList} />

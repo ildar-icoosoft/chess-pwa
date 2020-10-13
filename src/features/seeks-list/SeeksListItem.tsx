@@ -4,15 +4,15 @@ import { Seek } from "../../interfaces/Seek";
 import { Button } from "react-bootstrap";
 
 export interface SeeksListItemProps {
+  acceptInProcess?: number | null;
   seek?: Seek;
   onPlay?(seekId: number): void;
-  isSubmitting?: boolean;
 }
 
 export const SeeksListItem: FC<SeeksListItemProps> = ({
+  acceptInProcess = null,
   seek,
   onPlay,
-  isSubmitting = false,
 }) => {
   const handlePlay = useCallback(() => {
     if (onPlay) {
@@ -37,7 +37,7 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
         <Button
           data-testid="play-btn"
           onClick={handlePlay}
-          disabled={isSubmitting || !!seek.game}
+          disabled={acceptInProcess !== null || !!seek.game}
         >
           Play
         </Button>
