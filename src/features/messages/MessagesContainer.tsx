@@ -1,25 +1,22 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { Messages } from "./Messages";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/rootReducer";
+import { hideMessage } from "./messagesSlice";
 
 const MessagesContainer: FC<unknown> = () => {
-  return <Messages />;
+  const dispatch = useDispatch();
 
-  /*const dispatch = useDispatch();
+  const messages = useSelector((state: RootState) => state.messages);
 
-  const handleChallengeAi = useCallback(() => {
-    dispatch(showChallengeAiModal());
-  }, [dispatch]);
+  const handleHideMessage = useCallback(
+    (messageId: string) => {
+      dispatch(hideMessage(messageId));
+    },
+    [dispatch]
+  );
 
-  const handleCreateGame = useCallback(() => {
-    dispatch(showSeekModal());
-  }, [dispatch]);
-
-  return (
-    <ChallengeButtons
-      onChallengeAi={handleChallengeAi}
-      onCreateGame={handleCreateGame}
-    />
-  );*/
+  return <Messages items={messages} onHideMessage={handleHideMessage} />;
 };
 
 export default MessagesContainer;

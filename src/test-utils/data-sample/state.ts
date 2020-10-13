@@ -17,6 +17,7 @@ export const defaultState: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  messages: [],
   seekModal: {
     isSeekModalVisible: false,
     allowCloseSeekModal: true,
@@ -65,6 +66,7 @@ export const stateWithDataSample: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  messages: [],
   seekModal: {
     isSeekModalVisible: false,
     allowCloseSeekModal: true,
@@ -127,6 +129,7 @@ export const stateWithDataSample2: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  messages: [],
   seekModal: {
     isSeekModalVisible: false,
     allowCloseSeekModal: true,
@@ -196,6 +199,7 @@ export const stateWithDataSample3: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  messages: [],
   seekModal: {
     isSeekModalVisible: false,
     allowCloseSeekModal: true,
@@ -265,6 +269,7 @@ export const stateWithDataSample4: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  messages: [],
   seekModal: {
     isSeekModalVisible: false,
     allowCloseSeekModal: true,
@@ -395,6 +400,7 @@ export const stateWithDataSample5: RootState = {
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },
+  messages: [],
   seekModal: {
     isSeekModalVisible: false,
     allowCloseSeekModal: true,

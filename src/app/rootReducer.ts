@@ -10,6 +10,7 @@ import seekModalReducer from "../features/seek-modal/seekModalSlice";
 import entitiesReducer from "../features/entities/entitiesSlice";
 import singleGameReducer from "../features/single-game/singleGameSlice";
 import acceptSeekRequestReducer from "../features/accept-seek-request/acceptSeekRequestSlice";
+import messagesReducer from "../features/messages/messagesSlice";
 
 const rootReducer = combineReducers({
   authModal: authModalReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   seekModal: seekModalReducer,
   seeksList: seeksListReducer,
   acceptSeekRequest: acceptSeekRequestReducer,
+  messages: messagesReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

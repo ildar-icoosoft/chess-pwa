@@ -8,9 +8,7 @@ export interface MessageItemState {
   body: string;
 }
 
-export type MessagesState = Array<MessageItemState>;
-
-const initialState: MessagesState = [];
+const initialState: MessageItemState[] = [];
 
 const messagesSlice = createSlice({
   name: "messages",
