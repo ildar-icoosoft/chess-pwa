@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { denormalize } from "normalizr";
 import seekSchema from "../../normalizr/schemas/seekSchema";
@@ -8,9 +8,12 @@ import { acceptSeek } from "../challenge/challengeSlice";
 import { AppDispatch } from "../../app/store";
 import Game from "../../interfaces/Game";
 import { useHistory } from "react-router-dom";
+import { Toast } from "react-bootstrap";
 
 const SeeksListContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const [playError, setPlayError] = useState<string | null>(null);
 
   const history = useHistory();
 
@@ -37,25 +40,34 @@ const SeeksListContainer: FC<unknown> = () => {
           history.push(`/game/${game.id}`);
         })
         .catch((err) => {
-          /*if (err.statusCode === 401) {
-            formikHelpers.setStatus("You must log in to create a game");
-          } else if (err.statusCode === 0) {
-            // request is aborted by client. do nothing
+          if (err.statusCode === 401) {
+            setPlayError("You must log in to create a game");
           } else {
-            formikHelpers.setStatus("Internal server error");
-          }*/
+            setPlayError("Internal server error");
+          }
         });
     },
     [dispatch, history]
   );
 
   return (
-    <SeeksList
-      currentUserId={currentUserId}
-      seeks={seeks}
-      onPlay={handlePlay}
-      acceptInProcess={acceptInProcess}
-    />
+    <>
+      <Toast
+        onClose={() => setPlayError(null)}
+        show={playError !== null}
+        delay={3000}
+        autohide
+        animation={false}
+      >
+        <Toast.Body>{playError}</Toast.Body>
+      </Toast>
+      <SeeksList
+        currentUserId={currentUserId}
+        seeks={seeks}
+        onPlay={handlePlay}
+        acceptInProcess={acceptInProcess}
+      />
+    </>
   );
 };
 
