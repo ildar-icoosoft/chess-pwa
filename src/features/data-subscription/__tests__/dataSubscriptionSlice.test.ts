@@ -5,6 +5,7 @@ import dataSubscriptionReducer, {
   createGameBySubscription,
   updateSeekBySubscription,
   createSeekBySubscription,
+  removeSeekBySubscription,
   watchGames,
   watchSeeks,
 } from "../dataSubscriptionSlice";
@@ -274,6 +275,36 @@ describe("dataSubscriptionSlice reducer", () => {
             },
           },
         },
+      });
+    });
+
+    it("remove seek", () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.on as jest.Mock).mockImplementationOnce(
+        (url: string, cb: (...args: Array<any>) => any) => {
+          cb({
+            verb: "destroyed",
+            previous: {
+              id: 1,
+              color: "white",
+              clockLimit: 300,
+              createdAt: 0,
+              clockIncrement: 5,
+              createdBy: 1,
+              game: null,
+            },
+            id: 1,
+          });
+        }
+      );
+
+      watchSeeks()(dispatch, () => defaultState, null);
+
+      expect(dispatch).toBeCalledTimes(1);
+      expect(dispatch).toBeCalledWith({
+        type: removeSeekBySubscription.type,
+        payload: 1,
       });
     });
   });

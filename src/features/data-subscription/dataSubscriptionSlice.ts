@@ -35,6 +35,7 @@ const dataSubscriptionSlice = createSlice({
       _state,
       _action: PayloadAction<NormalizedData<number>>
     ) {},
+    removeSeekBySubscription(_state, _action: PayloadAction<number>) {},
   },
   extraReducers: {},
 });
@@ -44,6 +45,7 @@ export const {
   createGameBySubscription,
   updateSeekBySubscription,
   createSeekBySubscription,
+  removeSeekBySubscription,
 } = dataSubscriptionSlice.actions;
 
 export default dataSubscriptionSlice.reducer;
@@ -82,6 +84,8 @@ export const watchSeeks = (): AppThunk<void> => (dispatch) => {
       const normalizedSeek = normalize(subscriptionData.data, seekSchema);
 
       dispatch(createSeekBySubscription(normalizedSeek));
+    } else if (subscriptionData.verb === "destroyed") {
+      dispatch(removeSeekBySubscription(subscriptionData.id));
     }
   });
 };

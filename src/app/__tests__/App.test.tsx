@@ -5,7 +5,10 @@ import App from "../App";
 import mountTest from "../../test-utils/mountTest";
 import HomePage from "../../features/home-page/HomePage";
 import { fetchCurrentUser } from "../../features/current-user/currentUserSlice";
-import { watchGames } from "../../features/data-subscription/dataSubscriptionSlice";
+import {
+  watchGames,
+  watchSeeks,
+} from "../../features/data-subscription/dataSubscriptionSlice";
 import { defaultState } from "../../test-utils/data-sample/state";
 import { startGameClock } from "../../features/game-clock/gameClockSlice";
 import HeaderContainer from "../../features/header/HeaderContainer";
@@ -124,6 +127,25 @@ describe("App", () => {
       expect(watchGamesFn).toBeCalledWith();
 
       expect(dispatch).toBeCalledWith(watchGamesReturnedValue);
+    });
+
+    it("should call dispatch(watchSeeks())", () => {
+      const dispatch = useDispatch<jest.Mock>();
+
+      (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
+
+      const watchSeeksReturnedValue = Symbol("watchSeeks");
+
+      const watchSeeksFn = watchSeeks as jest.Mock;
+      watchSeeksFn.mockClear();
+      watchSeeksFn.mockReturnValue(watchSeeksReturnedValue);
+
+      TestRenderer.create(<App />);
+
+      expect(watchSeeksFn).toBeCalledTimes(1);
+      expect(watchSeeksFn).toBeCalledWith();
+
+      expect(dispatch).toBeCalledWith(watchSeeksReturnedValue);
     });
 
     it("should call dispatch(fetchGames())", () => {
