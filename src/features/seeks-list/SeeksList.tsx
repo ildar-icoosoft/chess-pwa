@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { Seek } from "../../interfaces/Seek";
-import css from "../games-list/GamePreviewsList.module.scss";
 import { SeeksListItem } from "./SeeksListItem";
 
 export interface SeeksListProps {
@@ -17,7 +16,7 @@ export const SeeksList: FC<SeeksListProps> = ({
   onPlay,
 }) => {
   return (
-    <div className={css.grid}>
+    <div>
       {seeks.map((item) => (
         <SeeksListItem
           acceptInProcess={acceptInProcess}

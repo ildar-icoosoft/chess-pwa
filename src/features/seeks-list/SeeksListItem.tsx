@@ -29,13 +29,17 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
   return (
     <div
       data-testid="seek-wrapper"
-      className={cx({ gameIsStarted: seek.game })}
+      className={cx("d-flex", "align-items-center", "border-bottom", {
+        gameIsStarted: seek.game,
+      })}
     >
-      <div data-testid="user-name">{seek.createdBy.fullName}</div>
-      <div data-testid="time-control">
+      <div data-testid="user-name" className="mr-auto p-2">
+        {seek.createdBy.fullName}
+      </div>
+      <div data-testid="time-control" className="p-2">
         {seek.clockLimit / 60} + {seek.clockIncrement}
       </div>
-      <div>
+      <div className="p-2">
         {currentUserId !== seek.createdBy.id && (
           <Button
             data-testid="play-btn"
