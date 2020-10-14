@@ -2,6 +2,7 @@ import React, { FC, useCallback } from "react";
 import cx from "classnames";
 import { Seek } from "../../interfaces/Seek";
 import { Button, Spinner } from "react-bootstrap";
+import css from "./SeeksListItem.module.scss";
 
 export interface SeeksListItemProps {
   acceptInProcess?: number | null;
@@ -30,7 +31,7 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
     <div
       data-testid="seek-wrapper"
       className={cx("d-flex", "align-items-center", "border-bottom", {
-        gameIsStarted: seek.game,
+        [css.gameIsStarted]: seek.game,
       })}
     >
       <div data-testid="user-name" className="mr-auto p-2">
