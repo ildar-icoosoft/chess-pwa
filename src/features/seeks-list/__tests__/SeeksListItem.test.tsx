@@ -5,6 +5,7 @@ import { SeeksListItem } from "../SeeksListItem";
 import {
   defaultSeekSample,
   seekSample2,
+  seekSample3,
 } from "../../../test-utils/data-sample/seek";
 
 describe("SeeksListItem", () => {
@@ -16,8 +17,28 @@ describe("SeeksListItem", () => {
       expect(container).toBeEmptyDOMElement();
     });
 
+    it("should contain color icon", () => {
+      const { queryByTestId, rerender } = render(
+        <SeeksListItem seek={defaultSeekSample} />
+      );
+
+      expect(queryByTestId("white-icon")).toBeInTheDocument();
+      expect(queryByTestId("black-icon")).not.toBeInTheDocument();
+      expect(queryByTestId("random-icon")).not.toBeInTheDocument();
+
+      rerender(<SeeksListItem seek={seekSample2} />);
+      expect(queryByTestId("white-icon")).not.toBeInTheDocument();
+      expect(queryByTestId("black-icon")).toBeInTheDocument();
+      expect(queryByTestId("random-icon")).not.toBeInTheDocument();
+
+      rerender(<SeeksListItem seek={seekSample3} />);
+      expect(queryByTestId("white-icon")).not.toBeInTheDocument();
+      expect(queryByTestId("black-icon")).not.toBeInTheDocument();
+      expect(queryByTestId("random-icon")).toBeInTheDocument();
+    });
+
     it("should contain player name", () => {
-      const { getByTestId, rerender } = render(
+      const { getByTestId } = render(
         <SeeksListItem seek={defaultSeekSample} />
       );
 

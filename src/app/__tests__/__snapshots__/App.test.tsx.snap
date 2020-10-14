@@ -77,9 +77,7 @@ exports[`App Snapshot 1`] = `
       >
         Waiting for opponent
       </div>
-      <div
-        className="grid"
-      />
+      <div />
     </div>
   </div>
   <div

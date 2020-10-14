@@ -3,6 +3,9 @@ import cx from "classnames";
 import { Seek } from "../../interfaces/Seek";
 import { Button, Spinner } from "react-bootstrap";
 import css from "./SeeksListItem.module.scss";
+import { ReactComponent as WhiteIcon } from "./icons/white.svg";
+import { ReactComponent as BlackIcon } from "./icons/black.svg";
+import { ReactComponent as RandomIcon } from "./icons/random.svg";
 
 export interface SeeksListItemProps {
   acceptInProcess?: number | null;
@@ -34,6 +37,17 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
         [css.gameIsStarted]: seek.game,
       })}
     >
+      <div className="d-flex">
+        {seek.color === "white" && (
+          <WhiteIcon data-testid="white-icon" className={css.colorIcon} />
+        )}
+        {seek.color === "black" && (
+          <BlackIcon data-testid="black-icon" className={css.colorIcon} />
+        )}
+        {seek.color === "random" && (
+          <RandomIcon data-testid="random-icon" className={css.colorIcon} />
+        )}
+      </div>
       <div data-testid="user-name" className="mr-auto p-2">
         {seek.createdBy.fullName}
       </div>

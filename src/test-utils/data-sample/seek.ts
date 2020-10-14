@@ -32,3 +32,13 @@ export const seekSample2: Seek = {
   createdBy: userSample,
   game: defaultGameSample,
 };
+
+export const seekSample3: Seek = {
+  id: 2,
+  color: "random",
+  clockLimit: 600,
+  createdAt: 0,
+  clockIncrement: 3,
+  createdBy: userSample,
+  game: defaultGameSample,
+};
