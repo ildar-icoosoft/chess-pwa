@@ -138,7 +138,7 @@ export const acceptSeek = (seekId: number): AppThunk<Promise<Game>> => (
         } else {
           let errorMessage = body as string;
           if (jwr.statusCode === 401) {
-            errorMessage = "You must log in to create a game";
+            errorMessage = "You must log in to play a game";
           }
 
           dispatch(

@@ -48,7 +48,12 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
             disabled={acceptInProcess !== null || !!seek.game}
           >
             {acceptInProcess === seek.id && (
-              <Spinner animation="border" data-testid="play-btn-spinner">
+              <Spinner
+                animation="border"
+                data-testid="play-btn-spinner"
+                size="sm"
+                className="mr-2"
+              >
                 <span className="sr-only">Sending...</span>
               </Spinner>
             )}
