@@ -3,9 +3,9 @@ import {
   acceptSeekRequest,
   acceptSeekSuccess,
   acceptSeekError,
-  AcceptSeekSuccessPayload,
 } from "../challenge/challengeSlice";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
+import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 
 interface AcceptSeekRequestState {
   inProcess: boolean;
@@ -31,7 +31,7 @@ const acceptSeekRequestSlice = createSlice({
     },
     [acceptSeekSuccess.type]: (
       state,
-      action: PayloadAction<AcceptSeekSuccessPayload>
+      _action: PayloadAction<NormalizedData<number>>
     ) => {
       state.inProcess = false;
       state.itemId = null;

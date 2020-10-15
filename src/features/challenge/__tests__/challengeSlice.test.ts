@@ -18,6 +18,11 @@ import challengeReducer, {
 import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import { gameWithMovesSample } from "../../../test-utils/data-sample/game";
+import {
+  defaultSeekSample,
+  normalizedDefaultSeekSample,
+} from "../../../test-utils/data-sample/seek";
+import userSample from "../../../test-utils/data-sample/user";
 
 jest.mock("../../../services/ioClient");
 
@@ -271,11 +276,8 @@ describe("challengeSlice reducer", () => {
         {
           type: acceptSeekSuccess.type,
           payload: {
-            seekId: 5,
-            normalizedGame: {
-              result: 1,
-              entities: {},
-            },
+            result: 1,
+            entities: {},
           },
         }
       )
@@ -303,32 +305,32 @@ describe("challengeSlice reducer", () => {
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, data: any, cb: RequestCallback) => {
-          cb(gameWithMovesSample, {
-            body: gameWithMovesSample,
+          cb(defaultSeekSample, {
+            body: defaultSeekSample,
             statusCode: 200,
           } as JWR);
         }
       );
 
-      const result = acceptSeek(5)(dispatch, () => defaultState, null);
+      const result = acceptSeek(1)(dispatch, () => defaultState, null);
 
-      await expect(result).resolves.toEqual(gameWithMovesSample);
+      await expect(result).resolves.toEqual(defaultSeekSample);
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
         type: acceptSeekRequest.type,
-        payload: 5,
+        payload: 1,
       });
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: acceptSeekSuccess.type,
         payload: {
-          seekId: 5,
-          normalizedGame: {
-            result: 2,
-            entities: {
-              games: {
-                "2": gameWithMovesSample,
-              },
+          result: 1,
+          entities: {
+            seeks: {
+              "1": normalizedDefaultSeekSample,
+            },
+            users: {
+              "1": userSample,
             },
           },
         },

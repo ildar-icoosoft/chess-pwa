@@ -305,13 +305,10 @@ describe("entitiesSlice reducer", () => {
       entitiesReducer(entitiesSample, {
         type: acceptSeekSuccess.type,
         payload: {
-          seekId: 5,
-          normalizedGame: {
-            result: 2,
-            entities: addGamePayloadSample,
-          },
+          result: 2,
+          entities: addSeekPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(entitiesAfterAddingSeekSample);
   });
 });

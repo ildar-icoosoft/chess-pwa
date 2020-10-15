@@ -14,15 +14,12 @@ import ioClient from "../../services/ioClient";
 import gameSchema from "../../normalizr/schemas/gameSchema";
 import { CreateSeekData } from "../../interfaces/CreateSeekData";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
+import { Seek } from "../../interfaces/Seek";
+import seekSchema from "../../normalizr/schemas/seekSchema";
 
 interface ChallengeState {}
 
 const initialState: ChallengeState = {};
-
-export interface AcceptSeekSuccessPayload {
-  seekId: number;
-  normalizedGame: NormalizedData<number>;
-}
 
 const challengeSlice = createSlice({
   name: "challenge",
@@ -44,7 +41,7 @@ const challengeSlice = createSlice({
     acceptSeekRequest(_state, _seekId: PayloadAction<number>) {},
     acceptSeekSuccess(
       _state,
-      _action: PayloadAction<AcceptSeekSuccessPayload>
+      _action: PayloadAction<NormalizedData<number>>
     ) {},
     acceptSeekError(_state, _action: PayloadAction<ItemErrorPayload>) {},
   },
@@ -115,7 +112,7 @@ export const createSeek = (data: CreateSeekData): AppThunk<Promise<Game>> => (
   });
 };
 
-export const acceptSeek = (seekId: number): AppThunk<Promise<Game>> => (
+export const acceptSeek = (seekId: number): AppThunk<Promise<Seek>> => (
   dispatch
 ) => {
   dispatch(acceptSeekRequest(seekId));
@@ -126,15 +123,10 @@ export const acceptSeek = (seekId: number): AppThunk<Promise<Game>> => (
       {},
       (body: unknown, jwr: JWR) => {
         if (jwr.statusCode === 200) {
-          const normalizedGame = normalize(body as Game, gameSchema);
+          const normalizedSeek = normalize(body as Seek, seekSchema);
 
-          dispatch(
-            acceptSeekSuccess({
-              seekId,
-              normalizedGame,
-            })
-          );
-          resolve(body as Game);
+          dispatch(acceptSeekSuccess(normalizedSeek));
+          resolve(body as Seek);
         } else {
           let errorMessage = body as string;
           if (jwr.statusCode === 401) {

@@ -4,7 +4,7 @@ import {
   acceptSeekSuccess,
   acceptSeekError,
 } from "../../challenge/challengeSlice";
-import { defaultGameSample } from "../../../test-utils/data-sample/game";
+import { defaultSeekSample } from "../../../test-utils/data-sample/seek";
 
 describe("challengeSlice reducer", () => {
   it("should handle initial state", () => {
@@ -50,13 +50,10 @@ describe("challengeSlice reducer", () => {
         {
           type: acceptSeekSuccess.type,
           payload: {
-            seekId: 5,
-            normalizedGame: {
-              result: 1,
-              entities: {
-                games: {
-                  "1": defaultGameSample,
-                },
+            result: 1,
+            entities: {
+              seeks: {
+                "1": defaultSeekSample,
               },
             },
           },

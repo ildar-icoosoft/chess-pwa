@@ -22,7 +22,6 @@ import {
   challengeAiSuccess,
   createSeekSuccess,
   acceptSeekSuccess,
-  AcceptSeekSuccessPayload,
 } from "../challenge/challengeSlice";
 import { oneSecondPassed } from "../game-clock/gameClockSlice";
 import {
@@ -38,6 +37,7 @@ import NormalizedUserEntity from "../../normalizr/interfaces/NormalizedUserEntit
 import NormalizedGameEntity from "../../normalizr/interfaces/NormalizedGameEntity";
 import makeChessInstance from "../../utils/makeChessInstance";
 import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
+import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 
 export interface EntitiesState {
   users: Record<string, NormalizedUserEntity>;
@@ -107,14 +107,7 @@ const entitiesSlice = createSlice({
       } ${action.payload.move}`.trim();
     },
     [makeMoveSuccess.type]: getNormalizedDataReducer,
-    [acceptSeekSuccess.type]: (
-      state: EntitiesState,
-      action: PayloadAction<AcceptSeekSuccessPayload>
-    ) => {
-      getNormalizedDataReducer(state, {
-        payload: action.payload.normalizedGame,
-      });
-    },
+    [acceptSeekSuccess.type]: getNormalizedDataReducer,
     [oneSecondPassed.type]: (state: EntitiesState) => {
       const gameIds = Object.keys(state.games);
 
