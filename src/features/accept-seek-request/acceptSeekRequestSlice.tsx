@@ -1,3 +1,7 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-cycle */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   acceptSeekRequest,

@@ -1,8 +1,8 @@
-import mountTest from "../../../test-utils/mountTest";
-import { Messages } from "../Messages";
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { Toast } from "react-bootstrap";
+import mountTest from "../../../test-utils/mountTest";
+import { Messages } from "../Messages";
 import {
   defaultMessageSample,
   messageSample2,
@@ -28,7 +28,7 @@ describe("Messages", () => {
     });
   });
 
-  describe("children components", () => {
+  describe("children components props", () => {
     describe("Toast", () => {
       it("autohide", () => {
         const testRenderer = TestRenderer.create(

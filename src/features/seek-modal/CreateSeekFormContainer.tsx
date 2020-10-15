@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import React, { FC, useCallback } from "react";
-import { CreateSeekForm } from "./CreateSeekForm";
 import { FormikHelpers } from "formik";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { CreateSeekForm } from "./CreateSeekForm";
 import { createSeek } from "../challenge/challengeSlice";
 import { CreateSeekData } from "../../interfaces/CreateSeekData";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import Game from "../../interfaces/Game";
-import { useHistory } from "react-router-dom";
+
 import ioClient from "../../services/ioClient";
 
 const CreateSeekFormContainer: FC<unknown> = () => {

@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from "react";
-import { Messages } from "./Messages";
 import { useDispatch, useSelector } from "react-redux";
+import { Messages } from "./Messages";
 import { RootState } from "../../app/rootReducer";
 import { hideMessage } from "./messagesSlice";
 

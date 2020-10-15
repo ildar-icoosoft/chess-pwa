@@ -1,3 +1,5 @@
+/* eslint-disable import/no-cycle */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { pullAllBy as _pullAllBy } from "lodash";
 import { acceptSeekError } from "../challenge/challengeSlice";

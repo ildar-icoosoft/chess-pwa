@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable prefer-promise-reject-errors */
+
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import { useDispatch } from "react-redux";

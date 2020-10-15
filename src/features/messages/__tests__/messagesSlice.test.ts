@@ -1,7 +1,4 @@
-import messagesReducer, {
-  showMessage,
-  hideMessage,
-} from "../../messages/messagesSlice";
+import messagesReducer, { showMessage, hideMessage } from "../messagesSlice";
 import { acceptSeekError } from "../../challenge/challengeSlice";
 
 describe("messagesSlice reducer", () => {

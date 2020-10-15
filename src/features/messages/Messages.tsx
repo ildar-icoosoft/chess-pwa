@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+
 import React, { FC, useCallback } from "react";
 import { Toast } from "react-bootstrap";
 import { Message } from "../../interfaces/Message";
@@ -22,7 +24,7 @@ export const Messages: FC<MessagesProps> = ({ items = [], onHideMessage }) => {
     <div className={css.messages}>
       {items.map((item, index) => (
         <Toast
-          key={`${item.id}-${index}`}
+          key={index}
           onClose={makeHideMessageHandler(item.id)}
           show
           delay={3000}

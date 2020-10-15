@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Formik, FormikHelpers } from "formik";
 import React, { FC, FormEvent, useCallback } from "react";
 import { Alert, Button, Form, Spinner } from "react-bootstrap";

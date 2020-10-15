@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { denormalize } from "normalizr";
 import seekSchema from "../../normalizr/schemas/seekSchema";
 import { RootState } from "../../app/rootReducer";
 import { SeeksList } from "./SeeksList";
 import { acceptSeek } from "../challenge/challengeSlice";
 import { AppDispatch } from "../../app/store";
-import { useHistory } from "react-router-dom";
 import { Seek } from "../../interfaces/Seek";
 
 const SeeksListContainer: FC<unknown> = () => {

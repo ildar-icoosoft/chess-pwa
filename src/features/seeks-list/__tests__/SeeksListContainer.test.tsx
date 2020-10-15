@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import TestRenderer from "react-test-renderer";
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   defaultState,
   makeStateSample,
@@ -10,7 +11,6 @@ import mountTest from "../../../test-utils/mountTest";
 import SeeksListContainer from "../SeeksListContainer";
 import { SeeksList } from "../SeeksList";
 import { acceptSeek } from "../../challenge/challengeSlice";
-import { useHistory } from "react-router-dom";
 import { seekSample2 } from "../../../test-utils/data-sample/seek";
 
 jest.mock("../../challenge/challengeSlice");
