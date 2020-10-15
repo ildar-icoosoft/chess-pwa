@@ -1,10 +1,13 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-cycle */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { pull as _pull } from "lodash";
+import { JWR } from "sails.io.js";
+import { normalize } from "normalizr";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
-import { JWR } from "sails.io.js";
-import { normalize } from "normalizr";
 import { Seek } from "../../interfaces/Seek";
 import seekSchema from "../../normalizr/schemas/seekSchema";
 import {

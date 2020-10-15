@@ -1,6 +1,6 @@
-import mountTest from "../../../test-utils/mountTest";
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
+import mountTest from "../../../test-utils/mountTest";
 import { SeeksListItem } from "../SeeksListItem";
 import {
   defaultSeekSample,

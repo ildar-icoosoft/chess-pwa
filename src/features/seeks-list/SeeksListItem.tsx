@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import React, { FC, useCallback } from "react";
+import { Button, Spinner } from "react-bootstrap";
 import cx from "classnames";
 import { Seek } from "../../interfaces/Seek";
-import { Button, Spinner } from "react-bootstrap";
 import css from "./SeeksListItem.module.scss";
 import { ReactComponent as WhiteIcon } from "./icons/white.svg";
 import { ReactComponent as BlackIcon } from "./icons/black.svg";

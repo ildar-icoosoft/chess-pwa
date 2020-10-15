@@ -1,3 +1,4 @@
+import { JWR, RequestCallback } from "sails.io.js";
 import seeksListReducer, {
   getSeeksListRequest,
   getSeeksListSuccess,
@@ -10,7 +11,6 @@ import {
   removeSeekBySubscription,
 } from "../../data-subscription/dataSubscriptionSlice";
 import ioClient from "../../../services/ioClient";
-import { JWR, RequestCallback } from "sails.io.js";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import {
   defaultSeekSample,

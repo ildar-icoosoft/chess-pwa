@@ -8,8 +8,6 @@ import {
 } from "../../../test-utils/data-sample/seek";
 import { Seek } from "../../../interfaces/Seek";
 import { SeeksListItem } from "../SeeksListItem";
-import { SeekModal } from "../../seek-modal/SeekModal";
-import { Modal } from "react-bootstrap";
 
 const seeksList: Seek[] = [defaultSeekSample, seekSample2];
 
