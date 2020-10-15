@@ -4,6 +4,11 @@ import seeksListReducer, {
   getSeeksListError,
   fetchSeeks,
 } from "../seeksListSlice";
+import {
+  createSeekBySubscription,
+  updateSeekBySubscription,
+  removeSeekBySubscription,
+} from "../../data-subscription/dataSubscriptionSlice";
 import ioClient from "../../../services/ioClient";
 import { JWR, RequestCallback } from "sails.io.js";
 import { defaultState } from "../../../test-utils/data-sample/state";
@@ -86,6 +91,132 @@ describe("seeksListSlice reducer", () => {
       isLoading: false,
       error: "error text",
       items: [],
+    });
+  });
+
+  it("should handle createSeekBySubscription", () => {
+    expect(
+      seeksListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: createSeekBySubscription.type,
+          payload: {
+            result: 2,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2],
+    });
+
+    expect(
+      seeksListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: createSeekBySubscription.type,
+          payload: {
+            result: 3,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2, 3],
+    });
+  });
+
+  it("should handle updateSeekBySubscription", () => {
+    expect(
+      seeksListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: updateSeekBySubscription.type,
+          payload: {
+            result: 2,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2],
+    });
+
+    expect(
+      seeksListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: updateSeekBySubscription.type,
+          payload: {
+            result: 3,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2, 3],
+    });
+  });
+
+  it("should handle removeSeekBySubscription", () => {
+    expect(
+      seeksListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: removeSeekBySubscription.type,
+          payload: 3,
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2],
+    });
+
+    expect(
+      seeksListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: removeSeekBySubscription.type,
+          payload: 1,
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [2],
     });
   });
 

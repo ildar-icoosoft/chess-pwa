@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { pull as _pull } from "lodash";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
@@ -6,6 +7,11 @@ import { JWR } from "sails.io.js";
 import { normalize } from "normalizr";
 import { Seek } from "../../interfaces/Seek";
 import seekSchema from "../../normalizr/schemas/seekSchema";
+import {
+  createSeekBySubscription,
+  updateSeekBySubscription,
+  removeSeekBySubscription,
+} from "../data-subscription/dataSubscriptionSlice";
 
 interface SeeksListState {
   isLoading: boolean;
@@ -39,6 +45,30 @@ const seeksListSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
       state.items = [];
+    },
+  },
+  extraReducers: {
+    [createSeekBySubscription.type]: (
+      state: SeeksListState,
+      action: PayloadAction<NormalizedData<number>>
+    ) => {
+      if (!state.items.includes(action.payload.result)) {
+        state.items.push(action.payload.result);
+      }
+    },
+    [updateSeekBySubscription.type]: (
+      state: SeeksListState,
+      action: PayloadAction<NormalizedData<number>>
+    ) => {
+      if (!state.items.includes(action.payload.result)) {
+        state.items.push(action.payload.result);
+      }
+    },
+    [removeSeekBySubscription.type]: (
+      state: SeeksListState,
+      action: PayloadAction<number>
+    ) => {
+      _pull(state.items, action.payload);
     },
   },
 });

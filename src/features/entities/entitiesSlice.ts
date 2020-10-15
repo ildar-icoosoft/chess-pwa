@@ -98,14 +98,14 @@ const entitiesSlice = createSlice({
     [createSeekSuccess.type]: getNormalizedDataReducer,
     [createSeekBySubscription.type]: getNormalizedDataReducer,
     [updateSeekBySubscription.type]: getNormalizedDataReducer,
-    [updateGameBySubscription.type]: getNormalizedDataReducer,
-    [createGameBySubscription.type]: getNormalizedDataReducer,
     [removeSeekBySubscription.type]: (
       state: EntitiesState,
       action: PayloadAction<number>
     ) => {
       delete state.seeks[action.payload];
     },
+    [updateGameBySubscription.type]: getNormalizedDataReducer,
+    [createGameBySubscription.type]: getNormalizedDataReducer,
     [makeMoveRequest.type]: (
       state: EntitiesState,
       action: PayloadAction<MoveRequestPayload>
