@@ -37,7 +37,7 @@ export const SeeksListItem: FC<SeeksListItemProps> = ({
         [css.gameIsStarted]: seek.game,
       })}
     >
-      <div className="d-flex">
+      <div className="d-flex pl-2">
         {seek.color === "white" && (
           <WhiteIcon data-testid="white-icon" className={css.colorIcon} />
         )}
