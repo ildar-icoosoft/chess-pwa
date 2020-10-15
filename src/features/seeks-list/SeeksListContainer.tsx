@@ -6,8 +6,8 @@ import { RootState } from "../../app/rootReducer";
 import { SeeksList } from "./SeeksList";
 import { acceptSeek } from "../challenge/challengeSlice";
 import { AppDispatch } from "../../app/store";
-import Game from "../../interfaces/Game";
 import { useHistory } from "react-router-dom";
+import { Seek } from "../../interfaces/Seek";
 
 const SeeksListContainer: FC<unknown> = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -33,8 +33,8 @@ const SeeksListContainer: FC<unknown> = () => {
   const handlePlay = useCallback(
     (seekId: number) => {
       return dispatch(acceptSeek(seekId))
-        .then((game: Game) => {
-          history.push(`/game/${game.id}`);
+        .then((seek: Seek) => {
+          history.push(`/game/${seek.game!.id}`);
         })
         .catch(() => {});
     },

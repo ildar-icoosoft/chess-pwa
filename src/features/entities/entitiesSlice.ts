@@ -27,6 +27,9 @@ import { oneSecondPassed } from "../game-clock/gameClockSlice";
 import {
   updateGameBySubscription,
   createGameBySubscription,
+  createSeekBySubscription,
+  updateSeekBySubscription,
+  removeSeekBySubscription,
 } from "../data-subscription/dataSubscriptionSlice";
 import {
   makeMoveRequest,
@@ -37,7 +40,6 @@ import NormalizedUserEntity from "../../normalizr/interfaces/NormalizedUserEntit
 import NormalizedGameEntity from "../../normalizr/interfaces/NormalizedGameEntity";
 import makeChessInstance from "../../utils/makeChessInstance";
 import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
-import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 
 export interface EntitiesState {
   users: Record<string, NormalizedUserEntity>;
@@ -94,8 +96,16 @@ const entitiesSlice = createSlice({
     [declineDrawOfferSuccess.type]: getNormalizedDataReducer,
     [challengeAiSuccess.type]: getNormalizedDataReducer,
     [createSeekSuccess.type]: getNormalizedDataReducer,
+    [createSeekBySubscription.type]: getNormalizedDataReducer,
+    [updateSeekBySubscription.type]: getNormalizedDataReducer,
     [updateGameBySubscription.type]: getNormalizedDataReducer,
     [createGameBySubscription.type]: getNormalizedDataReducer,
+    [removeSeekBySubscription.type]: (
+      state: EntitiesState,
+      action: PayloadAction<number>
+    ) => {
+      delete state.seeks[action.payload];
+    },
     [makeMoveRequest.type]: (
       state: EntitiesState,
       action: PayloadAction<MoveRequestPayload>

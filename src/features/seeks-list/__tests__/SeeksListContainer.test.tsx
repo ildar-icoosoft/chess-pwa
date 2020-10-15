@@ -12,6 +12,10 @@ import { SeeksList } from "../SeeksList";
 import { acceptSeek } from "../../challenge/challengeSlice";
 import { defaultGameSample } from "../../../test-utils/data-sample/game";
 import { useHistory } from "react-router-dom";
+import {
+  defaultSeekSample,
+  seekSample2,
+} from "../../../test-utils/data-sample/seek";
 
 jest.mock("../../challenge/challengeSlice");
 
@@ -165,7 +169,7 @@ describe("SeeksListContainer", () => {
 
     it("should handle dispatch(acceptSeek()) success", async () => {
       const dispatch = useDispatch<jest.Mock>();
-      dispatch.mockImplementationOnce(() => Promise.resolve(defaultGameSample));
+      dispatch.mockImplementationOnce(() => Promise.resolve(seekSample2));
 
       const testRenderer = TestRenderer.create(<SeeksListContainer />);
       const testInstance = testRenderer.root;
