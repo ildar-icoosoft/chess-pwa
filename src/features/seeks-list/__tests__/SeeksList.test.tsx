@@ -90,7 +90,7 @@ describe("SeeksList", () => {
         );
 
         expect(contentLoadingStatus.props.emptyContentMessage).toBe(
-          "Nobody is waiting for playing"
+          "Nobody is waiting for opponent"
         );
       });
     });

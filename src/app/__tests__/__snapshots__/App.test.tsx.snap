@@ -83,7 +83,7 @@ exports[`App Snapshot 1`] = `
           data-testid="empty-content-message"
           role="alert"
         >
-          Nobody is waiting for playing
+          Nobody is waiting for opponent
         </div>
         <div />
       </div>

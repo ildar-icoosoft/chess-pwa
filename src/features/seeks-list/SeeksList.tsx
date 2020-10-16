@@ -26,7 +26,7 @@ export const SeeksList: FC<SeeksListProps> = ({
         isLoading={isLoading}
         error={error}
         isEmpty={seeks.length === 0}
-        emptyContentMessage="Nobody is waiting for playing"
+        emptyContentMessage="Nobody is waiting for opponent"
       />
       <div>
         {seeks.map((item) => (
