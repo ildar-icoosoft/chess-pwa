@@ -49,6 +49,7 @@ export const SingleGameBoardContainer: FC<SingleGameBoardProps> = ({ id }) => {
         rewindToMoveIndex={singleGameItemState.rewindToMoveIndex}
         onMove={handleMove}
         isLoading={singleGameItemState.isLoading}
+        error={singleGameItemState.error}
       />
     );
   }

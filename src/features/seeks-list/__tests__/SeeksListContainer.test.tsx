@@ -140,7 +140,7 @@ describe("SeeksListContainer", () => {
 
         const seeksListComponent = testInstance.findByType(SeeksList);
 
-        expect(seeksListComponent.props.error).toBeFalsy();
+        expect(seeksListComponent.props.error).toBeNull();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
           cb(stateWithLoadingError)
@@ -148,7 +148,7 @@ describe("SeeksListContainer", () => {
 
         testRenderer.update(<SeeksListContainer />);
 
-        expect(seeksListComponent.props.error).toBeTruthy();
+        expect(seeksListComponent.props.error).toBe("error text");
       });
 
       it("acceptInProcess", () => {

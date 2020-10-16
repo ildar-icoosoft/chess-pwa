@@ -28,6 +28,20 @@ const stateWithLoadedGame = makeStateSample(
   stateWithDataSample
 );
 
+const stateWithLoadingError = makeStateSample(
+  {
+    singleGame: {
+      "1": {
+        isLoading: false,
+        error: "error text",
+        isFlipped: false,
+        rewindToMoveIndex: null,
+      },
+    },
+  },
+  stateWithDataSample
+);
+
 describe("SingleGameBoardContainer", () => {
   beforeEach(() => {
     (useSelector as jest.Mock).mockImplementation((cb) =>
@@ -100,6 +114,25 @@ describe("SingleGameBoardContainer", () => {
         testRenderer.update(<SingleGameBoardContainer id={1} />);
 
         expect(singleGameBoard.props.isLoading).toBeFalsy();
+      });
+
+      it("error", async () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGameBoardContainer id={1} />
+        );
+        const testInstance = testRenderer.root;
+
+        const singleGameBoard = testInstance.findByType(SingleGameBoard);
+
+        expect(singleGameBoard.props.error).toBeNull();
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithLoadingError)
+        );
+
+        testRenderer.update(<SingleGameBoardContainer id={1} />);
+
+        expect(singleGameBoard.props.error).toBe("error text");
       });
 
       it("currentUser", async () => {
