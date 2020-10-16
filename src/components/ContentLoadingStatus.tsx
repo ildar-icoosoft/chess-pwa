@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Spinner } from "react-bootstrap";
+import css from "./ContentLoadingStatus.module.scss";
 
 export interface ContentLoadingStatusProps {
   emptyContentMessage?: string;
@@ -19,7 +20,7 @@ export const ContentLoadingStatus: FC<ContentLoadingStatusProps> = ({
   if (isEmpty && !isLoading && !error) {
     return (
       <div
-        className="alert alert-warning"
+        className="alert alert-warning text-center"
         role="alert"
         data-testid="empty-content-message"
       >
@@ -30,16 +31,18 @@ export const ContentLoadingStatus: FC<ContentLoadingStatusProps> = ({
 
   if (isLoading && isEmpty) {
     return (
-      <Spinner animation="border" role="status" data-testid="loading-spinner">
-        <span className="sr-only">Loading...</span>
-      </Spinner>
+      <div className="text-center">
+        <Spinner animation="border" role="status" data-testid="loading-spinner">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </div>
     );
   }
 
   if (error) {
     return (
       <div
-        className="alert alert-error"
+        className="alert alert-danger text-center"
         role="alert"
         data-testid="error-message"
       >

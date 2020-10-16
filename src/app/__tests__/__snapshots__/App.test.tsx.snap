@@ -79,7 +79,7 @@ exports[`App Snapshot 1`] = `
       </div>
       <div>
         <div
-          className="alert alert-warning"
+          className="alert alert-warning text-center"
           data-testid="empty-content-message"
           role="alert"
         >
