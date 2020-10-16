@@ -9,7 +9,6 @@ import {
 import Game from "../../../interfaces/Game";
 import { GamePreviewsListItem } from "../GamePreviewsListItem";
 import { ContentLoadingStatus } from "../../../components/ContentLoadingStatus";
-import { SeeksList } from "../../seeks-list/SeeksList";
 
 const gamesList: Game[] = [defaultGameSample, gameWithMovesSample];
 

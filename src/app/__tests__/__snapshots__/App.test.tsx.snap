@@ -131,7 +131,7 @@ exports[`App Snapshot 1`] = `
           data-testid="empty-content-message"
           role="alert"
         >
-          content is empty
+          There is no finished games yet
         </div>
         <div
           className="grid"
