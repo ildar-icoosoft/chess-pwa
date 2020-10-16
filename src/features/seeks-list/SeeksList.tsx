@@ -15,6 +15,18 @@ export const SeeksList: FC<SeeksListProps> = ({
   seeks = [],
   onPlay,
 }) => {
+  if (!seeks.length) {
+    return (
+      <div
+        className="alert alert-warning"
+        role="alert"
+        data-testid="empty-list-message"
+      >
+        Nobody is waiting for playing
+      </div>
+    );
+  }
+
   return (
     <div>
       {seeks.map((item) => (

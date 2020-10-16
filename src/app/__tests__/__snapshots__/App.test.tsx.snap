@@ -77,7 +77,13 @@ exports[`App Snapshot 1`] = `
       >
         Waiting for opponent
       </div>
-      <div />
+      <div
+        className="alert alert-warning"
+        data-testid="empty-list-message"
+        role="alert"
+      >
+        Nobody is waiting for playing
+      </div>
     </div>
   </div>
   <div

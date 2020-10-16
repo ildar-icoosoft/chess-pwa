@@ -8,6 +8,8 @@ import {
 } from "../../../test-utils/data-sample/seek";
 import { Seek } from "../../../interfaces/Seek";
 import { SeeksListItem } from "../SeeksListItem";
+import { render } from "@testing-library/react";
+import { GameControlPanelStatus } from "../../single-game/GameControlPanelStatus";
 
 const seeksList: Seek[] = [defaultSeekSample, seekSample2];
 
@@ -94,6 +96,18 @@ describe("SeeksList", () => {
         expect(seeksListItems[0].props.onPlay).toBe(onPlay);
         expect(seeksListItems[1].props.onPlay).toBe(onPlay);
       });
+    });
+  });
+
+  describe("DOM structure", () => {
+    it("should contain message if list is empty", () => {
+      const { queryByTestId, rerender } = render(<SeeksList />);
+
+      expect(queryByTestId("empty-list-message")).toBeInTheDocument();
+
+      rerender(<SeeksList seeks={seeksList} />);
+
+      expect(queryByTestId("empty-list-message")).not.toBeInTheDocument();
     });
   });
 });
