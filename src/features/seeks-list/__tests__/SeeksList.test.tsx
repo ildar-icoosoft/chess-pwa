@@ -61,7 +61,7 @@ describe("SeeksList", () => {
 
         expect(contentLoadingStatus.props.error).toBeNull();
 
-        testRenderer.update(<SeeksList isLoading error="error text" />);
+        testRenderer.update(<SeeksList error="error text" />);
 
         expect(contentLoadingStatus.props.error).toBe("error text");
       });

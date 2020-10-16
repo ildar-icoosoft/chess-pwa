@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { Spinner } from "react-bootstrap";
-import css from "./ContentLoadingStatus.module.scss";
 
 export interface ContentLoadingStatusProps {
   emptyContentMessage?: string;
