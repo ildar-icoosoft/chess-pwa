@@ -60,10 +60,10 @@ describe("SingleGameBoardContainer", () => {
       );
       const testInstance = testRenderer.root;
 
-      expect(testInstance.findAllByType(SingleGameBoard).length).toBe(0);
+      // render SingleGameBoard event if there is no game in state
+      expect(testInstance.findAllByType(SingleGameBoard).length).toBe(1);
 
       testRenderer.update(<SingleGameBoardContainer id={1} />);
-
       expect(testInstance.findAllByType(SingleGameBoard).length).toBe(1);
     });
   });
