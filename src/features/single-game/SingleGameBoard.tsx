@@ -18,6 +18,8 @@ export interface SingleGameBoardProps {
   isFlipped?: boolean;
   onMove?(move: Move): void;
   rewindToMoveIndex?: number | null;
+  isLoading?: boolean;
+  error?: string | null;
 }
 
 export const SingleGameBoard: FC<SingleGameBoardProps> = ({

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import TestRenderer from "react-test-renderer";
 import {
+  makeStateSample,
   stateWithDataSample,
   stateWithDataSample2,
   stateWithDataSample3,
@@ -12,6 +13,20 @@ import { SingleGameBoard } from "../SingleGameBoard";
 import { makeMove } from "../../move/moveSlice";
 
 jest.mock("../../move/moveSlice");
+
+const stateWithLoadedGame = makeStateSample(
+  {
+    singleGame: {
+      "1": {
+        isLoading: false,
+        error: null,
+        isFlipped: false,
+        rewindToMoveIndex: null,
+      },
+    },
+  },
+  stateWithDataSample
+);
 
 describe("SingleGameBoardContainer", () => {
   beforeEach(() => {
@@ -66,6 +81,25 @@ describe("SingleGameBoardContainer", () => {
           black: null,
           winner: null,
         });
+      });
+
+      it("isLoading", async () => {
+        const testRenderer = TestRenderer.create(
+          <SingleGameBoardContainer id={1} />
+        );
+        const testInstance = testRenderer.root;
+
+        const singleGameBoard = testInstance.findByType(SingleGameBoard);
+
+        expect(singleGameBoard.props.isLoading).toBeTruthy();
+
+        (useSelector as jest.Mock).mockImplementation((cb) =>
+          cb(stateWithLoadedGame)
+        );
+
+        testRenderer.update(<SingleGameBoardContainer id={1} />);
+
+        expect(singleGameBoard.props.isLoading).toBeFalsy();
       });
 
       it("currentUser", async () => {

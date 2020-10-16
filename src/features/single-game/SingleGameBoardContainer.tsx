@@ -48,6 +48,7 @@ export const SingleGameBoardContainer: FC<SingleGameBoardProps> = ({ id }) => {
         isFlipped={singleGameItemState.isFlipped}
         rewindToMoveIndex={singleGameItemState.rewindToMoveIndex}
         onMove={handleMove}
+        isLoading={singleGameItemState.isLoading}
       />
     );
   }
