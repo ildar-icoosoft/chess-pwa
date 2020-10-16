@@ -5,6 +5,8 @@ import { GamePreviewsListItem } from "./GamePreviewsListItem";
 
 export interface GamePreviewsListProps {
   games?: Game[];
+  isLoading?: boolean;
+  error?: string | null;
 }
 
 export const GamePreviewsList: FC<GamePreviewsListProps> = ({ games = [] }) => {
