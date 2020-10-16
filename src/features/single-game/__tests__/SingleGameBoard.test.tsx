@@ -19,7 +19,6 @@ import {
 import { SingleGameBoard } from "../SingleGameBoard";
 import userSample from "../../../test-utils/data-sample/user";
 import { ContentLoadingStatus } from "../../../components/ContentLoadingStatus";
-import { SeeksList } from "../../seeks-list/SeeksList";
 
 describe("SingleGameBoard", () => {
   describe("children components", () => {

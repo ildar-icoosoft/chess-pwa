@@ -117,7 +117,7 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
       <ContentLoadingStatus
         isLoading={isLoading}
         error={error}
-        isEmpty={game ? false : true}
+        isEmpty={!game}
       />
       {boardContent}
     </div>
