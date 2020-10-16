@@ -129,6 +129,17 @@ describe("OngoingGamesContainer", () => {
 
         expect(gamePreviewsComponent.props.error).toBe("error text");
       });
+
+      it("emptyContentMessage", () => {
+        const testRenderer = TestRenderer.create(<OngoingGamesContainer />);
+        const testInstance = testRenderer.root;
+
+        const gamePreviewsComponent = testInstance.findByType(GamePreviewsList);
+
+        expect(gamePreviewsComponent.props.emptyContentMessage).toBe(
+          "Nobody is playing right now"
+        );
+      });
     });
   });
 });

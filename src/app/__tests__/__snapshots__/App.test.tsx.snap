@@ -100,9 +100,18 @@ exports[`App Snapshot 1`] = `
       >
         Playing right now
       </div>
-      <div
-        className="grid"
-      />
+      <div>
+        <div
+          className="alert alert-warning text-center"
+          data-testid="empty-content-message"
+          role="alert"
+        >
+          Nobody is playing right now
+        </div>
+        <div
+          className="grid"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -116,9 +125,18 @@ exports[`App Snapshot 1`] = `
       >
         Finished
       </div>
-      <div
-        className="grid"
-      />
+      <div>
+        <div
+          className="alert alert-warning text-center"
+          data-testid="empty-content-message"
+          role="alert"
+        >
+          content is empty
+        </div>
+        <div
+          className="grid"
+        />
+      </div>
     </div>
   </div>
 </div>

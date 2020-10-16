@@ -21,7 +21,14 @@ const OngoingGamesContainer: FC<unknown> = () => {
   );
   const error = useSelector((state: RootState) => state.gamesList.error);
 
-  return <GamePreviewsList games={games} isLoading={isLoading} error={error} />;
+  return (
+    <GamePreviewsList
+      games={games}
+      isLoading={isLoading}
+      error={error}
+      emptyContentMessage="Nobody is playing right now"
+    />
+  );
 };
 
 export default OngoingGamesContainer;
