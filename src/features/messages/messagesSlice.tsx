@@ -5,6 +5,7 @@ import { pullAllBy as _pullAllBy } from "lodash";
 import { acceptSeekError } from "../challenge/challengeSlice";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 import { Message } from "../../interfaces/Message";
+import { makeMoveError } from "../move/moveSlice";
 
 const initialState: Message[] = [];
 
@@ -27,6 +28,12 @@ const messagesSlice = createSlice({
       state.push({
         id: "acceptSeekError",
         body: action.payload.error,
+      });
+    },
+    [makeMoveError.type]: (state, action: PayloadAction<string>) => {
+      state.push({
+        id: "makeMoveError",
+        body: action.payload,
       });
     },
   },
