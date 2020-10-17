@@ -127,15 +127,10 @@ export const acceptSeek = (seekId: number): AppThunk<Promise<Seek>> => (
           dispatch(acceptSeekSuccess(normalizedSeek));
           resolve(body as Seek);
         } else {
-          let errorMessage = body as string;
-          if (jwr.statusCode === 401) {
-            errorMessage = "You must log in to play a game";
-          }
-
           dispatch(
             acceptSeekError({
               itemId: seekId,
-              error: errorMessage,
+              error: getErrorMessageFromJWR(jwr),
             })
           );
           reject(jwr);

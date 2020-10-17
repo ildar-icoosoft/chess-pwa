@@ -352,6 +352,7 @@ describe("challengeSlice reducer", () => {
           } as JWR);
         }
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const result = acceptSeek(5)(dispatch, () => defaultState, null);
 
@@ -369,7 +370,7 @@ describe("challengeSlice reducer", () => {
         type: acceptSeekError.type,
         payload: {
           itemId: 5,
-          error: "internal server error",
+          error: "error text",
         },
       });
     });
