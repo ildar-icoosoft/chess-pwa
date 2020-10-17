@@ -103,9 +103,7 @@ export const createSeek = (data: CreateSeekData): AppThunk<Promise<Game>> => (
           dispatch(createSeekSuccess(normalizedGame));
           resolve(body as Game);
         } else {
-          dispatch(
-            createSeekError(_isString(body) ? body : "Internal server error")
-          );
+          dispatch(createSeekError(getErrorMessageFromJWR(jwr)));
           reject(jwr);
         }
       }

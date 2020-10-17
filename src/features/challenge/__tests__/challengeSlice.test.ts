@@ -237,6 +237,7 @@ describe("challengeSlice reducer", () => {
           } as JWR);
         }
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const result = createSeek({
         color: "random",
@@ -255,7 +256,7 @@ describe("challengeSlice reducer", () => {
       });
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: createSeekError.type,
-        payload: "internal server error",
+        payload: "error text",
       });
     });
   });
