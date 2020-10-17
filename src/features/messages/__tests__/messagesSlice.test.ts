@@ -5,7 +5,10 @@ import {
   getCurrentUserError,
   logoutError,
 } from "../../current-user/currentUserSlice";
-import { abortGameError } from "../../single-game/singleGameSlice";
+import {
+  abortGameError,
+  resignGameError,
+} from "../../single-game/singleGameSlice";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
 
 describe("messagesSlice reducer", () => {
@@ -203,6 +206,35 @@ describe("messagesSlice reducer", () => {
       },
       {
         id: "abortGameError",
+        body: "error text",
+      },
+    ]);
+  });
+
+  it("should handle resignGameError", () => {
+    expect(
+      messagesReducer(
+        [
+          {
+            id: "message1",
+            body: "some message",
+          },
+        ],
+        {
+          type: resignGameError.type,
+          payload: {
+            itemId: 1,
+            error: "error text",
+          },
+        }
+      )
+    ).toEqual([
+      {
+        id: "message1",
+        body: "some message",
+      },
+      {
+        id: "resignGameError",
         body: "error text",
       },
     ]);

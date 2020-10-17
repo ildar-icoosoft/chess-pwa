@@ -207,7 +207,7 @@ export const resignGame = (id: number): AppThunk<Promise<Game>> => (
           dispatch(
             resignGameError({
               itemId: id,
-              error: body as string,
+              error: getErrorMessageFromJWR(jwr),
             })
           );
           reject(jwr);

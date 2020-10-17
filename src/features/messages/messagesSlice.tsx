@@ -10,7 +10,10 @@ import {
   getCurrentUserError,
   logoutError,
 } from "../current-user/currentUserSlice";
-import { abortGameError } from "../single-game/singleGameSlice";
+import {
+  abortGameError,
+  resignGameError,
+} from "../single-game/singleGameSlice";
 
 const initialState: Message[] = [];
 
@@ -56,6 +59,15 @@ const messagesSlice = createSlice({
     [abortGameError.type]: (state, action: PayloadAction<ItemErrorPayload>) => {
       state.push({
         id: "abortGameError",
+        body: action.payload.error,
+      });
+    },
+    [resignGameError.type]: (
+      state,
+      action: PayloadAction<ItemErrorPayload>
+    ) => {
+      state.push({
+        id: "resignGameError",
         body: action.payload.error,
       });
     },
