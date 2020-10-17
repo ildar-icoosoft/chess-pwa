@@ -180,7 +180,7 @@ export const abortGame = (id: number): AppThunk<Promise<Game>> => (
           dispatch(
             abortGameError({
               itemId: id,
-              error: body as string,
+              error: getErrorMessageFromJWR(jwr),
             })
           );
           reject(jwr);
