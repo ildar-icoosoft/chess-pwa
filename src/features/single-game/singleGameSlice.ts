@@ -261,7 +261,7 @@ export const acceptDrawOffer = (id: number): AppThunk<Promise<Game>> => (
           dispatch(
             acceptDrawOfferError({
               itemId: id,
-              error: body as string,
+              error: getErrorMessageFromJWR(jwr),
             })
           );
           reject(jwr);
