@@ -11,6 +11,7 @@ import LoginData from "../../interfaces/LoginData";
 import SignUpData from "../../interfaces/SignUpData";
 import userSchema from "../../normalizr/schemas/userSchema";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
+import getErrorMessageFromJWR from "../../utils/getErrorMessageFromJWR";
 
 interface CurrentUserState {
   userId: number | null;
@@ -83,7 +84,7 @@ export const fetchCurrentUser = (): AppThunk<Promise<User | null>> => (
         dispatch(getCurrentUserSuccess(null));
         resolve(null);
       } else {
-        dispatch(getCurrentUserError(body as string));
+        dispatch(getCurrentUserError(getErrorMessageFromJWR(jwr)));
         reject(jwr);
       }
     });

@@ -16,8 +16,10 @@ import currentUserReducer, {
 import User from "../../../interfaces/User";
 import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
+import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
 
 jest.mock("../../../services/ioClient");
+jest.mock("../../../utils/getErrorMessageFromJWR");
 
 describe("currentUserSlice reducer", () => {
   it("should handle initial state", () => {
@@ -252,6 +254,7 @@ describe("currentUserSlice reducer", () => {
           } as JWR);
         }
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const result = fetchCurrentUser()(dispatch, () => defaultState, null);
 
@@ -266,7 +269,7 @@ describe("currentUserSlice reducer", () => {
       });
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: getCurrentUserError.type,
-        payload: "Not found",
+        payload: "error text",
       });
     });
   });

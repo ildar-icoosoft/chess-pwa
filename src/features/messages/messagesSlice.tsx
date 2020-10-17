@@ -6,6 +6,7 @@ import { acceptSeekError } from "../challenge/challengeSlice";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 import { Message } from "../../interfaces/Message";
 import { makeMoveError } from "../move/moveSlice";
+import { getCurrentUserError } from "../current-user/currentUserSlice";
 
 const initialState: Message[] = [];
 
@@ -33,6 +34,12 @@ const messagesSlice = createSlice({
     [makeMoveError.type]: (state, action: PayloadAction<string>) => {
       state.push({
         id: "makeMoveError",
+        body: action.payload,
+      });
+    },
+    [getCurrentUserError.type]: (state, action: PayloadAction<string>) => {
+      state.push({
+        id: "getCurrentUserError",
         body: action.payload,
       });
     },
