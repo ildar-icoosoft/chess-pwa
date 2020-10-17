@@ -134,6 +134,8 @@ export const login = (data: LoginData): AppThunk<Promise<User>> => (
 export const register = (data: SignUpData): AppThunk<Promise<User>> => (
   dispatch
 ) => {
+  dispatch(registerRequest());
+
   return new Promise((resolve, reject) => {
     ioClient.socket.post(
       "/api/v1/entrance/signup",
@@ -151,6 +153,7 @@ export const register = (data: SignUpData): AppThunk<Promise<User>> => (
           dispatch(registerSuccess(normalizedUser));
           resolve(body as User);
         } else {
+          dispatch(registerError(getErrorMessageFromJWR(jwr)));
           reject(jwr);
         }
       }
@@ -159,6 +162,8 @@ export const register = (data: SignUpData): AppThunk<Promise<User>> => (
 };
 
 export const logout = (): AppThunk<Promise<void>> => (dispatch) => {
+  dispatch(logoutRequest());
+
   return new Promise((resolve, reject) => {
     ioClient.socket.post(
       "/api/v1/account/logout",
@@ -168,6 +173,7 @@ export const logout = (): AppThunk<Promise<void>> => (dispatch) => {
           dispatch(logoutSuccess());
           resolve();
         } else {
+          dispatch(logoutError(getErrorMessageFromJWR(jwr)));
           reject(jwr);
         }
       }

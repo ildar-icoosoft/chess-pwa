@@ -504,8 +504,12 @@ describe("currentUserSlice reducer", () => {
 
       await expect(result).resolves.toEqual(user);
 
-      expect(dispatch).toBeCalledTimes(1);
-      expect(dispatch).toBeCalledWith({
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: registerRequest.type,
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: registerSuccess.type,
         payload: {
           result: 1,
@@ -532,6 +536,7 @@ describe("currentUserSlice reducer", () => {
           } as JWR);
         }
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const result = register({
         fullName: "Christopher Garcia",
@@ -544,12 +549,20 @@ describe("currentUserSlice reducer", () => {
         statusCode: 409,
       });
 
-      expect(dispatch).toBeCalledTimes(0);
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: registerRequest.type,
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: registerError.type,
+        payload: "error text",
+      });
     });
   });
 
   describe("should handle logout", () => {
-    it("success", () => {
+    it("success", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
@@ -563,26 +576,46 @@ describe("currentUserSlice reducer", () => {
 
       const result = logout()(dispatch, () => defaultState, null);
 
-      return expect(result).resolves.toBeUndefined();
+      await expect(result).resolves.toBeUndefined();
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: logoutRequest.type,
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: logoutSuccess.type,
+      });
     });
 
-    it("fail", () => {
+    it("fail", async () => {
       const dispatch = jest.fn();
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, data: any, cb: RequestCallback) => {
-          cb("", {
-            body: "error text",
+          cb("User is not logged in", {
+            body: "User is not logged in",
             statusCode: 500,
           } as JWR);
         }
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const result = logout()(dispatch, () => defaultState, null);
 
-      return expect(result).rejects.toEqual({
-        body: "error text",
+      expect(result).rejects.toEqual({
+        body: "User is not logged in",
         statusCode: 500,
+      });
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: logoutRequest.type,
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: logoutError.type,
+        payload: "error text",
       });
     });
   });
