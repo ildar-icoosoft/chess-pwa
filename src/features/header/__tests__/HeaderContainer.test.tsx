@@ -6,7 +6,7 @@ import HeaderContainer from "../HeaderContainer";
 import { Header } from "../Header";
 import {
   defaultState,
-  stateWithDataSample,
+  makeStateSample,
 } from "../../../test-utils/data-sample/state";
 import userSample1 from "../../../test-utils/data-sample/user";
 import { logout } from "../../current-user/currentUserSlice";
@@ -14,6 +14,21 @@ import { showAuthModal } from "../../auth-modal/authModalSlice";
 
 jest.mock("../../current-user/currentUserSlice");
 jest.mock("../../auth-modal/authModalSlice");
+
+const stateWithAuthenticatedUser = makeStateSample({
+  currentUser: {
+    userId: 1,
+    isLoading: false,
+    error: null,
+  },
+  entities: {
+    users: {
+      "1": userSample1,
+    },
+    games: {},
+    seeks: {},
+  },
+});
 
 describe("HeaderContainer", () => {
   beforeEach(() => {
@@ -42,7 +57,7 @@ describe("HeaderContainer", () => {
         expect(header.props.currentUser).toBeNull();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample)
+          cb(stateWithAuthenticatedUser)
         );
 
         testRenderer.update(<HeaderContainer />);

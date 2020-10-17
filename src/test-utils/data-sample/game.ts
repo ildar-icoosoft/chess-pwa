@@ -1,5 +1,6 @@
 import { ValidMoves } from "ii-react-chessboard";
 import Game from "../../interfaces/Game";
+import NormalizedGameEntity from "../../normalizr/interfaces/NormalizedGameEntity";
 
 export const defaultGameSample: Game = {
   id: 1,
@@ -20,6 +21,24 @@ export const defaultGameSample: Game = {
 };
 export const gameSampleFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+export const defaultNormalizedGameSample: NormalizedGameEntity = {
+  id: 1,
+  aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
+  createdAt: 0,
+  drawOffer: null,
+  initialFen: "startpos",
+  turn: "white",
+  wtime: 310000,
+  btime: 365000,
+  moves: "",
+  status: "started",
+  white: null,
+  black: null,
+  winner: null,
+};
 
 // @todo. use this function to create samples.
 export const makeGameSample = (
