@@ -603,7 +603,7 @@ describe("currentUserSlice reducer", () => {
 
       const result = logout()(dispatch, () => defaultState, null);
 
-      expect(result).rejects.toEqual({
+      await expect(result).rejects.toEqual({
         body: "User is not logged in",
         statusCode: 500,
       });

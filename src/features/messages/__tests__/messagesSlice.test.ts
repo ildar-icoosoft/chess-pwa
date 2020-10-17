@@ -12,7 +12,6 @@ import {
   offerDrawError,
   resignGameError,
 } from "../../single-game/singleGameSlice";
-import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
 
 describe("messagesSlice reducer", () => {
   it("should handle initial state", () => {
