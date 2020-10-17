@@ -18,6 +18,7 @@ import {
   resignGame,
   rewindToMove,
 } from "../singleGameSlice";
+import userSample1 from "../../../test-utils/data-sample/user";
 
 jest.mock("../singleGameSlice");
 
@@ -92,10 +93,9 @@ describe("GameControlPanelContainer", () => {
           GameControlPanelWrapper
         );
 
-        expect(singleGameControlPanelWrapper.props.currentUser).toEqual({
-          id: 1,
-          fullName: "Thomas Miller",
-        });
+        expect(singleGameControlPanelWrapper.props.currentUser).toEqual(
+          userSample1
+        );
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
           cb(stateWithDataSample2)

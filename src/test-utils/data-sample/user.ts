@@ -1,8 +1,8 @@
 import User from "../../interfaces/User";
 
-const userSample: User = {
+const userSample1: User = {
   id: 1,
   fullName: "Thomas Miller",
 };
 
-export default userSample;
+export default userSample1;

@@ -12,7 +12,7 @@ import {
 } from "../../../test-utils/data-sample/game";
 import { GameControlPanel } from "../GameControlPanel";
 import { GameControlPanelWrapper } from "../GameControlPanelWrapper";
-import userSample from "../../../test-utils/data-sample/user";
+import userSample1 from "../../../test-utils/data-sample/user";
 
 describe("GameControlPanelWrapper", () => {
   describe("children components", () => {
@@ -54,7 +54,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameSample2}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -63,7 +63,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameSample2}
-            currentUser={userSample}
+            currentUser={userSample1}
             isFlipped
           />
         );
@@ -120,7 +120,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameWithdrawOfferSentByCurrentUser}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -147,7 +147,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameWithdrawOfferSentByOpponent}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -167,7 +167,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameThatCanBeAbortedSample}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -184,7 +184,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameSampleWithOutOfTimeStatus}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -204,7 +204,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameWithMovesAndUserSample}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -221,7 +221,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameSampleWithOutOfTimeStatus}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -242,7 +242,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameWithMovesAndUserVsUserSample}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -259,7 +259,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameWithOutOfTimeStatus}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -276,7 +276,7 @@ describe("GameControlPanelWrapper", () => {
         testRenderer.update(
           <GameControlPanelWrapper
             game={gameWithDrawOffer}
-            currentUser={userSample}
+            currentUser={userSample1}
           />
         );
 
@@ -292,7 +292,7 @@ describe("GameControlPanelWrapper", () => {
         );
 
         testRenderer.update(
-          <GameControlPanelWrapper game={gameVsAI} currentUser={userSample} />
+          <GameControlPanelWrapper game={gameVsAI} currentUser={userSample1} />
         );
 
         // game VS AI

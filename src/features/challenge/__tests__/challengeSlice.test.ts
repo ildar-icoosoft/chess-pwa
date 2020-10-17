@@ -22,7 +22,7 @@ import {
   defaultSeekSample,
   normalizedDefaultSeekSample,
 } from "../../../test-utils/data-sample/seek";
-import userSample from "../../../test-utils/data-sample/user";
+import userSample1 from "../../../test-utils/data-sample/user";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
 
 jest.mock("../../../services/ioClient");
@@ -334,7 +334,7 @@ describe("challengeSlice reducer", () => {
               "1": normalizedDefaultSeekSample,
             },
             users: {
-              "1": userSample,
+              "1": userSample1,
             },
           },
         },

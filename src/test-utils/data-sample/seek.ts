@@ -1,5 +1,5 @@
 import { Seek } from "../../interfaces/Seek";
-import userSample from "./user";
+import userSample1 from "./user";
 import { defaultGameSample } from "./game";
 import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
 
@@ -9,7 +9,7 @@ export const defaultSeekSample: Seek = {
   clockLimit: 300,
   createdAt: 0,
   clockIncrement: 5,
-  createdBy: userSample,
+  createdBy: userSample1,
   game: null,
 };
 
@@ -29,7 +29,7 @@ export const seekSample2: Seek = {
   clockLimit: 600,
   createdAt: 0,
   clockIncrement: 3,
-  createdBy: userSample,
+  createdBy: userSample1,
   game: defaultGameSample,
 };
 
@@ -39,6 +39,6 @@ export const seekSample3: Seek = {
   clockLimit: 600,
   createdAt: 0,
   clockIncrement: 3,
-  createdBy: userSample,
+  createdBy: userSample1,
   game: defaultGameSample,
 };

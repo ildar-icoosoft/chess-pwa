@@ -11,6 +11,7 @@ import mountTest from "../../../test-utils/mountTest";
 import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
 import { SingleGameBoard } from "../SingleGameBoard";
 import { makeMove } from "../../move/moveSlice";
+import userSample1 from "../../../test-utils/data-sample/user";
 
 jest.mock("../../move/moveSlice");
 
@@ -143,10 +144,7 @@ describe("SingleGameBoardContainer", () => {
 
         const singleGameBoard = testInstance.findByType(SingleGameBoard);
 
-        expect(singleGameBoard.props.currentUser).toEqual({
-          id: 1,
-          fullName: "Thomas Miller",
-        });
+        expect(singleGameBoard.props.currentUser).toEqual(userSample1);
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
           cb(stateWithDataSample2)

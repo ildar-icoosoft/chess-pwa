@@ -17,7 +17,7 @@ import {
   whiteTurnGameSample,
 } from "../../../test-utils/data-sample/game";
 import { SingleGameBoard } from "../SingleGameBoard";
-import userSample from "../../../test-utils/data-sample/user";
+import userSample1 from "../../../test-utils/data-sample/user";
 import { ContentLoadingStatus } from "../../../components/ContentLoadingStatus";
 
 describe("SingleGameBoard", () => {
@@ -204,7 +204,7 @@ describe("SingleGameBoard", () => {
 
         testRenderer.update(
           <SingleGameBoard
-            currentUser={userSample}
+            currentUser={userSample1}
             game={gameWithCheckmateByWhiteSample}
           />
         );
@@ -212,14 +212,14 @@ describe("SingleGameBoard", () => {
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample} game={defaultGameSample} />
+          <SingleGameBoard currentUser={userSample1} game={defaultGameSample} />
         );
         // true because currentUser is not a gamer of this game
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(
           <SingleGameBoard
-            currentUser={userSample}
+            currentUser={userSample1}
             game={gameWithMovesAndUserSample}
             rewindToMoveIndex={2}
           />
@@ -228,7 +228,7 @@ describe("SingleGameBoard", () => {
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample} game={gameSample2} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample2} />
         );
         // false because currentUser is a gamer of this game and game is not over
         expect(board.props.viewOnly).toBeFalsy();
@@ -246,19 +246,19 @@ describe("SingleGameBoard", () => {
         expect(board.props.movableColor).toBeUndefined();
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample} game={defaultGameSample} />
+          <SingleGameBoard currentUser={userSample1} game={defaultGameSample} />
         );
         // undefined because currentUser is not a gamer of this game
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample} game={gameSample2} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample2} />
         );
         // PieceColor.BLACK because currentUser plays with black
         expect(board.props.movableColor).toBe(PieceColor.BLACK);
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample} game={gameSample3} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample3} />
         );
         // PieceColor.BLACK because currentUser plays with white
         expect(board.props.movableColor).toBe(PieceColor.WHITE);
@@ -276,14 +276,14 @@ describe("SingleGameBoard", () => {
         expect(board.props.orientation).toBe(PieceColor.WHITE);
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample} game={gameSample2} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample2} />
         );
         // black because current user plays black
         expect(board.props.orientation).toBe(PieceColor.BLACK);
 
         testRenderer.update(
           <SingleGameBoard
-            currentUser={userSample}
+            currentUser={userSample1}
             game={gameSample2}
             isFlipped
           />
