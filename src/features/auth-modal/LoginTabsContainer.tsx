@@ -33,13 +33,7 @@ const LoginTabsContainer: FC<unknown> = () => {
           password: values.password,
         })
       ).catch((err) => {
-        if (err.statusCode === 409) {
-          formikHelpers.setStatus(
-            "The provided email address is already in use"
-          );
-        } else {
-          formikHelpers.setStatus("Internal server error");
-        }
+        formikHelpers.setStatus(getErrorMessageFromJWR(err));
       });
     },
     [dispatch]

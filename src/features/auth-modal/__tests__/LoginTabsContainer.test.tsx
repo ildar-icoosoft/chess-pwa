@@ -134,46 +134,14 @@ describe("LoginTabsContainer", () => {
       expect(dispatch).toBeCalledWith(registerReturnedValue);
     });
 
-    it("should handle dispatch(register()) fail 409", async () => {
-      const dispatch = useDispatch<jest.Mock>();
-      dispatch.mockImplementationOnce(() =>
-        Promise.reject({
-          statusCode: 409,
-        })
-      );
-
-      const testRenderer = TestRenderer.create(<LoginTabsContainer />);
-      const testInstance = testRenderer.root;
-
-      const registrationForm = testInstance.findByType(RegistrationForm);
-
-      const formikSetStatusFn = jest.fn();
-
-      await TestRenderer.act(async () => {
-        registrationForm.props.onSubmit(
-          {
-            email: "test@test.com",
-            password: "123",
-          },
-          {
-            setStatus: formikSetStatusFn,
-          }
-        );
-      });
-
-      expect(formikSetStatusFn).toBeCalledTimes(1);
-      expect(formikSetStatusFn).toBeCalledWith(
-        "The provided email address is already in use"
-      );
-    });
-
-    it("should handle dispatch(register()) fail NOT 409", async () => {
+    it("should handle dispatch(register()) fail", async () => {
       const dispatch = useDispatch<jest.Mock>();
       dispatch.mockImplementationOnce(() =>
         Promise.reject({
           statusCode: 500,
         })
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const testRenderer = TestRenderer.create(<LoginTabsContainer />);
       const testInstance = testRenderer.root;
@@ -195,7 +163,7 @@ describe("LoginTabsContainer", () => {
       });
 
       expect(formikSetStatusFn).toBeCalledTimes(1);
-      expect(formikSetStatusFn).toBeCalledWith("Internal server error");
+      expect(formikSetStatusFn).toBeCalledWith("error text");
     });
   });
 });
