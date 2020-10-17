@@ -45,15 +45,21 @@ const currentUserSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    loginRequest(_state) {},
     loginSuccess(state, action: PayloadAction<NormalizedData<number>>) {
       state.userId = action.payload.result;
     },
+    loginError(_state, _action: PayloadAction<string>) {},
+    registerRequest(_state) {},
     registerSuccess(state, action: PayloadAction<NormalizedData<number>>) {
       state.userId = action.payload.result;
     },
+    registerError(_state, _action: PayloadAction<string>) {},
+    logoutRequest(_state) {},
     logoutSuccess(state) {
       state.userId = null;
     },
+    logoutError(_state, _action: PayloadAction<string>) {},
   },
 });
 
@@ -61,9 +67,15 @@ export const {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
+  loginRequest,
   loginSuccess,
+  loginError,
+  registerRequest,
   registerSuccess,
+  registerError,
+  logoutRequest,
   logoutSuccess,
+  logoutError,
 } = currentUserSlice.actions;
 
 export default currentUserSlice.reducer;

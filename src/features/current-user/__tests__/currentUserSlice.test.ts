@@ -5,9 +5,15 @@ import currentUserReducer, {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
+  loginRequest,
   loginSuccess,
+  loginError,
+  registerRequest,
   registerSuccess,
+  registerError,
+  logoutRequest,
   logoutSuccess,
+  logoutError,
   fetchCurrentUser,
   login,
   register,
@@ -110,6 +116,25 @@ describe("currentUserSlice reducer", () => {
     });
   });
 
+  it("should handle loginRequest", () => {
+    expect(
+      currentUserReducer(
+        {
+          userId: 1,
+          isLoading: true,
+          error: "error text",
+        },
+        {
+          type: loginRequest.type,
+        }
+      )
+    ).toEqual({
+      userId: 1,
+      isLoading: true,
+      error: "error text",
+    });
+  });
+
   it("should handle loginSuccess", () => {
     expect(
       currentUserReducer(
@@ -124,6 +149,45 @@ describe("currentUserSlice reducer", () => {
             result: 1,
             entities: {},
           },
+        }
+      )
+    ).toEqual({
+      userId: 1,
+      isLoading: true,
+      error: "error text",
+    });
+  });
+
+  it("should handle loginError", () => {
+    expect(
+      currentUserReducer(
+        {
+          userId: 1,
+          isLoading: true,
+          error: "error text",
+        },
+        {
+          type: loginError.type,
+          payload: "login error text",
+        }
+      )
+    ).toEqual({
+      userId: 1,
+      isLoading: true,
+      error: "error text",
+    });
+  });
+
+  it("should handle registerRequest", () => {
+    expect(
+      currentUserReducer(
+        {
+          userId: 1,
+          isLoading: true,
+          error: "error text",
+        },
+        {
+          type: registerRequest.type,
         }
       )
     ).toEqual({
@@ -156,6 +220,45 @@ describe("currentUserSlice reducer", () => {
     });
   });
 
+  it("should handle registerError", () => {
+    expect(
+      currentUserReducer(
+        {
+          userId: 1,
+          isLoading: true,
+          error: "error text",
+        },
+        {
+          type: registerError.type,
+          payload: "register error text",
+        }
+      )
+    ).toEqual({
+      userId: 1,
+      isLoading: true,
+      error: "error text",
+    });
+  });
+
+  it("should handle logoutRequest", () => {
+    expect(
+      currentUserReducer(
+        {
+          userId: 1,
+          isLoading: true,
+          error: "error text",
+        },
+        {
+          type: logoutRequest.type,
+        }
+      )
+    ).toEqual({
+      userId: 1,
+      isLoading: true,
+      error: "error text",
+    });
+  });
+
   it("should handle logoutSuccess", () => {
     expect(
       currentUserReducer(
@@ -170,6 +273,26 @@ describe("currentUserSlice reducer", () => {
       )
     ).toEqual({
       userId: null,
+      isLoading: true,
+      error: "error text",
+    });
+  });
+
+  it("should handle logoutError", () => {
+    expect(
+      currentUserReducer(
+        {
+          userId: 1,
+          isLoading: true,
+          error: "error text",
+        },
+        {
+          type: logoutError.type,
+          payload: "logout error text",
+        }
+      )
+    ).toEqual({
+      userId: 1,
       isLoading: true,
       error: "error text",
     });
