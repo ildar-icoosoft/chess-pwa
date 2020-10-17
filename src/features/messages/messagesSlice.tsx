@@ -6,7 +6,10 @@ import { acceptSeekError } from "../challenge/challengeSlice";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 import { Message } from "../../interfaces/Message";
 import { makeMoveError } from "../move/moveSlice";
-import { getCurrentUserError } from "../current-user/currentUserSlice";
+import {
+  getCurrentUserError,
+  logoutError,
+} from "../current-user/currentUserSlice";
 
 const initialState: Message[] = [];
 
@@ -40,6 +43,12 @@ const messagesSlice = createSlice({
     [getCurrentUserError.type]: (state, action: PayloadAction<string>) => {
       state.push({
         id: "getCurrentUserError",
+        body: action.payload,
+      });
+    },
+    [logoutError.type]: (state, action: PayloadAction<string>) => {
+      state.push({
+        id: "logoutError",
         body: action.payload,
       });
     },
