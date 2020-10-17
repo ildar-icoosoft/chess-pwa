@@ -23,8 +23,10 @@ import {
   normalizedDefaultSeekSample,
 } from "../../../test-utils/data-sample/seek";
 import userSample from "../../../test-utils/data-sample/user";
+import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
 
 jest.mock("../../../services/ioClient");
+jest.mock("../../../utils/getErrorMessageFromJWR");
 
 describe("challengeSlice reducer", () => {
   it("should handle initial state", () => {
@@ -123,6 +125,7 @@ describe("challengeSlice reducer", () => {
           } as JWR);
         }
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const result = challengeAi({
         level: 3,
@@ -142,7 +145,7 @@ describe("challengeSlice reducer", () => {
       });
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: challengeAiError.type,
-        payload: "internal server error",
+        payload: "error text",
       });
     });
   });

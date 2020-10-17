@@ -16,6 +16,7 @@ import { CreateSeekData } from "../../interfaces/CreateSeekData";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 import { Seek } from "../../interfaces/Seek";
 import seekSchema from "../../normalizr/schemas/seekSchema";
+import getErrorMessageFromJWR from "../../utils/getErrorMessageFromJWR";
 
 interface ChallengeState {}
 
@@ -78,7 +79,7 @@ export const challengeAi = (data: ChallengeAiData): AppThunk<Promise<Game>> => (
           dispatch(challengeAiSuccess(normalizedGame));
           resolve(body as Game);
         } else {
-          dispatch(challengeAiError(body as string));
+          dispatch(challengeAiError(getErrorMessageFromJWR(jwr)));
           reject(jwr);
         }
       }
