@@ -1,11 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React from "react";
 import TestRenderer from "react-test-renderer";
-import {
-  stateWithDataSample,
-  stateWithDataSample2,
-  stateWithDataSample3,
-} from "../../../test-utils/data-sample/state";
+import { makeStateSample } from "../../../test-utils/data-sample/state";
 import mountTest from "../../../test-utils/mountTest";
 import { GameControlPanelContainer } from "../GameControlPanelContainer";
 import { GameControlPanelWrapper } from "../GameControlPanelWrapper";
@@ -19,16 +15,99 @@ import {
   rewindToMove,
 } from "../singleGameSlice";
 import userSample1 from "../../../test-utils/data-sample/user";
+import {
+  defaultGameSample,
+  defaultNormalizedGameSample,
+} from "../../../test-utils/data-sample/game";
 
 jest.mock("../singleGameSlice");
 
+const stateWithGame = makeStateSample({
+  entities: {
+    users: {},
+    games: {
+      "1": defaultNormalizedGameSample,
+    },
+    seeks: {},
+  },
+});
+
+const stateWithLoadedGame = makeStateSample({
+  singleGame: {
+    "1": {
+      isLoading: false,
+      error: null,
+      isFlipped: false,
+      rewindToMoveIndex: null,
+    },
+  },
+  entities: {
+    users: {},
+    games: {
+      "1": defaultNormalizedGameSample,
+    },
+    seeks: {},
+  },
+});
+
+const stateWithFlippedGame = makeStateSample({
+  singleGame: {
+    "1": {
+      isLoading: false,
+      error: null,
+      isFlipped: true,
+      rewindToMoveIndex: null,
+    },
+  },
+  entities: {
+    users: {},
+    games: {
+      "1": defaultNormalizedGameSample,
+    },
+    seeks: {},
+  },
+});
+
+const stateWithRewindToMoveIndex = makeStateSample({
+  singleGame: {
+    "1": {
+      isLoading: false,
+      error: null,
+      isFlipped: true,
+      rewindToMoveIndex: 2,
+    },
+  },
+  entities: {
+    users: {},
+    games: {
+      "1": defaultNormalizedGameSample,
+    },
+    seeks: {},
+  },
+});
+
+const stateWithGameAndAuthenticatedUser = makeStateSample({
+  currentUser: {
+    userId: 1,
+    isLoading: false,
+    error: null,
+  },
+  singleGame: {},
+  entities: {
+    users: {
+      "1": userSample1,
+    },
+    games: {
+      "1": defaultNormalizedGameSample,
+    },
+    seeks: {},
+  },
+});
+
 describe("GameControlPanelContainer", () => {
   beforeEach(() => {
-    (useSelector as jest.Mock).mockImplementation((cb) =>
-      cb(stateWithDataSample)
-    );
+    (useSelector as jest.Mock).mockImplementation((cb) => cb(stateWithGame));
     useDispatch<jest.Mock>().mockClear();
-    (useEffect as jest.Mock).mockReset();
   });
 
   mountTest(GameControlPanelContainer, { id: 1 });
@@ -64,23 +143,9 @@ describe("GameControlPanelContainer", () => {
           GameControlPanelWrapper
         );
 
-        expect(singleGameControlPanelWrapper.props.game).toEqual({
-          id: 1,
-          aiLevel: 3,
-          clockLimit: 300,
-          clockIncrement: 3,
-          createdAt: 0,
-          drawOffer: null,
-          initialFen: "startpos",
-          turn: "white",
-          wtime: 300000,
-          btime: 300000,
-          moves: "e2e4 e7e5 g1f3 g8f6",
-          status: "started",
-          white: null,
-          black: null,
-          winner: null,
-        });
+        expect(singleGameControlPanelWrapper.props.game).toEqual(
+          defaultGameSample
+        );
       });
 
       it("currentUser", async () => {
@@ -93,17 +158,16 @@ describe("GameControlPanelContainer", () => {
           GameControlPanelWrapper
         );
 
-        expect(singleGameControlPanelWrapper.props.currentUser).toEqual(
-          userSample1
-        );
+        expect(singleGameControlPanelWrapper.props.currentUser).toBeUndefined();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample2)
+          cb(stateWithGameAndAuthenticatedUser)
         );
 
         testRenderer.update(<GameControlPanelContainer id={1} />);
-
-        expect(singleGameControlPanelWrapper.props.currentUser).toBeUndefined();
+        expect(singleGameControlPanelWrapper.props.currentUser).toEqual(
+          userSample1
+        );
       });
 
       it("isFlipped", async () => {
@@ -119,14 +183,14 @@ describe("GameControlPanelContainer", () => {
         expect(singleGameControlPanelWrapper.props.isFlipped).toBeFalsy();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample2)
+          cb(stateWithLoadedGame)
         );
 
         testRenderer.update(<GameControlPanelContainer id={1} />);
         expect(singleGameControlPanelWrapper.props.isFlipped).toBeFalsy();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample3)
+          cb(stateWithFlippedGame)
         );
 
         testRenderer.update(<GameControlPanelContainer id={1} />);
@@ -148,18 +212,11 @@ describe("GameControlPanelContainer", () => {
         ).toBeNull();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample2)
+          cb(stateWithRewindToMoveIndex)
         );
 
         testRenderer.update(<GameControlPanelContainer id={1} />);
         expect(singleGameControlPanelWrapper.props.rewindToMoveIndex).toBe(2);
-
-        (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample3)
-        );
-
-        testRenderer.update(<GameControlPanelContainer id={1} />);
-        expect(singleGameControlPanelWrapper.props.rewindToMoveIndex).toBe(0);
       });
     });
   });
