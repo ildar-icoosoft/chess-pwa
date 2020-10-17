@@ -422,8 +422,12 @@ describe("currentUserSlice reducer", () => {
 
       await expect(result).resolves.toEqual(user);
 
-      expect(dispatch).toBeCalledTimes(1);
-      expect(dispatch).toBeCalledWith({
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: loginRequest.type,
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: loginSuccess.type,
         payload: {
           result: 1,
@@ -450,6 +454,7 @@ describe("currentUserSlice reducer", () => {
           } as JWR);
         }
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const result = login({
         email: "test@test.com",
@@ -461,7 +466,15 @@ describe("currentUserSlice reducer", () => {
         statusCode: 401,
       });
 
-      expect(dispatch).toBeCalledTimes(0);
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: loginRequest.type,
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: loginError.type,
+        payload: "error text",
+      });
     });
   });
 

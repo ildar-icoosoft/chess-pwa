@@ -106,6 +106,8 @@ export const fetchCurrentUser = (): AppThunk<Promise<User | null>> => (
 export const login = (data: LoginData): AppThunk<Promise<User>> => (
   dispatch
 ) => {
+  dispatch(loginRequest());
+
   return new Promise((resolve, reject) => {
     ioClient.socket.put(
       "/api/v1/entrance/login",
@@ -121,6 +123,7 @@ export const login = (data: LoginData): AppThunk<Promise<User>> => (
           dispatch(loginSuccess(normalizedUser));
           resolve(body as User);
         } else {
+          dispatch(loginError(getErrorMessageFromJWR(jwr)));
           reject(jwr);
         }
       }
