@@ -13,6 +13,7 @@ import {
 import {
   abortGameError,
   acceptDrawOfferError,
+  declineDrawOfferError,
   offerDrawError,
   resignGameError,
 } from "../single-game/singleGameSlice";
@@ -85,6 +86,15 @@ const messagesSlice = createSlice({
     ) => {
       state.push({
         id: "acceptDrawOfferError",
+        body: action.payload.error,
+      });
+    },
+    [declineDrawOfferError.type]: (
+      state,
+      action: PayloadAction<ItemErrorPayload>
+    ) => {
+      state.push({
+        id: "declineDrawOfferError",
         body: action.payload.error,
       });
     },

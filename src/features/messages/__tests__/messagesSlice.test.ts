@@ -8,6 +8,7 @@ import {
 import {
   abortGameError,
   acceptDrawOfferError,
+  declineDrawOfferError,
   offerDrawError,
   resignGameError,
 } from "../../single-game/singleGameSlice";
@@ -295,6 +296,35 @@ describe("messagesSlice reducer", () => {
       },
       {
         id: "acceptDrawOfferError",
+        body: "error text",
+      },
+    ]);
+  });
+
+  it("should handle declineDrawOfferError", () => {
+    expect(
+      messagesReducer(
+        [
+          {
+            id: "message1",
+            body: "some message",
+          },
+        ],
+        {
+          type: declineDrawOfferError.type,
+          payload: {
+            itemId: 1,
+            error: "error text",
+          },
+        }
+      )
+    ).toEqual([
+      {
+        id: "message1",
+        body: "some message",
+      },
+      {
+        id: "declineDrawOfferError",
         body: "error text",
       },
     ]);

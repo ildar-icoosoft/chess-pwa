@@ -1039,6 +1039,7 @@ describe("singleGameSlice reducer", () => {
           } as JWR);
         }
       );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
 
       const result = declineDrawOffer(1)(dispatch, () => defaultState, null);
 
@@ -1056,7 +1057,7 @@ describe("singleGameSlice reducer", () => {
         type: declineDrawOfferError.type,
         payload: {
           itemId: 1,
-          error: "game not found",
+          error: "error text",
         },
       });
     });
