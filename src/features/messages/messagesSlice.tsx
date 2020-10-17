@@ -12,6 +12,7 @@ import {
 } from "../current-user/currentUserSlice";
 import {
   abortGameError,
+  offerDrawError,
   resignGameError,
 } from "../single-game/singleGameSlice";
 
@@ -68,6 +69,12 @@ const messagesSlice = createSlice({
     ) => {
       state.push({
         id: "resignGameError",
+        body: action.payload.error,
+      });
+    },
+    [offerDrawError.type]: (state, action: PayloadAction<ItemErrorPayload>) => {
+      state.push({
+        id: "offerDrawError",
         body: action.payload.error,
       });
     },

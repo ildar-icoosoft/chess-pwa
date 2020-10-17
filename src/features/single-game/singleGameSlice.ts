@@ -234,7 +234,7 @@ export const offerDraw = (id: number): AppThunk<Promise<Game>> => (
           dispatch(
             offerDrawError({
               itemId: id,
-              error: body as string,
+              error: getErrorMessageFromJWR(jwr),
             })
           );
           reject(jwr);

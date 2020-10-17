@@ -7,6 +7,7 @@ import {
 } from "../../current-user/currentUserSlice";
 import {
   abortGameError,
+  offerDrawError,
   resignGameError,
 } from "../../single-game/singleGameSlice";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
@@ -235,6 +236,35 @@ describe("messagesSlice reducer", () => {
       },
       {
         id: "resignGameError",
+        body: "error text",
+      },
+    ]);
+  });
+
+  it("should handle offerDrawError", () => {
+    expect(
+      messagesReducer(
+        [
+          {
+            id: "message1",
+            body: "some message",
+          },
+        ],
+        {
+          type: offerDrawError.type,
+          payload: {
+            itemId: 1,
+            error: "error text",
+          },
+        }
+      )
+    ).toEqual([
+      {
+        id: "message1",
+        body: "some message",
+      },
+      {
+        id: "offerDrawError",
         body: "error text",
       },
     ]);
