@@ -24,6 +24,16 @@ export const normalizedSeekSample1: NormalizedSeekEntity = {
   game: null,
 };
 
+export const seekSample2: Seek = {
+  id: 2,
+  color: "black",
+  clockLimit: 300,
+  createdAt: 0,
+  clockIncrement: 5,
+  createdBy: userSample1,
+  game: gameSample1,
+};
+
 // @todo. use this functions to create samples.
 export const makeSeekSample = (
   data: Partial<Seek>,
