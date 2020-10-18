@@ -262,21 +262,3 @@ export const whiteTurnGameSample: Game = {
   black: null,
   winner: null,
 };
-
-export const gameWithIncorrectMoveSample: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "e2e4 e7e5", // e2e4 is incorrect
-  status: "started",
-  white: null,
-  black: null,
-  winner: null,
-};
