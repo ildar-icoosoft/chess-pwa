@@ -48,7 +48,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: false,
             error: "error text",
             isFlipped: true,
@@ -61,7 +61,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -72,7 +72,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: false,
             error: "error text",
             isFlipped: true,
@@ -85,13 +85,13 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: false,
         error: "error text",
         isFlipped: true,
         rewindToMoveIndex: 2,
       },
-      "2": {
+      2: {
         isLoading: true,
         error: null,
         isFlipped: false,
@@ -104,7 +104,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: "error text",
             isFlipped: true,
@@ -120,7 +120,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: false,
         error: null,
         isFlipped: true,
@@ -131,7 +131,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: "error text",
             isFlipped: true,
@@ -147,13 +147,13 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: "error text",
         isFlipped: true,
         rewindToMoveIndex: 2,
       },
-      "2": {
+      2: {
         isLoading: false,
         error: null,
         isFlipped: false,
@@ -166,7 +166,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -182,7 +182,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: false,
         error: "error text",
         isFlipped: true,
@@ -193,7 +193,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -209,13 +209,13 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
         rewindToMoveIndex: 2,
       },
-      "2": {
+      2: {
         isLoading: false,
         error: "error text",
         isFlipped: false,
@@ -251,7 +251,7 @@ describe("singleGameSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": gameSample1,
+              1: gameSample1,
             },
           },
         },
@@ -297,7 +297,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -310,7 +310,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -323,7 +323,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -339,7 +339,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -352,7 +352,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -368,7 +368,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -404,7 +404,7 @@ describe("singleGameSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": gameSample1,
+              1: gameSample1,
             },
           },
         },
@@ -450,7 +450,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -463,7 +463,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -476,7 +476,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -492,7 +492,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -505,7 +505,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -521,7 +521,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -557,7 +557,7 @@ describe("singleGameSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": gameSample1,
+              1: gameSample1,
             },
           },
         },
@@ -604,7 +604,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -617,7 +617,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -630,7 +630,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -646,7 +646,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -659,7 +659,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -675,7 +675,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -711,7 +711,7 @@ describe("singleGameSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": gameSample1,
+              1: gameSample1,
             },
           },
         },
@@ -759,7 +759,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -772,7 +772,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -785,7 +785,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -801,7 +801,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -814,7 +814,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -830,7 +830,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -866,7 +866,7 @@ describe("singleGameSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": gameSample1,
+              1: gameSample1,
             },
           },
         },
@@ -914,7 +914,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -927,7 +927,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -940,7 +940,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -956,7 +956,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -969,7 +969,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: true,
             error: null,
             isFlipped: true,
@@ -985,7 +985,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: true,
         error: null,
         isFlipped: true,
@@ -1021,7 +1021,7 @@ describe("singleGameSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": gameSample1,
+              1: gameSample1,
             },
           },
         },
@@ -1068,7 +1068,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: false,
             error: "error text",
             isFlipped: true,
@@ -1081,7 +1081,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: false,
         error: "error text",
         isFlipped: false,
@@ -1092,7 +1092,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: false,
             error: "error text",
             isFlipped: false,
@@ -1105,7 +1105,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: false,
         error: "error text",
         isFlipped: true,
@@ -1118,7 +1118,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: false,
             error: "error text",
             isFlipped: true,
@@ -1134,7 +1134,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: false,
         error: "error text",
         isFlipped: true,
@@ -1145,7 +1145,7 @@ describe("singleGameSlice reducer", () => {
     expect(
       singleGameReducer(
         {
-          "1": {
+          1: {
             isLoading: false,
             error: "error text",
             isFlipped: true,
@@ -1161,7 +1161,7 @@ describe("singleGameSlice reducer", () => {
         }
       )
     ).toEqual({
-      "1": {
+      1: {
         isLoading: false,
         error: "error text",
         isFlipped: true,

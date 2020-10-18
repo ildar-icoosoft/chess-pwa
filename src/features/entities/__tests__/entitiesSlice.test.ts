@@ -32,7 +32,6 @@ import {
 } from "../../data-subscription/dataSubscriptionSlice";
 import {
   addGamePayloadSample,
-  addUserPayloadSample,
   emptyEntitiesSample,
   entitiesSample,
   entitiesAfterAddingGameSample,
@@ -45,8 +44,17 @@ import {
   entitiesAfterAddingSeekSample,
   addSeekPayloadSample,
 } from "../../../test-utils/data-sample/entities";
+import userSample1 from "../../../test-utils/data-sample/user";
 
 jest.mock("../../../services/ioClient");
+
+const addUserPayloadSample: EntitiesState = {
+  users: {
+    1: userSample1,
+  },
+  seeks: {},
+  games: {},
+};
 
 describe("entitiesSlice reducer", () => {
   it("should handle initial state", () => {
@@ -54,11 +62,7 @@ describe("entitiesSlice reducer", () => {
       entitiesReducer(undefined, {
         type: "",
       })
-    ).toEqual({
-      users: {},
-      games: {},
-      seeks: {},
-    });
+    ).toEqual(emptyEntitiesSample);
   });
 
   it("should handle getCurrentUserSuccess null", () => {
@@ -79,7 +83,12 @@ describe("entitiesSlice reducer", () => {
           entities: addUserPayloadSample,
         },
       })
-    ).toEqual(entitiesWithUserSample);
+    ).toEqual({
+      ...emptyEntitiesSample,
+      users: {
+        1: userSample1,
+      },
+    });
   });
 
   it("should handle loginSuccess", () => {
@@ -344,7 +353,7 @@ describe("entitiesSlice reducer", () => {
       users: {},
       games: {},
       seeks: {
-        "1": {
+        1: {
           id: 1,
           color: "white",
           clockLimit: 300,
@@ -353,7 +362,7 @@ describe("entitiesSlice reducer", () => {
           createdBy: 2,
           game: 2,
         },
-        "2": {
+        2: {
           id: 2,
           color: "white",
           clockLimit: 400,
@@ -374,7 +383,7 @@ describe("entitiesSlice reducer", () => {
       users: {},
       games: {},
       seeks: {
-        "2": {
+        2: {
           id: 2,
           color: "white",
           clockLimit: 400,

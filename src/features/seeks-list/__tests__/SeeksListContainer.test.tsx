@@ -67,12 +67,12 @@ const stateWithSeeks = makeStateSample({
   },
   entities: {
     users: {
-      "1": userSample1,
+      1: userSample1,
     },
     games: {},
     seeks: {
-      "1": normalizedSeek1,
-      "2": normalizedSeek2,
+      1: normalizedSeek1,
+      2: normalizedSeek2,
     },
   },
 });

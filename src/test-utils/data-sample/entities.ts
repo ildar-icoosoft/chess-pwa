@@ -1,4 +1,11 @@
 import { EntitiesState } from "../../features/entities/entitiesSlice";
+import userSample1 from "./user";
+
+export const emptyEntitiesSample: EntitiesState = {
+  users: {},
+  seeks: {},
+  games: {},
+};
 
 export const entitiesSample: EntitiesState = {
   users: {
@@ -87,29 +94,9 @@ export const entitiesAfterTimeOutSample: EntitiesState = {
   },
 };
 
-export const emptyEntitiesSample: EntitiesState = {
-  users: {},
-  seeks: {},
-  games: {},
-};
-
-export const addUserPayloadSample: EntitiesState = {
-  users: {
-    1: {
-      id: 1,
-      fullName: "Robert Johnson",
-    },
-  },
-  seeks: {},
-  games: {},
-};
-
 export const entitiesWithUserSample: EntitiesState = {
   users: {
-    1: {
-      id: 1,
-      fullName: "Robert Johnson",
-    },
+    1: userSample1,
   },
   seeks: {},
   games: {},
@@ -289,7 +276,7 @@ export const addSeekPayloadSample: EntitiesState = {
     },
   },
   seeks: {
-    "1": {
+    1: {
       id: 1,
       color: "white",
       clockLimit: 300,
@@ -332,7 +319,7 @@ export const entitiesAfterAddingSeekSample: EntitiesState = {
     },
   },
   seeks: {
-    "1": {
+    1: {
       id: 1,
       color: "white",
       clockLimit: 300,

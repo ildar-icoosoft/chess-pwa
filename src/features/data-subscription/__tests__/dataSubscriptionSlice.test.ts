@@ -89,7 +89,7 @@ describe("dataSubscriptionSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": {
+              1: {
                 id: 1,
                 initialFen: "startpos",
                 wtime: 300000,

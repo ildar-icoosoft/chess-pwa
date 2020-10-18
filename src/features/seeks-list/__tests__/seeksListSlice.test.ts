@@ -17,6 +17,7 @@ import {
   normalizedSeekSample1,
 } from "../../../test-utils/data-sample/seek";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
+import userSample1 from "../../../test-utils/data-sample/user";
 
 jest.mock("../../../services/ioClient");
 jest.mock("../../../utils/getErrorMessageFromJWR");
@@ -249,13 +250,10 @@ describe("seeksListSlice reducer", () => {
           result: [1],
           entities: {
             seeks: {
-              "1": normalizedSeekSample1,
+              1: normalizedSeekSample1,
             },
             users: {
-              "1": {
-                id: 1,
-                fullName: "Thomas Miller",
-              },
+              1: userSample1,
             },
           },
         },

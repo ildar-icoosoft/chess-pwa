@@ -21,7 +21,7 @@ const stateWithGameSample = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": normalizedGameSample1,
+      1: normalizedGameSample1,
     },
     seeks: {},
   },
@@ -29,7 +29,7 @@ const stateWithGameSample = makeStateSample({
 
 const stateWithLoadedGame = makeStateSample({
   singleGame: {
-    "1": {
+    1: {
       isLoading: false,
       error: null,
       isFlipped: false,
@@ -45,7 +45,7 @@ const stateWithLoadedGame = makeStateSample({
 
 const stateWithFlippedGame = makeStateSample({
   singleGame: {
-    "1": {
+    1: {
       isLoading: false,
       error: null,
       isFlipped: true,
@@ -61,7 +61,7 @@ const stateWithFlippedGame = makeStateSample({
 
 const stateWithRewindToMoveIndex = makeStateSample({
   singleGame: {
-    "1": {
+    1: {
       isLoading: false,
       error: null,
       isFlipped: true,
@@ -77,7 +77,7 @@ const stateWithRewindToMoveIndex = makeStateSample({
 
 const stateWithLoadingError = makeStateSample({
   singleGame: {
-    "1": {
+    1: {
       isLoading: false,
       error: "error text",
       isFlipped: false,
@@ -95,7 +95,7 @@ const stateWithAuthenticatedUser = makeStateSample({
   singleGame: {},
   entities: {
     users: {
-      "1": userSample1,
+      1: userSample1,
     },
     games: {},
     seeks: {},

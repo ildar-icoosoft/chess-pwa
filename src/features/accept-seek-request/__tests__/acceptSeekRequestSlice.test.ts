@@ -53,7 +53,7 @@ describe("challengeSlice reducer", () => {
             result: 1,
             entities: {
               seeks: {
-                "1": seekSample1,
+                1: seekSample1,
               },
             },
           },

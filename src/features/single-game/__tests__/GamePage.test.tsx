@@ -16,7 +16,7 @@ const stateWithGameSample = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": normalizedGameSample1,
+      1: normalizedGameSample1,
     },
     seeks: {},
   },

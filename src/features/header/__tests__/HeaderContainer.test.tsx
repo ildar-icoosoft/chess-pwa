@@ -23,7 +23,7 @@ const stateWithAuthenticatedUser = makeStateSample({
   },
   entities: {
     users: {
-      "1": userSample1,
+      1: userSample1,
     },
     games: {},
     seeks: {},

@@ -65,14 +65,14 @@ const game5 = makeGameSample(
 const stateWithGames = makeStateSample({
   entities: {
     users: {
-      "1": userSample1,
+      1: userSample1,
     },
     games: {
-      "1": game1 as NormalizedGameEntity,
-      "2": game2 as NormalizedGameEntity,
-      "3": game3 as NormalizedGameEntity,
-      "4": game4 as NormalizedGameEntity,
-      "5": game5 as NormalizedGameEntity,
+      1: game1 as NormalizedGameEntity,
+      2: game2 as NormalizedGameEntity,
+      3: game3 as NormalizedGameEntity,
+      4: game4 as NormalizedGameEntity,
+      5: game5 as NormalizedGameEntity,
     },
     seeks: {},
   },

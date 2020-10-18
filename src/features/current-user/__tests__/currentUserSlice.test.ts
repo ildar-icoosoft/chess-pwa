@@ -325,7 +325,7 @@ describe("currentUserSlice reducer", () => {
         payload: {
           entities: {
             users: {
-              "1": userSample1,
+              1: userSample1,
             },
           },
           result: 1,
@@ -421,7 +421,7 @@ describe("currentUserSlice reducer", () => {
           result: 1,
           entities: {
             users: {
-              "1": userSample1,
+              1: userSample1,
             },
           },
         },
@@ -495,7 +495,7 @@ describe("currentUserSlice reducer", () => {
           result: 1,
           entities: {
             users: {
-              "1": userSample1,
+              1: userSample1,
             },
           },
         },
