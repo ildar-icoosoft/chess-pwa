@@ -3,11 +3,10 @@ import { render } from "@testing-library/react";
 import { GameMeta } from "../GameMeta";
 import {
   gameSample1,
-  gameSample2_,
-  gameSample3_,
-  gameWith10Plus5MinControlSample,
+  makeGameSample,
 } from "../../../test-utils/data-sample/game";
 import getGameStatusText from "../../../utils/getGameStatusText";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 
 jest.mock("../../../utils/getGameStatusText");
 
@@ -29,29 +28,49 @@ describe("GameMeta", () => {
     });
 
     it("should contain players names", () => {
+      const aiVsPlayerGameSample = makeGameSample({
+        white: null,
+        black: userSample1,
+      });
+
       const { getByTestId, rerender } = render(
-        <GameMeta game={gameSample2_} />
+        <GameMeta game={aiVsPlayerGameSample} />
       );
 
       expect(getByTestId("white-user")).toHaveTextContent("AI level 3");
       expect(getByTestId("black-user")).toHaveTextContent("Thomas Miller");
 
-      rerender(<GameMeta game={gameSample3_} />);
+      const playerVsAiGameSample = makeGameSample({
+        white: userSample1,
+        black: null,
+      });
+
+      rerender(<GameMeta game={playerVsAiGameSample} />);
 
       expect(getByTestId("white-user")).toHaveTextContent("Thomas Miller");
       expect(getByTestId("black-user")).toHaveTextContent("AI level 3");
     });
 
     it("should contain time control", () => {
+      const gameWith5Plus3ControlSample = makeGameSample({
+        clockIncrement: 3,
+        clockLimit: 300,
+      });
+
       const { queryByTestId, rerender } = render(
-        <GameMeta game={gameSample1} />
+        <GameMeta game={gameWith5Plus3ControlSample} />
       );
 
       const timeControl = queryByTestId("time-control");
 
       expect(timeControl).toHaveTextContent("5 + 3");
 
-      rerender(<GameMeta game={gameWith10Plus5MinControlSample} />);
+      const gameWith10Plus5ControlSample = makeGameSample({
+        clockIncrement: 5,
+        clockLimit: 600,
+      });
+
+      rerender(<GameMeta game={gameWith10Plus5ControlSample} />);
 
       expect(timeControl).toHaveTextContent("10 + 5");
     });
