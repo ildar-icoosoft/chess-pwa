@@ -363,11 +363,6 @@ describe("GameControlPanel", () => {
         // hasNextMove because gameWithMovesSample.moves is not empty and rewindToMoveIndex is not null
         expect(topToolbar.props.hasNextMove).toBeTruthy();
 
-        const gameWithoutMovesSample = makeGameSample({
-          initialFen: "startpos",
-          moves: "",
-        });
-
         testRenderer.update(<GameControlPanel game={gameWithoutMovesSample} />);
 
         // hasNextMove false because gameWithMovesSample.moves is empty
