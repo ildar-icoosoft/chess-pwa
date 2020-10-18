@@ -4,15 +4,12 @@ import {
   gameSample1,
   gameSample2_,
   gameSample3_,
-  gameThatCanBeAbortedSample,
-  gameWithMovesAndUserSample,
-  gameWithMovesAndUserVsUserSample,
   gameWithMovesSample,
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
 import { GameControlPanel } from "../GameControlPanel";
 import { GameControlPanelWrapper } from "../GameControlPanelWrapper";
-import { userSample1 } from "../../../test-utils/data-sample/user";
+import { userSample1, userSample2 } from "../../../test-utils/data-sample/user";
 
 describe("GameControlPanelWrapper", () => {
   describe("children components", () => {
@@ -155,13 +152,23 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("canAbortGame", () => {
+        const gameThatCanBeAbortedSample = makeGameSample({
+          moves: "e2e4",
+          status: "started",
+          black: {
+            id: 1,
+            fullName: "Thomas Miller",
+          },
+        });
+
         const testRenderer = TestRenderer.create(
-          <GameControlPanelWrapper game={gameWithMovesSample} />
+          <GameControlPanelWrapper game={gameThatCanBeAbortedSample} />
         );
         const testInstance = testRenderer.root;
 
         const gameControlPanel = testInstance.findByType(GameControlPanel);
 
+        // false because currentUser is NULL
         expect(gameControlPanel.props.canAbortGame).toBeFalsy();
 
         testRenderer.update(
@@ -192,6 +199,15 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("canResignGame", () => {
+        const gameThatCanBeAbortedSample = makeGameSample({
+          moves: "e2e4",
+          status: "started",
+          black: {
+            id: 1,
+            fullName: "Thomas Miller",
+          },
+        });
+
         const testRenderer = TestRenderer.create(
           <GameControlPanelWrapper game={gameThatCanBeAbortedSample} />
         );
@@ -201,9 +217,18 @@ describe("GameControlPanelWrapper", () => {
 
         expect(gameControlPanel.props.canResignGame).toBeFalsy();
 
+        const gameThatCanBeResignedSample = makeGameSample({
+          moves: "e2e4 e7e5",
+          status: "started",
+          black: {
+            id: 1,
+            fullName: "Thomas Miller",
+          },
+        });
+
         testRenderer.update(
           <GameControlPanelWrapper
-            game={gameWithMovesAndUserSample}
+            game={gameThatCanBeResignedSample}
             currentUser={userSample1}
           />
         );
@@ -215,7 +240,7 @@ describe("GameControlPanelWrapper", () => {
             status: "outoftime",
             winner: "white",
           },
-          gameWithMovesAndUserSample
+          gameThatCanBeResignedSample
         );
 
         testRenderer.update(
@@ -229,6 +254,15 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("canOfferDraw", () => {
+        const gameWithMovesAndUserVsUserSample = makeGameSample({
+          aiLevel: 0,
+          moves: "e2e4 e7e5 g1f3 g8f6",
+          status: "started",
+          white: userSample1,
+          black: userSample2,
+          winner: null,
+        });
+
         const testRenderer = TestRenderer.create(
           <GameControlPanelWrapper game={gameWithMovesAndUserVsUserSample} />
         );
