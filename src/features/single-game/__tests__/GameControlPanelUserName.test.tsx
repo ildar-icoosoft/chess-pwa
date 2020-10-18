@@ -1,7 +1,8 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { gameSample2_ } from "../../../test-utils/data-sample/game";
+import { makeGameSample } from "../../../test-utils/data-sample/game";
 import { GameControlPanelUserName } from "../GameControlPanelUserName";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 
 describe("GameControlPanelUserName", () => {
   describe("DOM structure", () => {
@@ -11,15 +12,23 @@ describe("GameControlPanelUserName", () => {
     });
 
     it("should contain player name", () => {
+      const playerVsAiGameSample = makeGameSample({
+        aiLevel: 3,
+        white: userSample1,
+        black: null,
+      });
+
       const { container, rerender } = render(
-        <GameControlPanelUserName game={gameSample2_} />
+        <GameControlPanelUserName game={playerVsAiGameSample} />
+      );
+
+      expect(container).toHaveTextContent("Thomas Miller");
+
+      rerender(
+        <GameControlPanelUserName game={playerVsAiGameSample} color="black" />
       );
 
       expect(container).toHaveTextContent("AI level 3");
-
-      rerender(<GameControlPanelUserName game={gameSample2_} color="black" />);
-
-      expect(container).toHaveTextContent("Thomas Miller");
     });
   });
 });

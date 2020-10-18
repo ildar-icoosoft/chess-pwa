@@ -79,28 +79,6 @@ export const makeGameSample = (
   ...data,
 });
 
-// with black user
-export const gameSample2_: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "",
-  status: "started",
-  white: null,
-  black: {
-    id: 1,
-    fullName: "Thomas Miller",
-  },
-  winner: null,
-};
-
 export const gameWithMovesSample: Game = {
   id: 2,
   aiLevel: 3,
