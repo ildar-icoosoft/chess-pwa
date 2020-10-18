@@ -2,7 +2,7 @@ import { ValidMoves } from "ii-react-chessboard";
 import Game from "../../interfaces/Game";
 import NormalizedGameEntity from "../../normalizr/interfaces/NormalizedGameEntity";
 
-export const defaultGameSample: Game = {
+export const gameSample1: Game = {
   id: 1,
   aiLevel: 3,
   clockLimit: 300,
@@ -19,31 +19,15 @@ export const defaultGameSample: Game = {
   black: null,
   winner: null,
 };
-export const gameSampleFen =
+export const gameSample1Fen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-export const defaultNormalizedGameSample: NormalizedGameEntity = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 310000,
-  btime: 365000,
-  moves: "",
-  status: "started",
-  white: null,
-  black: null,
-  winner: null,
-};
+export const normalizedGameSample1: NormalizedGameEntity = gameSample1 as NormalizedGameEntity;
 
 // @todo. use this function to create samples.
 export const makeGameSample = (
   data: Partial<Game>,
-  originalGameSample = defaultGameSample
+  originalGameSample = gameSample1
 ): Game => ({
   ...originalGameSample,
   ...data,
@@ -127,7 +111,7 @@ export const blackOutOfTimeGameSample: Game = {
 };
 
 // with black user
-export const gameSample2: Game = {
+export const gameSample2_: Game = {
   id: 1,
   aiLevel: 3,
   clockLimit: 300,
@@ -149,7 +133,7 @@ export const gameSample2: Game = {
 };
 
 // with white user
-export const gameSample3: Game = {
+export const gameSample3_: Game = {
   id: 1,
   aiLevel: 3,
   clockLimit: 300,

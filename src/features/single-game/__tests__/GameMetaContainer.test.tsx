@@ -6,15 +6,15 @@ import mountTest from "../../../test-utils/mountTest";
 import { GameMetaContainer } from "../GameMetaContainer";
 import { GameMeta } from "../GameMeta";
 import {
-  defaultGameSample,
-  defaultNormalizedGameSample,
+  gameSample1,
+  normalizedGameSample1,
 } from "../../../test-utils/data-sample/game";
 
 const stateWithGameSample = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": defaultNormalizedGameSample,
+      "1": normalizedGameSample1,
     },
     seeks: {},
   },
@@ -52,7 +52,7 @@ describe("GameMetaContainer", () => {
 
         const gameMeta = testInstance.findByType(GameMeta);
 
-        expect(gameMeta.props.game).toEqual(defaultGameSample);
+        expect(gameMeta.props.game).toEqual(gameSample1);
       });
     });
   });

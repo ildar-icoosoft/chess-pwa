@@ -1,9 +1,9 @@
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import {
-  defaultGameSample,
-  gameSample2,
-  gameSample3,
+  gameSample1,
+  gameSample2_,
+  gameSample3_,
   gameThatCanBeAbortedSample,
   gameWithMovesAndUserSample,
   gameWithMovesAndUserVsUserSample,
@@ -22,7 +22,7 @@ describe("GameControlPanelWrapper", () => {
 
       expect(testInstance.findAllByType(GameControlPanel).length).toBe(0);
 
-      testRenderer.update(<GameControlPanelWrapper game={defaultGameSample} />);
+      testRenderer.update(<GameControlPanelWrapper game={gameSample1} />);
 
       expect(testInstance.findAllByType(GameControlPanel).length).toBe(1);
     });
@@ -32,18 +32,18 @@ describe("GameControlPanelWrapper", () => {
     describe("GameControlPanel", () => {
       it("game", () => {
         const testRenderer = TestRenderer.create(
-          <GameControlPanelWrapper game={defaultGameSample} />
+          <GameControlPanelWrapper game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
         const gameMeta = testInstance.findByType(GameControlPanel);
 
-        expect(gameMeta.props.game).toBe(defaultGameSample);
+        expect(gameMeta.props.game).toBe(gameSample1);
       });
 
       it("orientation", () => {
         const testRenderer = TestRenderer.create(
-          <GameControlPanelWrapper game={defaultGameSample} />
+          <GameControlPanelWrapper game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -53,7 +53,7 @@ describe("GameControlPanelWrapper", () => {
 
         testRenderer.update(
           <GameControlPanelWrapper
-            game={gameSample2}
+            game={gameSample2_}
             currentUser={userSample1}
           />
         );
@@ -62,7 +62,7 @@ describe("GameControlPanelWrapper", () => {
 
         testRenderer.update(
           <GameControlPanelWrapper
-            game={gameSample2}
+            game={gameSample2_}
             currentUser={userSample1}
             isFlipped
           />
@@ -102,7 +102,7 @@ describe("GameControlPanelWrapper", () => {
 
       it("drawOfferSentByCurrentUser", () => {
         const testRenderer = TestRenderer.create(
-          <GameControlPanelWrapper game={gameSample3} />
+          <GameControlPanelWrapper game={gameSample3_} />
         );
         const testInstance = testRenderer.root;
 
@@ -114,7 +114,7 @@ describe("GameControlPanelWrapper", () => {
           {
             drawOffer: "white",
           },
-          gameSample3
+          gameSample3_
         );
 
         testRenderer.update(
@@ -129,7 +129,7 @@ describe("GameControlPanelWrapper", () => {
 
       it("drawOfferSentByOpponent", () => {
         const testRenderer = TestRenderer.create(
-          <GameControlPanelWrapper game={gameSample3} />
+          <GameControlPanelWrapper game={gameSample3_} />
         );
         const testInstance = testRenderer.root;
 
@@ -141,7 +141,7 @@ describe("GameControlPanelWrapper", () => {
           {
             drawOffer: "black",
           },
-          gameSample3
+          gameSample3_
         );
 
         testRenderer.update(
@@ -304,7 +304,7 @@ describe("GameControlPanelWrapper", () => {
 
         const testInstance = TestRenderer.create(
           <GameControlPanelWrapper
-            game={defaultGameSample}
+            game={gameSample1}
             onFlipBoard={onFlipBoard}
           />
         ).root;
@@ -321,7 +321,7 @@ describe("GameControlPanelWrapper", () => {
 
         const testInstance = TestRenderer.create(
           <GameControlPanelWrapper
-            game={defaultGameSample}
+            game={gameSample1}
             onAcceptDrawOffer={onAcceptDrawOffer}
           />
         ).root;
@@ -340,7 +340,7 @@ describe("GameControlPanelWrapper", () => {
 
         const testInstance = TestRenderer.create(
           <GameControlPanelWrapper
-            game={defaultGameSample}
+            game={gameSample1}
             onDeclineDrawOffer={onDeclineDrawOffer}
           />
         ).root;
@@ -359,7 +359,7 @@ describe("GameControlPanelWrapper", () => {
 
         const testInstance = TestRenderer.create(
           <GameControlPanelWrapper
-            game={defaultGameSample}
+            game={gameSample1}
             onAbortGame={onAbortGame}
           />
         ).root;
@@ -376,7 +376,7 @@ describe("GameControlPanelWrapper", () => {
 
         const testInstance = TestRenderer.create(
           <GameControlPanelWrapper
-            game={defaultGameSample}
+            game={gameSample1}
             onOfferDraw={onOfferDraw}
           />
         ).root;
@@ -393,7 +393,7 @@ describe("GameControlPanelWrapper", () => {
 
         const testInstance = TestRenderer.create(
           <GameControlPanelWrapper
-            game={defaultGameSample}
+            game={gameSample1}
             onResignGame={onResignGame}
           />
         ).root;

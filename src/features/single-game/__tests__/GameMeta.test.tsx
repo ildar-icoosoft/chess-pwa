@@ -2,9 +2,9 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { GameMeta } from "../GameMeta";
 import {
-  defaultGameSample,
-  gameSample2,
-  gameSample3,
+  gameSample1,
+  gameSample2_,
+  gameSample3_,
   gameWith10Plus5MinControlSample,
 } from "../../../test-utils/data-sample/game";
 import getGameStatusText from "../../../utils/getGameStatusText";
@@ -21,7 +21,7 @@ describe("GameMeta", () => {
     it("should contain status", () => {
       (getGameStatusText as jest.Mock).mockReturnValue("some status text");
 
-      const { queryByTestId } = render(<GameMeta game={defaultGameSample} />);
+      const { queryByTestId } = render(<GameMeta game={gameSample1} />);
 
       const gameStatus = queryByTestId("game-status");
 
@@ -29,12 +29,14 @@ describe("GameMeta", () => {
     });
 
     it("should contain players names", () => {
-      const { getByTestId, rerender } = render(<GameMeta game={gameSample2} />);
+      const { getByTestId, rerender } = render(
+        <GameMeta game={gameSample2_} />
+      );
 
       expect(getByTestId("white-user")).toHaveTextContent("AI level 3");
       expect(getByTestId("black-user")).toHaveTextContent("Thomas Miller");
 
-      rerender(<GameMeta game={gameSample3} />);
+      rerender(<GameMeta game={gameSample3_} />);
 
       expect(getByTestId("white-user")).toHaveTextContent("Thomas Miller");
       expect(getByTestId("black-user")).toHaveTextContent("AI level 3");
@@ -42,7 +44,7 @@ describe("GameMeta", () => {
 
     it("should contain time control", () => {
       const { queryByTestId, rerender } = render(
-        <GameMeta game={defaultGameSample} />
+        <GameMeta game={gameSample1} />
       );
 
       const timeControl = queryByTestId("time-control");

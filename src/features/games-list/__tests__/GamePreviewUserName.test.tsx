@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { gameSample2 } from "../../../test-utils/data-sample/game";
+import { gameSample2_ } from "../../../test-utils/data-sample/game";
 import { GamePreviewUserName } from "../GamePreviewUserName";
 
 describe("GamePreviewUserName", () => {
@@ -12,12 +12,12 @@ describe("GamePreviewUserName", () => {
 
     it("should contain player name", () => {
       const { container, rerender } = render(
-        <GamePreviewUserName game={gameSample2} />
+        <GamePreviewUserName game={gameSample2_} />
       );
 
       expect(container).toHaveTextContent("AI level 3");
 
-      rerender(<GamePreviewUserName game={gameSample2} color="black" />);
+      rerender(<GamePreviewUserName game={gameSample2_} color="black" />);
 
       expect(container).toHaveTextContent("Thomas Miller");
     });

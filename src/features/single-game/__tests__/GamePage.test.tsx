@@ -8,7 +8,7 @@ import { GameControlPanelContainer } from "../GameControlPanelContainer";
 import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
 import { fetchGame } from "../singleGameSlice";
 import { makeStateSample } from "../../../test-utils/data-sample/state";
-import { defaultNormalizedGameSample } from "../../../test-utils/data-sample/game";
+import { normalizedGameSample1 } from "../../../test-utils/data-sample/game";
 
 jest.mock("../singleGameSlice");
 
@@ -16,7 +16,7 @@ const stateWithGameSample = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": defaultNormalizedGameSample,
+      "1": normalizedGameSample1,
     },
     seeks: {},
   },

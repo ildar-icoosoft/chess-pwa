@@ -4,13 +4,13 @@ import { GamePreviewsList } from "../GamePreviewsList";
 import mountTest from "../../../test-utils/mountTest";
 import {
   gameWithMovesSample,
-  defaultGameSample,
+  gameSample1,
 } from "../../../test-utils/data-sample/game";
 import Game from "../../../interfaces/Game";
 import { GamePreviewsListItem } from "../GamePreviewsListItem";
 import { ContentLoadingStatus } from "../../../components/ContentLoadingStatus";
 
-const gamesList: Game[] = [defaultGameSample, gameWithMovesSample];
+const gamesList: Game[] = [gameSample1, gameWithMovesSample];
 
 describe("GamePreviewsList", () => {
   mountTest(GamePreviewsList);
@@ -112,7 +112,7 @@ describe("GamePreviewsList", () => {
           GamePreviewsListItem
         );
 
-        expect(gamePreviewsListItems[0].props.game).toBe(defaultGameSample);
+        expect(gamePreviewsListItems[0].props.game).toBe(gameSample1);
         expect(gamePreviewsListItems[1].props.game).toBe(gameWithMovesSample);
       });
     });

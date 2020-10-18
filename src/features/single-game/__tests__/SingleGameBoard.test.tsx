@@ -3,10 +3,10 @@ import { Board, PieceColor } from "ii-react-chessboard";
 import React from "react";
 import {
   blackTurnGameSample,
-  defaultGameSample,
-  gameSample2,
-  gameSample3,
-  gameSampleFen,
+  gameSample1,
+  gameSample2_,
+  gameSample3_,
+  gameSample1Fen,
   gameWithCheckmateByWhiteSample,
   gameWithMovesAndUserSample,
   gameWithMovesRewoundToIndex3SampleFen,
@@ -28,7 +28,7 @@ describe("SingleGameBoard", () => {
 
       expect(testInstance.findAllByType(Board).length).toBe(0);
 
-      testRenderer.update(<SingleGameBoard game={defaultGameSample} />);
+      testRenderer.update(<SingleGameBoard game={gameSample1} />);
 
       expect(testInstance.findAllByType(Board).length).toBe(1);
     });
@@ -83,7 +83,7 @@ describe("SingleGameBoard", () => {
 
         expect(contentLoadingStatus.props.isEmpty).toBeTruthy();
 
-        testRenderer.update(<SingleGameBoard game={defaultGameSample} />);
+        testRenderer.update(<SingleGameBoard game={gameSample1} />);
 
         expect(contentLoadingStatus.props.isEmpty).toBeFalsy();
       });
@@ -92,13 +92,13 @@ describe("SingleGameBoard", () => {
     describe("Board", () => {
       it("position", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
         const board = testInstance.findByType(Board);
 
-        expect(board.props.position).toBe(gameSampleFen);
+        expect(board.props.position).toBe(gameSample1Fen);
 
         testRenderer.update(<SingleGameBoard game={gameWithMovesSample} />);
 
@@ -115,7 +115,7 @@ describe("SingleGameBoard", () => {
 
       it("allowMarkers", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -126,7 +126,7 @@ describe("SingleGameBoard", () => {
 
       it("check", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -143,7 +143,7 @@ describe("SingleGameBoard", () => {
 
       it("clickable", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -154,7 +154,7 @@ describe("SingleGameBoard", () => {
 
       it("draggable", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -193,7 +193,7 @@ describe("SingleGameBoard", () => {
 
       it("viewOnly", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -212,7 +212,7 @@ describe("SingleGameBoard", () => {
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={defaultGameSample} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample1} />
         );
         // true because currentUser is not a gamer of this game
         expect(board.props.viewOnly).toBeTruthy();
@@ -228,7 +228,7 @@ describe("SingleGameBoard", () => {
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={gameSample2} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample2_} />
         );
         // false because currentUser is a gamer of this game and game is not over
         expect(board.props.viewOnly).toBeFalsy();
@@ -236,7 +236,7 @@ describe("SingleGameBoard", () => {
 
       it("movableColor", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -246,19 +246,19 @@ describe("SingleGameBoard", () => {
         expect(board.props.movableColor).toBeUndefined();
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={defaultGameSample} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample1} />
         );
         // undefined because currentUser is not a gamer of this game
         expect(board.props.viewOnly).toBeTruthy();
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={gameSample2} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample2_} />
         );
         // PieceColor.BLACK because currentUser plays with black
         expect(board.props.movableColor).toBe(PieceColor.BLACK);
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={gameSample3} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample3_} />
         );
         // PieceColor.BLACK because currentUser plays with white
         expect(board.props.movableColor).toBe(PieceColor.WHITE);
@@ -266,7 +266,7 @@ describe("SingleGameBoard", () => {
 
       it("orientation", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -276,7 +276,7 @@ describe("SingleGameBoard", () => {
         expect(board.props.orientation).toBe(PieceColor.WHITE);
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={gameSample2} />
+          <SingleGameBoard currentUser={userSample1} game={gameSample2_} />
         );
         // black because current user plays black
         expect(board.props.orientation).toBe(PieceColor.BLACK);
@@ -284,7 +284,7 @@ describe("SingleGameBoard", () => {
         testRenderer.update(
           <SingleGameBoard
             currentUser={userSample1}
-            game={gameSample2}
+            game={gameSample2_}
             isFlipped
           />
         );
@@ -294,7 +294,7 @@ describe("SingleGameBoard", () => {
 
       it("lastMoveSquares", () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} />
+          <SingleGameBoard game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -321,7 +321,7 @@ describe("SingleGameBoard", () => {
         const onMove = jest.fn();
 
         const testInstance = TestRenderer.create(
-          <SingleGameBoard game={defaultGameSample} onMove={onMove} />
+          <SingleGameBoard game={gameSample1} onMove={onMove} />
         ).root;
 
         const board: TestRenderer.ReactTestInstance = testInstance.findByType(

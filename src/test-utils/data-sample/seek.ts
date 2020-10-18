@@ -1,6 +1,6 @@
 import { Seek } from "../../interfaces/Seek";
 import userSample1 from "./user";
-import { defaultGameSample } from "./game";
+import { gameSample1 } from "./game";
 import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
 
 export const defaultSeekSample: Seek = {
@@ -30,7 +30,7 @@ export const seekSample2: Seek = {
   createdAt: 0,
   clockIncrement: 3,
   createdBy: userSample1,
-  game: defaultGameSample,
+  game: gameSample1,
 };
 
 export const seekSample3: Seek = {
@@ -40,5 +40,5 @@ export const seekSample3: Seek = {
   createdAt: 0,
   clockIncrement: 3,
   createdBy: userSample1,
-  game: defaultGameSample,
+  game: gameSample1,
 };

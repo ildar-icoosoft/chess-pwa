@@ -11,8 +11,8 @@ import { SingleGameBoard } from "../SingleGameBoard";
 import { makeMove } from "../../move/moveSlice";
 import userSample1 from "../../../test-utils/data-sample/user";
 import {
-  defaultGameSample,
-  defaultNormalizedGameSample,
+  gameSample1,
+  normalizedGameSample1,
 } from "../../../test-utils/data-sample/game";
 
 jest.mock("../../move/moveSlice");
@@ -21,7 +21,7 @@ const stateWithGameSample = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": defaultNormalizedGameSample,
+      "1": normalizedGameSample1,
     },
     seeks: {},
   },
@@ -147,7 +147,7 @@ describe("SingleGameBoardContainer", () => {
         );
         testRenderer.update(<SingleGameBoardContainer id={1} />);
 
-        expect(singleGameBoard.props.game).toEqual(defaultGameSample);
+        expect(singleGameBoard.props.game).toEqual(gameSample1);
       });
 
       it("isLoading", async () => {

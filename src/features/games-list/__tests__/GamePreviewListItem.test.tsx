@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { render } from "@testing-library/react";
 import {
-  defaultGameSample,
-  gameSampleFen,
+  gameSample1,
+  gameSample1Fen,
   gameWithMovesSample,
   gameWithMovesSampleFen,
   makeGameSample,
@@ -30,7 +30,7 @@ describe("GamePreviewsListItem", () => {
   describe("children components", () => {
     it("contains Board", () => {
       const testRenderer = TestRenderer.create(
-        <GamePreviewsListItem game={defaultGameSample} />
+        <GamePreviewsListItem game={gameSample1} />
       );
       const testInstance = testRenderer.root;
 
@@ -39,7 +39,7 @@ describe("GamePreviewsListItem", () => {
 
     it("contains Link", () => {
       const testRenderer = TestRenderer.create(
-        <GamePreviewsListItem game={defaultGameSample} />
+        <GamePreviewsListItem game={gameSample1} />
       );
       const testInstance = testRenderer.root;
 
@@ -50,7 +50,7 @@ describe("GamePreviewsListItem", () => {
 
     it("contains GamePreviewUserName", () => {
       const testRenderer = TestRenderer.create(
-        <GamePreviewsListItem game={defaultGameSample} />
+        <GamePreviewsListItem game={gameSample1} />
       );
       const testInstance = testRenderer.root;
 
@@ -63,7 +63,7 @@ describe("GamePreviewsListItem", () => {
 
     it("contains GamePreviewResult", () => {
       const testRenderer = TestRenderer.create(
-        <GamePreviewsListItem game={defaultGameSample} />
+        <GamePreviewsListItem game={gameSample1} />
       );
       const testInstance = testRenderer.root;
 
@@ -85,7 +85,7 @@ describe("GamePreviewsListItem", () => {
 
     it("contains GamePreviewClock", () => {
       const testRenderer = TestRenderer.create(
-        <GamePreviewsListItem game={defaultGameSample} />
+        <GamePreviewsListItem game={gameSample1} />
       );
       const testInstance = testRenderer.root;
 
@@ -110,13 +110,13 @@ describe("GamePreviewsListItem", () => {
     describe("Board", () => {
       it("position", () => {
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
         const board = testInstance.findByType(Board);
 
-        expect(board.props.position).toBe(gameSampleFen);
+        expect(board.props.position).toBe(gameSample1Fen);
 
         testRenderer.update(
           <GamePreviewsListItem game={gameWithMovesSample} />
@@ -126,7 +126,7 @@ describe("GamePreviewsListItem", () => {
 
       it("viewOnly", () => {
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -139,7 +139,7 @@ describe("GamePreviewsListItem", () => {
     describe("Link", () => {
       it("to", () => {
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -152,7 +152,7 @@ describe("GamePreviewsListItem", () => {
     describe("GamePreviewUserName", () => {
       it("game", () => {
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -160,13 +160,13 @@ describe("GamePreviewsListItem", () => {
           GamePreviewUserName
         );
 
-        expect(GamePreviewUserNames[0].props.game).toBe(defaultGameSample);
-        expect(GamePreviewUserNames[1].props.game).toBe(defaultGameSample);
+        expect(GamePreviewUserNames[0].props.game).toBe(gameSample1);
+        expect(GamePreviewUserNames[1].props.game).toBe(gameSample1);
       });
 
       it("color", () => {
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -222,7 +222,7 @@ describe("GamePreviewsListItem", () => {
     describe("GamePreviewClock", () => {
       it("time", () => {
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -234,7 +234,7 @@ describe("GamePreviewsListItem", () => {
 
       it("isRunning", () => {
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={defaultGameSample} />
+          <GamePreviewsListItem game={gameSample1} />
         );
         const testInstance = testRenderer.root;
 
@@ -247,7 +247,7 @@ describe("GamePreviewsListItem", () => {
           {
             turn: "black",
           },
-          defaultGameSample
+          gameSample1
         );
 
         testRenderer.update(

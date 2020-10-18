@@ -16,8 +16,8 @@ import {
 } from "../singleGameSlice";
 import userSample1 from "../../../test-utils/data-sample/user";
 import {
-  defaultGameSample,
-  defaultNormalizedGameSample,
+  gameSample1,
+  normalizedGameSample1,
 } from "../../../test-utils/data-sample/game";
 
 jest.mock("../singleGameSlice");
@@ -26,7 +26,7 @@ const stateWithGame = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": defaultNormalizedGameSample,
+      "1": normalizedGameSample1,
     },
     seeks: {},
   },
@@ -44,7 +44,7 @@ const stateWithLoadedGame = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": defaultNormalizedGameSample,
+      "1": normalizedGameSample1,
     },
     seeks: {},
   },
@@ -62,7 +62,7 @@ const stateWithFlippedGame = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": defaultNormalizedGameSample,
+      "1": normalizedGameSample1,
     },
     seeks: {},
   },
@@ -80,7 +80,7 @@ const stateWithRewindToMoveIndex = makeStateSample({
   entities: {
     users: {},
     games: {
-      "1": defaultNormalizedGameSample,
+      "1": normalizedGameSample1,
     },
     seeks: {},
   },
@@ -98,7 +98,7 @@ const stateWithGameAndAuthenticatedUser = makeStateSample({
       "1": userSample1,
     },
     games: {
-      "1": defaultNormalizedGameSample,
+      "1": normalizedGameSample1,
     },
     seeks: {},
   },
@@ -143,9 +143,7 @@ describe("GameControlPanelContainer", () => {
           GameControlPanelWrapper
         );
 
-        expect(singleGameControlPanelWrapper.props.game).toEqual(
-          defaultGameSample
-        );
+        expect(singleGameControlPanelWrapper.props.game).toEqual(gameSample1);
       });
 
       it("currentUser", async () => {

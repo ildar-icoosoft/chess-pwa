@@ -6,9 +6,14 @@ import mountTest from "../../../test-utils/mountTest";
 import {
   defaultState,
   makeStateSample,
-  stateWithDataSample4,
 } from "../../../test-utils/data-sample/state";
 import CompletedGamesContainer from "../CompletedGamesContainer";
+import {
+  gameSample1,
+  makeGameSample,
+} from "../../../test-utils/data-sample/game";
+import NormalizedGameEntity from "../../../normalizr/interfaces/NormalizedGameEntity";
+import userSample1 from "../../../test-utils/data-sample/user";
 
 const stateWithLoadingGames = makeStateSample({
   gamesList: {
@@ -21,6 +26,55 @@ const stateWithLoadingError = makeStateSample({
   gamesList: {
     isLoading: false,
     error: "error text",
+  },
+});
+
+const game1 = gameSample1;
+const game2 = makeGameSample(
+  {
+    id: 2,
+    status: "outoftime",
+    winner: "white",
+  },
+  gameSample1
+);
+const game3 = makeGameSample(
+  {
+    id: 3,
+    status: "aborted",
+  },
+  gameSample1
+);
+const game4 = makeGameSample(
+  {
+    id: 4,
+    createdAt: 1,
+  },
+  gameSample1
+);
+const game5 = makeGameSample(
+  {
+    id: 5,
+    createdAt: 1,
+    status: "resign",
+    winner: "white",
+  },
+  gameSample1
+);
+
+const stateWithGames = makeStateSample({
+  entities: {
+    users: {
+      "1": userSample1,
+    },
+    games: {
+      "1": game1 as NormalizedGameEntity,
+      "2": game2 as NormalizedGameEntity,
+      "3": game3 as NormalizedGameEntity,
+      "4": game4 as NormalizedGameEntity,
+      "5": game5 as NormalizedGameEntity,
+    },
+    seeks: {},
   },
 });
 
@@ -53,47 +107,12 @@ describe("CompletedGamesContainer", () => {
         expect(gamePreviewsComponent.props.games).toEqual([]);
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample4)
+          cb(stateWithGames)
         );
 
         testRenderer.update(<CompletedGamesContainer />);
 
-        expect(gamePreviewsComponent.props.games).toEqual([
-          {
-            id: 5,
-            aiLevel: 3,
-            clockLimit: 300,
-            clockIncrement: 3,
-            createdAt: 1,
-            drawOffer: null,
-            initialFen: "startpos",
-            turn: "white",
-            wtime: 300000,
-            btime: 300000,
-            moves: "e2e4 e7e5 g1f3 g8f6",
-            status: "resign",
-            white: null,
-            black: null,
-            winner: "white",
-          },
-          {
-            id: 2,
-            aiLevel: 3,
-            clockLimit: 300,
-            clockIncrement: 3,
-            createdAt: 0,
-            drawOffer: null,
-            initialFen: "startpos",
-            turn: "white",
-            wtime: 300000,
-            btime: 300000,
-            moves: "e2e4 e7e5 g1f3 g8f6",
-            status: "outoftime",
-            white: null,
-            black: null,
-            winner: "white",
-          },
-        ]);
+        expect(gamePreviewsComponent.props.games).toEqual([game5, game2]);
       });
 
       it("isLoading", () => {

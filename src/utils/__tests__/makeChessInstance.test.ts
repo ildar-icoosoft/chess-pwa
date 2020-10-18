@@ -1,7 +1,7 @@
 import makeChessInstance from "../makeChessInstance";
 import {
-  defaultGameSample,
-  gameSampleFen,
+  gameSample1,
+  gameSample1Fen,
   gameWithIncorrectMoveSample,
   gameWithMovesRewoundToIndex3SampleFen,
   gameWithMovesSample,
@@ -10,7 +10,7 @@ import {
 
 describe("makeChessInstance", () => {
   it("startpos with empty moves prop", () => {
-    expect(makeChessInstance(defaultGameSample).fen()).toBe(gameSampleFen);
+    expect(makeChessInstance(gameSample1).fen()).toBe(gameSample1Fen);
   });
 
   it("not empty moves", () => {
