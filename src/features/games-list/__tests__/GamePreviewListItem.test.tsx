@@ -5,9 +5,6 @@ import React from "react";
 import { render } from "@testing-library/react";
 import {
   gameSample1,
-  gameSample1Fen,
-  gameWithMovesSample,
-  gameWithMovesSampleFen,
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
 
@@ -109,14 +106,28 @@ describe("GamePreviewsListItem", () => {
   describe("children components props", () => {
     describe("Board", () => {
       it("position", () => {
+        const gameWithoutMovesSample = makeGameSample({
+          initialFen: "startpos",
+          moves: "",
+        });
+        const gameWithoutMovesSampleFen =
+          "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
         const testRenderer = TestRenderer.create(
-          <GamePreviewsListItem game={gameSample1} />
+          <GamePreviewsListItem game={gameWithoutMovesSample} />
         );
         const testInstance = testRenderer.root;
 
         const board = testInstance.findByType(Board);
 
-        expect(board.props.position).toBe(gameSample1Fen);
+        expect(board.props.position).toBe(gameWithoutMovesSampleFen);
+
+        const gameWithMovesSample = makeGameSample({
+          initialFen: "startpos",
+          moves: "e2e4 e7e5 g1f3 g8f6",
+        });
+        const gameWithMovesSampleFen =
+          "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3";
 
         testRenderer.update(
           <GamePreviewsListItem game={gameWithMovesSample} />
