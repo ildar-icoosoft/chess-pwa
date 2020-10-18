@@ -231,6 +231,7 @@ describe("singleGameSlice reducer", () => {
       (ioClient.socket.get as jest.Mock).mockImplementationOnce(
         (url: string, cb: RequestCallback) => {
           cb(gameSample1, {
+            body: gameSample1,
             statusCode: 200,
           } as JWR);
         }
@@ -384,6 +385,7 @@ describe("singleGameSlice reducer", () => {
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, cb: RequestCallback) => {
           cb(gameSample1, {
+            body: gameSample1,
             statusCode: 200,
           } as JWR);
         }
@@ -537,6 +539,7 @@ describe("singleGameSlice reducer", () => {
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, cb: RequestCallback) => {
           cb(gameSample1, {
+            body: gameSample1,
             statusCode: 200,
           } as JWR);
         }
@@ -691,6 +694,7 @@ describe("singleGameSlice reducer", () => {
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, cb: RequestCallback) => {
           cb(gameSample1, {
+            body: gameSample1,
             statusCode: 200,
           } as JWR);
         }
@@ -846,6 +850,7 @@ describe("singleGameSlice reducer", () => {
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, cb: RequestCallback) => {
           cb(gameSample1, {
+            body: gameSample1,
             statusCode: 200,
           } as JWR);
         }
@@ -1001,6 +1006,7 @@ describe("singleGameSlice reducer", () => {
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, cb: RequestCallback) => {
           cb(gameSample1, {
+            body: gameSample1,
             statusCode: 200,
           } as JWR);
         }

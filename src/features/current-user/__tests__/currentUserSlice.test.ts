@@ -19,7 +19,6 @@ import currentUserReducer, {
   register,
   logout,
 } from "../currentUserSlice";
-import User from "../../../interfaces/User";
 import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";

@@ -1,8 +1,7 @@
 import { Seek } from "../../interfaces/Seek";
 import { userSample1, userSample2 } from "./user";
-import { gameSample1, gameSample2 } from "./game";
+import { gameSample2 } from "./game";
 import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
-import Game from "../../interfaces/Game";
 
 export const seekSample1: Seek = {
   id: 1,

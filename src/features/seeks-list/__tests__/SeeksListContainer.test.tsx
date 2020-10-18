@@ -11,16 +11,20 @@ import SeeksListContainer from "../SeeksListContainer";
 import { SeeksList } from "../SeeksList";
 import { acceptSeek } from "../../challenge/challengeSlice";
 import {
-  makeNormalizedSeekSample,
   makeSeekSample,
   normalizedSeekSample1,
+  normalizedSeekSample2,
   seekSample1,
+  seekSample2,
 } from "../../../test-utils/data-sample/seek";
 import {
   normalizedUserSample1,
-  userSample1,
+  normalizedUserSample2,
 } from "../../../test-utils/data-sample/user";
-import { gameSample1 } from "../../../test-utils/data-sample/game";
+import {
+  gameSample1,
+  normalizedGameSample2,
+} from "../../../test-utils/data-sample/game";
 
 jest.mock("../../challenge/challengeSlice");
 
@@ -48,16 +52,6 @@ const stateWithLoadingError = makeStateSample({
   },
 });
 
-const normalizedSeek1 = normalizedSeekSample1;
-const seek1 = seekSample1;
-
-const normalizedSeek2 = makeNormalizedSeekSample({
-  id: 2,
-});
-const seek2 = makeSeekSample({
-  id: 2,
-});
-
 const seekWithStartedGame = makeSeekSample({
   game: gameSample1,
 });
@@ -71,11 +65,14 @@ const stateWithSeeks = makeStateSample({
   entities: {
     users: {
       1: normalizedUserSample1,
+      2: normalizedUserSample2,
     },
-    games: {},
+    games: {
+      2: normalizedGameSample2,
+    },
     seeks: {
-      1: normalizedSeek1,
-      2: normalizedSeek2,
+      1: normalizedSeekSample1,
+      2: normalizedSeekSample2,
     },
   },
 });
@@ -122,7 +119,10 @@ describe("SeeksListContainer", () => {
 
         testRenderer.update(<SeeksListContainer />);
 
-        expect(seeksListComponent.props.seeks).toEqual([seek2, seek1]);
+        expect(seeksListComponent.props.seeks).toEqual([
+          seekSample2,
+          seekSample1,
+        ]);
       });
 
       it("isLoading", () => {
