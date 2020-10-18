@@ -226,39 +226,3 @@ export const gameWithCheckmateByWhiteSample: Game = {
   black: null,
   winner: "white",
 };
-
-export const blackTurnGameSample: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "black",
-  wtime: 300000,
-  btime: 300000,
-  moves: "e2e4 e7e5 g1f3",
-  status: "started",
-  white: null,
-  black: null,
-  winner: null,
-};
-
-export const whiteTurnGameSample: Game = {
-  id: 2,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR b KQkq - 0 1",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "e8e7",
-  status: "started",
-  white: null,
-  black: null,
-  winner: null,
-};
