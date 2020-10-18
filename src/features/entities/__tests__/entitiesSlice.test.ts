@@ -34,11 +34,6 @@ import {
   emptyEntities,
   entitiesSample_,
   entitiesAfterAddingGameSample,
-  entitiesAfterMoveSample,
-  entitiesAfterTimeOutSample,
-  entitiesBeforeTimeOutSample,
-  entitiesAfterTwoMovesSample,
-  entitiesAfterTwoMovesAndOneSecondSample,
   entitiesAfterAddingSeekSample,
   addSeekPayloadSample,
   makeEntitiesSample,
@@ -47,7 +42,6 @@ import {
 import {
   normalizedUserSample1,
   normalizedUserSample2,
-  userSample1,
 } from "../../../test-utils/data-sample/user";
 import {
   normalizedSeekSample1,
@@ -223,26 +217,111 @@ describe("entitiesSlice reducer", () => {
   });
 
   it("should handle oneSecondPassed", () => {
+    const entitiesWithNoMovesSample: EntitiesState = {
+      ...entitiesSample,
+      games: {
+        1: {
+          ...normalizedGameSample1,
+          turn: "white",
+          moves: "",
+          wtime: 300000,
+          btime: 300000,
+          status: "started",
+        },
+      },
+    };
+
+    const entitiesWithOneMoveSample: EntitiesState = {
+      ...entitiesSample,
+      games: {
+        1: {
+          ...normalizedGameSample1,
+          turn: "black",
+          moves: "e2e4",
+          wtime: 300000,
+          btime: 300000,
+          status: "started",
+        },
+      },
+    };
+
+    const entitiesWithTwoMovesSample: EntitiesState = {
+      ...entitiesSample,
+      games: {
+        1: {
+          ...normalizedGameSample1,
+          turn: "white",
+          moves: "e2e4 e7e5",
+          wtime: 300000,
+          btime: 300000,
+          status: "started",
+        },
+      },
+    };
+
+    const entitiesWithTwoMovesInOneSecondSample: EntitiesState = {
+      ...entitiesSample,
+      games: {
+        1: {
+          ...normalizedGameSample1,
+          turn: "white",
+          moves: "e2e4 e7e5",
+          wtime: 299000,
+          btime: 300000,
+          status: "started",
+        },
+      },
+    };
+
+    const entitiesBeforeTimeOutSample: EntitiesState = {
+      ...entitiesSample,
+      games: {
+        1: {
+          ...normalizedGameSample1,
+          turn: "white",
+          moves: "e2e4 e7e5",
+          wtime: 800,
+          btime: 300000,
+          status: "started",
+        },
+      },
+    };
+
+    const entitiesAfterTimeOutSample: EntitiesState = {
+      ...entitiesSample,
+      games: {
+        1: {
+          ...normalizedGameSample1,
+          turn: "white",
+          moves: "e2e4 e7e5",
+          wtime: 0,
+          btime: 300000,
+          status: "outoftime",
+          winner: "black",
+        },
+      },
+    };
+
     // do not change time because there is no moves
     expect(
-      entitiesReducer(entitiesSample, {
+      entitiesReducer(entitiesWithNoMovesSample, {
         type: oneSecondPassed.type,
       })
-    ).toEqual(entitiesSample);
+    ).toEqual(entitiesWithNoMovesSample);
 
     // do not change time because there is only one move (time starts to go after two moves)
     expect(
-      entitiesReducer(entitiesAfterMoveSample, {
+      entitiesReducer(entitiesWithOneMoveSample, {
         type: oneSecondPassed.type,
       })
-    ).toEqual(entitiesAfterMoveSample);
+    ).toEqual(entitiesWithOneMoveSample);
 
-    // do not change time because there is only one move (time starts to go after two moves)
+    // now the time has passed (фаеук ецщ ьщмуы)
     expect(
-      entitiesReducer(entitiesAfterTwoMovesSample, {
+      entitiesReducer(entitiesWithTwoMovesSample, {
         type: oneSecondPassed.type,
       })
-    ).toEqual(entitiesAfterTwoMovesAndOneSecondSample);
+    ).toEqual(entitiesWithTwoMovesInOneSecondSample);
 
     expect(
       entitiesReducer(entitiesBeforeTimeOutSample, {
@@ -253,26 +332,26 @@ describe("entitiesSlice reducer", () => {
 
   it("should handle getSingleGameSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: getSingleGameSuccess.type,
         payload: {
           result: 2,
-          entities: addGamePayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle abortGameSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: abortGameSuccess.type,
         payload: {
           result: 2,
-          entities: addGamePayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle resignGameSuccess", () => {
