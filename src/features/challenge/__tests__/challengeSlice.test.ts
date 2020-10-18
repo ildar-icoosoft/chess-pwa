@@ -17,12 +17,12 @@ import challengeReducer, {
 } from "../challengeSlice";
 import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
-import { gameWithMovesSample } from "../../../test-utils/data-sample/game";
+import { gameSample1 } from "../../../test-utils/data-sample/game";
 import {
   seekSample1,
   normalizedSeekSample1,
 } from "../../../test-utils/data-sample/seek";
-import { userSample1 } from "../../../test-utils/data-sample/user";
+import { normalizedUserSample1 } from "../../../test-utils/data-sample/user";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
 
 jest.mock("../../../services/ioClient");
@@ -81,8 +81,8 @@ describe("challengeSlice reducer", () => {
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, data: any, cb: RequestCallback) => {
-          cb(gameWithMovesSample, {
-            body: gameWithMovesSample,
+          cb(gameSample1, {
+            body: gameSample1,
             statusCode: 200,
           } as JWR);
         }
@@ -95,7 +95,7 @@ describe("challengeSlice reducer", () => {
         clockIncrement: 10,
       })(dispatch, () => defaultState, null);
 
-      await expect(result).resolves.toEqual(gameWithMovesSample);
+      await expect(result).resolves.toEqual(gameSample1);
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -104,10 +104,10 @@ describe("challengeSlice reducer", () => {
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: challengeAiSuccess.type,
         payload: {
-          result: 2,
+          result: 1,
           entities: {
             games: {
-              "2": gameWithMovesSample,
+              "1": gameSample1,
             },
           },
         },
@@ -194,8 +194,8 @@ describe("challengeSlice reducer", () => {
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, data: any, cb: RequestCallback) => {
-          cb(gameWithMovesSample, {
-            body: gameWithMovesSample,
+          cb(gameSample1, {
+            body: gameSample1,
             statusCode: 200,
           } as JWR);
         }
@@ -207,7 +207,7 @@ describe("challengeSlice reducer", () => {
         clockIncrement: 10,
       })(dispatch, () => defaultState, null);
 
-      await expect(result).resolves.toEqual(gameWithMovesSample);
+      await expect(result).resolves.toEqual(gameSample1);
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -216,10 +216,10 @@ describe("challengeSlice reducer", () => {
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: createSeekSuccess.type,
         payload: {
-          result: 2,
+          result: 1,
           entities: {
             games: {
-              "2": gameWithMovesSample,
+              "1": gameSample1,
             },
           },
         },
@@ -334,7 +334,7 @@ describe("challengeSlice reducer", () => {
               1: normalizedSeekSample1,
             },
             users: {
-              1: userSample1,
+              1: normalizedUserSample1,
             },
           },
         },
