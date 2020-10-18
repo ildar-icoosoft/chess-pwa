@@ -78,3 +78,11 @@ export const makeGameSample = (
   ...originalGameSample,
   ...data,
 });
+
+export const makeNormalizedGameSample = (
+  data: Partial<NormalizedGameEntity>,
+  originalGameSample = normalizedGameSample1
+): NormalizedGameEntity => ({
+  ...originalGameSample,
+  ...data,
+});
