@@ -13,16 +13,16 @@ import { GameControlPanelBottomToolbar } from "../GameControlPanelBottomToolbar"
 import { GameControlPanelTopToolbar } from "../GameControlPanelTopToolbar";
 import { DrawOfferDialog } from "../DrawOfferDialog";
 
-const gameWithOneMoveSample = makeGameSample(
-  {
-    moves: "e2e4",
-  },
-  gameSample1
-);
+const gameWithOneMoveSample = makeGameSample({
+  moves: "e2e4",
+});
 
 const gameWithMovesSample = makeGameSample({
-  initialFen: "startpos",
   moves: "e2e4 e7e5 g1f3 g8f6",
+});
+
+const gameWithoutMovesSample = makeGameSample({
+  moves: "",
 });
 
 describe("GameControlPanel", () => {
@@ -126,12 +126,9 @@ describe("GameControlPanel", () => {
         expect(gameClocks[0].props.isRunning).toBeFalsy();
         expect(gameClocks[1].props.isRunning).toBeTruthy();
 
-        const gameSampleWithBlackTurn = makeGameSample(
-          {
-            turn: "black",
-          },
-          gameSample1
-        );
+        const gameSampleWithBlackTurn = makeGameSample({
+          turn: "black",
+        });
 
         testRenderer.update(
           <GameControlPanel game={gameSampleWithBlackTurn} />
@@ -303,7 +300,7 @@ describe("GameControlPanel", () => {
         // isFirstMove because rewindToMoveIndex is 0
         expect(topToolbar.props.isFirstMove).toBeTruthy();
 
-        testRenderer.update(<GameControlPanel game={gameSample1} />);
+        testRenderer.update(<GameControlPanel game={gameWithoutMovesSample} />);
 
         // isFirstMove because gameSample.moves is empty
         expect(topToolbar.props.isFirstMove).toBeTruthy();
@@ -339,7 +336,7 @@ describe("GameControlPanel", () => {
         // hasPrevMove because gameWithMovesSample.moves is not empty and rewindToMoveIndex is not 0
         expect(topToolbar.props.hasPrevMove).toBeTruthy();
 
-        testRenderer.update(<GameControlPanel game={gameSample1} />);
+        testRenderer.update(<GameControlPanel game={gameWithoutMovesSample} />);
 
         // hasPrevMove false because gameWithMovesSample.moves is empty
         expect(topToolbar.props.hasPrevMove).toBeFalsy();

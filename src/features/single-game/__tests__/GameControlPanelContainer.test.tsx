@@ -14,7 +14,10 @@ import {
   resignGame,
   rewindToMove,
 } from "../singleGameSlice";
-import { userSample1 } from "../../../test-utils/data-sample/user";
+import {
+  normalizedUserSample1,
+  userSample1,
+} from "../../../test-utils/data-sample/user";
 import {
   gameSample1,
   normalizedGameSample1,
@@ -95,7 +98,7 @@ const stateWithGameAndAuthenticatedUser = makeStateSample({
   singleGame: {},
   entities: {
     users: {
-      1: userSample1,
+      1: normalizedUserSample1,
     },
     games: {
       1: normalizedGameSample1,

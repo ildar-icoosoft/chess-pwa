@@ -23,7 +23,10 @@ import User from "../../../interfaces/User";
 import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
-import { userSample1 } from "../../../test-utils/data-sample/user";
+import {
+  normalizedUserSample1,
+  userSample1,
+} from "../../../test-utils/data-sample/user";
 
 jest.mock("../../../services/ioClient");
 jest.mock("../../../utils/getErrorMessageFromJWR");
@@ -325,7 +328,7 @@ describe("currentUserSlice reducer", () => {
         payload: {
           entities: {
             users: {
-              1: userSample1,
+              1: normalizedUserSample1,
             },
           },
           result: 1,
@@ -421,7 +424,7 @@ describe("currentUserSlice reducer", () => {
           result: 1,
           entities: {
             users: {
-              1: userSample1,
+              1: normalizedUserSample1,
             },
           },
         },
@@ -495,7 +498,7 @@ describe("currentUserSlice reducer", () => {
           result: 1,
           entities: {
             users: {
-              1: userSample1,
+              1: normalizedUserSample1,
             },
           },
         },

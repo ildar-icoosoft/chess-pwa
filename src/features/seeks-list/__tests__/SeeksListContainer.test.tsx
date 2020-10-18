@@ -16,7 +16,10 @@ import {
   normalizedSeekSample1,
   seekSample1,
 } from "../../../test-utils/data-sample/seek";
-import { userSample1 } from "../../../test-utils/data-sample/user";
+import {
+  normalizedUserSample1,
+  userSample1,
+} from "../../../test-utils/data-sample/user";
 import { gameSample1 } from "../../../test-utils/data-sample/game";
 
 jest.mock("../../challenge/challengeSlice");
@@ -67,7 +70,7 @@ const stateWithSeeks = makeStateSample({
   },
   entities: {
     users: {
-      1: userSample1,
+      1: normalizedUserSample1,
     },
     games: {},
     seeks: {

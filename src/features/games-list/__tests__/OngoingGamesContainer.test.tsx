@@ -11,8 +11,9 @@ import {
 import {
   gameSample1,
   makeGameSample,
+  makeNormalizedGameSample,
 } from "../../../test-utils/data-sample/game";
-import { userSample1 } from "../../../test-utils/data-sample/user";
+import { normalizedUserSample1 } from "../../../test-utils/data-sample/user";
 import NormalizedGameEntity from "../../../normalizr/interfaces/NormalizedGameEntity";
 
 const stateWithLoadedGames = makeStateSample({
@@ -29,50 +30,42 @@ const stateWithLoadingError = makeStateSample({
   },
 });
 
-const game1 = gameSample1;
-const game2 = makeGameSample(
-  {
-    id: 2,
-    status: "outoftime",
-    winner: "white",
-  },
-  gameSample1
-);
-const game3 = makeGameSample(
-  {
-    id: 3,
-    status: "aborted",
-  },
-  gameSample1
-);
-const game4 = makeGameSample(
-  {
-    id: 4,
-    createdAt: 1,
-  },
-  gameSample1
-);
-const game5 = makeGameSample(
-  {
-    id: 5,
-    createdAt: 1,
-    status: "resign",
-    winner: "white",
-  },
-  gameSample1
-);
+const startedGameSample = makeNormalizedGameSample({
+  id: 1,
+  createdAt: 1,
+  status: "started",
+});
+const outOfTimeGameSample = makeNormalizedGameSample({
+  id: 2,
+  createdAt: 0,
+  status: "outoftime",
+  winner: "white",
+});
+const abortedGameSample = makeNormalizedGameSample({
+  id: 3,
+  status: "aborted",
+});
+const resignedGameSample = makeNormalizedGameSample({
+  id: 4,
+  createdAt: 1,
+  status: "resign",
+  winner: "white",
+});
+const startedGameSample2 = makeNormalizedGameSample({
+  id: 5,
+  createdAt: 2,
+  status: "started",
+});
 
 const stateWithGames = makeStateSample({
   entities: {
-    users: {
-      1: userSample1,
-    },
+    users: {},
     games: {
-      1: game1 as NormalizedGameEntity,
-      2: game2 as NormalizedGameEntity,
-      3: game3 as NormalizedGameEntity,
-      4: game4 as NormalizedGameEntity,
-      5: game5 as NormalizedGameEntity,
+      1: startedGameSample,
+      2: outOfTimeGameSample,
+      3: abortedGameSample,
+      4: resignedGameSample,
+      5: startedGameSample2,
     },
     seeks: {},
   },
@@ -112,7 +105,10 @@ describe("OngoingGamesContainer", () => {
 
         testRenderer.update(<OngoingGamesContainer />);
 
-        expect(gamePreviewsComponent.props.games).toEqual([game4, game1]);
+        expect(gamePreviewsComponent.props.games).toEqual([
+          startedGameSample2,
+          startedGameSample,
+        ]);
       });
 
       it("isLoading", () => {

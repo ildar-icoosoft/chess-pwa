@@ -9,7 +9,10 @@ import mountTest from "../../../test-utils/mountTest";
 import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
 import { SingleGameBoard } from "../SingleGameBoard";
 import { makeMove } from "../../move/moveSlice";
-import { userSample1 } from "../../../test-utils/data-sample/user";
+import {
+  normalizedUserSample1,
+  userSample1,
+} from "../../../test-utils/data-sample/user";
 import {
   gameSample1,
   normalizedGameSample1,
@@ -95,7 +98,7 @@ const stateWithAuthenticatedUser = makeStateSample({
   singleGame: {},
   entities: {
     users: {
-      1: userSample1,
+      1: normalizedUserSample1,
     },
     games: {},
     seeks: {},
