@@ -12,8 +12,8 @@ import {
   gameWithMovesRewoundToIndex3SampleFen,
   gameWithMovesSample,
   gameWithMovesSampleFen,
-  gameWithSmallAmountOfPiecesSample,
-  gameWithSmallAmountOfPiecesSampleValidMoves,
+  gameSample3,
+  gameSample3ValidMoves,
   whiteTurnGameSample,
 } from "../../../test-utils/data-sample/game";
 import { SingleGameBoard } from "../SingleGameBoard";
@@ -180,15 +180,13 @@ describe("SingleGameBoard", () => {
 
       it("validMoves", async () => {
         const testRenderer = TestRenderer.create(
-          <SingleGameBoard game={gameWithSmallAmountOfPiecesSample} />
+          <SingleGameBoard game={gameSample3} />
         );
         const testInstance = testRenderer.root;
 
         const board = testInstance.findByType(Board);
 
-        expect(board.props.validMoves).toEqual(
-          gameWithSmallAmountOfPiecesSampleValidMoves
-        );
+        expect(board.props.validMoves).toEqual(gameSample3ValidMoves);
       });
 
       it("viewOnly", () => {

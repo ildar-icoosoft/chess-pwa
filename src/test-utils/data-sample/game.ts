@@ -44,34 +44,7 @@ export const gameSample2: Game = {
 
 export const normalizedGameSample2: NormalizedGameEntity = gameSample2 as NormalizedGameEntity;
 
-// @todo. use this function to create samples.
-export const makeGameSample = (
-  data: Partial<Game>,
-  originalGameSample = gameSample1
-): Game => ({
-  ...originalGameSample,
-  ...data,
-});
-
-export const gameWith10Plus5MinControlSample: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 600,
-  clockIncrement: 5,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 600000,
-  btime: 600000,
-  moves: "",
-  status: "started",
-  white: null,
-  black: null,
-  winner: null,
-};
-
-export const gameWithSmallAmountOfPiecesSample: Game = {
+export const gameSample3: Game = {
   id: 2,
   aiLevel: 3,
   clockLimit: 600,
@@ -88,11 +61,23 @@ export const gameWithSmallAmountOfPiecesSample: Game = {
   black: null,
   winner: null,
 };
-export const gameWithSmallAmountOfPiecesSampleValidMoves: ValidMoves = {
+
+export const normalizedGameSample3: NormalizedGameEntity = gameSample3 as NormalizedGameEntity;
+
+export const gameSample3ValidMoves: ValidMoves = {
   e1: ["d2", "f1", "d1", "g1", "c1"],
   e2: ["e3", "e4", "d3"],
   f2: ["f3", "f4"],
 };
+
+// @todo. use this function to create samples.
+export const makeGameSample = (
+  data: Partial<Game>,
+  originalGameSample = gameSample1
+): Game => ({
+  ...originalGameSample,
+  ...data,
+});
 
 export const whiteOutOfTimeGameSample: Game = {
   id: 1,
