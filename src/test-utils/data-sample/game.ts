@@ -101,28 +101,6 @@ export const gameSample2_: Game = {
   winner: null,
 };
 
-// with white user
-export const gameSample3_: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "",
-  status: "started",
-  white: {
-    id: 1,
-    fullName: "Thomas Miller",
-  },
-  black: null,
-  winner: null,
-};
-
 export const gameWithMovesSample: Game = {
   id: 2,
   aiLevel: 3,
@@ -138,69 +116,5 @@ export const gameWithMovesSample: Game = {
   status: "started",
   white: null,
   black: null,
-  winner: null,
-};
-export const gameWithMovesAndUserSample: Game = {
-  id: 2,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "e2e4 e7e5 g1f3 g8f6",
-  status: "started",
-  white: {
-    id: 1,
-    fullName: "Thomas Miller",
-  },
-  black: null,
-  winner: null,
-};
-export const gameWithMovesAndUserVsUserSample: Game = {
-  id: 2,
-  aiLevel: 0,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "e2e4 e7e5 g1f3 g8f6",
-  status: "started",
-  white: {
-    id: 1,
-    fullName: "Thomas Miller",
-  },
-  black: {
-    id: 2,
-    fullName: "William Garcia",
-  },
-  winner: null,
-};
-
-export const gameThatCanBeAbortedSample: Game = {
-  id: 2,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "black",
-  wtime: 300000,
-  btime: 300000,
-  moves: "e2e4",
-  status: "started",
-  white: null,
-  black: {
-    id: 1,
-    fullName: "Thomas Miller",
-  },
   winner: null,
 };

@@ -2,9 +2,6 @@ import TestRenderer from "react-test-renderer";
 import React from "react";
 import {
   gameSample1,
-  gameSample2_,
-  gameSample3_,
-  gameWithMovesSample,
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
 import { GameControlPanel } from "../GameControlPanel";
@@ -48,9 +45,14 @@ describe("GameControlPanelWrapper", () => {
 
         expect(gameControlPanel.props.orientation).toBe("white");
 
+        const gameWithBlackUserSample = makeGameSample({
+          white: null,
+          black: userSample1,
+        });
+
         testRenderer.update(
           <GameControlPanelWrapper
-            game={gameSample2_}
+            game={gameWithBlackUserSample}
             currentUser={userSample1}
           />
         );
@@ -59,7 +61,7 @@ describe("GameControlPanelWrapper", () => {
 
         testRenderer.update(
           <GameControlPanelWrapper
-            game={gameSample2_}
+            game={gameWithBlackUserSample}
             currentUser={userSample1}
             isFlipped
           />
@@ -69,6 +71,10 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("rewindToMoveIndex", () => {
+        const gameWithMovesSample = makeGameSample({
+          moves: "e2e4 e7e5 g1f3 g8f6",
+        });
+
         const testRenderer = TestRenderer.create(
           <GameControlPanelWrapper game={gameWithMovesSample} />
         );
@@ -98,25 +104,41 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("drawOfferSentByCurrentUser", () => {
+        const gameWithoutDrawOffer = makeGameSample({
+          drawOffer: null,
+          black: null,
+          white: userSample1,
+        });
+
         const testRenderer = TestRenderer.create(
-          <GameControlPanelWrapper game={gameSample3_} />
+          <GameControlPanelWrapper
+            game={gameWithoutDrawOffer}
+            currentUser={userSample1}
+          />
         );
         const testInstance = testRenderer.root;
 
         const gameControlPanel = testInstance.findByType(GameControlPanel);
 
+        // false because drawOffer is null
         expect(gameControlPanel.props.drawOfferSentByCurrentUser).toBeFalsy();
 
-        const gameWithdrawOfferSentByCurrentUser = makeGameSample(
-          {
-            drawOffer: "white",
-          },
-          gameSample3_
+        const gameWithDrawOfferByWhite = makeGameSample({
+          drawOffer: "white",
+          black: null,
+          white: userSample1,
+        });
+
+        testRenderer.update(
+          <GameControlPanelWrapper game={gameWithDrawOfferByWhite} />
         );
+
+        // false because currentUser is null
+        expect(gameControlPanel.props.drawOfferSentByCurrentUser).toBeFalsy();
 
         testRenderer.update(
           <GameControlPanelWrapper
-            game={gameWithdrawOfferSentByCurrentUser}
+            game={gameWithDrawOfferByWhite}
             currentUser={userSample1}
           />
         );
@@ -125,8 +147,14 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("drawOfferSentByOpponent", () => {
+        const gameWithoutDrawOffer = makeGameSample({
+          drawOffer: null,
+          black: null,
+          white: userSample1,
+        });
+
         const testRenderer = TestRenderer.create(
-          <GameControlPanelWrapper game={gameSample3_} />
+          <GameControlPanelWrapper game={gameWithoutDrawOffer} />
         );
         const testInstance = testRenderer.root;
 
@@ -134,16 +162,15 @@ describe("GameControlPanelWrapper", () => {
 
         expect(gameControlPanel.props.drawOfferSentByOpponent).toBeFalsy();
 
-        const gameWithdrawOfferSentByOpponent = makeGameSample(
-          {
-            drawOffer: "black",
-          },
-          gameSample3_
-        );
+        const gameWithDrawOfferByBlack = makeGameSample({
+          drawOffer: "black",
+          black: null,
+          white: userSample1,
+        });
 
         testRenderer.update(
           <GameControlPanelWrapper
-            game={gameWithdrawOfferSentByOpponent}
+            game={gameWithDrawOfferByBlack}
             currentUser={userSample1}
           />
         );
@@ -444,6 +471,10 @@ describe("GameControlPanelWrapper", () => {
   describe("Events", () => {
     describe("onRewindToMove", () => {
       it("from onRewindToMove", () => {
+        const gameWithMovesSample = makeGameSample({
+          moves: "e2e4 e7e5 g1f3 g8f6",
+        });
+
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
@@ -469,6 +500,10 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("from onRewindToFirstMove", () => {
+        const gameWithMovesSample = makeGameSample({
+          moves: "e2e4 e7e5 g1f3 g8f6",
+        });
+
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
@@ -489,6 +524,10 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("from onRewindToLastMove", () => {
+        const gameWithMovesSample = makeGameSample({
+          moves: "e2e4 e7e5 g1f3 g8f6",
+        });
+
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
@@ -509,6 +548,10 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("from onRewindToPrevMove", () => {
+        const gameWithMovesSample = makeGameSample({
+          moves: "e2e4 e7e5 g1f3 g8f6",
+        });
+
         const onRewindToMove = jest.fn();
 
         const testRenderer = TestRenderer.create(
@@ -543,6 +586,10 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("from onRewindToNextMove", () => {
+        const gameWithMovesSample = makeGameSample({
+          moves: "e2e4 e7e5 g1f3 g8f6",
+        });
+
         const onRewindToMove = jest.fn();
 
         const testRenderer = TestRenderer.create(
