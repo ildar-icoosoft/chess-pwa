@@ -3,7 +3,7 @@ import React from "react";
 import mountTest from "../../../test-utils/mountTest";
 import { SeeksListItem } from "../SeeksListItem";
 import {
-  defaultSeekSample,
+  seekSample1,
   seekSample2,
   seekSample3,
 } from "../../../test-utils/data-sample/seek";
@@ -19,7 +19,7 @@ describe("SeeksListItem", () => {
 
     it("should contain color icon", () => {
       const { queryByTestId, rerender } = render(
-        <SeeksListItem seek={defaultSeekSample} />
+        <SeeksListItem seek={seekSample1} />
       );
 
       expect(queryByTestId("white-icon")).toBeInTheDocument();
@@ -38,16 +38,14 @@ describe("SeeksListItem", () => {
     });
 
     it("should contain player name", () => {
-      const { getByTestId } = render(
-        <SeeksListItem seek={defaultSeekSample} />
-      );
+      const { getByTestId } = render(<SeeksListItem seek={seekSample1} />);
 
       expect(getByTestId("user-name")).toHaveTextContent("Thomas Miller");
     });
 
     it("should contain time control", () => {
       const { queryByTestId, rerender } = render(
-        <SeeksListItem seek={defaultSeekSample} />
+        <SeeksListItem seek={seekSample1} />
       );
 
       const timeControl = queryByTestId("time-control");
@@ -61,7 +59,7 @@ describe("SeeksListItem", () => {
 
     it("should contain gameIsStarted class", () => {
       const { queryByTestId, rerender } = render(
-        <SeeksListItem seek={defaultSeekSample} />
+        <SeeksListItem seek={seekSample1} />
       );
 
       const seekWrapper = queryByTestId("seek-wrapper");
@@ -75,38 +73,38 @@ describe("SeeksListItem", () => {
 
     it("play button should contain spinner if acceptInProcess contains ID of the seek", () => {
       const { queryByTestId, rerender } = render(
-        <SeeksListItem seek={defaultSeekSample} />
+        <SeeksListItem seek={seekSample1} />
       );
 
       let playBtnSpinner = queryByTestId("play-btn-spinner");
       expect(playBtnSpinner).not.toBeInTheDocument();
 
-      rerender(<SeeksListItem seek={defaultSeekSample} acceptInProcess={4} />);
+      rerender(<SeeksListItem seek={seekSample1} acceptInProcess={4} />);
       playBtnSpinner = queryByTestId("play-btn-spinner");
       expect(playBtnSpinner).not.toBeInTheDocument();
 
-      rerender(<SeeksListItem seek={defaultSeekSample} acceptInProcess={1} />);
+      rerender(<SeeksListItem seek={seekSample1} acceptInProcess={1} />);
       playBtnSpinner = queryByTestId("play-btn-spinner");
       expect(playBtnSpinner).toBeInTheDocument();
     });
 
     it("play button disabled if acceptInProcess is not NULL", () => {
       const { queryByTestId, rerender } = render(
-        <SeeksListItem seek={defaultSeekSample} />
+        <SeeksListItem seek={seekSample1} />
       );
 
       const playBtn = queryByTestId("play-btn");
 
       expect(playBtn).not.toBeDisabled();
 
-      rerender(<SeeksListItem seek={defaultSeekSample} acceptInProcess={4} />);
+      rerender(<SeeksListItem seek={seekSample1} acceptInProcess={4} />);
 
       expect(playBtn).toBeDisabled();
     });
 
     it("play button disabled if game is started", () => {
       const { queryByTestId, rerender } = render(
-        <SeeksListItem seek={defaultSeekSample} />
+        <SeeksListItem seek={seekSample1} />
       );
 
       const playBtn = queryByTestId("play-btn");
@@ -120,7 +118,7 @@ describe("SeeksListItem", () => {
 
     it("play button is hidden if current user created the seek", () => {
       const { queryByTestId, rerender } = render(
-        <SeeksListItem seek={defaultSeekSample} />
+        <SeeksListItem seek={seekSample1} />
       );
 
       let playBtn = queryByTestId("play-btn");
@@ -141,7 +139,7 @@ describe("SeeksListItem", () => {
       const onPlay = jest.fn();
 
       const { getByTestId } = render(
-        <SeeksListItem seek={defaultSeekSample} onPlay={onPlay} />
+        <SeeksListItem seek={seekSample1} onPlay={onPlay} />
       );
 
       fireEvent.click(getByTestId("play-btn"));

@@ -5,13 +5,19 @@ import { useHistory } from "react-router-dom";
 import {
   defaultState,
   makeStateSample,
-  stateWithDataSample5,
 } from "../../../test-utils/data-sample/state";
 import mountTest from "../../../test-utils/mountTest";
 import SeeksListContainer from "../SeeksListContainer";
 import { SeeksList } from "../SeeksList";
 import { acceptSeek } from "../../challenge/challengeSlice";
-import { seekSample2 } from "../../../test-utils/data-sample/seek";
+import {
+  makeNormalizedSeekSample,
+  makeSeekSample,
+  normalizedSeekSample1,
+  seekSample1,
+  seekSample2,
+} from "../../../test-utils/data-sample/seek";
+import userSample1 from "../../../test-utils/data-sample/user";
 
 jest.mock("../../challenge/challengeSlice");
 
@@ -36,6 +42,42 @@ const stateWithLoadingError = makeStateSample({
     isLoading: false,
     error: "error text",
     items: [],
+  },
+});
+
+const normalizedSeek1 = normalizedSeekSample1;
+const seek1 = seekSample1;
+
+const normalizedSeek2 = makeNormalizedSeekSample({
+  id: 2,
+});
+const seek2 = makeSeekSample({
+  id: 2,
+});
+
+const stateWithSeeks = makeStateSample({
+  seeksList: {
+    isLoading: false,
+    error: null,
+    items: [2, 1],
+  },
+  entities: {
+    users: {
+      "1": userSample1,
+    },
+    games: {},
+    seeks: {
+      "1": normalizedSeek1,
+      "2": normalizedSeek2,
+    },
+  },
+});
+
+const stateWithAcceptSeekRequest = makeStateSample({
+  acceptSeekRequest: {
+    inProcess: true,
+    itemId: 6,
+    error: null,
   },
 });
 
@@ -68,53 +110,12 @@ describe("SeeksListContainer", () => {
         expect(seeksListComponent.props.seeks).toEqual([]);
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample5)
+          cb(stateWithSeeks)
         );
 
         testRenderer.update(<SeeksListContainer />);
 
-        expect(seeksListComponent.props.seeks).toEqual([
-          {
-            id: 2,
-            color: "black",
-            clockLimit: 600,
-            createdAt: 0,
-            clockIncrement: 10,
-            createdBy: {
-              id: 1,
-              fullName: "Thomas Miller",
-            },
-            game: {
-              id: 1,
-              aiLevel: 3,
-              clockLimit: 300,
-              clockIncrement: 3,
-              createdAt: 0,
-              drawOffer: null,
-              initialFen: "startpos",
-              turn: "white",
-              wtime: 300000,
-              btime: 300000,
-              moves: "e2e4 e7e5 g1f3 g8f6",
-              status: "started",
-              white: null,
-              black: null,
-              winner: null,
-            },
-          },
-          {
-            id: 1,
-            color: "white",
-            clockLimit: 300,
-            createdAt: 0,
-            clockIncrement: 5,
-            createdBy: {
-              id: 1,
-              fullName: "Thomas Miller",
-            },
-            game: null,
-          },
-        ]);
+        expect(seeksListComponent.props.seeks).toEqual([seek2, seek1]);
       });
 
       it("isLoading", () => {
@@ -160,7 +161,7 @@ describe("SeeksListContainer", () => {
         expect(seeksListComponent.props.acceptInProcess).toBeNull();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithDataSample5)
+          cb(stateWithAcceptSeekRequest)
         );
 
         testRenderer.update(<SeeksListContainer />);

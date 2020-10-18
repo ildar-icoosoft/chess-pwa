@@ -19,8 +19,8 @@ import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import { gameWithMovesSample } from "../../../test-utils/data-sample/game";
 import {
-  defaultSeekSample,
-  normalizedDefaultSeekSample,
+  seekSample1,
+  normalizedSeekSample1,
 } from "../../../test-utils/data-sample/seek";
 import userSample1 from "../../../test-utils/data-sample/user";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
@@ -309,8 +309,8 @@ describe("challengeSlice reducer", () => {
 
       (ioClient.socket.post as jest.Mock).mockImplementationOnce(
         (url: string, data: any, cb: RequestCallback) => {
-          cb(defaultSeekSample, {
-            body: defaultSeekSample,
+          cb(seekSample1, {
+            body: seekSample1,
             statusCode: 200,
           } as JWR);
         }
@@ -318,7 +318,7 @@ describe("challengeSlice reducer", () => {
 
       const result = acceptSeek(1)(dispatch, () => defaultState, null);
 
-      await expect(result).resolves.toEqual(defaultSeekSample);
+      await expect(result).resolves.toEqual(seekSample1);
 
       expect(dispatch).toBeCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -331,7 +331,7 @@ describe("challengeSlice reducer", () => {
           result: 1,
           entities: {
             seeks: {
-              "1": normalizedDefaultSeekSample,
+              "1": normalizedSeekSample1,
             },
             users: {
               "1": userSample1,
