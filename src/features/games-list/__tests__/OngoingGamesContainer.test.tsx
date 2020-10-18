@@ -15,9 +15,9 @@ import {
 import userSample1 from "../../../test-utils/data-sample/user";
 import NormalizedGameEntity from "../../../normalizr/interfaces/NormalizedGameEntity";
 
-const stateWithLoadingGames = makeStateSample({
+const stateWithLoadedGames = makeStateSample({
   gamesList: {
-    isLoading: true,
+    isLoading: false,
     error: null,
   },
 });
@@ -121,15 +121,15 @@ describe("OngoingGamesContainer", () => {
 
         const gamePreviewsComponent = testInstance.findByType(GamePreviewsList);
 
-        expect(gamePreviewsComponent.props.isLoading).toBeFalsy();
+        expect(gamePreviewsComponent.props.isLoading).toBeTruthy();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithLoadingGames)
+          cb(stateWithLoadedGames)
         );
 
         testRenderer.update(<OngoingGamesContainer />);
 
-        expect(gamePreviewsComponent.props.isLoading).toBeTruthy();
+        expect(gamePreviewsComponent.props.isLoading).toBeFalsy();
       });
 
       it("error", () => {

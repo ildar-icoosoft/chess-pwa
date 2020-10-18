@@ -23,9 +23,9 @@ const stateWithCurrentUser = makeStateSample({
   },
 });
 
-const stateWithLoadingSeeks = makeStateSample({
+const stateWithLoadedSeeks = makeStateSample({
   seeksList: {
-    isLoading: true,
+    isLoading: false,
     error: null,
     items: [],
   },
@@ -123,15 +123,15 @@ describe("SeeksListContainer", () => {
 
         const seeksListComponent = testInstance.findByType(SeeksList);
 
-        expect(seeksListComponent.props.isLoading).toBeFalsy();
+        expect(seeksListComponent.props.isLoading).toBeTruthy();
 
         (useSelector as jest.Mock).mockImplementation((cb) =>
-          cb(stateWithLoadingSeeks)
+          cb(stateWithLoadedSeeks)
         );
 
         testRenderer.update(<SeeksListContainer />);
 
-        expect(seeksListComponent.props.isLoading).toBeTruthy();
+        expect(seeksListComponent.props.isLoading).toBeFalsy();
       });
 
       it("error", () => {

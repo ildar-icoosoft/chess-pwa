@@ -8,7 +8,7 @@ export const defaultState: RootState = {
   },
   currentUser: {
     userId: null,
-    isLoading: false,
+    isLoading: true,
     error: null,
   },
   authModal: {
@@ -23,13 +23,13 @@ export const defaultState: RootState = {
     allowCloseSeekModal: true,
   },
   seeksList: {
-    isLoading: false,
+    isLoading: true,
     error: null,
     items: [],
   },
   singleGame: {},
   gamesList: {
-    isLoading: false,
+    isLoading: true,
     error: null,
   },
   entities: {
