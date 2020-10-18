@@ -79,42 +79,6 @@ export const makeGameSample = (
   ...data,
 });
 
-export const whiteOutOfTimeGameSample: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 0,
-  btime: 300000,
-  moves: "",
-  status: "outoftime",
-  white: null,
-  black: null,
-  winner: "black",
-};
-
-export const blackOutOfTimeGameSample: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 0,
-  moves: "",
-  status: "outoftime",
-  white: null,
-  black: null,
-  winner: "white",
-};
-
 // with black user
 export const gameSample2_: Game = {
   id: 1,
@@ -263,60 +227,6 @@ export const gameWithCheckmateByWhiteSample: Game = {
   winner: "white",
 };
 
-export const gameWithCheckmateByBlackSample: Game = {
-  id: 3,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "",
-  status: "mate",
-  white: null,
-  black: null,
-  winner: "black",
-};
-
-export const gameWithDrawSample: Game = {
-  id: 3,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "",
-  status: "draw",
-  white: null,
-  black: null,
-  winner: null,
-};
-
-export const gameWithStalemateSample: Game = {
-  id: 3,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "",
-  status: "stalemate",
-  white: null,
-  black: null,
-  winner: null,
-};
-
 export const blackTurnGameSample: Game = {
   id: 1,
   aiLevel: 3,
@@ -366,60 +276,6 @@ export const gameWithIncorrectMoveSample: Game = {
   btime: 300000,
   moves: "e2e4 e7e5", // e2e4 is incorrect
   status: "started",
-  white: null,
-  black: null,
-  winner: null,
-};
-
-export const blackResignedGameSample: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 0,
-  moves: "",
-  status: "resign",
-  white: null,
-  black: null,
-  winner: "white",
-};
-
-export const whiteResignedGameSample: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 0,
-  moves: "",
-  status: "resign",
-  white: null,
-  black: null,
-  winner: "black",
-};
-
-export const abortedGameSample: Game = {
-  id: 1,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 0,
-  moves: "",
-  status: "aborted",
   white: null,
   black: null,
   winner: null,
