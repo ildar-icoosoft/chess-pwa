@@ -4,7 +4,6 @@ import TestRenderer from "react-test-renderer";
 import { GameControlPanel } from "../GameControlPanel";
 import {
   gameSample1,
-  gameWithMovesSample,
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
 import { GameClock } from "../GameClock";
@@ -20,6 +19,11 @@ const gameWithOneMoveSample = makeGameSample(
   },
   gameSample1
 );
+
+const gameWithMovesSample = makeGameSample({
+  initialFen: "startpos",
+  moves: "e2e4 e7e5 g1f3 g8f6",
+});
 
 describe("GameControlPanel", () => {
   describe("children components", () => {
@@ -362,7 +366,12 @@ describe("GameControlPanel", () => {
         // hasNextMove because gameWithMovesSample.moves is not empty and rewindToMoveIndex is not null
         expect(topToolbar.props.hasNextMove).toBeTruthy();
 
-        testRenderer.update(<GameControlPanel game={gameSample1} />);
+        const gameWithoutMovesSample = makeGameSample({
+          initialFen: "startpos",
+          moves: "",
+        });
+
+        testRenderer.update(<GameControlPanel game={gameWithoutMovesSample} />);
 
         // hasNextMove false because gameWithMovesSample.moves is empty
         expect(topToolbar.props.hasNextMove).toBeFalsy();
