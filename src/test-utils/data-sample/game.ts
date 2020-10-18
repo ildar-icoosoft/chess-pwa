@@ -140,10 +140,6 @@ export const gameWithMovesSample: Game = {
   black: null,
   winner: null,
 };
-export const gameWithMovesSampleFen =
-  "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3";
-export const gameWithMovesRewoundToIndex3SampleFen =
-  "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2";
 export const gameWithMovesAndUserSample: Game = {
   id: 2,
   aiLevel: 3,
@@ -207,22 +203,4 @@ export const gameThatCanBeAbortedSample: Game = {
     fullName: "Thomas Miller",
   },
   winner: null,
-};
-
-export const gameWithCheckmateByWhiteSample: Game = {
-  id: 3,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "4k3/4Q3/4K3/8/8/8/8/8 b - - 0 1",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "",
-  status: "mate",
-  white: null,
-  black: null,
-  winner: "white",
 };

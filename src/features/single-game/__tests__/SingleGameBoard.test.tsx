@@ -3,8 +3,6 @@ import { Board, PieceColor } from "ii-react-chessboard";
 import React from "react";
 import {
   gameSample1,
-  gameSample2_,
-  gameSample3_,
   gameSample1Fen,
   gameSample3,
   gameSample3ValidMoves,
@@ -238,7 +236,7 @@ describe("SingleGameBoard", () => {
         // true because game is over
         expect(board.props.viewOnly).toBeTruthy();
 
-        const playingGameWithoutUser = makeGameSample({
+        const playingGameWithoutUserSample = makeGameSample({
           status: "started",
           white: null,
           black: null,
@@ -247,13 +245,13 @@ describe("SingleGameBoard", () => {
         testRenderer.update(
           <SingleGameBoard
             currentUser={userSample1}
-            game={playingGameWithoutUser}
+            game={playingGameWithoutUserSample}
           />
         );
         // true because currentUser is not a gamer of this game
         expect(board.props.viewOnly).toBeTruthy();
 
-        const playingGameWithUserAndMoves = makeGameSample({
+        const playingGameWithUserAndMovesSample = makeGameSample({
           status: "started",
           white: userSample1,
           moves: "e2e4 e7e5 g1f3 g8f6",
@@ -263,14 +261,14 @@ describe("SingleGameBoard", () => {
         testRenderer.update(
           <SingleGameBoard
             currentUser={userSample1}
-            game={playingGameWithUserAndMoves}
+            game={playingGameWithUserAndMovesSample}
             rewindToMoveIndex={2}
           />
         );
         // true because rewindToMoveIndex is not null
         expect(board.props.viewOnly).toBeTruthy();
 
-        const playingGameWithUser = makeGameSample({
+        const playingGameWithUserSample = makeGameSample({
           status: "started",
           white: userSample1,
           moves: "e2e4 e7e5 g1f3 g8f6",
@@ -280,7 +278,7 @@ describe("SingleGameBoard", () => {
         testRenderer.update(
           <SingleGameBoard
             currentUser={userSample1}
-            game={playingGameWithUser}
+            game={playingGameWithUserSample}
           />
         );
         // false because currentUser is a gamer of this game and game is not over
@@ -298,20 +296,47 @@ describe("SingleGameBoard", () => {
         // undefined because currentUser is null
         expect(board.props.movableColor).toBeUndefined();
 
-        testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={gameSample1} />
-        );
-        // undefined because currentUser is not a gamer of this game
-        expect(board.props.viewOnly).toBeTruthy();
+        const playingGameWithoutUserSample = makeGameSample({
+          status: "started",
+          white: null,
+          black: null,
+        });
 
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={gameSample2_} />
+          <SingleGameBoard
+            currentUser={userSample1}
+            game={playingGameWithoutUserSample}
+          />
+        );
+        // undefined because currentUser is not a gamer of this game
+        expect(board.props.movableColor).toBeUndefined();
+
+        const playingGameWithBlackUserSample = makeGameSample({
+          status: "started",
+          white: null,
+          black: userSample1,
+        });
+
+        testRenderer.update(
+          <SingleGameBoard
+            currentUser={userSample1}
+            game={playingGameWithBlackUserSample}
+          />
         );
         // PieceColor.BLACK because currentUser plays with black
         expect(board.props.movableColor).toBe(PieceColor.BLACK);
 
+        const playingGameWithWhiteUserSample = makeGameSample({
+          status: "started",
+          white: userSample1,
+          black: null,
+        });
+
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={gameSample3_} />
+          <SingleGameBoard
+            currentUser={userSample1}
+            game={playingGameWithWhiteUserSample}
+          />
         );
         // PieceColor.BLACK because currentUser plays with white
         expect(board.props.movableColor).toBe(PieceColor.WHITE);
@@ -328,8 +353,17 @@ describe("SingleGameBoard", () => {
         // white by default
         expect(board.props.orientation).toBe(PieceColor.WHITE);
 
+        const playingGameWithBlackUserSample = makeGameSample({
+          status: "started",
+          white: null,
+          black: userSample1,
+        });
+
         testRenderer.update(
-          <SingleGameBoard currentUser={userSample1} game={gameSample2_} />
+          <SingleGameBoard
+            currentUser={userSample1}
+            game={playingGameWithBlackUserSample}
+          />
         );
         // black because current user plays black
         expect(board.props.orientation).toBe(PieceColor.BLACK);
@@ -337,7 +371,7 @@ describe("SingleGameBoard", () => {
         testRenderer.update(
           <SingleGameBoard
             currentUser={userSample1}
-            game={gameSample2_}
+            game={playingGameWithBlackUserSample}
             isFlipped
           />
         );
