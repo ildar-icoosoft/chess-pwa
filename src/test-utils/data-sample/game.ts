@@ -78,21 +78,3 @@ export const makeGameSample = (
   ...originalGameSample,
   ...data,
 });
-
-export const gameWithMovesSample: Game = {
-  id: 2,
-  aiLevel: 3,
-  clockLimit: 300,
-  clockIncrement: 3,
-  createdAt: 0,
-  drawOffer: null,
-  initialFen: "startpos",
-  turn: "white",
-  wtime: 300000,
-  btime: 300000,
-  moves: "e2e4 e7e5 g1f3 g8f6",
-  status: "started",
-  white: null,
-  black: null,
-  winner: null,
-};
