@@ -40,23 +40,3 @@ export const makeNormalizedSeekSample = (
   ...originalSeekSample,
   ...data,
 });
-
-export const seekSample2: Seek = {
-  id: 2,
-  color: "black",
-  clockLimit: 600,
-  createdAt: 0,
-  clockIncrement: 3,
-  createdBy: userSample1,
-  game: gameSample1,
-};
-
-export const seekSample3: Seek = {
-  id: 2,
-  color: "random",
-  clockLimit: 600,
-  createdAt: 0,
-  clockIncrement: 3,
-  createdBy: userSample1,
-  game: gameSample1,
-};

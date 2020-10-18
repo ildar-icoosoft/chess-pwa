@@ -15,9 +15,9 @@ import {
   makeSeekSample,
   normalizedSeekSample1,
   seekSample1,
-  seekSample2,
 } from "../../../test-utils/data-sample/seek";
 import userSample1 from "../../../test-utils/data-sample/user";
+import { gameSample1 } from "../../../test-utils/data-sample/game";
 
 jest.mock("../../challenge/challengeSlice");
 
@@ -53,6 +53,10 @@ const normalizedSeek2 = makeNormalizedSeekSample({
 });
 const seek2 = makeSeekSample({
   id: 2,
+});
+
+const seekWithStartedGame = makeSeekSample({
+  game: gameSample1,
 });
 
 const stateWithSeeks = makeStateSample({
@@ -216,7 +220,9 @@ describe("SeeksListContainer", () => {
 
     it("should handle dispatch(acceptSeek()) success", async () => {
       const dispatch = useDispatch<jest.Mock>();
-      dispatch.mockImplementationOnce(() => Promise.resolve(seekSample2));
+      dispatch.mockImplementationOnce(() =>
+        Promise.resolve(seekWithStartedGame)
+      );
 
       const testRenderer = TestRenderer.create(<SeeksListContainer />);
       const testInstance = testRenderer.root;
