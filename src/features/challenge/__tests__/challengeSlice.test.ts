@@ -107,7 +107,7 @@ describe("challengeSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": gameSample1,
+              1: gameSample1,
             },
           },
         },
@@ -219,7 +219,7 @@ describe("challengeSlice reducer", () => {
           result: 1,
           entities: {
             games: {
-              "1": gameSample1,
+              1: gameSample1,
             },
           },
         },

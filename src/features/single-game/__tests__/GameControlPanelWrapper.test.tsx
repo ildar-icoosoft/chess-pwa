@@ -8,6 +8,10 @@ import { GameControlPanel } from "../GameControlPanel";
 import { GameControlPanelWrapper } from "../GameControlPanelWrapper";
 import { userSample1, userSample2 } from "../../../test-utils/data-sample/user";
 
+const gameWithMovesSample = makeGameSample({
+  moves: "e2e4 e7e5 g1f3 g8f6",
+});
+
 describe("GameControlPanelWrapper", () => {
   describe("children components", () => {
     it("contains GameControlPanel", () => {
@@ -71,10 +75,6 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("rewindToMoveIndex", () => {
-        const gameWithMovesSample = makeGameSample({
-          moves: "e2e4 e7e5 g1f3 g8f6",
-        });
-
         const testRenderer = TestRenderer.create(
           <GameControlPanelWrapper game={gameWithMovesSample} />
         );
@@ -471,10 +471,6 @@ describe("GameControlPanelWrapper", () => {
   describe("Events", () => {
     describe("onRewindToMove", () => {
       it("from onRewindToMove", () => {
-        const gameWithMovesSample = makeGameSample({
-          moves: "e2e4 e7e5 g1f3 g8f6",
-        });
-
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
@@ -500,10 +496,6 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("from onRewindToFirstMove", () => {
-        const gameWithMovesSample = makeGameSample({
-          moves: "e2e4 e7e5 g1f3 g8f6",
-        });
-
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
@@ -524,10 +516,6 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("from onRewindToLastMove", () => {
-        const gameWithMovesSample = makeGameSample({
-          moves: "e2e4 e7e5 g1f3 g8f6",
-        });
-
         const onRewindToMove = jest.fn();
 
         const testInstance = TestRenderer.create(
@@ -548,10 +536,6 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("from onRewindToPrevMove", () => {
-        const gameWithMovesSample = makeGameSample({
-          moves: "e2e4 e7e5 g1f3 g8f6",
-        });
-
         const onRewindToMove = jest.fn();
 
         const testRenderer = TestRenderer.create(
@@ -586,10 +570,6 @@ describe("GameControlPanelWrapper", () => {
       });
 
       it("from onRewindToNextMove", () => {
-        const gameWithMovesSample = makeGameSample({
-          moves: "e2e4 e7e5 g1f3 g8f6",
-        });
-
         const onRewindToMove = jest.fn();
 
         const testRenderer = TestRenderer.create(

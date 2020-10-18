@@ -2,15 +2,12 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import { GamePreviewsList } from "../GamePreviewsList";
 import mountTest from "../../../test-utils/mountTest";
-import {
-  gameWithMovesSample,
-  gameSample1,
-} from "../../../test-utils/data-sample/game";
+import { gameSample1, gameSample2 } from "../../../test-utils/data-sample/game";
 import Game from "../../../interfaces/Game";
 import { GamePreviewsListItem } from "../GamePreviewsListItem";
 import { ContentLoadingStatus } from "../../../components/ContentLoadingStatus";
 
-const gamesList: Game[] = [gameSample1, gameWithMovesSample];
+const gamesList: Game[] = [gameSample1, gameSample2];
 
 describe("GamePreviewsList", () => {
   mountTest(GamePreviewsList);
@@ -113,7 +110,7 @@ describe("GamePreviewsList", () => {
         );
 
         expect(gamePreviewsListItems[0].props.game).toBe(gameSample1);
-        expect(gamePreviewsListItems[1].props.game).toBe(gameWithMovesSample);
+        expect(gamePreviewsListItems[1].props.game).toBe(gameSample2);
       });
     });
   });
