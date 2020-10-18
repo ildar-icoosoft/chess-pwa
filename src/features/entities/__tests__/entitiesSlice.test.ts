@@ -32,12 +32,7 @@ import {
 } from "../../data-subscription/dataSubscriptionSlice";
 import {
   emptyEntities,
-  entitiesSample_,
-  entitiesAfterAddingGameSample,
-  entitiesAfterAddingSeekSample,
-  addSeekPayloadSample,
   makeEntitiesSample,
-  addGamePayloadSample,
 } from "../../../test-utils/data-sample/entities";
 import {
   normalizedUserSample1,
@@ -356,169 +351,144 @@ describe("entitiesSlice reducer", () => {
 
   it("should handle resignGameSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: resignGameSuccess.type,
         payload: {
           result: 2,
-          entities: addGamePayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle offerDrawSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: offerDrawSuccess.type,
         payload: {
           result: 2,
-          entities: addGamePayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle acceptDrawOfferSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: acceptDrawOfferSuccess.type,
         payload: {
           result: 2,
-          entities: addGamePayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle declineDrawOfferSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: declineDrawOfferSuccess.type,
         payload: {
           result: 2,
-          entities: addGamePayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle challengeAiSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: challengeAiSuccess.type,
         payload: {
           result: 2,
-          entities: addGamePayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("createSeekSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: createSeekSuccess.type,
         payload: {
           result: 2,
-          entities: addGamePayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingGameSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle getSeeksListSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: getSeeksListSuccess.type,
         payload: {
           result: [1],
-          entities: addSeekPayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingSeekSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle acceptSeekSuccess", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: acceptSeekSuccess.type,
         payload: {
           result: 2,
-          entities: addSeekPayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingSeekSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle createSeekBySubscription", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: createSeekBySubscription.type,
         payload: {
           result: 2,
-          entities: addSeekPayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingSeekSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle updateSeekBySubscription", () => {
     expect(
-      entitiesReducer(entitiesSample_, {
+      entitiesReducer(entitiesSample, {
         type: updateSeekBySubscription.type,
         payload: {
           result: 2,
-          entities: addSeekPayloadSample,
+          entities: entitiesPayloadSample,
         },
       })
-    ).toEqual(entitiesAfterAddingSeekSample);
+    ).toEqual(allEntitiesSample);
   });
 
   it("should handle removeSeekBySubscription", () => {
-    const entitiesWithSeeksSample: EntitiesState = {
-      users: {},
-      games: {},
+    const entitiesWithTwoSeeks = {
+      ...emptyEntities,
       seeks: {
-        1: {
-          id: 1,
-          color: "white",
-          clockLimit: 300,
-          createdAt: 0,
-          clockIncrement: 5,
-          createdBy: 2,
-          game: 2,
-        },
-        2: {
-          id: 2,
-          color: "white",
-          clockLimit: 400,
-          createdAt: 0,
-          clockIncrement: 5,
-          createdBy: 2,
-          game: 3,
-        },
+        1: normalizedSeekSample1,
+        2: normalizedSeekSample2,
+      },
+    };
+    const entitiesWithOneSeek = {
+      ...emptyEntities,
+      seeks: {
+        2: normalizedSeekSample2,
       },
     };
 
     expect(
-      entitiesReducer(entitiesWithSeeksSample, {
+      entitiesReducer(entitiesWithTwoSeeks, {
         type: removeSeekBySubscription.type,
         payload: 1,
       })
-    ).toEqual({
-      users: {},
-      games: {},
-      seeks: {
-        2: {
-          id: 2,
-          color: "white",
-          clockLimit: 400,
-          createdAt: 0,
-          clockIncrement: 5,
-          createdBy: 2,
-          game: 3,
-        },
-      },
-    });
+    ).toEqual(entitiesWithOneSeek);
   });
 });
