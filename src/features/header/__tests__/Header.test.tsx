@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 import mountTest from "../../../test-utils/mountTest";
 import { Header } from "../Header";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 
 describe("Header", () => {
   mountTest(Header);

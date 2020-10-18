@@ -17,7 +17,7 @@ import {
   whiteTurnGameSample,
 } from "../../../test-utils/data-sample/game";
 import { SingleGameBoard } from "../SingleGameBoard";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 import { ContentLoadingStatus } from "../../../components/ContentLoadingStatus";
 
 describe("SingleGameBoard", () => {

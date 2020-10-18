@@ -1,6 +1,6 @@
 import { Seek } from "../../interfaces/Seek";
-import userSample1 from "./user";
-import { gameSample1 } from "./game";
+import { userSample1, userSample2 } from "./user";
+import { gameSample1, gameSample2 } from "./game";
 import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
 import Game from "../../interfaces/Game";
 
@@ -30,8 +30,18 @@ export const seekSample2: Seek = {
   clockLimit: 300,
   createdAt: 0,
   clockIncrement: 5,
-  createdBy: userSample1,
-  game: gameSample1,
+  createdBy: userSample2,
+  game: gameSample2,
+};
+
+export const normalizedSeekSample2: NormalizedSeekEntity = {
+  id: 2,
+  color: "black",
+  clockLimit: 300,
+  createdAt: 0,
+  clockIncrement: 5,
+  createdBy: 2,
+  game: 2,
 };
 
 // @todo. use this functions to create samples.

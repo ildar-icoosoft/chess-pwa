@@ -23,7 +23,7 @@ import User from "../../../interfaces/User";
 import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 
 jest.mock("../../../services/ioClient");
 jest.mock("../../../utils/getErrorMessageFromJWR");

@@ -17,7 +17,7 @@ import {
   normalizedSeekSample1,
 } from "../../../test-utils/data-sample/seek";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 
 jest.mock("../../../services/ioClient");
 jest.mock("../../../utils/getErrorMessageFromJWR");

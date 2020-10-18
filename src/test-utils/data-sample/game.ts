@@ -24,6 +24,26 @@ export const gameSample1Fen =
 
 export const normalizedGameSample1: NormalizedGameEntity = gameSample1 as NormalizedGameEntity;
 
+export const gameSample2: Game = {
+  id: 2,
+  aiLevel: 3,
+  clockLimit: 300,
+  clockIncrement: 3,
+  createdAt: 0,
+  drawOffer: null,
+  initialFen: "startpos",
+  turn: "white",
+  wtime: 300000,
+  btime: 300000,
+  moves: "",
+  status: "started",
+  white: null,
+  black: null,
+  winner: null,
+};
+
+export const normalizedGameSample2: NormalizedGameEntity = gameSample2 as NormalizedGameEntity;
+
 // @todo. use this function to create samples.
 export const makeGameSample = (
   data: Partial<Game>,

@@ -14,7 +14,7 @@ import {
   resignGame,
   rewindToMove,
 } from "../singleGameSlice";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 import {
   gameSample1,
   normalizedGameSample1,

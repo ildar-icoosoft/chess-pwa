@@ -12,7 +12,7 @@ import {
 } from "../../../test-utils/data-sample/game";
 import { GameControlPanel } from "../GameControlPanel";
 import { GameControlPanelWrapper } from "../GameControlPanelWrapper";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 
 describe("GameControlPanelWrapper", () => {
   describe("children components", () => {

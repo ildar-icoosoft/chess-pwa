@@ -1,13 +1,22 @@
 import { EntitiesState } from "../../features/entities/entitiesSlice";
-import userSample1 from "./user";
+import { userSample1 } from "./user";
 
-export const emptyEntitiesSample: EntitiesState = {
+export const emptyEntities: EntitiesState = {
   users: {},
   seeks: {},
   games: {},
 };
 
-export const entitiesSample: EntitiesState = {
+// @todo. use this functions to create samples.
+export const makeEntitiesSample = (
+  data: Partial<EntitiesState>,
+  originalEntitiesSample = emptyEntities
+): EntitiesState => ({
+  ...originalEntitiesSample,
+  ...data,
+});
+
+export const entitiesSample_: EntitiesState = {
   users: {
     1: {
       id: 1,

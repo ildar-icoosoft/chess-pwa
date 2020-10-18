@@ -22,7 +22,7 @@ import {
   seekSample1,
   normalizedSeekSample1,
 } from "../../../test-utils/data-sample/seek";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
 
 jest.mock("../../../services/ioClient");

@@ -9,7 +9,7 @@ import mountTest from "../../../test-utils/mountTest";
 import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
 import { SingleGameBoard } from "../SingleGameBoard";
 import { makeMove } from "../../move/moveSlice";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 import {
   gameSample1,
   normalizedGameSample1,

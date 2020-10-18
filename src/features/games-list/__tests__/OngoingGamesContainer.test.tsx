@@ -12,7 +12,7 @@ import {
   gameSample1,
   makeGameSample,
 } from "../../../test-utils/data-sample/game";
-import userSample1 from "../../../test-utils/data-sample/user";
+import { userSample1 } from "../../../test-utils/data-sample/user";
 import NormalizedGameEntity from "../../../normalizr/interfaces/NormalizedGameEntity";
 
 const stateWithLoadedGames = makeStateSample({
