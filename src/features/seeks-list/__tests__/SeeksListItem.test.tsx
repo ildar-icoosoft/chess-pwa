@@ -8,18 +8,20 @@ import {
 } from "../../../test-utils/data-sample/seek";
 import { gameSample1 } from "../../../test-utils/data-sample/game";
 
-const seekFromWhite = seekSample1;
-const seekFromBlack = makeSeekSample({
+const seekFromWhiteSample = makeSeekSample({
+  color: "white",
+});
+const seekFromBlackSample = makeSeekSample({
   color: "black",
 });
-const seekFromRandom = makeSeekSample({
+const seekFromRandomSample = makeSeekSample({
   color: "random",
 });
-const seekWithDifferentTimeControl = makeSeekSample({
+const seekWithDifferentTimeControlSample = makeSeekSample({
   clockLimit: 600,
   clockIncrement: 3,
 });
-const seekWithStartedGame = makeSeekSample({
+const seekWithStartedGameSample = makeSeekSample({
   game: gameSample1,
 });
 
@@ -34,19 +36,19 @@ describe("SeeksListItem", () => {
 
     it("should contain color icon", () => {
       const { queryByTestId, rerender } = render(
-        <SeeksListItem seek={seekFromWhite} />
+        <SeeksListItem seek={seekFromWhiteSample} />
       );
 
       expect(queryByTestId("white-icon")).toBeInTheDocument();
       expect(queryByTestId("black-icon")).not.toBeInTheDocument();
       expect(queryByTestId("random-icon")).not.toBeInTheDocument();
 
-      rerender(<SeeksListItem seek={seekFromBlack} />);
+      rerender(<SeeksListItem seek={seekFromBlackSample} />);
       expect(queryByTestId("white-icon")).not.toBeInTheDocument();
       expect(queryByTestId("black-icon")).toBeInTheDocument();
       expect(queryByTestId("random-icon")).not.toBeInTheDocument();
 
-      rerender(<SeeksListItem seek={seekFromRandom} />);
+      rerender(<SeeksListItem seek={seekFromRandomSample} />);
       expect(queryByTestId("white-icon")).not.toBeInTheDocument();
       expect(queryByTestId("black-icon")).not.toBeInTheDocument();
       expect(queryByTestId("random-icon")).toBeInTheDocument();
@@ -67,7 +69,7 @@ describe("SeeksListItem", () => {
 
       expect(timeControl).toHaveTextContent("5 + 5");
 
-      rerender(<SeeksListItem seek={seekWithDifferentTimeControl} />);
+      rerender(<SeeksListItem seek={seekWithDifferentTimeControlSample} />);
 
       expect(timeControl).toHaveTextContent("10 + 3");
     });
@@ -81,7 +83,7 @@ describe("SeeksListItem", () => {
 
       expect(seekWrapper).not.toHaveClass("gameIsStarted");
 
-      rerender(<SeeksListItem seek={seekWithStartedGame} />);
+      rerender(<SeeksListItem seek={seekWithStartedGameSample} />);
 
       expect(seekWrapper).toHaveClass("gameIsStarted");
     });
@@ -126,7 +128,7 @@ describe("SeeksListItem", () => {
 
       expect(playBtn).not.toBeDisabled();
 
-      rerender(<SeeksListItem seek={seekWithStartedGame} />);
+      rerender(<SeeksListItem seek={seekWithStartedGameSample} />);
 
       expect(playBtn).toBeDisabled();
     });

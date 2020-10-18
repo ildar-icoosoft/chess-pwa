@@ -182,10 +182,7 @@ describe("GameControlPanelWrapper", () => {
         const gameThatCanBeAbortedSample = makeGameSample({
           moves: "e2e4",
           status: "started",
-          black: {
-            id: 1,
-            fullName: "Thomas Miller",
-          },
+          black: userSample1,
         });
 
         const testRenderer = TestRenderer.create(
@@ -229,10 +226,7 @@ describe("GameControlPanelWrapper", () => {
         const gameThatCanBeAbortedSample = makeGameSample({
           moves: "e2e4",
           status: "started",
-          black: {
-            id: 1,
-            fullName: "Thomas Miller",
-          },
+          black: userSample1,
         });
 
         const testRenderer = TestRenderer.create(
@@ -247,10 +241,7 @@ describe("GameControlPanelWrapper", () => {
         const gameThatCanBeResignedSample = makeGameSample({
           moves: "e2e4 e7e5",
           status: "started",
-          black: {
-            id: 1,
-            fullName: "Thomas Miller",
-          },
+          black: userSample1,
         });
 
         testRenderer.update(
