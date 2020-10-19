@@ -4,6 +4,13 @@ import {
   createUserBySubscription,
   updateUserBySubscription,
 } from "../data-subscription/dataSubscriptionSlice";
+import { AppThunk } from "../../app/store";
+import ioClient from "../../services/ioClient";
+import { JWR } from "sails.io.js";
+import { normalize } from "normalizr";
+import getErrorMessageFromJWR from "../../utils/getErrorMessageFromJWR";
+import User from "../../interfaces/User";
+import userSchema from "../../normalizr/schemas/userSchema";
 
 interface SeeksListState {
   isLoading: boolean;
@@ -66,3 +73,21 @@ export const {
 } = usersListSlice.actions;
 
 export default usersListSlice.reducer;
+
+export const fetchUsers = (): AppThunk<Promise<User[]>> => (dispatch) => {
+  dispatch(getUsersListRequest());
+
+  return new Promise((resolve, reject) => {
+    ioClient.socket.get("/user", (body: unknown, jwr: JWR) => {
+      if (jwr.statusCode === 200) {
+        const normalizedUsers = normalize(body as User[], [userSchema]);
+        dispatch(getUsersListSuccess(normalizedUsers));
+
+        resolve(body as User[]);
+      } else {
+        dispatch(getUsersListError(getErrorMessageFromJWR(jwr)));
+        reject(jwr);
+      }
+    });
+  });
+};
