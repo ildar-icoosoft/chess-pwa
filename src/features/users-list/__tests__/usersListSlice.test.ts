@@ -3,6 +3,10 @@ import usersListReducer, {
   getUsersListSuccess,
   getUsersListError,
 } from "../usersListSlice";
+import {
+  createUserBySubscription,
+  updateUserBySubscription,
+} from "../../data-subscription/dataSubscriptionSlice";
 
 describe("usersListSlice reducer", () => {
   it("should handle initial state", () => {
@@ -76,6 +80,94 @@ describe("usersListSlice reducer", () => {
       isLoading: false,
       error: "error text",
       items: [],
+    });
+  });
+
+  it("should handle createUserBySubscription", () => {
+    expect(
+      usersListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: createUserBySubscription.type,
+          payload: {
+            result: 2,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2],
+    });
+
+    expect(
+      usersListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: createUserBySubscription.type,
+          payload: {
+            result: 3,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2, 3],
+    });
+  });
+
+  it("should handle updateUserBySubscription", () => {
+    expect(
+      usersListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: updateUserBySubscription.type,
+          payload: {
+            result: 2,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2],
+    });
+
+    expect(
+      usersListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: updateUserBySubscription.type,
+          payload: {
+            result: 3,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2, 3],
     });
   });
 });

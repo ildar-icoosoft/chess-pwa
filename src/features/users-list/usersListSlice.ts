@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
+import {
+  createUserBySubscription,
+  updateUserBySubscription,
+} from "../data-subscription/dataSubscriptionSlice";
 
 interface SeeksListState {
   isLoading: boolean;
@@ -35,7 +39,24 @@ const usersListSlice = createSlice({
       state.items = [];
     },
   },
-  extraReducers: {},
+  extraReducers: {
+    [createUserBySubscription.type]: (
+      state: SeeksListState,
+      action: PayloadAction<NormalizedData<number>>
+    ) => {
+      if (!state.items.includes(action.payload.result)) {
+        state.items.push(action.payload.result);
+      }
+    },
+    [updateUserBySubscription.type]: (
+      state: SeeksListState,
+      action: PayloadAction<NormalizedData<number>>
+    ) => {
+      if (!state.items.includes(action.payload.result)) {
+        state.items.push(action.payload.result);
+      }
+    },
+  },
 });
 
 export const {
