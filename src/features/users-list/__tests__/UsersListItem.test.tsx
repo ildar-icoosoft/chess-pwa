@@ -7,6 +7,7 @@ import {
   userSample1,
 } from "../../../test-utils/data-sample/user";
 import { SeeksListItem } from "../../seeks-list/SeeksListItem";
+import { seekSample1 } from "../../../test-utils/data-sample/seek";
 
 describe("UsersListItem", () => {
   mountTest(UsersListItem);
@@ -41,6 +42,25 @@ describe("UsersListItem", () => {
       const { getByTestId } = render(<UsersListItem user={userSample1} />);
 
       expect(getByTestId("user-name")).toHaveTextContent("Thomas Miller");
+    });
+
+    it("should contain currentUser class", () => {
+      const { queryByTestId, rerender } = render(
+        <UsersListItem user={userSample1} />
+      );
+
+      const seekWrapper = queryByTestId("user-wrapper");
+
+      expect(seekWrapper).not.toHaveClass("currentUser");
+
+      rerender(<UsersListItem user={userSample1} currentUserId={2} />);
+
+      // this user is not current user
+      expect(seekWrapper).not.toHaveClass("currentUser");
+
+      rerender(<UsersListItem user={userSample1} currentUserId={1} />);
+
+      expect(seekWrapper).toHaveClass("currentUser");
     });
   });
 });

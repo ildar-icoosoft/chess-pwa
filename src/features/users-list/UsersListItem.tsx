@@ -27,12 +27,17 @@ export const UsersListItem: FC<UsersListItemProps> = ({
     >
       <div className="d-flex pl-2">
         {user.isOnline && (
-          <OnlineIcon data-testid="online-icon" className={css.connectedIcon} />
+          <OnlineIcon
+            data-testid="online-icon"
+            className={css.connectedIcon}
+            title="online"
+          />
         )}
         {!user.isOnline && (
           <OfflineIcon
             data-testid="offline-icon"
             className={css.connectedIcon}
+            title="offline"
           />
         )}
       </div>
