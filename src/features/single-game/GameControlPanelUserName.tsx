@@ -31,7 +31,7 @@ export const GameControlPanelUserName: FC<GameControlPanelUserNameProps> = ({
       )}
     >
       {game[color] && (
-        <span data-testid="connected-icon" className="d-flex">
+        <span data-testid="connected-icon" className="d-flex mr-1">
           {game[color]!.isOnline && (
             <OnlineIcon
               data-testid="online-icon"
