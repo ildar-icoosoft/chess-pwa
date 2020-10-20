@@ -13,6 +13,9 @@ describe("sounds", () => {
     playStub.mockRestore();
   });
 
+  // sometimes if I reload page in browser I get this error:
+  // "play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD "
+  // This is why playStartGameSound should ignore play() exceptions
   it("playStartGameSound() should ignore Audio.play() exception", () => {
     const playStub = jest
       .spyOn(window.HTMLAudioElement.prototype, "play")
