@@ -54,19 +54,3 @@ export const GameControlPanelUserName: FC<GameControlPanelUserNameProps> = ({
     </div>
   );
 };
-
-/*
-{user.isOnline && (
-  <OnlineIcon
-    data-testid="online-icon"
-    className={css.connectedIcon}
-    title="online"
-  />
-)}
-{!user.isOnline && (
-  <OfflineIcon
-    data-testid="offline-icon"
-    className={css.connectedIcon}
-    title="offline"
-  />
-)}*/

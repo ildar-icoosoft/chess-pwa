@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { UsersList } from "./UsersList";
 import { useSelector } from "react-redux";
-import { RootState } from "../../app/rootReducer";
 import { denormalize } from "normalizr";
+import { UsersList } from "./UsersList";
+import { RootState } from "../../app/rootReducer";
 import userSchema from "../../normalizr/schemas/userSchema";
 
 const UsersListContainer: FC<unknown> = () => {

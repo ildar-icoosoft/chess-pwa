@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
+import React from "react";
+import TestRenderer from "react-test-renderer";
 import {
   defaultState,
   makeStateSample,
 } from "../../../test-utils/data-sample/state";
-import React from "react";
 import mountTest from "../../../test-utils/mountTest";
-import TestRenderer from "react-test-renderer";
 import UsersListContainer from "../UsersListContainer";
 import { UsersList } from "../UsersList";
 import {
@@ -14,8 +14,6 @@ import {
   userSample1,
   userSample2,
 } from "../../../test-utils/data-sample/user";
-import SeeksListContainer from "../../seeks-list/SeeksListContainer";
-import { SeeksList } from "../../seeks-list/SeeksList";
 
 const stateWithCurrentUser = makeStateSample({
   currentUser: {

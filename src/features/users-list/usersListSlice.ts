@@ -1,4 +1,9 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-cycle */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { JWR } from "sails.io.js";
+import { normalize } from "normalizr";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 import {
   createUserBySubscription,
@@ -7,8 +12,6 @@ import {
 import { registerSuccess } from "../current-user/currentUserSlice";
 import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
-import { JWR } from "sails.io.js";
-import { normalize } from "normalizr";
 import getErrorMessageFromJWR from "../../utils/getErrorMessageFromJWR";
 import User from "../../interfaces/User";
 import userSchema from "../../normalizr/schemas/userSchema";

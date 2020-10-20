@@ -1,3 +1,4 @@
+import { JWR, RequestCallback } from "sails.io.js";
 import usersListReducer, {
   getUsersListRequest,
   getUsersListSuccess,
@@ -10,7 +11,6 @@ import {
   updateUserBySubscription,
 } from "../../data-subscription/dataSubscriptionSlice";
 import ioClient from "../../../services/ioClient";
-import { JWR, RequestCallback } from "sails.io.js";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import {
   normalizedUserSample1,

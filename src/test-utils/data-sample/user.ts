@@ -1,8 +1,5 @@
 import User from "../../interfaces/User";
 import NormalizedUserEntity from "../../normalizr/interfaces/NormalizedUserEntity";
-import { Seek } from "../../interfaces/Seek";
-import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
-import { normalizedSeekSample1, seekSample1 } from "./seek";
 
 export const userSample1: User = {
   id: 1,
