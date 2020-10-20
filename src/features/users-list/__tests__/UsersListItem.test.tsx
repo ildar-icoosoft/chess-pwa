@@ -6,8 +6,6 @@ import {
   makeUserSample,
   userSample1,
 } from "../../../test-utils/data-sample/user";
-import { SeeksListItem } from "../../seeks-list/SeeksListItem";
-import { seekSample1 } from "../../../test-utils/data-sample/seek";
 
 describe("UsersListItem", () => {
   mountTest(UsersListItem);
@@ -61,6 +59,18 @@ describe("UsersListItem", () => {
       rerender(<UsersListItem user={userSample1} currentUserId={1} />);
 
       expect(seekWrapper).toHaveClass("currentUser");
+    });
+
+    it("should contain registration date", () => {
+      const userSample = makeUserSample({
+        createdAt: 0,
+      });
+
+      const { getByTestId } = render(<UsersListItem user={userSample} />);
+
+      expect(getByTestId("registration-date")).toHaveTextContent(
+        "January 1, 1970 12:00 AM"
+      );
     });
   });
 });

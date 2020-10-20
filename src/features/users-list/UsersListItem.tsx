@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import cx from "classnames";
+import moment from "moment-timezone";
 import User from "../../interfaces/User";
 import css from "./UsersListItem.module.scss";
 import { ReactComponent as OnlineIcon } from "./icons/online.svg";
@@ -43,6 +44,9 @@ export const UsersListItem: FC<UsersListItemProps> = ({
       </div>
       <div data-testid="user-name" className="mr-auto p-2">
         {user.fullName}
+      </div>
+      <div data-testid="registration-date">
+        {moment(user.createdAt).format("LLL")}
       </div>
     </div>
   );
