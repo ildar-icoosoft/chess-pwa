@@ -13,6 +13,11 @@ import User from "../../interfaces/User";
 import css from "./SingleGameBoard.module.scss";
 import { ContentLoadingStatus } from "../../components/ContentLoadingStatus";
 import GameStatus from "../../types/GameStatus";
+import {
+  playEndGameSound,
+  playMoveSound,
+  playStartGameSound,
+} from "../../utils/sounds";
 
 export interface SingleGameBoardProps {
   currentUser?: User;
@@ -24,24 +29,6 @@ export interface SingleGameBoardProps {
   error?: string | null;
 }
 
-const playStartGameSound = () => {
-  const audio = new Audio(
-    "https://lichess1.org/assets/_Iu1lae/sound/standard/GenericNotify.ogg"
-  );
-  audio.play().catch(() => {});
-};
-
-const playEndGameSound = () => {
-  playStartGameSound();
-};
-
-const playMoveSound = () => {
-  const audio = new Audio(
-    "https://lichess1.org/assets/sound/standard/Move.ogg"
-  );
-  audio.play().catch(() => {});
-};
-
 export const SingleGameBoard: FC<SingleGameBoardProps> = ({
   currentUser,
   game,
@@ -51,7 +38,8 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
   isLoading = false,
   error = null,
 }) => {
-  let lastStatus = useRef<GameStatus | null>(null);
+  // @todo. test useEffect
+  const lastStatus = useRef<GameStatus | null>(null);
   useEffect(() => {
     if (!game) {
       return;
@@ -65,6 +53,7 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
 
   let movesHistory: Move[] = [];
 
+  // @todo. test useEffect
   const lastSelectedMoveIndex = useRef<number | null>(null);
   useEffect(() => {
     if (!game) {
