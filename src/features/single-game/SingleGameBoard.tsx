@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import {
   Board,
   getValidMoves,
@@ -12,6 +12,7 @@ import makeChessInstance from "../../utils/makeChessInstance";
 import User from "../../interfaces/User";
 import css from "./SingleGameBoard.module.scss";
 import { ContentLoadingStatus } from "../../components/ContentLoadingStatus";
+import GameStatus from "../../types/GameStatus";
 
 export interface SingleGameBoardProps {
   currentUser?: User;
@@ -23,6 +24,24 @@ export interface SingleGameBoardProps {
   error?: string | null;
 }
 
+const playStartGameSound = () => {
+  const audio = new Audio(
+    "https://lichess1.org/assets/_Iu1lae/sound/standard/GenericNotify.ogg"
+  );
+  audio.play().catch(() => {});
+};
+
+const playEndGameSound = () => {
+  playStartGameSound();
+};
+
+const playMoveSound = () => {
+  const audio = new Audio(
+    "https://lichess1.org/assets/sound/standard/Move.ogg"
+  );
+  audio.play().catch(() => {});
+};
+
 export const SingleGameBoard: FC<SingleGameBoardProps> = ({
   currentUser,
   game,
@@ -32,6 +51,43 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
   isLoading = false,
   error = null,
 }) => {
+  let lastStatus = useRef<GameStatus | null>(null);
+  useEffect(() => {
+    if (!game) {
+      return;
+    }
+
+    if (lastStatus.current === "started" && game.status !== "started") {
+      playEndGameSound();
+    }
+    lastStatus.current = game.status;
+  }, [game, lastStatus]);
+
+  let movesHistory: Move[] = [];
+
+  const lastSelectedMoveIndex = useRef<number | null>(null);
+  useEffect(() => {
+    if (!game) {
+      return;
+    }
+
+    if (lastSelectedMoveIndex.current === null && movesHistory.length === 0) {
+      playStartGameSound();
+    }
+
+    const selectedMoveIndex =
+      rewindToMoveIndex === null ? movesHistory.length : rewindToMoveIndex;
+
+    if (
+      lastSelectedMoveIndex.current !== null &&
+      selectedMoveIndex === lastSelectedMoveIndex.current + 1
+    ) {
+      playMoveSound();
+    }
+
+    lastSelectedMoveIndex.current = selectedMoveIndex;
+  }, [game, lastSelectedMoveIndex, movesHistory.length, rewindToMoveIndex]);
+
   let boardContent = null;
 
   if (game) {
@@ -79,7 +135,7 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
         orientation === PieceColor.WHITE ? PieceColor.BLACK : PieceColor.WHITE;
     }
 
-    const movesHistory = chessWithAllMoves.history({ verbose: true });
+    movesHistory = chessWithAllMoves.history({ verbose: true });
 
     let lastMoveSquares: string[] | undefined;
     if (rewindToMoveIndex === null) {
