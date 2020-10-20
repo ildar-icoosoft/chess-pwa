@@ -44,7 +44,6 @@ export const defaultState: RootState = {
   },
 };
 
-// @todo. use this function to create samples.
 export const makeStateSample = (
   data: Partial<RootState>,
   originalStateSample = defaultState

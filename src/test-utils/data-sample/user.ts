@@ -1,5 +1,8 @@
 import User from "../../interfaces/User";
 import NormalizedUserEntity from "../../normalizr/interfaces/NormalizedUserEntity";
+import { Seek } from "../../interfaces/Seek";
+import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
+import { normalizedSeekSample1, seekSample1 } from "./seek";
 
 export const userSample1: User = {
   id: 1,
@@ -16,3 +19,19 @@ export const userSample2: User = {
   isOnline: false,
 };
 export const normalizedUserSample2: NormalizedUserEntity = userSample2;
+
+export const makeUserSample = (
+  data: Partial<User>,
+  originalUserSample = userSample1
+): User => ({
+  ...originalUserSample,
+  ...data,
+});
+
+export const makeNormalizedUserSample = (
+  data: Partial<NormalizedUserEntity>,
+  originalserSample = normalizedUserSample1
+): NormalizedUserEntity => ({
+  ...originalserSample,
+  ...data,
+});

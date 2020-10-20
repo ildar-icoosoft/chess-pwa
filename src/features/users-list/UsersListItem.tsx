@@ -1,7 +1,9 @@
 import React, { FC } from "react";
-import User from "../../interfaces/User";
 import cx from "classnames";
-import css from "../seeks-list/SeeksListItem.module.scss";
+import User from "../../interfaces/User";
+import css from "./UsersListItem.module.scss";
+import { ReactComponent as OnlineIcon } from "./icons/online.svg";
+import { ReactComponent as OfflineIcon } from "./icons/offline.svg";
 
 export interface UsersListItemProps {
   currentUserId?: number | null;
@@ -23,6 +25,17 @@ export const UsersListItem: FC<UsersListItemProps> = ({
         [css.currentUser]: user.id === currentUserId,
       })}
     >
+      <div className="d-flex pl-2">
+        {user.isOnline && (
+          <OnlineIcon data-testid="online-icon" className={css.connectedIcon} />
+        )}
+        {!user.isOnline && (
+          <OfflineIcon
+            data-testid="offline-icon"
+            className={css.connectedIcon}
+          />
+        )}
+      </div>
       <div data-testid="user-name" className="mr-auto p-2">
         {user.fullName}
       </div>
