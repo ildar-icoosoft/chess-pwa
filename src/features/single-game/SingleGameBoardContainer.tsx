@@ -10,6 +10,8 @@ import userSchema from "../../normalizr/schemas/userSchema";
 import { defaultSingleGameItemState } from "./singleGameSlice";
 import { makeMove } from "../move/moveSlice";
 import { AppDispatch } from "../../app/store";
+import { useShallowEqualSelector } from "../../hooks/useShallowEqualSelector";
+import { useDeepEqualSelector } from "../../hooks/useDeepEqualSelector";
 
 export interface SingleGameBoardProps {
   id: number;
@@ -18,16 +20,22 @@ export interface SingleGameBoardProps {
 export const SingleGameBoardContainer: FC<SingleGameBoardProps> = ({ id }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const game = useSelector((state: RootState) =>
+  const game = useDeepEqualSelector((state: RootState) =>
     denormalize(id, gameSchema, state.entities)
   );
 
-  const currentUser: User | undefined = useSelector((state: RootState) => {
-    if (state.currentUser.userId) {
-      return denormalize(state.currentUser.userId, userSchema, state.entities);
+  const currentUser: User | undefined = useShallowEqualSelector(
+    (state: RootState) => {
+      if (state.currentUser.userId) {
+        return denormalize(
+          state.currentUser.userId,
+          userSchema,
+          state.entities
+        );
+      }
+      return undefined;
     }
-    return undefined;
-  });
+  );
 
   const singleGameItemState =
     useSelector((state: RootState) => state.singleGame[id]) ||
