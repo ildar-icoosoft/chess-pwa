@@ -19,7 +19,7 @@ describe("sounds", () => {
   it("playStartGameSound() should ignore Audio.play() exception", () => {
     const playStub = jest
       .spyOn(window.HTMLAudioElement.prototype, "play")
-      .mockImplementation(() => Promise.reject("error text"));
+      .mockImplementation(() => Promise.reject(Error("error text")));
 
     // @todo. For someone reason if playStartGameSound() throws exception this test does not work as expected
     // The test does not catch error. And we get Unhandled promise rejection
