@@ -45,7 +45,7 @@ export const UsersListItem: FC<UsersListItemProps> = ({
       <div data-testid="user-name" className="mr-auto p-2">
         {user.fullName}
       </div>
-      <div data-testid="registration-date">
+      <div data-testid="registration-date" title="registration date">
         {moment(user.createdAt).format("LLL")}
       </div>
     </div>
