@@ -3,8 +3,8 @@ import cx from "classnames";
 import moment from "moment-timezone";
 import User from "../../interfaces/User";
 import css from "./UsersListItem.module.scss";
-import { ReactComponent as OnlineIcon } from "./icons/online.svg";
-import { ReactComponent as OfflineIcon } from "./icons/offline.svg";
+import { ReactComponent as OnlineIcon } from "../../assets/icons/online.svg";
+import { ReactComponent as OfflineIcon } from "../../assets/icons/offline.svg";
 
 export interface UsersListItemProps {
   currentUserId?: number | null;
