@@ -27,6 +27,11 @@ export const defaultState: RootState = {
     error: null,
     items: [],
   },
+  usersList: {
+    isLoading: true,
+    error: null,
+    items: [],
+  },
   singleGame: {},
   gamesList: {
     isLoading: true,
