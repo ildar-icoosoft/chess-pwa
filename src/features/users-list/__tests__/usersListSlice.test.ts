@@ -4,6 +4,7 @@ import usersListReducer, {
   getUsersListError,
   fetchUsers,
 } from "../usersListSlice";
+import { registerSuccess } from "../../current-user/currentUserSlice";
 import {
   createUserBySubscription,
   updateUserBySubscription,
@@ -92,6 +93,50 @@ describe("usersListSlice reducer", () => {
       isLoading: false,
       error: "error text",
       items: [],
+    });
+  });
+
+  it("should handle registerSuccess", () => {
+    expect(
+      usersListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: registerSuccess.type,
+          payload: {
+            result: 2,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2],
+    });
+
+    expect(
+      usersListReducer(
+        {
+          isLoading: true,
+          error: "error text",
+          items: [1, 2],
+        },
+        {
+          type: registerSuccess.type,
+          payload: {
+            result: 3,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      isLoading: true,
+      error: "error text",
+      items: [1, 2, 3],
     });
   });
 

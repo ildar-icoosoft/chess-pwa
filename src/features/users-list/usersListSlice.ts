@@ -4,6 +4,7 @@ import {
   createUserBySubscription,
   updateUserBySubscription,
 } from "../data-subscription/dataSubscriptionSlice";
+import { registerSuccess } from "../current-user/currentUserSlice";
 import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
 import { JWR } from "sails.io.js";
@@ -12,13 +13,13 @@ import getErrorMessageFromJWR from "../../utils/getErrorMessageFromJWR";
 import User from "../../interfaces/User";
 import userSchema from "../../normalizr/schemas/userSchema";
 
-interface SeeksListState {
+interface UsersListState {
   isLoading: boolean;
   error: string | null;
   items: number[];
 }
 
-const initialState: SeeksListState = {
+const initialState: UsersListState = {
   isLoading: true,
   error: null,
   items: [],
@@ -47,8 +48,16 @@ const usersListSlice = createSlice({
     },
   },
   extraReducers: {
+    [registerSuccess.type]: (
+      state: UsersListState,
+      action: PayloadAction<NormalizedData<number>>
+    ) => {
+      if (!state.items.includes(action.payload.result)) {
+        state.items.push(action.payload.result);
+      }
+    },
     [createUserBySubscription.type]: (
-      state: SeeksListState,
+      state: UsersListState,
       action: PayloadAction<NormalizedData<number>>
     ) => {
       if (!state.items.includes(action.payload.result)) {
@@ -56,7 +65,7 @@ const usersListSlice = createSlice({
       }
     },
     [updateUserBySubscription.type]: (
-      state: SeeksListState,
+      state: UsersListState,
       action: PayloadAction<NormalizedData<number>>
     ) => {
       if (!state.items.includes(action.payload.result)) {
