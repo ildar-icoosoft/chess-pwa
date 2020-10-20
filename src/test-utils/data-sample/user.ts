@@ -27,8 +27,8 @@ export const makeUserSample = (
 
 export const makeNormalizedUserSample = (
   data: Partial<NormalizedUserEntity>,
-  originalserSample = normalizedUserSample1
+  originalUserSample = normalizedUserSample1
 ): NormalizedUserEntity => ({
-  ...originalserSample,
+  ...originalUserSample,
   ...data,
 });
