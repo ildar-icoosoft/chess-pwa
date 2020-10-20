@@ -20,8 +20,15 @@ export interface SingleGameBoardProps {
 export const SingleGameBoardContainer: FC<SingleGameBoardProps> = ({ id }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const game = useDeepEqualSelector((state: RootState) =>
-    denormalize(id, gameSchema, state.entities)
+  const game = useDeepEqualSelector(
+    (state: RootState) => denormalize(id, gameSchema, state.entities),
+    (_value: any, _other: any, indexOrKey: any) => {
+      // ignore time to improve performance
+      if (indexOrKey === "wtime" || indexOrKey === "btime") {
+        return true;
+      }
+      return undefined;
+    }
   );
 
   const currentUser: User | undefined = useShallowEqualSelector(
