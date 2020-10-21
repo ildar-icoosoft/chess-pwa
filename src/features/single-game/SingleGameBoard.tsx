@@ -74,15 +74,32 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
       selectedMoveIndex === lastSelectedMoveIndex.current + 1
     ) {
       playMoveSound();
-
-      if (rewindToMoveIndex === null && premove.current) {
-        premove.current[1](); // playPremove()
-        premove.current = null;
-      }
     }
 
     lastSelectedMoveIndex.current = selectedMoveIndex;
   }, [game, lastSelectedMoveIndex, movesHistory.length, rewindToMoveIndex]);
+
+  // @todo. test useEffect
+  const lastMovesQnt = useRef<number | null>(null);
+  useEffect(() => {
+    if (!game) {
+      return;
+    }
+
+    const movesQnt = movesHistory.length;
+
+    if (
+      lastMovesQnt.current !== null &&
+      movesQnt === lastMovesQnt.current + 1 &&
+      rewindToMoveIndex === null &&
+      premove.current
+    ) {
+      premove.current[1](); // playPremove()
+      premove.current = null;
+    }
+
+    lastMovesQnt.current = movesQnt;
+  }, [game, lastMovesQnt, movesHistory.length, rewindToMoveIndex]);
 
   let boardContent = null;
 
