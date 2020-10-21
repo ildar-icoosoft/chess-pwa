@@ -99,7 +99,14 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
     }
 
     lastMovesQnt.current = movesQnt;
-  }, [game, lastMovesQnt, movesHistory.length, rewindToMoveIndex]);
+  }, [game, premove, lastMovesQnt, movesHistory.length, rewindToMoveIndex]);
+
+  // @todo. test useEffect
+  useEffect(() => {
+    if (rewindToMoveIndex !== null && premove.current) {
+      premove.current[2](); // cancelPremove()
+    }
+  }, [premove, rewindToMoveIndex]);
 
   let boardContent = null;
 
@@ -171,6 +178,8 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
 
     const handleUnsetPremove = () => {
       premove.current = null;
+
+      console.log("handleUnsetPremove");
     };
 
     boardContent = (
