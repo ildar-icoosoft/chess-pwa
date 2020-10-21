@@ -5,10 +5,10 @@ import mountTest from "../../../test-utils/mountTest";
 import ChallengeButtonsContainer from "../ChallengeButtonsContainer";
 import { ChallengeButtons } from "../ChallengeButtons";
 import { defaultState } from "../../../test-utils/data-sample/state";
-import { showChallengeAiModal } from "../../challenge-ai-modal/challengeAiModalSlice";
+import { showModal } from "../../modal/modalSlice";
 import { showSeekModal } from "../../seek-modal/seekModalSlice";
 
-jest.mock("../../challenge-ai-modal/challengeAiModalSlice");
+jest.mock("../../modal/modalSlice");
 jest.mock("../../seek-modal/seekModalSlice");
 
 describe("ChallengeButtonsContainer", () => {
@@ -28,27 +28,30 @@ describe("ChallengeButtonsContainer", () => {
   });
 
   describe("dispatch() calls", () => {
-    it("should call dispatch(showChallengeAiModal())", () => {
+    it("should call dispatch(showModal())", () => {
       const dispatch = useDispatch<jest.Mock>();
-      const showChallengeAiModalReturnedValue = Symbol("showChallengeAiModal");
+      const showModalReturnedValue = Symbol("showModal");
 
       const testRenderer = TestRenderer.create(<ChallengeButtonsContainer />);
       const testInstance = testRenderer.root;
 
       const challengeButtons = testInstance.findByType(ChallengeButtons);
 
-      const showChallengeAiModalFn = (showChallengeAiModal as unknown) as jest.Mock;
-      showChallengeAiModalFn.mockClear();
-      showChallengeAiModalFn.mockReturnValue(showChallengeAiModalReturnedValue);
+      const showModalFn = (showModal as unknown) as jest.Mock;
+      showModalFn.mockClear();
+      showModalFn.mockReturnValue(showModalReturnedValue);
 
       TestRenderer.act(() => {
         challengeButtons.props.onChallengeAi();
       });
 
-      expect(showChallengeAiModalFn).toBeCalledTimes(1);
-      expect(showChallengeAiModalFn).toBeCalledWith();
+      expect(showModalFn).toBeCalledTimes(1);
+      expect(showModalFn).toBeCalledWith({
+        name: "challengeAi",
+        allowClose: true,
+      });
 
-      expect(dispatch).toBeCalledWith(showChallengeAiModalReturnedValue);
+      expect(dispatch).toBeCalledWith(showModalReturnedValue);
     });
 
     it("should call dispatch(showSeekModal())", () => {
