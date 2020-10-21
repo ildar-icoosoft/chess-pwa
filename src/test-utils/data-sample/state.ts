@@ -18,6 +18,10 @@ export const defaultState: RootState = {
     isChallengeAiModalVisible: false,
   },
   messages: [],
+  modal: {
+    showModal: null,
+    allowClose: true,
+  },
   seekModal: {
     isSeekModalVisible: false,
     allowCloseSeekModal: true,
