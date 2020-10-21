@@ -1,3 +1,6 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/no-param-reassign */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   challengeAiSuccess,

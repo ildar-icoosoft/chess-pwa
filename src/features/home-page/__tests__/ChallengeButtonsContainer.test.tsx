@@ -26,7 +26,7 @@ describe("ChallengeButtonsContainer", () => {
   });
 
   describe("dispatch() calls", () => {
-    it("should call dispatch(showModal())", () => {
+    it("should call dispatch(showModal()) challengeAi", () => {
       const dispatch = useDispatch<jest.Mock>();
       const showModalReturnedValue = Symbol("showModal");
 
@@ -52,7 +52,7 @@ describe("ChallengeButtonsContainer", () => {
       expect(dispatch).toBeCalledWith(showModalReturnedValue);
     });
 
-    it("should call dispatch(showModal())", () => {
+    it("should call dispatch(showModal()) seek", () => {
       const dispatch = useDispatch<jest.Mock>();
       const showModalReturnedValue = Symbol("showModal");
 
