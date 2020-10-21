@@ -5,6 +5,11 @@ import {
   createSeekSuccess,
 } from "../../challenge/challengeSlice";
 import seekModalReducer from "../../seek-modal/seekModalSlice";
+import authModalReducer from "../../auth-modal/authModalSlice";
+import {
+  loginSuccess,
+  registerSuccess,
+} from "../../current-user/currentUserSlice";
 
 describe("modalSlice reducer", () => {
   it("should handle initial state", () => {
@@ -108,6 +113,48 @@ describe("modalSlice reducer", () => {
       )
     ).toEqual({
       showModal: "seek",
+      allowClose: true,
+    });
+  });
+
+  it("should handle loginSuccess", () => {
+    expect(
+      modalReducer(
+        {
+          showModal: "auth",
+          allowClose: false,
+        },
+        {
+          type: loginSuccess.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      showModal: null,
+      allowClose: true,
+    });
+  });
+
+  it("should handle registerSuccess", () => {
+    expect(
+      modalReducer(
+        {
+          showModal: "auth",
+          allowClose: false,
+        },
+        {
+          type: registerSuccess.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      showModal: null,
       allowClose: true,
     });
   });

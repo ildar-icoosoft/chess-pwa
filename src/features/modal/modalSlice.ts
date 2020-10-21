@@ -4,6 +4,10 @@ import {
   createSeekRequest,
   createSeekSuccess,
 } from "../challenge/challengeSlice";
+import {
+  loginSuccess,
+  registerSuccess,
+} from "../current-user/currentUserSlice";
 
 export type ModalName = "auth" | "challengeAi" | "seek";
 
@@ -46,12 +50,14 @@ const modalSlice = createSlice({
     [createSeekError.type]: (state) => {
       state.allowClose = true;
     },
-    // [loginSuccess.type]: (state) => {
-    //   state.isAuthModalVisible = false;
-    // },
-    // [registerSuccess.type]: (state) => {
-    //   state.isAuthModalVisible = false;
-    // },
+    [loginSuccess.type]: (state) => {
+      state.showModal = null;
+      state.allowClose = true;
+    },
+    [registerSuccess.type]: (state) => {
+      state.showModal = null;
+      state.allowClose = true;
+    },
   },
 });
 
