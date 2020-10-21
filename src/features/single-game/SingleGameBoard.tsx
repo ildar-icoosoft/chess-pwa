@@ -47,6 +47,10 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
 
     if (lastStatus.current === "started" && game.status !== "started") {
       playEndGameSound();
+
+      if (premove.current) {
+        premove.current[2](); // cancelPremove()
+      }
     }
     lastStatus.current = game.status;
   }, [game, lastStatus]);
