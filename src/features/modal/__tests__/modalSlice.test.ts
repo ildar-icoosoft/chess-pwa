@@ -5,13 +5,10 @@ import {
   createSeekRequest,
   createSeekSuccess,
 } from "../../challenge/challengeSlice";
-import seekModalReducer from "../../seek-modal/seekModalSlice";
-import authModalReducer from "../../auth-modal/authModalSlice";
 import {
   loginSuccess,
   registerSuccess,
 } from "../../current-user/currentUserSlice";
-import challengeAiModalReducer from "../../challenge-ai-modal/challengeAiModalSlice";
 
 describe("modalSlice reducer", () => {
   it("should handle initial state", () => {
