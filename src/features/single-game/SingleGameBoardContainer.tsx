@@ -10,8 +10,10 @@ import userSchema from "../../normalizr/schemas/userSchema";
 import { defaultSingleGameItemState } from "./singleGameSlice";
 import { makeMove } from "../move/moveSlice";
 import { AppDispatch } from "../../app/store";
-import { useShallowEqualSelector } from "../../hooks/useShallowEqualSelector";
-import { useDeepEqualSelector } from "../../hooks/useDeepEqualSelector";
+import {
+  useDeepEqualSelector,
+  useShallowEqualSelector,
+} from "ii-react-libraries";
 
 export interface SingleGameBoardProps {
   id: number;
