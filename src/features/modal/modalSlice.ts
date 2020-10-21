@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  challengeAiSuccess,
   createSeekError,
   createSeekRequest,
   createSeekSuccess,
@@ -55,6 +56,10 @@ const modalSlice = createSlice({
       state.allowClose = true;
     },
     [registerSuccess.type]: (state) => {
+      state.showModal = null;
+      state.allowClose = true;
+    },
+    [challengeAiSuccess.type]: (state) => {
       state.showModal = null;
       state.allowClose = true;
     },

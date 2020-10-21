@@ -1,5 +1,6 @@
 import modalReducer, { showModal, hideModal } from "../modalSlice";
 import {
+  challengeAiSuccess,
   createSeekError,
   createSeekRequest,
   createSeekSuccess,
@@ -10,6 +11,7 @@ import {
   loginSuccess,
   registerSuccess,
 } from "../../current-user/currentUserSlice";
+import challengeAiModalReducer from "../../challenge-ai-modal/challengeAiModalSlice";
 
 describe("modalSlice reducer", () => {
   it("should handle initial state", () => {
@@ -147,6 +149,27 @@ describe("modalSlice reducer", () => {
         },
         {
           type: registerSuccess.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({
+      showModal: null,
+      allowClose: true,
+    });
+  });
+
+  it("should handle challengeAiSuccess", () => {
+    expect(
+      modalReducer(
+        {
+          showModal: "challengeAi",
+          allowClose: false,
+        },
+        {
+          type: challengeAiSuccess.type,
           payload: {
             result: 1,
             entities: {},
