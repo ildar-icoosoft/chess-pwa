@@ -38,6 +38,8 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
   isLoading = false,
   error = null,
 }) => {
+  const premove = useRef<[Move, () => void, () => void] | null>(null);
+
   // @todo. test useEffect
   const lastStatus = useRef<GameStatus | null>(null);
   useEffect(() => {
@@ -56,8 +58,6 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
   }, [game, lastStatus]);
 
   let movesHistory: Move[] = [];
-
-  const premove = useRef<[Move, () => void, () => void] | null>(null);
 
   // @todo. test useEffect
   const lastSelectedMoveIndex = useRef<number | null>(null);
@@ -182,8 +182,6 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
 
     const handleUnsetPremove = () => {
       premove.current = null;
-
-      console.log("handleUnsetPremove");
     };
 
     boardContent = (
