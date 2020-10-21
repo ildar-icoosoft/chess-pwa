@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useCallback, useEffect, useRef } from "react";
 import {
   Board,
   getValidMoves,
@@ -112,6 +112,17 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
     }
   }, [premove, rewindToMoveIndex]);
 
+  const handleSetPremove = useCallback(
+    (move: Move, playPremove: () => void, cancelPremove: () => void) => {
+      premove.current = [move, playPremove, cancelPremove];
+    },
+    [premove]
+  );
+
+  const handleUnsetPremove = useCallback(() => {
+    premove.current = null;
+  }, [premove]);
+
   let boardContent = null;
 
   if (game) {
@@ -171,18 +182,6 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
       const lastMove = movesHistory[rewindToMoveIndex - 1];
       lastMoveSquares = [lastMove.from, lastMove.to];
     }
-
-    const handleSetPremove = (
-      move: Move,
-      playPremove: () => void,
-      cancelPremove: () => void
-    ) => {
-      premove.current = [move, playPremove, cancelPremove];
-    };
-
-    const handleUnsetPremove = () => {
-      premove.current = null;
-    };
 
     boardContent = (
       <div className={css.singleGameBoard}>
