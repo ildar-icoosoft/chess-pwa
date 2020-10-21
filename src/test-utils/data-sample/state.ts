@@ -11,9 +11,6 @@ export const defaultState: RootState = {
     isLoading: true,
     error: null,
   },
-  authModal: {
-    isAuthModalVisible: false,
-  },
   challengeAiModal: {
     isChallengeAiModalVisible: false,
   },

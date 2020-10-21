@@ -5,7 +5,6 @@ import gamesListReducer from "../features/games-list/gamesListSlice";
 import seeksListReducer from "../features/seeks-list/seeksListSlice";
 import usersListReducer from "../features/users-list/usersListSlice";
 import currentUserReducer from "../features/current-user/currentUserSlice";
-import authModalReducer from "../features/auth-modal/authModalSlice";
 import challengeAiModalReducer from "../features/challenge-ai-modal/challengeAiModalSlice";
 import seekModalReducer from "../features/seek-modal/seekModalSlice";
 import entitiesReducer from "../features/entities/entitiesSlice";
@@ -15,7 +14,6 @@ import messagesReducer from "../features/messages/messagesSlice";
 import modalReducer from "../features/modal/modalSlice";
 
 const rootReducer = combineReducers({
-  authModal: authModalReducer,
   challengeAiModal: challengeAiModalReducer,
   // challenge: challengeReducer,
   currentUser: currentUserReducer,
