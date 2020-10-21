@@ -53,6 +53,8 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
 
   let movesHistory: Move[] = [];
 
+  const premove = useRef<[Move, () => void, () => void] | null>(null);
+
   // @todo. test useEffect
   const lastSelectedMoveIndex = useRef<number | null>(null);
   useEffect(() => {
@@ -72,6 +74,11 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
       selectedMoveIndex === lastSelectedMoveIndex.current + 1
     ) {
       playMoveSound();
+
+      if (rewindToMoveIndex === null && premove.current) {
+        premove.current[1](); // playPremove()
+        premove.current = null;
+      }
     }
 
     lastSelectedMoveIndex.current = selectedMoveIndex;
@@ -137,6 +144,18 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
       lastMoveSquares = [lastMove.from, lastMove.to];
     }
 
+    const handleSetPremove = (
+      move: Move,
+      playPremove: () => void,
+      cancelPremove: () => void
+    ) => {
+      premove.current = [move, playPremove, cancelPremove];
+    };
+
+    const handleUnsetPremove = () => {
+      premove.current = null;
+    };
+
     boardContent = (
       <div className={css.singleGameBoard}>
         <Board
@@ -147,8 +166,11 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
           lastMoveSquares={lastMoveSquares}
           movableColor={movableColor}
           onMove={onMove}
+          onSetPremove={handleSetPremove}
+          onUnsetPremove={handleUnsetPremove}
           orientation={orientation}
           position={fen}
+          premovable
           turnColor={turnColor}
           validMoves={validMoves}
           viewOnly={viewOnly}
