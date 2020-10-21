@@ -1,7 +1,6 @@
 import React, { FC, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ChallengeButtons } from "./ChallengeButtons";
-import { showSeekModal } from "../seek-modal/seekModalSlice";
 import { showModal } from "../modal/modalSlice";
 
 const ChallengeButtonsContainer: FC<unknown> = () => {
@@ -17,7 +16,12 @@ const ChallengeButtonsContainer: FC<unknown> = () => {
   }, [dispatch]);
 
   const handleCreateGame = useCallback(() => {
-    dispatch(showSeekModal());
+    dispatch(
+      showModal({
+        name: "seek",
+        allowClose: true,
+      })
+    );
   }, [dispatch]);
 
   return (

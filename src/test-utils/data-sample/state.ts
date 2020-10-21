@@ -16,10 +16,6 @@ export const defaultState: RootState = {
     showModal: null,
     allowClose: true,
   },
-  seekModal: {
-    isSeekModalVisible: false,
-    allowCloseSeekModal: true,
-  },
   seeksList: {
     isLoading: true,
     error: null,
