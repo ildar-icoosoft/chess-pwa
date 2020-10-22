@@ -94,6 +94,10 @@ describe("App", () => {
       expect(dispatch).toBeCalledWith(startGameClockReturnedValue);
     });
 
+    it("should stop game clock on component unmount", () => {
+      // @todo
+    });
+
     it("should call dispatch(fetchCurrentUser())", () => {
       const dispatch = useDispatch<jest.Mock>();
 
