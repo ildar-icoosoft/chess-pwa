@@ -116,7 +116,6 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
       game.status === "started" &&
       rewindToMoveIndex === null
     ) {
-      const chess = makeChessInstance(game);
       if (isValidMove(chess, premove.current[0])) {
         premove.current[1](); // playPremove()
         premove.current = null;
