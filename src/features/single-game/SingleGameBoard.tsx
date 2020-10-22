@@ -2,6 +2,7 @@ import React, { FC, useCallback, useEffect, useRef } from "react";
 import {
   Board,
   getValidMoves,
+  isValidMove,
   Move,
   PieceColor,
   ValidMoves,
@@ -111,8 +112,13 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
       game.status === "started" &&
       rewindToMoveIndex === null
     ) {
-      premove.current[1](); // playPremove()
-      premove.current = null;
+      const chess = makeChessInstance(game);
+      if (isValidMove(chess, premove.current[0])) {
+        premove.current[1](); // playPremove()
+        premove.current = null;
+      } else {
+        premove.current[2](); // cancelPremove()
+      }
     }
 
     lastMovesQnt.current = movesQnt;
