@@ -90,7 +90,10 @@ export const fetchSeeks = (): AppThunk<Promise<Seek[]>> => (dispatch) => {
 
   return new Promise((resolve, reject) => {
     ioClient.socket.get(
-      "/seek?sort=createdAt%20DESC",
+      "/seek",
+      {
+        sort: "createdAt DESC",
+      },
       (body: unknown, jwr: JWR) => {
         if (jwr.statusCode === 200) {
           const normalizedGames = normalize(body as Seek[], [seekSchema]);
