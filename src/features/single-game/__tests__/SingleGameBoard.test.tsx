@@ -129,7 +129,7 @@ describe("SingleGameBoard", () => {
           expect(promotionChoiceModal.props.show).toBeTruthy();
 
           TestRenderer.act(() => {
-            promotionChoiceModal.props.onPromotion();
+            promotionChoiceModal.props.onPromotion("b");
           });
 
           expect(promotionChoiceModal.props.show).toBeFalsy();
@@ -506,6 +506,47 @@ describe("SingleGameBoard", () => {
       expect(onMove).toBeCalledWith({
         from: "e2",
         to: "e4",
+      });
+    });
+
+    it("onMove (with promotion)", () => {
+      (isPromotionMove as jest.Mock).mockReturnValueOnce(true);
+
+      const initialGameSample = makeGameSample({
+        initialFen: "startpos",
+        moves: "",
+      });
+
+      const onMove = jest.fn();
+
+      const testInstance = TestRenderer.create(
+        <SingleGameBoard game={initialGameSample} onMove={onMove} />
+      ).root;
+
+      const board: TestRenderer.ReactTestInstance = testInstance.findByType(
+        Board
+      );
+
+      const promotionChoiceModal = testInstance.findByType(
+        PromotionChoiceModal
+      );
+
+      TestRenderer.act(() => {
+        board.props.onMove({
+          from: "e2",
+          to: "e4",
+        });
+      });
+
+      TestRenderer.act(() => {
+        promotionChoiceModal.props.onPromotion("b");
+      });
+
+      expect(onMove).toBeCalledTimes(1);
+      expect(onMove).toBeCalledWith({
+        from: "e2",
+        to: "e4",
+        promotion: "b",
       });
     });
   });
