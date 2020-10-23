@@ -2,6 +2,9 @@ import chatReducer, {
   getChatMessagesListRequest,
   getChatMessagesListSuccess,
   getChatMessagesListError,
+  createChatMessageRequest,
+  createChatMessageSuccess,
+  createChatMessageError,
   fetchChatMessages,
 } from "../chatSlice";
 import ioClient from "../../../services/ioClient";
@@ -11,7 +14,9 @@ import { normalizedUserSample1 } from "../../../test-utils/data-sample/user";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";
 import {
   chatMessageSample1,
+  makeNormalizedChatMessageSample,
   normalizedChatMessageSample1,
+  normalizedChatMessageSample2,
 } from "../../../test-utils/data-sample/chat-message";
 
 jest.mock("../../../services/ioClient");
@@ -217,6 +222,93 @@ describe("chatSlice reducer", () => {
           error: "error text",
         },
       });
+    });
+  });
+
+  it("should handle createChatMessageRequest", () => {
+    expect(
+      chatReducer(
+        {
+          1: {
+            isLoading: false,
+            error: "error text",
+            items: [1, 2],
+          },
+        },
+        {
+          type: createChatMessageRequest.type,
+          payload: 1,
+        }
+      )
+    ).toEqual({
+      1: {
+        isLoading: false,
+        error: "error text",
+        items: [1, 2],
+      },
+    });
+  });
+
+  it("should handle createChatMessageSuccess", () => {
+    const normalizedChatMessageSample = makeNormalizedChatMessageSample({
+      id: 3,
+      game: 1,
+    });
+
+    expect(
+      chatReducer(
+        {
+          1: {
+            isLoading: false,
+            error: "error text",
+            items: [1, 2],
+          },
+        },
+        {
+          type: createChatMessageSuccess.type,
+          payload: {
+            result: 3,
+            entities: {
+              chatMessages: {
+                3: normalizedChatMessageSample,
+              },
+            },
+          },
+        }
+      )
+    ).toEqual({
+      1: {
+        isLoading: false,
+        error: "error text",
+        items: [1, 2, 3],
+      },
+    });
+  });
+
+  it("should handle createChatMessageError", () => {
+    expect(
+      chatReducer(
+        {
+          1: {
+            isLoading: false,
+            error: null,
+            items: [1, 2],
+          },
+        },
+        {
+          type: createChatMessageError.type,
+          payload: {
+            itemId: 1,
+            error: "error text",
+          },
+        }
+      )
+    ).toEqual({
+      1: {
+        isLoading: false,
+        error: null,
+        items: [1, 2],
+      },
     });
   });
 });

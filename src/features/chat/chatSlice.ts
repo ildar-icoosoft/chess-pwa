@@ -1,19 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
-import { defaultSingleGameItemState } from "../single-game/singleGameSlice";
 import { AppThunk } from "../../app/store";
-import { Seek } from "../../interfaces/Seek";
 import ioClient from "../../services/ioClient";
 import { JWR } from "sails.io.js";
 import { normalize } from "normalizr";
-import seekSchema from "../../normalizr/schemas/seekSchema";
 import getErrorMessageFromJWR from "../../utils/getErrorMessageFromJWR";
-import {
-  getSeeksListError,
-  getSeeksListRequest,
-  getSeeksListSuccess,
-} from "../seeks-list/seeksListSlice";
 import { ChatMessage } from "../../interfaces/ChatMessage";
 import chatMessageSchema from "../../normalizr/schemas/chatMessageSchema";
 
@@ -59,29 +51,34 @@ const chatSlice = createSlice({
       state,
       action: PayloadAction<GetChatMessagesListSuccessPayload>
     ) {
-      state[action.payload.gameId] = Object.assign(
-        {},
-        defaultGameChatMessagesState,
-        state[action.payload.gameId],
-        {
-          isLoading: false,
-          error: null,
-          items: action.payload.normalizedChatMessages.result,
-        }
-      );
+      const gameId = action.payload.gameId;
+
+      state[gameId] = {
+        isLoading: false,
+        error: null,
+        items: action.payload.normalizedChatMessages.result,
+      };
     },
     getChatMessagesListError(state, action: PayloadAction<ItemErrorPayload>) {
-      state[action.payload.itemId] = Object.assign(
-        {},
-        defaultGameChatMessagesState,
-        state[action.payload.itemId],
-        {
-          isLoading: false,
-          error: action.payload.error,
-          items: [],
-        }
-      );
+      const gameId = action.payload.itemId;
+
+      state[gameId] = {
+        isLoading: false,
+        error: action.payload.error,
+        items: [],
+      };
     },
+    createChatMessageRequest(_state, _action: PayloadAction<number>) {},
+    createChatMessageSuccess(
+      state,
+      action: PayloadAction<NormalizedData<number>>
+    ) {
+      const chatMessageId = action.payload.result;
+      const gameId = action.payload.entities.chatMessages![chatMessageId].game;
+
+      state[gameId].items.push(chatMessageId);
+    },
+    createChatMessageError(_state, _action: PayloadAction<ItemErrorPayload>) {},
   },
   extraReducers: {},
 });
@@ -90,6 +87,9 @@ export const {
   getChatMessagesListRequest,
   getChatMessagesListSuccess,
   getChatMessagesListError,
+  createChatMessageRequest,
+  createChatMessageSuccess,
+  createChatMessageError,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;
