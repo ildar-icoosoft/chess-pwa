@@ -3,9 +3,6 @@ import chatReducer, {
   getChatMessagesListSuccess,
   getChatMessagesListError,
 } from "../chatSlice";
-import singleGameReducer, {
-  getSingleGameSuccess,
-} from "../../single-game/singleGameSlice";
 
 describe("chatSlice reducer", () => {
   it("should handle initial state", () => {
@@ -103,6 +100,33 @@ describe("chatSlice reducer", () => {
         isLoading: true,
         error: "error text",
         items: [5, 6],
+      },
+    });
+  });
+
+  it("should handle getChatMessagesListError", () => {
+    expect(
+      chatReducer(
+        {
+          1: {
+            isLoading: true,
+            error: null,
+            items: [1, 2],
+          },
+        },
+        {
+          type: getChatMessagesListError.type,
+          payload: {
+            itemId: 1,
+            error: "error text",
+          },
+        }
+      )
+    ).toEqual({
+      1: {
+        isLoading: false,
+        error: "error text",
+        items: [],
       },
     });
   });

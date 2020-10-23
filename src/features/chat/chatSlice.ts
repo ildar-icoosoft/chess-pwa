@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
+import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
+import { defaultSingleGameItemState } from "../single-game/singleGameSlice";
 
 interface GameChatMessagesState {
   isLoading: boolean;
@@ -54,10 +56,17 @@ const chatSlice = createSlice({
         }
       );
     },
-    getChatMessagesListError(state, action: PayloadAction<string>) {
-      // state.isLoading = false;
-      // state.error = action.payload;
-      // state.items = [];
+    getChatMessagesListError(state, action: PayloadAction<ItemErrorPayload>) {
+      state[action.payload.itemId] = Object.assign(
+        {},
+        defaultGameChatMessagesState,
+        state[action.payload.itemId],
+        {
+          isLoading: false,
+          error: action.payload.error,
+          items: [],
+        }
+      );
     },
   },
   extraReducers: {},
