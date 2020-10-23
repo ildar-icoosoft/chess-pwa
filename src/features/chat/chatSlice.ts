@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
+import { defaultSingleGameItemState } from "../single-game/singleGameSlice";
 
 interface GameChatMessagesState {
   isLoading: boolean;
@@ -23,9 +24,16 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    getChatMessagesListRequest(state) {
-      // state.isLoading = true;
-      // state.error = null;
+    getChatMessagesListRequest(state, action: PayloadAction<number>) {
+      state[action.payload] = Object.assign(
+        {},
+        defaultGameChatMessagesState,
+        state[action.payload],
+        {
+          isLoading: true,
+          error: null,
+        }
+      );
     },
     getChatMessagesListSuccess(
       state,
