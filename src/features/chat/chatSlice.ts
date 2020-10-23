@@ -8,6 +8,7 @@ import { normalize } from "normalizr";
 import getErrorMessageFromJWR from "../../utils/getErrorMessageFromJWR";
 import { ChatMessage } from "../../interfaces/ChatMessage";
 import chatMessageSchema from "../../normalizr/schemas/chatMessageSchema";
+import { createChatMessageBySubscription } from "../data-subscription/dataSubscriptionSlice";
 
 interface GameChatMessagesState {
   isLoading: boolean;
@@ -80,7 +81,20 @@ const chatSlice = createSlice({
     },
     createChatMessageError(_state, _action: PayloadAction<ItemErrorPayload>) {},
   },
-  extraReducers: {},
+  extraReducers: {
+    [createChatMessageBySubscription.type]: (
+      state,
+      action: PayloadAction<NormalizedData<number>>
+    ) => {
+      const chatMessageId = action.payload.result;
+      const gameId = action.payload.entities.chatMessages![chatMessageId].game;
+
+      // ignore message if there is no such game in the state
+      if (state[gameId]) {
+        state[gameId].items.push(chatMessageId);
+      }
+    },
+  },
 });
 
 export const {

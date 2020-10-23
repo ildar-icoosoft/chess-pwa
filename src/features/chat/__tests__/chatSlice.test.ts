@@ -18,6 +18,7 @@ import {
   makeNormalizedChatMessageSample,
   normalizedChatMessageSample1,
 } from "../../../test-utils/data-sample/chat-message";
+import { createChatMessageBySubscription } from "../../data-subscription/dataSubscriptionSlice";
 
 jest.mock("../../../services/ioClient");
 jest.mock("../../../utils/getErrorMessageFromJWR");
@@ -281,6 +282,81 @@ describe("chatSlice reducer", () => {
         isLoading: false,
         error: "error text",
         items: [1, 2, 3],
+      },
+    });
+  });
+
+  it("should handle createChatMessageBySubscription", () => {
+    const normalizedChatMessageWithExistingGame = makeNormalizedChatMessageSample(
+      {
+        id: 3,
+        game: 1,
+      }
+    );
+
+    expect(
+      chatReducer(
+        {
+          1: {
+            isLoading: false,
+            error: "error text",
+            items: [1, 2],
+          },
+        },
+        {
+          type: createChatMessageBySubscription.type,
+          payload: {
+            result: 3,
+            entities: {
+              chatMessages: {
+                3: normalizedChatMessageWithExistingGame,
+              },
+            },
+          },
+        }
+      )
+    ).toEqual({
+      1: {
+        isLoading: false,
+        error: "error text",
+        items: [1, 2, 3],
+      },
+    });
+
+    const normalizedChatMessageWithNonExistingGame = makeNormalizedChatMessageSample(
+      {
+        id: 3,
+        game: 2,
+      }
+    );
+
+    // ignore message if there is no such game in the state
+    expect(
+      chatReducer(
+        {
+          1: {
+            isLoading: false,
+            error: "error text",
+            items: [1, 2],
+          },
+        },
+        {
+          type: createChatMessageBySubscription.type,
+          payload: {
+            result: 3,
+            entities: {
+              chatMessages: {
+                3: normalizedChatMessageWithNonExistingGame,
+              },
+            },
+          },
+        }
+      )
+    ).toEqual({
+      1: {
+        isLoading: false,
+        error: "error text",
+        items: [1, 2],
       },
     });
   });
