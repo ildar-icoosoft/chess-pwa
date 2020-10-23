@@ -3,6 +3,9 @@ import chatReducer, {
   getChatMessagesListSuccess,
   getChatMessagesListError,
 } from "../chatSlice";
+import singleGameReducer, {
+  getSingleGameSuccess,
+} from "../../single-game/singleGameSlice";
 
 describe("chatSlice reducer", () => {
   it("should handle initial state", () => {
@@ -60,6 +63,46 @@ describe("chatSlice reducer", () => {
         isLoading: true,
         error: null,
         items: [],
+      },
+    });
+  });
+
+  it("should handle getChatMessagesListSuccess", () => {
+    expect(
+      chatReducer(
+        {
+          1: {
+            isLoading: true,
+            error: "error text",
+            items: [3, 4],
+          },
+          2: {
+            isLoading: true,
+            error: "error text",
+            items: [5, 6],
+          },
+        },
+        {
+          type: getChatMessagesListSuccess.type,
+          payload: {
+            gameId: 1,
+            normalizedChatMessages: {
+              result: [7, 8],
+              entities: {},
+            },
+          },
+        }
+      )
+    ).toEqual({
+      1: {
+        isLoading: false,
+        error: null,
+        items: [7, 8],
+      },
+      2: {
+        isLoading: true,
+        error: "error text",
+        items: [5, 6],
       },
     });
   });
