@@ -25,7 +25,7 @@ export const PromotionChoiceModal: FC<PromotionChoiceModalProps> = ({
   };
 
   return (
-    <Modal show={show} animation={false}>
+    <Modal show={show} animation={false} backdrop="static">
       <Modal.Body>
         <div style={{ textAlign: "center", cursor: "pointer" }}>
           <span
