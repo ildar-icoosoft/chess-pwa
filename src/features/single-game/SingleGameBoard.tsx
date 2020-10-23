@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef } from "react";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import {
   Board,
   getValidMoves,
@@ -7,7 +7,7 @@ import {
   PieceColor,
   ValidMoves,
 } from "ii-react-chessboard";
-import { ChessInstance } from "chess.js";
+import { ChessInstance, ShortMove } from "chess.js";
 import Game from "../../interfaces/Game";
 import makeChessInstance from "../../utils/makeChessInstance";
 import User from "../../interfaces/User";
@@ -19,12 +19,13 @@ import {
   playMoveSound,
   playStartGameSound,
 } from "../../utils/sounds";
+import { isPromotionMove } from "../../utils/chess";
 
 export interface SingleGameBoardProps {
   currentUser?: User;
   game?: Game;
   isFlipped?: boolean;
-  onMove?(move: Move): void;
+  onMove?(move: ShortMove): void;
   rewindToMoveIndex?: number | null;
   isLoading?: boolean;
   error?: string | null;
@@ -138,12 +139,38 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
     premove.current = null;
   }, [premove]);
 
+  const [showPromotionChoice, setShowPromotionChoice] = useState<boolean>(
+    false
+  );
+
+  // @todo. test useEffect
+  useEffect(() => {
+    if (!game) {
+      return;
+    }
+
+    if (showPromotionChoice && game.status !== "started") {
+      setShowPromotionChoice(false);
+    }
+  }, [showPromotionChoice, game]);
+
+  const handleMove = (move: Move) => {
+    if (!onMove) {
+      return;
+    }
+
+    if (isPromotionMove(game!, move)) {
+      setShowPromotionChoice(true);
+    } else {
+      onMove(move as ShortMove);
+    }
+  };
   let boardContent = null;
 
   if (game) {
     const chessWithAllMoves: ChessInstance = makeChessInstance(game);
 
-    const chess: ChessInstance =
+    const chess =
       rewindToMoveIndex === null
         ? chessWithAllMoves
         : makeChessInstance(game, rewindToMoveIndex);
@@ -207,7 +234,7 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
           draggable
           lastMoveSquares={lastMoveSquares}
           movableColor={movableColor}
-          onMove={onMove}
+          onMove={handleMove}
           onSetPremove={handleSetPremove}
           onUnsetPremove={handleUnsetPremove}
           orientation={orientation}

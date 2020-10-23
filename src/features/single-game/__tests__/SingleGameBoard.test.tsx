@@ -424,20 +424,32 @@ describe("SingleGameBoard", () => {
         );
         expect(board.props.lastMoveSquares).toEqual(["g1", "f3"]);
       });
+    });
+  });
 
-      it("onMove", () => {
-        const onMove = jest.fn();
+  describe("Events", () => {
+    it("onMove", () => {
+      const onMove = jest.fn();
 
-        const testInstance = TestRenderer.create(
-          <SingleGameBoard game={gameSample1} onMove={onMove} />
-        ).root;
-
-        const board: TestRenderer.ReactTestInstance = testInstance.findByType(
-          Board
-        );
-
-        expect(board.props.onMove).toBe(onMove);
+      const initialPositionGameSample = makeGameSample({
+        initialFen: "startpos",
+        moves: "",
       });
+
+      const testInstance = TestRenderer.create(
+        <SingleGameBoard game={initialPositionGameSample} onMove={onMove} />
+      ).root;
+
+      const board: TestRenderer.ReactTestInstance = testInstance.findByType(
+        Board
+      );
+
+      board.props.onMove({
+        from: "e2",
+        to: "e4",
+      });
+
+      expect(onMove).toBeCalledTimes(1);
     });
   });
 
