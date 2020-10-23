@@ -137,7 +137,7 @@ describe("seeksListSlice reducer", () => {
     ).toEqual({
       isLoading: true,
       error: "error text",
-      items: [1, 2, 3],
+      items: [3, 1, 2],
     });
   });
 
@@ -181,7 +181,7 @@ describe("seeksListSlice reducer", () => {
     ).toEqual({
       isLoading: true,
       error: "error text",
-      items: [1, 2, 3],
+      items: [3, 1, 2],
     });
   });
 
