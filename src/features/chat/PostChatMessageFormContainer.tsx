@@ -1,8 +1,27 @@
-import { FC } from "react";
+import React, { FC, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../app/store";
+import {
+  PostChatMessageForm,
+  PostChatMessageFormData,
+} from "./PostChatMessageForm";
+import { createChatMessage } from "./chatSlice";
 
 export interface PostChatMessageFormContainerProps {
   gameId: number;
 }
 
-export const PostChatMessageFormContainer: FC<PostChatMessageFormContainerProps> = () =>
-  null;
+export const PostChatMessageFormContainer: FC<PostChatMessageFormContainerProps> = ({
+  gameId,
+}) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleSubmit = useCallback(
+    (values: PostChatMessageFormData) => {
+      return dispatch(createChatMessage(gameId, values.text));
+    },
+    [dispatch]
+  );
+
+  return <PostChatMessageForm onSubmit={handleSubmit} />;
+};
