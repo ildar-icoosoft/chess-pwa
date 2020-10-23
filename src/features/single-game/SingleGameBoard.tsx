@@ -7,7 +7,7 @@ import {
   PieceColor,
   ValidMoves,
 } from "ii-react-chessboard";
-import { ChessInstance, ShortMove } from "chess.js";
+import { ChessInstance, PieceType, ShortMove, Square } from "chess.js";
 import Game from "../../interfaces/Game";
 import makeChessInstance from "../../utils/makeChessInstance";
 import User from "../../interfaces/User";
@@ -20,6 +20,7 @@ import {
   playStartGameSound,
 } from "../../utils/sounds";
 import { isPromotionMove } from "../../utils/chess";
+import { PromotionChoiceModal } from "./PromotionChoiceModal";
 
 export interface SingleGameBoardProps {
   currentUser?: User;
@@ -154,17 +155,46 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
     }
   }, [showPromotionChoice, game]);
 
-  const handleMove = (move: Move) => {
-    if (!onMove) {
-      return;
-    }
+  const promotionMove = useRef<Move | null>(null);
 
-    if (isPromotionMove(game!, move)) {
-      setShowPromotionChoice(true);
-    } else {
-      onMove(move as ShortMove);
-    }
-  };
+  const handleMove = useCallback(
+    (move: Move) => {
+      if (!onMove) {
+        return;
+      }
+
+      if (isPromotionMove(game!, move)) {
+        setShowPromotionChoice(true);
+        promotionMove.current = move;
+      } else {
+        onMove(move as ShortMove);
+      }
+    },
+    [onMove, game]
+  );
+
+  const handlePromotion = useCallback(
+    (promotionPiece: Exclude<PieceType, "p">): void => {
+      setShowPromotionChoice(false);
+
+      const chess: ChessInstance = makeChessInstance(game!);
+
+      if (
+        onMove &&
+        promotionMove.current &&
+        isValidMove(chess, promotionMove.current)
+      ) {
+        const move: ShortMove = {
+          from: promotionMove.current.from as Square,
+          to: promotionMove.current.to as Square,
+          promotion: promotionPiece,
+        };
+        onMove(move);
+      }
+    },
+    [onMove, game]
+  );
+
   let boardContent = null;
 
   if (game) {
@@ -226,25 +256,32 @@ export const SingleGameBoard: FC<SingleGameBoardProps> = ({
     }
 
     boardContent = (
-      <div className={css.singleGameBoard}>
-        <Board
-          allowMarkers
-          check={check}
-          clickable
-          draggable
-          lastMoveSquares={lastMoveSquares}
-          movableColor={movableColor}
-          onMove={handleMove}
-          onSetPremove={handleSetPremove}
-          onUnsetPremove={handleUnsetPremove}
-          orientation={orientation}
-          position={fen}
-          premovable
-          turnColor={turnColor}
-          validMoves={validMoves}
-          viewOnly={viewOnly}
+      <>
+        <PromotionChoiceModal
+          show={showPromotionChoice}
+          turnColor={game.turn}
+          onPromotion={handlePromotion}
         />
-      </div>
+        <div className={css.singleGameBoard}>
+          <Board
+            allowMarkers
+            check={check}
+            clickable
+            draggable
+            lastMoveSquares={lastMoveSquares}
+            movableColor={movableColor}
+            onMove={handleMove}
+            onSetPremove={handleSetPremove}
+            onUnsetPremove={handleUnsetPremove}
+            orientation={orientation}
+            position={fen}
+            premovable
+            turnColor={turnColor}
+            validMoves={validMoves}
+            viewOnly={viewOnly}
+          />
+        </div>
+      </>
     );
   }
 

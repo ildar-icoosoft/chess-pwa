@@ -11,6 +11,10 @@ import {
 import { SingleGameBoard } from "../SingleGameBoard";
 import { userSample1 } from "../../../test-utils/data-sample/user";
 import { ContentLoadingStatus } from "../../../components/ContentLoadingStatus";
+import { PromotionChoiceModal } from "../PromotionChoiceModal";
+import { isPromotionMove } from "../../../utils/chess";
+
+jest.mock("../../../utils/chess");
 
 describe("SingleGameBoard", () => {
   describe("children components", () => {
@@ -30,6 +34,17 @@ describe("SingleGameBoard", () => {
       const testInstance = testRenderer.root;
 
       expect(testInstance.findAllByType(ContentLoadingStatus).length).toBe(1);
+    });
+
+    it("contains PromotionChoiceModal", () => {
+      const testRenderer = TestRenderer.create(<SingleGameBoard />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(PromotionChoiceModal).length).toBe(0);
+
+      testRenderer.update(<SingleGameBoard game={gameSample1} />);
+
+      expect(testInstance.findAllByType(PromotionChoiceModal).length).toBe(1);
     });
   });
 
@@ -78,6 +93,47 @@ describe("SingleGameBoard", () => {
         testRenderer.update(<SingleGameBoard game={gameSample1} />);
 
         expect(contentLoadingStatus.props.isEmpty).toBeFalsy();
+      });
+    });
+
+    describe("PromotionChoiceModal", () => {
+      describe("show", () => {
+        it("true", () => {
+          (isPromotionMove as jest.Mock).mockReturnValueOnce(true);
+
+          const onMove = jest.fn();
+
+          const testInstance = TestRenderer.create(
+            <SingleGameBoard game={gameSample1} onMove={onMove} />
+          ).root;
+
+          const board: TestRenderer.ReactTestInstance = testInstance.findByType(
+            Board
+          );
+
+          const promotionChoiceModal = testInstance.findByType(
+            PromotionChoiceModal
+          );
+
+          expect(promotionChoiceModal.props.show).toBeFalsy();
+
+          TestRenderer.act(() => {
+            board.props.onMove({
+              from: "e2",
+              to: "e4",
+            });
+          });
+
+          expect(onMove).toBeCalledTimes(0);
+
+          expect(promotionChoiceModal.props.show).toBeTruthy();
+
+          TestRenderer.act(() => {
+            promotionChoiceModal.props.onPromotion();
+          });
+
+          expect(promotionChoiceModal.props.show).toBeFalsy();
+        });
       });
     });
 
@@ -429,15 +485,12 @@ describe("SingleGameBoard", () => {
 
   describe("Events", () => {
     it("onMove", () => {
+      (isPromotionMove as jest.Mock).mockReturnValueOnce(false);
+
       const onMove = jest.fn();
 
-      const initialPositionGameSample = makeGameSample({
-        initialFen: "startpos",
-        moves: "",
-      });
-
       const testInstance = TestRenderer.create(
-        <SingleGameBoard game={initialPositionGameSample} onMove={onMove} />
+        <SingleGameBoard game={gameSample1} onMove={onMove} />
       ).root;
 
       const board: TestRenderer.ReactTestInstance = testInstance.findByType(
@@ -450,6 +503,10 @@ describe("SingleGameBoard", () => {
       });
 
       expect(onMove).toBeCalledTimes(1);
+      expect(onMove).toBeCalledWith({
+        from: "e2",
+        to: "e4",
+      });
     });
   });
 
