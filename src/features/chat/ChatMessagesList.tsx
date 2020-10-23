@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { ChatMessage } from "../../interfaces/ChatMessage";
 import { ChatMessagesListItem } from "./ChatMessagesListItem";
+import { ContentLoadingStatus } from "../../components/ContentLoadingStatus";
 
 export interface ChatMessagesListProps {
   currentUserId?: number | null;
@@ -17,12 +18,12 @@ export const ChatMessagesList: FC<ChatMessagesListProps> = ({
 }) => {
   return (
     <div>
-      {/*<ContentLoadingStatus
+      <ContentLoadingStatus
         isLoading={isLoading}
         error={error}
-        isEmpty={seeks.length === 0}
-        emptyContentMessage="Nobody is waiting for opponent"
-      />*/}
+        isEmpty={messages.length === 0}
+        showEmptyContentMessage={false}
+      />
       <div>
         {messages.map((item) => (
           <ChatMessagesListItem

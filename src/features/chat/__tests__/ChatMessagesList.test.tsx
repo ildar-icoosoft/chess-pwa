@@ -7,6 +7,7 @@ import {
   chatMessageSample1,
   chatMessageSample2,
 } from "../../../test-utils/data-sample/chat-message";
+import { ContentLoadingStatus } from "../../../components/ContentLoadingStatus";
 
 const messagesListSample = [chatMessageSample1, chatMessageSample2];
 
@@ -24,9 +25,74 @@ describe("ChatMessagesList", () => {
 
       expect(testInstance.findAllByType(ChatMessagesListItem).length).toBe(2);
     });
+
+    it("contains ContentLoadingStatus", () => {
+      const testRenderer = TestRenderer.create(<ChatMessagesList />);
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(ContentLoadingStatus).length).toBe(1);
+    });
   });
 
   describe("children components props", () => {
+    describe("ContentLoadingStatus", () => {
+      it("isLoading", () => {
+        const testRenderer = TestRenderer.create(<ChatMessagesList />);
+        const testInstance = testRenderer.root;
+
+        const contentLoadingStatus = testInstance.findByType(
+          ContentLoadingStatus
+        );
+
+        expect(contentLoadingStatus.props.isLoading).toBeFalsy();
+
+        testRenderer.update(<ChatMessagesList isLoading />);
+
+        expect(contentLoadingStatus.props.isLoading).toBeTruthy();
+      });
+
+      it("error", () => {
+        const testRenderer = TestRenderer.create(<ChatMessagesList />);
+        const testInstance = testRenderer.root;
+
+        const contentLoadingStatus = testInstance.findByType(
+          ContentLoadingStatus
+        );
+
+        expect(contentLoadingStatus.props.error).toBeNull();
+
+        testRenderer.update(<ChatMessagesList error="error text" />);
+
+        expect(contentLoadingStatus.props.error).toBe("error text");
+      });
+
+      it("isEmpty", () => {
+        const testRenderer = TestRenderer.create(<ChatMessagesList />);
+        const testInstance = testRenderer.root;
+
+        const contentLoadingStatus = testInstance.findByType(
+          ContentLoadingStatus
+        );
+
+        expect(contentLoadingStatus.props.isEmpty).toBeTruthy();
+
+        testRenderer.update(<ChatMessagesList messages={messagesListSample} />);
+
+        expect(contentLoadingStatus.props.isEmpty).toBeFalsy();
+      });
+
+      it("showEmptyContentMessage", () => {
+        const testRenderer = TestRenderer.create(<ChatMessagesList />);
+        const testInstance = testRenderer.root;
+
+        const contentLoadingStatus = testInstance.findByType(
+          ContentLoadingStatus
+        );
+
+        expect(contentLoadingStatus.props.showEmptyContentMessage).toBeFalsy();
+      });
+    });
+
     describe("ChatMessagesListItem", () => {
       it("message", () => {
         const testRenderer = TestRenderer.create(
