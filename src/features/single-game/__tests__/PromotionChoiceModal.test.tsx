@@ -3,6 +3,7 @@ import TestRenderer from "react-test-renderer";
 import { Modal } from "react-bootstrap";
 import React from "react";
 import { PromotionChoiceModal } from "../PromotionChoiceModal";
+import { fireEvent, render } from "@testing-library/react";
 
 describe("PromotionChoiceModal", () => {
   mountTest(PromotionChoiceModal);
@@ -32,4 +33,8 @@ describe("PromotionChoiceModal", () => {
       });
     });
   });
+
+  // @todo. test onPromotion event
+
+  // @todo. test DOM structure. should contain data-testid promotion-q, promotion-r, promotion-b, promotion-n
 });
