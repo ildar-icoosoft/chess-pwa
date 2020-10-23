@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import {
   Board,

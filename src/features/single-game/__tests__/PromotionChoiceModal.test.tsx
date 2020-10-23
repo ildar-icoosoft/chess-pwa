@@ -1,7 +1,7 @@
-import mountTest from "../../../test-utils/mountTest";
 import TestRenderer from "react-test-renderer";
 import { Modal } from "react-bootstrap";
 import React from "react";
+import mountTest from "../../../test-utils/mountTest";
 import { PromotionChoiceModal } from "../PromotionChoiceModal";
 
 describe("PromotionChoiceModal", () => {

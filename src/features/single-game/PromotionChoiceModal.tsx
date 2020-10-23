@@ -29,7 +29,7 @@ export const PromotionChoiceModal: FC<PromotionChoiceModalProps> = ({
       <Modal.Body>
         <div style={{ textAlign: "center", cursor: "pointer" }}>
           <span
-            data-testid={"promotion-q"}
+            data-testid="promotion-q"
             role="presentation"
             onClick={makePromotionHandler("q")}
           >
@@ -41,7 +41,7 @@ export const PromotionChoiceModal: FC<PromotionChoiceModalProps> = ({
             />
           </span>
           <span
-            data-testid={"promotion-r"}
+            data-testid="promotion-r"
             role="presentation"
             onClick={makePromotionHandler("r")}
           >
@@ -53,7 +53,7 @@ export const PromotionChoiceModal: FC<PromotionChoiceModalProps> = ({
             />
           </span>
           <span
-            data-testid={"promotion-b"}
+            data-testid="promotion-b"
             role="presentation"
             onClick={makePromotionHandler("b")}
           >
@@ -65,7 +65,7 @@ export const PromotionChoiceModal: FC<PromotionChoiceModalProps> = ({
             />
           </span>
           <span
-            data-testid={"promotion-n"}
+            data-testid="promotion-n"
             role="presentation"
             onClick={makePromotionHandler("n")}
           >
