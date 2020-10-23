@@ -1,9 +1,6 @@
 import { ChatMessage } from "../../interfaces/ChatMessage";
 import { userSample1, userSample2 } from "./user";
 import NormalizedChatMessageEntity from "../../normalizr/interfaces/NormalizedChatMessageEntity";
-import Game from "../../interfaces/Game";
-import NormalizedGameEntity from "../../normalizr/interfaces/NormalizedGameEntity";
-import { gameSample1, normalizedGameSample1 } from "./game";
 
 export const chatMessageSample1: ChatMessage = {
   id: 1,

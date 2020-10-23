@@ -6,6 +6,7 @@ import chatReducer, {
   createChatMessageSuccess,
   createChatMessageError,
   fetchChatMessages,
+  createChatMessage,
 } from "../chatSlice";
 import ioClient from "../../../services/ioClient";
 import { JWR, RequestCallback } from "sails.io.js";
@@ -16,7 +17,6 @@ import {
   chatMessageSample1,
   makeNormalizedChatMessageSample,
   normalizedChatMessageSample1,
-  normalizedChatMessageSample2,
 } from "../../../test-utils/data-sample/chat-message";
 
 jest.mock("../../../services/ioClient");
@@ -309,6 +309,87 @@ describe("chatSlice reducer", () => {
         error: null,
         items: [1, 2],
       },
+    });
+  });
+
+  describe("should handle createChatMessage", () => {
+    it("success", async () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: unknown, cb: RequestCallback) => {
+          cb(chatMessageSample1, {
+            body: chatMessageSample1,
+            statusCode: 200,
+          } as JWR);
+        }
+      );
+
+      const result = createChatMessage(1, "Good game!")(
+        dispatch,
+        () => defaultState,
+        null
+      );
+
+      await expect(result).resolves.toEqual(chatMessageSample1);
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: createChatMessageRequest.type,
+        payload: 1,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: createChatMessageSuccess.type,
+        payload: {
+          result: 1,
+          entities: {
+            chatMessages: {
+              1: normalizedChatMessageSample1,
+            },
+            users: {
+              1: normalizedUserSample1,
+            },
+          },
+        },
+      });
+    });
+
+    it("fail", async () => {
+      const dispatch = jest.fn();
+
+      (ioClient.socket.post as jest.Mock).mockImplementationOnce(
+        (url: string, data: unknown, cb: RequestCallback) => {
+          cb("internal server error", {
+            body: "internal server error",
+            statusCode: 500,
+          } as JWR);
+        }
+      );
+      (getErrorMessageFromJWR as jest.Mock).mockReturnValueOnce("error text");
+
+      const result = createChatMessage(1, "Good game!")(
+        dispatch,
+        () => defaultState,
+        null
+      );
+
+      await expect(result).rejects.toEqual({
+        body: "internal server error",
+        statusCode: 500,
+      });
+
+      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: createChatMessageRequest.type,
+        payload: 1,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: createChatMessageError.type,
+        payload: {
+          itemId: 1,
+          error: "error text",
+        },
+      });
     });
   });
 });

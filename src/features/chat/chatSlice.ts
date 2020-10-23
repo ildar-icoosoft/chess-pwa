@@ -128,3 +128,38 @@ export const fetchChatMessages = (
     );
   });
 };
+
+export const createChatMessage = (
+  gameId: number,
+  text: string
+): AppThunk<Promise<ChatMessage>> => (dispatch) => {
+  dispatch(createChatMessageRequest(gameId));
+
+  return new Promise((resolve, reject) => {
+    ioClient.socket.post(
+      `/board/game/${gameId}/chat`,
+      {
+        text,
+      },
+      (body: unknown, jwr: JWR) => {
+        if (jwr.statusCode === 200) {
+          const normalizedChatMessage = normalize(
+            body as ChatMessage,
+            chatMessageSchema
+          );
+          dispatch(createChatMessageSuccess(normalizedChatMessage));
+
+          resolve(body as ChatMessage);
+        } else {
+          dispatch(
+            createChatMessageError({
+              itemId: gameId,
+              error: getErrorMessageFromJWR(jwr),
+            })
+          );
+          reject(jwr);
+        }
+      }
+    );
+  });
+};
