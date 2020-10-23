@@ -9,6 +9,7 @@ import { SingleGameBoardContainer } from "../SingleGameBoardContainer";
 import { fetchGame } from "../singleGameSlice";
 import { makeStateSample } from "../../../test-utils/data-sample/state";
 import { normalizedGameSample1 } from "../../../test-utils/data-sample/game";
+import { Chat } from "../../chat/Chat";
 
 jest.mock("../singleGameSlice");
 
@@ -19,6 +20,7 @@ const stateWithGameSample = makeStateSample({
       1: normalizedGameSample1,
     },
     seeks: {},
+    chatMessages: {},
   },
 });
 
@@ -73,6 +75,19 @@ describe("GamePage", () => {
       expect(testInstance.findAllByType(SingleGameBoardContainer).length).toBe(
         1
       );
+    });
+
+    it("contains Chat", () => {
+      const testRenderer = TestRenderer.create(
+        <MemoryRouter initialEntries={["/game/1"]}>
+          <Route path="/game/:id">
+            <GamePage />
+          </Route>
+        </MemoryRouter>
+      );
+      const testInstance = testRenderer.root;
+
+      expect(testInstance.findAllByType(Chat).length).toBe(1);
     });
   });
 
@@ -131,6 +146,23 @@ describe("GamePage", () => {
         );
 
         expect(singleGameBoardContainer.props.id).toBe(2);
+      });
+    });
+
+    describe("Chat", () => {
+      it("gameId", () => {
+        const testRenderer = TestRenderer.create(
+          <MemoryRouter initialEntries={["/game/2"]}>
+            <Route path="/game/:id">
+              <GamePage />
+            </Route>
+          </MemoryRouter>
+        );
+        const testInstance = testRenderer.root;
+
+        const chat = testInstance.findByType(Chat);
+
+        expect(chat.props.gameId).toBe(2);
       });
     });
   });

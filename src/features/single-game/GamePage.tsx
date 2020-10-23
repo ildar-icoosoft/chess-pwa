@@ -6,6 +6,7 @@ import { GameControlPanelContainer } from "./GameControlPanelContainer";
 import { SingleGameBoardContainer } from "./SingleGameBoardContainer";
 import { fetchGame } from "./singleGameSlice";
 import { AppDispatch } from "../../app/store";
+import { Chat } from "../chat/Chat";
 
 interface GamePageParams {
   id: string;
@@ -26,6 +27,8 @@ const GamePage: FC<unknown> = () => {
     <div className="row">
       <div className="col-3">
         <GameMetaContainer id={idAsNumber} />
+
+        <Chat gameId={idAsNumber} />
       </div>
       <div className="col-6">
         <SingleGameBoardContainer id={idAsNumber} />
