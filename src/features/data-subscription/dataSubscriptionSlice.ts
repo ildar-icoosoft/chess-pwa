@@ -45,6 +45,14 @@ const dataSubscriptionSlice = createSlice({
       _state,
       _action: PayloadAction<NormalizedData<number>>
     ) {},
+    createChatMessageBySubscription(
+      _state,
+      _action: PayloadAction<NormalizedData<number>>
+    ) {},
+    updateChatMessageBySubscription(
+      _state,
+      _action: PayloadAction<NormalizedData<number>>
+    ) {},
   },
   extraReducers: {},
 });
@@ -57,6 +65,8 @@ export const {
   removeSeekBySubscription,
   createUserBySubscription,
   updateUserBySubscription,
+  createChatMessageBySubscription,
+  updateChatMessageBySubscription,
 } = dataSubscriptionSlice.actions;
 
 export default dataSubscriptionSlice.reducer;

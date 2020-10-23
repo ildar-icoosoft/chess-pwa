@@ -8,6 +8,8 @@ import dataSubscriptionReducer, {
   removeSeekBySubscription,
   updateUserBySubscription,
   createUserBySubscription,
+  createChatMessageBySubscription,
+  updateChatMessageBySubscription,
   watchGames,
   watchSeeks,
   watchUsers,
@@ -330,6 +332,36 @@ describe("dataSubscriptionSlice reducer", () => {
         {},
         {
           type: createUserBySubscription.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({});
+  });
+
+  it("should handle createChatMessageBySubscription", () => {
+    expect(
+      dataSubscriptionReducer(
+        {},
+        {
+          type: createChatMessageBySubscription.type,
+          payload: {
+            result: 1,
+            entities: {},
+          },
+        }
+      )
+    ).toEqual({});
+  });
+
+  it("should handle updateChatMessageBySubscription", () => {
+    expect(
+      dataSubscriptionReducer(
+        {},
+        {
+          type: updateChatMessageBySubscription.type,
           payload: {
             result: 1,
             entities: {},
