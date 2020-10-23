@@ -1,9 +1,9 @@
 import { FC } from "react";
 import Game from "../../interfaces/Game";
 
-export interface ChatMessagesProps {
+export interface ChatMessagesListProps {
   game?: Game;
   currentUserId: number;
 }
 
-export const ChatMessages: FC<ChatMessagesProps> = () => null;
+export const ChatMessagesList: FC<ChatMessagesListProps> = () => null;

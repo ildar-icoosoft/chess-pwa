@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ChatMessagesContainer } from "./ChatMessagesContainer";
+import { ChatMessagesListContainer } from "./ChatMessagesListContainer";
 import { PostChatMessageFormContainer } from "./PostChatMessageFormContainer";
 
 export interface ChatProps {
@@ -9,7 +9,7 @@ export interface ChatProps {
 export const Chat: FC<ChatProps> = ({ gameId }) => {
   return (
     <>
-      <ChatMessagesContainer gameId={gameId} />
+      <ChatMessagesListContainer gameId={gameId} />
       <PostChatMessageFormContainer gameId={gameId} />
     </>
   );

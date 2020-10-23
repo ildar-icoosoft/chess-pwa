@@ -2,18 +2,20 @@ import mountTest from "../../../test-utils/mountTest";
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { Chat } from "../Chat";
-import { ChatMessagesContainer } from "../ChatMessagesContainer";
+import { ChatMessagesListContainer } from "../ChatMessagesListContainer";
 import { PostChatMessageFormContainer } from "../PostChatMessageFormContainer";
 
 describe("Chat", () => {
   mountTest(Chat, { gameId: 1 });
 
   describe("children components", () => {
-    it("contains ChatMessagesContainer", () => {
+    it("contains ChatMessagesListContainer", () => {
       const testRenderer = TestRenderer.create(<Chat gameId={1} />);
       const testInstance = testRenderer.root;
 
-      expect(testInstance.findAllByType(ChatMessagesContainer).length).toBe(1);
+      expect(testInstance.findAllByType(ChatMessagesListContainer).length).toBe(
+        1
+      );
     });
 
     it("contains PostChatMessageFormContainer", () => {
@@ -27,13 +29,13 @@ describe("Chat", () => {
   });
 
   describe("children components props", () => {
-    describe("ChatMessagesContainer", () => {
+    describe("ChatMessagesListContainer", () => {
       it("contains gameId", () => {
         const testRenderer = TestRenderer.create(<Chat gameId={1} />);
         const testInstance = testRenderer.root;
 
         const chatMessagesContainer = testInstance.findByType(
-          ChatMessagesContainer
+          ChatMessagesListContainer
         );
 
         expect(chatMessagesContainer.props.gameId).toBe(1);
