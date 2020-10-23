@@ -23,7 +23,7 @@ interface GameChatMessagesState {
   items: number[];
 }
 
-interface GetChatMessagesListSuccessPayload {
+export interface GetChatMessagesListSuccessPayload {
   gameId: number;
   normalizedChatMessages: NormalizedData<number[]>;
 }

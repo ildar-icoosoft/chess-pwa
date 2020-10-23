@@ -33,6 +33,7 @@ import {
   removeSeekBySubscription,
   createUserBySubscription,
   updateUserBySubscription,
+  createChatMessageBySubscription,
 } from "../data-subscription/dataSubscriptionSlice";
 import {
   makeMoveRequest,
@@ -43,17 +44,24 @@ import NormalizedUserEntity from "../../normalizr/interfaces/NormalizedUserEntit
 import NormalizedGameEntity from "../../normalizr/interfaces/NormalizedGameEntity";
 import makeChessInstance from "../../utils/makeChessInstance";
 import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
+import NormalizedChatMessageEntity from "../../normalizr/interfaces/NormalizedChatMessageEntity";
+import {
+  getChatMessagesListSuccess,
+  GetChatMessagesListSuccessPayload,
+} from "../chat/chatSlice";
 
 export interface EntitiesState {
   users: Record<string, NormalizedUserEntity>;
   games: Record<string, NormalizedGameEntity>;
   seeks: Record<string, NormalizedSeekEntity>;
+  chatMessages: Record<string, NormalizedChatMessageEntity>;
 }
 
 const initialState: EntitiesState = {
   users: {},
   games: {},
   seeks: {},
+  chatMessages: {},
 };
 
 const getNormalizedDataReducer = (
@@ -68,6 +76,7 @@ const getNormalizedDataReducer = (
   Object.assign(state.users, action.payload.entities.users);
   Object.assign(state.games, action.payload.entities.games);
   Object.assign(state.seeks, action.payload.entities.seeks);
+  Object.assign(state.chatMessages, action.payload.entities.chatMessages);
 };
 
 const entitiesSlice = createSlice({
@@ -93,6 +102,14 @@ const entitiesSlice = createSlice({
     [getSeeksListSuccess.type]: getNormalizedDataReducer,
     [getSingleGameSuccess.type]: getNormalizedDataReducer,
     [abortGameSuccess.type]: getNormalizedDataReducer,
+    [createChatMessageBySubscription.type]: getNormalizedDataReducer,
+    [getChatMessagesListSuccess.type]: (
+      state: EntitiesState,
+      action: PayloadAction<GetChatMessagesListSuccessPayload>
+    ) =>
+      getNormalizedDataReducer(state, {
+        payload: action.payload.normalizedChatMessages,
+      }),
     [resignGameSuccess.type]: getNormalizedDataReducer,
     [offerDrawSuccess.type]: getNormalizedDataReducer,
     [acceptDrawOfferSuccess.type]: getNormalizedDataReducer,
