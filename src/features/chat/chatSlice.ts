@@ -2,6 +2,7 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable prefer-object-spread */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JWR } from "sails.io.js";
@@ -57,7 +58,7 @@ const chatSlice = createSlice({
       state,
       action: PayloadAction<GetChatMessagesListSuccessPayload>
     ) {
-      const gameId = action.payload.gameId;
+      const { gameId } = action.payload;
 
       state[gameId] = {
         isLoading: false,

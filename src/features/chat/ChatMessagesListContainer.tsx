@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../app/rootReducer";
 import { denormalize } from "normalizr";
+import { RootState } from "../../app/rootReducer";
+import { useDeepEqualSelector } from "ii-react-libraries";
 import chatMessageSchema from "../../normalizr/schemas/chatMessageSchema";
 import { defaultGameChatMessagesState } from "./chatSlice";
 import { ChatMessagesList } from "./ChatMessagesList";
-import { useDeepEqualSelector } from "ii-react-libraries";
 
 export interface ChatMessagesListContainerProps {
   gameId: number;
