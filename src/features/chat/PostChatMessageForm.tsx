@@ -2,7 +2,7 @@
 
 import React, { FC, FormEvent } from "react";
 import { Formik, FormikHelpers } from "formik";
-import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import css from "./PostChatMessageForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
@@ -55,7 +55,7 @@ export const PostChatMessageForm: FC<PostChatMessageFormProps> = ({
                 className={css.textInput}
                 name="text"
                 autoComplete="off"
-                placeholder="Please be nice in the chat"
+                placeholder="Please be nice in the chat!"
                 onBlur={handleBlur}
                 value={values.text}
                 onChange={handleChange}

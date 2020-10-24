@@ -5,6 +5,7 @@ import { denormalize } from "normalizr";
 import chatMessageSchema from "../../normalizr/schemas/chatMessageSchema";
 import { defaultGameChatMessagesState } from "./chatSlice";
 import { ChatMessagesList } from "./ChatMessagesList";
+import { useDeepEqualSelector } from "ii-react-libraries";
 
 export interface ChatMessagesListContainerProps {
   gameId: number;
@@ -17,7 +18,7 @@ export const ChatMessagesListContainer: FC<ChatMessagesListContainerProps> = ({
     (state: RootState) => state.currentUser.userId
   );
 
-  const messages = useSelector((state: RootState) =>
+  const messages = useDeepEqualSelector((state: RootState) =>
     state.chat[gameId]
       ? denormalize(
           state.chat[gameId].items,
