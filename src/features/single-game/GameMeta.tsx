@@ -18,7 +18,7 @@ export const GameMeta: FC<GameMetaProps> = ({ game }) => {
 
   return (
     <Card className="mb-3">
-      <Card.Body>
+      <Card.Body className="p-2">
         <div>
           Time Control:{" "}
           <span data-testid="time-control">
