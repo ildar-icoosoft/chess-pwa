@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import { ChatMessage } from "../../interfaces/ChatMessage";
 import { ChatMessagesListItem } from "./ChatMessagesListItem";
 import { ContentLoadingStatus } from "../../components/ContentLoadingStatus";
@@ -17,8 +17,22 @@ export const ChatMessagesList: FC<ChatMessagesListProps> = ({
   isLoading = false,
   error = null,
 }) => {
+  const scrollElementRef = useRef<HTMLDivElement>(null);
+  const lastMovesQnt = useRef<number>(0);
+
+  // @todo. add unit test
+  useEffect(() => {
+    if (lastMovesQnt.current !== messages.length) {
+      if (scrollElementRef.current) {
+        scrollElementRef.current.scrollTop =
+          scrollElementRef.current.scrollHeight;
+      }
+    }
+    lastMovesQnt.current = messages.length;
+  }, [scrollElementRef, messages]);
+
   return (
-    <div className={css.chatMessages}>
+    <div className={css.chatMessages} ref={scrollElementRef}>
       <ContentLoadingStatus
         isLoading={isLoading}
         error={error}
