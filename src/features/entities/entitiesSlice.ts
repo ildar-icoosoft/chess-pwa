@@ -48,6 +48,7 @@ import NormalizedChatMessageEntity from "../../normalizr/interfaces/NormalizedCh
 import {
   getChatMessagesListSuccess,
   GetChatMessagesListSuccessPayload,
+  createChatMessageSuccess,
 } from "../chat/chatSlice";
 
 export interface EntitiesState {
@@ -102,6 +103,7 @@ const entitiesSlice = createSlice({
     [getSeeksListSuccess.type]: getNormalizedDataReducer,
     [getSingleGameSuccess.type]: getNormalizedDataReducer,
     [abortGameSuccess.type]: getNormalizedDataReducer,
+    [createChatMessageSuccess.type]: getNormalizedDataReducer,
     [createChatMessageBySubscription.type]: getNormalizedDataReducer,
     [getChatMessagesListSuccess.type]: (
       state: EntitiesState,

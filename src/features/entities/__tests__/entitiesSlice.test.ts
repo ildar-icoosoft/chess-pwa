@@ -35,6 +35,7 @@ import {
   updateUserBySubscription,
   createChatMessageBySubscription,
 } from "../../data-subscription/dataSubscriptionSlice";
+import { createChatMessageSuccess } from "../../chat/chatSlice";
 import {
   emptyEntities,
   makeEntitiesSample,
@@ -539,6 +540,18 @@ describe("entitiesSlice reducer", () => {
     expect(
       entitiesReducer(entitiesSample, {
         type: updateUserBySubscription.type,
+        payload: {
+          result: 2,
+          entities: entitiesPayloadSample,
+        },
+      })
+    ).toEqual(allEntitiesSample);
+  });
+
+  it("should handle createChatMessageSuccess", () => {
+    expect(
+      entitiesReducer(entitiesSample, {
+        type: createChatMessageSuccess.type,
         payload: {
           result: 2,
           entities: entitiesPayloadSample,
