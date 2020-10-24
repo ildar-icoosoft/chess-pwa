@@ -3,9 +3,9 @@
 import React, { FC, FormEvent } from "react";
 import { Formik, FormikHelpers } from "formik";
 import { Button, Form, Spinner } from "react-bootstrap";
-import css from "./PostChatMessageForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import css from "./PostChatMessageForm.module.scss";
 
 export interface PostChatMessageFormData {
   text: string;

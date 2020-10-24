@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
+import TestRenderer from "react-test-renderer";
+import React from "react";
 import {
   defaultState,
   makeStateSample,
 } from "../../../test-utils/data-sample/state";
 import mountTest from "../../../test-utils/mountTest";
-import TestRenderer from "react-test-renderer";
-import React from "react";
 import { ChatMessagesListContainer } from "../ChatMessagesListContainer";
 import { ChatMessagesList } from "../ChatMessagesList";
 import {

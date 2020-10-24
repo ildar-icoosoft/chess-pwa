@@ -1,3 +1,4 @@
+import { JWR, RequestCallback } from "sails.io.js";
 import chatReducer, {
   getChatMessagesListRequest,
   getChatMessagesListSuccess,
@@ -9,7 +10,6 @@ import chatReducer, {
   createChatMessage,
 } from "../chatSlice";
 import ioClient from "../../../services/ioClient";
-import { JWR, RequestCallback } from "sails.io.js";
 import { defaultState } from "../../../test-utils/data-sample/state";
 import { normalizedUserSample1 } from "../../../test-utils/data-sample/user";
 import getErrorMessageFromJWR from "../../../utils/getErrorMessageFromJWR";

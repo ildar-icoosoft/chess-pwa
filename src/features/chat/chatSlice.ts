@@ -1,10 +1,15 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-cycle */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { JWR } from "sails.io.js";
+import { normalize } from "normalizr";
 import NormalizedData from "../../normalizr/interfaces/NormalizedData";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 import { AppThunk } from "../../app/store";
 import ioClient from "../../services/ioClient";
-import { JWR } from "sails.io.js";
-import { normalize } from "normalizr";
 import getErrorMessageFromJWR from "../../utils/getErrorMessageFromJWR";
 import { ChatMessage } from "../../interfaces/ChatMessage";
 import chatMessageSchema from "../../normalizr/schemas/chatMessageSchema";

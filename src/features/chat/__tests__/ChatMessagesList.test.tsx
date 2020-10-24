@@ -1,7 +1,7 @@
-import mountTest from "../../../test-utils/mountTest";
-import TestRenderer from "react-test-renderer";
-import { ChatMessagesList } from "../ChatMessagesList";
 import React from "react";
+import TestRenderer from "react-test-renderer";
+import mountTest from "../../../test-utils/mountTest";
+import { ChatMessagesList } from "../ChatMessagesList";
 import { ChatMessagesListItem } from "../ChatMessagesListItem";
 import {
   chatMessageSample1,

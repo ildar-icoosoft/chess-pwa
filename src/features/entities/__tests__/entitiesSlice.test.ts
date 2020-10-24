@@ -3,7 +3,10 @@
 import entitiesReducer, { EntitiesState } from "../entitiesSlice";
 import { getGamesListSuccess } from "../../games-list/gamesListSlice";
 import { getSeeksListSuccess } from "../../seeks-list/seeksListSlice";
-import { getChatMessagesListSuccess } from "../../chat/chatSlice";
+import {
+  getChatMessagesListSuccess,
+  createChatMessageSuccess,
+} from "../../chat/chatSlice";
 import {
   abortGameSuccess,
   getSingleGameSuccess,
@@ -35,7 +38,6 @@ import {
   updateUserBySubscription,
   createChatMessageBySubscription,
 } from "../../data-subscription/dataSubscriptionSlice";
-import { createChatMessageSuccess } from "../../chat/chatSlice";
 import {
   emptyEntities,
   makeEntitiesSample,

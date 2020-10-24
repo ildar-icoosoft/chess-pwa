@@ -1,7 +1,7 @@
-import mountTest from "../../../test-utils/mountTest";
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { Chat } from "../Chat";
+import mountTest from "../../../test-utils/mountTest";
 import { ChatMessagesListContainer } from "../ChatMessagesListContainer";
 import { PostChatMessageFormContainer } from "../PostChatMessageFormContainer";
 

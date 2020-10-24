@@ -1,3 +1,4 @@
+import { FormikHelpers } from "formik";
 import React, { FC, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
@@ -6,7 +7,6 @@ import {
   PostChatMessageFormData,
 } from "./PostChatMessageForm";
 import { createChatMessage } from "./chatSlice";
-import { FormikHelpers } from "formik";
 
 export interface PostChatMessageFormContainerProps {
   gameId: number;
