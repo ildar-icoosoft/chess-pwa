@@ -115,7 +115,7 @@ export const fetchChatMessages = (
 
   return new Promise((resolve, reject) => {
     ioClient.socket.get(
-      `/board/game/${gameId}/chat`,
+      `/api/v1/board/game/${gameId}/chat`,
       (body: unknown, jwr: JWR) => {
         if (jwr.statusCode === 200) {
           const normalizedChatMessages = normalize(body as ChatMessage[], [
@@ -151,7 +151,7 @@ export const createChatMessage = (
 
   return new Promise((resolve, reject) => {
     ioClient.socket.post(
-      `/board/game/${gameId}/chat`,
+      `/api/v1/board/game/${gameId}/chat`,
       {
         text,
       },
