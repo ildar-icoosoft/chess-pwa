@@ -7,7 +7,6 @@ import {
 } from "./PostChatMessageForm";
 import { createChatMessage } from "./chatSlice";
 import { FormikHelpers } from "formik";
-import { RegistrationFormData } from "../auth-modal/RegistrationForm";
 
 export interface PostChatMessageFormContainerProps {
   gameId: number;
@@ -23,8 +22,6 @@ export const PostChatMessageFormContainer: FC<PostChatMessageFormContainerProps>
       values: PostChatMessageFormData,
       formikHelpers: FormikHelpers<PostChatMessageFormData>
     ) => {
-      const text = values.text;
-
       formikHelpers.resetForm();
 
       return dispatch(createChatMessage(gameId, values.text));
