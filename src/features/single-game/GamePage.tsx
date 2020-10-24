@@ -7,6 +7,7 @@ import { SingleGameBoardContainer } from "./SingleGameBoardContainer";
 import { fetchGame } from "./singleGameSlice";
 import { AppDispatch } from "../../app/store";
 import { Chat } from "../chat/Chat";
+import { fetchChatMessages } from "../chat/chatSlice";
 
 interface GamePageParams {
   id: string;
@@ -21,6 +22,7 @@ const GamePage: FC<unknown> = () => {
 
   useEffect(() => {
     dispatch(fetchGame(idAsNumber));
+    dispatch(fetchChatMessages(idAsNumber));
   }, [dispatch, idAsNumber]);
 
   return (

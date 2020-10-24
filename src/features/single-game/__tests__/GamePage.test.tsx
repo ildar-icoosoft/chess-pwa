@@ -10,8 +10,10 @@ import { fetchGame } from "../singleGameSlice";
 import { makeStateSample } from "../../../test-utils/data-sample/state";
 import { normalizedGameSample1 } from "../../../test-utils/data-sample/game";
 import { Chat } from "../../chat/Chat";
+import { fetchChatMessages } from "../../chat/chatSlice";
 
 jest.mock("../singleGameSlice");
+jest.mock("../../chat/chatSlice");
 
 const stateWithGameSample = makeStateSample({
   entities: {
@@ -211,6 +213,31 @@ describe("GamePage", () => {
 
       expect(dispatch).toBeCalledWith(fetchGameReturnedValue);
       */
+    });
+
+    it("should call dispatch(fetchChatMessages())", () => {
+      const dispatch = useDispatch<jest.Mock>();
+
+      (useEffect as jest.Mock).mockImplementationOnce((cb) => cb());
+
+      const fetchChatMessagesReturnedValue = Symbol("fetchChatMessages");
+
+      const fetchChatMessagesFn = fetchChatMessages as jest.Mock;
+      fetchChatMessagesFn.mockClear();
+      fetchChatMessagesFn.mockReturnValue(fetchChatMessagesReturnedValue);
+
+      TestRenderer.create(
+        <MemoryRouter initialEntries={["/game/1"]}>
+          <Route path="/game/:id">
+            <GamePage />
+          </Route>
+        </MemoryRouter>
+      );
+
+      expect(fetchChatMessagesFn).toBeCalledTimes(1);
+      expect(fetchChatMessagesFn).toBeCalledWith(1);
+
+      expect(dispatch).toBeCalledWith(fetchChatMessagesReturnedValue);
     });
   });
 });
