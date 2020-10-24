@@ -2,7 +2,7 @@
 
 import React, { FC, FormEvent } from "react";
 import { Formik, FormikHelpers } from "formik";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import cx from "classnames";
 import css from "./PostChatMessageForm.module.scss";
 
@@ -59,6 +59,16 @@ export const PostChatMessageForm: FC<PostChatMessageFormProps> = ({
           </Form.Group>
 
           <Button disabled={isSubmitting || values.text === ""} type="submit">
+            {isSubmitting && (
+              <Spinner
+                animation="border"
+                data-testid="submit-btn-spinner"
+                size="sm"
+                className="mr-2"
+              >
+                <span className="sr-only">Sending...</span>
+              </Spinner>
+            )}
             Send
           </Button>
         </Form>
