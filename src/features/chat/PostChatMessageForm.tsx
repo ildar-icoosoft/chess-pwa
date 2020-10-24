@@ -50,15 +50,15 @@ export const PostChatMessageForm: FC<PostChatMessageFormProps> = ({
         >
           <Form.Group>
             <Form.Control
-              as="textarea"
               name="text"
+              autoComplete="off"
               onBlur={handleBlur}
               value={values.text}
               onChange={handleChange}
             />
           </Form.Group>
 
-          <Button disabled={isSubmitting} type="submit">
+          <Button disabled={isSubmitting || values.text === ""} type="submit">
             Send
           </Button>
         </Form>
