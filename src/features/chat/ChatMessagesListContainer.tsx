@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { denormalize } from "normalizr";
-import { RootState } from "../../app/rootReducer";
 import { useDeepEqualSelector } from "ii-react-libraries";
+import { RootState } from "../../app/rootReducer";
 import chatMessageSchema from "../../normalizr/schemas/chatMessageSchema";
 import { defaultGameChatMessagesState } from "./chatSlice";
 import { ChatMessagesList } from "./ChatMessagesList";
