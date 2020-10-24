@@ -46,11 +46,21 @@ describe("PostChatMessageFormContainer", () => {
       createChatMessageFn.mockClear();
       createChatMessageFn.mockReturnValue(createChatMessageReturnedValue);
 
+      const formikResetFormFn = jest.fn();
+
       TestRenderer.act(() => {
-        postChatMessageForm.props.onSubmit({
-          text: "Hello",
-        });
+        postChatMessageForm.props.onSubmit(
+          {
+            text: "Hello",
+          },
+          {
+            resetForm: formikResetFormFn,
+          }
+        );
       });
+
+      expect(formikResetFormFn).toBeCalledTimes(1);
+      expect(formikResetFormFn).toBeCalledWith();
 
       expect(createChatMessageFn).toBeCalledTimes(1);
       expect(createChatMessageFn).toBeCalledWith(1, "Hello");
