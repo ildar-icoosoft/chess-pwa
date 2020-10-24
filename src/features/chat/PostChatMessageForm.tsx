@@ -52,6 +52,7 @@ export const PostChatMessageForm: FC<PostChatMessageFormProps> = ({
             <Form.Control
               name="text"
               autoComplete="off"
+              placeholder="Please be nice in the chat"
               onBlur={handleBlur}
               value={values.text}
               onChange={handleChange}

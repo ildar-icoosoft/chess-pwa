@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { ChatMessage } from "../../interfaces/ChatMessage";
 import { ChatMessagesListItem } from "./ChatMessagesListItem";
 import { ContentLoadingStatus } from "../../components/ContentLoadingStatus";
+import css from "./ChatMessagesList.module.scss";
 
 export interface ChatMessagesListProps {
   currentUserId?: number | null;
@@ -17,7 +18,7 @@ export const ChatMessagesList: FC<ChatMessagesListProps> = ({
   error = null,
 }) => {
   return (
-    <div>
+    <div className={css.chatMessages}>
       <ContentLoadingStatus
         isLoading={isLoading}
         error={error}

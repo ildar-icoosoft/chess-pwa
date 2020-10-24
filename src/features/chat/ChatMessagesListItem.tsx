@@ -19,12 +19,16 @@ export const ChatMessagesListItem: FC<ChatMessagesListItemProps> = ({
   return (
     <div
       data-testid="message-wrapper"
-      className={cx({
+      className={cx(css.messageWrapper, {
         [css.currentUserMessage]: message.createdBy.id === currentUserId,
       })}
     >
-      <div data-testid="user-name">{message.createdBy.fullName}</div>
-      <div data-testid="message-text">{message.text}</div>
+      <span data-testid="user-name" className={css.userName}>
+        {message.createdBy.fullName}
+      </span>
+      <span data-testid="message-text" className={css.messageText}>
+        {message.text}
+      </span>
     </div>
   );
 };

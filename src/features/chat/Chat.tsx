@@ -10,11 +10,11 @@ export interface ChatProps {
 export const Chat: FC<ChatProps> = ({ gameId }) => {
   return (
     <Card>
-      <Card.Header>Chat room</Card.Header>
-      <Card.Body>
+      <Card.Header className="p-2">Chat room</Card.Header>
+      <Card.Body className="p-2">
         <ChatMessagesListContainer gameId={gameId} />
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className="p-2">
         <PostChatMessageFormContainer gameId={gameId} />
       </Card.Footer>
     </Card>
