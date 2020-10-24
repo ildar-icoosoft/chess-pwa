@@ -6,6 +6,8 @@ import {
   PostChatMessageFormData,
 } from "./PostChatMessageForm";
 import { createChatMessage } from "./chatSlice";
+import { FormikHelpers } from "formik";
+import { RegistrationFormData } from "../auth-modal/RegistrationForm";
 
 export interface PostChatMessageFormContainerProps {
   gameId: number;
@@ -17,7 +19,14 @@ export const PostChatMessageFormContainer: FC<PostChatMessageFormContainerProps>
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = useCallback(
-    (values: PostChatMessageFormData) => {
+    (
+      values: PostChatMessageFormData,
+      formikHelpers: FormikHelpers<PostChatMessageFormData>
+    ) => {
+      const text = values.text;
+
+      formikHelpers.resetForm();
+
       return dispatch(createChatMessage(gameId, values.text));
     },
     [dispatch, gameId]
