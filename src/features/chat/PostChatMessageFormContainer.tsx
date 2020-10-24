@@ -20,7 +20,7 @@ export const PostChatMessageFormContainer: FC<PostChatMessageFormContainerProps>
     (values: PostChatMessageFormData) => {
       return dispatch(createChatMessage(gameId, values.text));
     },
-    [dispatch]
+    [dispatch, gameId]
   );
 
   return <PostChatMessageForm onSubmit={handleSubmit} />;
