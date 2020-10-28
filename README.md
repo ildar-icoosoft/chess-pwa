@@ -30,3 +30,8 @@ A small [React](https://reactjs.org/) application where users can play chess. [L
 
 The application is very small, I made it for demonstration purposes. It contains only 2 pages, but a lot of functionality.
 
+The Home page contains list of users. You can see their online/offline status. On Home page you can accept a game request 
+from another person. Or you can create a public seek, to start a game with a random player. Also you can play with the 
+computer with 4 levels of strength. Also home page contains previews of ongoing and finished games. All data is updated in real-time via Web Sockets.
+
+The Single game page contains a board to play the game. Control panel with toolbars and moves list. And a Chat.
