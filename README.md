@@ -32,4 +32,32 @@ The Home page contains list of users. You can see their online/offline status. O
 from another person. Or you can create a public seek, to start a game with a random player. Also you can play with the 
 computer with 4 levels of strength. Also home page contains previews of ongoing and finished games. All data is updated in real-time via Web Sockets.
 
-The Single game page contains a board to play the game. Control panel with toolbars and moves list. And a Chat.
+The Single game page contains a board to play the game. Control panel with toolbars and moves list.
+Game info panel where you can see information about the game. And a Chat to talk with your opponent.
+
+[Chessboard component](https://github.com/ildar-icoosoft/chess-pwa) which is used on Home page to show
+game previews and on Single game page to play chess, has flexible settings. It supports Drag and Drop, squares highlighting, animation, premoves, resize and many other functions.
+
+## Installation
+
+```bash
+git clone https://github.com/ildar-icoosoft/chess-pwa.git
+cd chess-pwa
+yarn install
+```
+
+Note that this repo contains only frontend. So that the application can work with data, you will need to install the [backend](https://github.com/ildar-icoosoft/chess-backend) as well.
+
+## Start server
+
+```bash
+yarn start
+```
+
+## Run tests
+
+```bash
+yarn test
+```
+
+
