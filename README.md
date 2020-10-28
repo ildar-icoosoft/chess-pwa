@@ -1,7 +1,7 @@
 <h1 align="center">Chess PWA</h1>
 
 <p align="center">
-A small [React](https://reactjs.org/) application where users can play chess. [Live Demo](https://ildar-icoosoft.github.io/chess-pwa/)
+    A small [React](https://reactjs.org/) application where users can play chess. <a href="https://ildar-icoosoft.github.io/chess-pwa/">Live Demo</a>
 </p>
 
 <p align="center">
