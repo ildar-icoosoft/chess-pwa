@@ -1,5 +1,8 @@
 name: GH-Pages
 
+env:
+  REACT_APP_BACKEND_HOST: ${{ secrets.REACT_APP_BACKEND_HOST }}
+
 on:
   push:
     branches: [ master, CHESSPWA-73_config-env ]
