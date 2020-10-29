@@ -1,10 +1,9 @@
 import React, { FC } from "react";
-import { ChessInstance } from "chess.js";
 import Game from "../../interfaces/Game";
 import { GameControlPanel } from "./GameControlPanel";
 import User from "../../interfaces/User";
 import { PieceColor } from "../../types/PieceColor";
-import makeChessInstance from "../../utils/makeChessInstance";
+import { getMovesQnt } from "../../utils/chess";
 
 export interface SingleGameControlPanelWrapperProps {
   game?: Game;
@@ -37,9 +36,7 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
     return null;
   }
 
-  const chessWithAllMoves: ChessInstance = makeChessInstance(game);
-
-  const movesHistory = chessWithAllMoves.history({ verbose: true });
+  const movesQnt = getMovesQnt(game);
 
   let orientation: PieceColor = "white";
   if (currentUser && currentUser.id === game.black?.id) {
@@ -84,7 +81,7 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
     currentUser &&
     (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
     game.status === "started" &&
-    movesHistory.length < 2
+    movesQnt < 2
   ) {
     canAbortGame = true;
   }
@@ -94,7 +91,7 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
     currentUser &&
     (currentUser.id === game.white?.id || currentUser.id === game.black?.id) &&
     game.status === "started" &&
-    movesHistory.length > 1
+    movesQnt > 1
   ) {
     canResignGame = true;
   }
@@ -106,7 +103,7 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
     game.drawOffer === null &&
     game.aiLevel === 0 &&
     game.status === "started" &&
-    movesHistory.length > 1
+    movesQnt > 1
   ) {
     canOfferDraw = true;
   }
@@ -114,7 +111,7 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
   // @todo. use useCallback hook
   const handleRewindToMove = (moveIndex: number) => {
     if (onRewindToMove) {
-      if (moveIndex === movesHistory.length) {
+      if (moveIndex === movesQnt) {
         onRewindToMove(null);
       } else {
         onRewindToMove(moveIndex);
@@ -140,7 +137,7 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
   const handleRewindToPrevMove = () => {
     if (onRewindToMove) {
       if (rewindToMoveIndex === null) {
-        onRewindToMove(movesHistory.length - 1);
+        onRewindToMove(movesQnt - 1);
       } else {
         onRewindToMove(rewindToMoveIndex - 1);
       }
@@ -150,7 +147,7 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
   // @todo. use useCallback hook
   const handleRewindToNextMove = () => {
     if (onRewindToMove) {
-      if (rewindToMoveIndex === movesHistory.length - 1) {
+      if (rewindToMoveIndex === movesQnt - 1) {
         onRewindToMove(null);
       } else {
         onRewindToMove((rewindToMoveIndex as number) + 1);
