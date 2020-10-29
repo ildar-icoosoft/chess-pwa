@@ -11,6 +11,7 @@ import makeChessInstance from "../../utils/makeChessInstance";
 import css from "./GameMoves.module.scss";
 import { GameControlPanelStatus } from "./GameControlPanelStatus";
 import GameStatus from "../../types/GameStatus";
+import { getMovesQnt } from "../../utils/chess";
 
 export interface GameMovesProps {
   game?: Game;
@@ -37,11 +38,10 @@ export const GameMoves: FC<GameMovesProps> = ({
       return;
     }
 
-    const chess = makeChessInstance(game);
-    const movesHistory = chess.history();
+    const movesQnt = getMovesQnt(game);
 
     if (
-      (lastMovesQnt.current !== movesHistory.length ||
+      (lastMovesQnt.current !== movesQnt ||
         lastGameStatus.current !== game.status) &&
       rewindToMoveIndex === null
     ) {
@@ -50,7 +50,7 @@ export const GameMoves: FC<GameMovesProps> = ({
           scrollElementRef.current.scrollHeight;
       }
     }
-    lastMovesQnt.current = movesHistory.length;
+    lastMovesQnt.current = movesQnt;
     lastGameStatus.current = game.status;
   }, [game, lastMovesQnt, lastGameStatus, rewindToMoveIndex, scrollElementRef]);
 
