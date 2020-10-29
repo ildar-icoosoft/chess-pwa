@@ -1,6 +1,10 @@
 import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { denormalize } from "normalizr";
+import {
+  useDeepEqualSelector,
+  useShallowEqualSelector,
+} from "ii-react-libraries";
 import { RootState } from "../../app/rootReducer";
 import gameSchema from "../../normalizr/schemas/gameSchema";
 import { GameControlPanelWrapper } from "./GameControlPanelWrapper";
@@ -17,10 +21,6 @@ import {
   rewindToMove,
 } from "./singleGameSlice";
 import { AppDispatch } from "../../app/store";
-import {
-  useDeepEqualSelector,
-  useShallowEqualSelector,
-} from "ii-react-libraries";
 
 export interface SingleGameControlPanelContainerProps {
   id: number;
