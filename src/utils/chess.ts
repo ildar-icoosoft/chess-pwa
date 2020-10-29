@@ -16,3 +16,11 @@ export const isPromotionMove = (game: Game, move: Move): boolean => {
   }
   return false;
 };
+
+export const getMovesQnt = (game: Game): number => {
+  if (game.moves.length === 0) {
+    return 0;
+  }
+
+  return game.moves.split(" ").length;
+};
