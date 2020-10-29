@@ -19,8 +19,6 @@ export const ContentLoadingStatus: FC<ContentLoadingStatusProps> = memo(
     error = null,
     showEmptyContentMessage = true,
   }) => {
-    console.log("ContentLoadingStatus");
-
     if (isEmpty && !isLoading && !error && showEmptyContentMessage) {
       return (
         <div
