@@ -50,6 +50,7 @@ import {
   GetChatMessagesListSuccessPayload,
   createChatMessageSuccess,
 } from "../chat/chatSlice";
+import { getMovesQnt } from "../../utils/chess";
 
 export interface EntitiesState {
   users: Record<string, NormalizedUserEntity>;
@@ -150,9 +151,7 @@ const entitiesSlice = createSlice({
         const game = state.games[gameId];
 
         if (game.status === "started") {
-          const chess = makeChessInstance(game);
-
-          if (chess.history().length > 1) {
+          if (getMovesQnt(game) > 1) {
             const timePropName = game.turn === "white" ? "wtime" : "btime";
 
             game[timePropName] -= 1000;

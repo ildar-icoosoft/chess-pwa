@@ -17,7 +17,7 @@ export const isPromotionMove = (game: Game, move: Move): boolean => {
   return false;
 };
 
-export const getMovesQnt = (game: Game): number => {
+export const getMovesQnt = (game: Pick<Game, "moves">): number => {
   if (game.moves.length === 0) {
     return 0;
   }
