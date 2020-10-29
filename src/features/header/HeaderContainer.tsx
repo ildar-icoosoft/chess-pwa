@@ -1,13 +1,13 @@
 import React, { FC, useCallback } from "react";
 import { denormalize } from "normalizr";
 import { useDispatch } from "react-redux";
+import { useShallowEqualSelector } from "ii-react-libraries";
 import { Header } from "./Header";
 import User from "../../interfaces/User";
 import { RootState } from "../../app/rootReducer";
 import userSchema from "../../normalizr/schemas/userSchema";
 import { logout } from "../current-user/currentUserSlice";
 import { showModal } from "../modal/modalSlice";
-import { useShallowEqualSelector } from "ii-react-libraries";
 
 const HeaderContainer: FC<unknown> = () => {
   const currentUser: User | null = useShallowEqualSelector(
