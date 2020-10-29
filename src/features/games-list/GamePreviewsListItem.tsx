@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { Link } from "react-router-dom";
 import { Board } from "ii-react-chessboard";
 import { isEqual as _isEqual } from "lodash";
@@ -13,7 +13,7 @@ export interface GamePreviewsListItemProps {
   game?: Game;
 }
 
-export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = React.memo(
+export const GamePreviewsListItem: FC<GamePreviewsListItemProps> = memo(
   ({ game }) => {
     if (!game) {
       return null;
