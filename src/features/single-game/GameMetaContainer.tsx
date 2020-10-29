@@ -12,7 +12,7 @@ export interface SingleGameMetaContainerProps {
 export const GameMetaContainer: FC<SingleGameMetaContainerProps> = ({ id }) => {
   const game = useDeepEqualSelector(
     (state: RootState) => denormalize(id, gameSchema, state.entities),
-    (_value: any, _other: any, indexOrKey: any) => {
+    (_value: unknown, _other: unknown, indexOrKey: unknown) => {
       // ignore time to improve performance
       if (indexOrKey === "wtime" || indexOrKey === "btime") {
         return true;

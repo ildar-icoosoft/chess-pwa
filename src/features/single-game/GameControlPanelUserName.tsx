@@ -54,12 +54,16 @@ export const GameControlPanelUserName: FC<GameControlPanelUserNameProps> = memo(
     );
   },
   (a: GameControlPanelUserNameProps, b: GameControlPanelUserNameProps) => {
-    return _isEqualWith(a, b, (_value: any, _other: any, indexOrKey: any) => {
-      // ignore time to improve performance
-      if (indexOrKey === "wtime" || indexOrKey === "btime") {
-        return true;
+    return _isEqualWith(
+      a,
+      b,
+      (_value: unknown, _other: unknown, indexOrKey: unknown) => {
+        // ignore time to improve performance
+        if (indexOrKey === "wtime" || indexOrKey === "btime") {
+          return true;
+        }
+        return undefined;
       }
-      return undefined;
-    });
+    );
   }
 );

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import React, { FC, useCallback } from "react";
 import Game from "../../interfaces/Game";
 import { GameControlPanel } from "./GameControlPanel";
