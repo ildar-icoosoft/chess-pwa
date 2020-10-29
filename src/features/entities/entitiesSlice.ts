@@ -42,7 +42,6 @@ import {
 } from "../move/moveSlice";
 import NormalizedUserEntity from "../../normalizr/interfaces/NormalizedUserEntity";
 import NormalizedGameEntity from "../../normalizr/interfaces/NormalizedGameEntity";
-import makeChessInstance from "../../utils/makeChessInstance";
 import NormalizedSeekEntity from "../../normalizr/interfaces/NormalizedSeekEntity";
 import NormalizedChatMessageEntity from "../../normalizr/interfaces/NormalizedChatMessageEntity";
 import {
