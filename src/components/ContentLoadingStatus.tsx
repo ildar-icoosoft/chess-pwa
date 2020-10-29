@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { Spinner } from "react-bootstrap";
 
 export interface ContentLoadingStatusProps {
@@ -11,7 +11,7 @@ export interface ContentLoadingStatusProps {
 
 const defaultEmptyContentMessage = "content is empty";
 
-export const ContentLoadingStatus: FC<ContentLoadingStatusProps> = React.memo(
+export const ContentLoadingStatus: FC<ContentLoadingStatusProps> = memo(
   ({
     emptyContentMessage = defaultEmptyContentMessage,
     isEmpty = false,
