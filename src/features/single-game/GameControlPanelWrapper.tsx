@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import Game from "../../interfaces/Game";
 import { GameControlPanel } from "./GameControlPanel";
 import User from "../../interfaces/User";
@@ -32,6 +32,65 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
   onResignGame,
   onRewindToMove,
 }) => {
+  const gameMoves: string | null = game ? game.moves : null;
+
+  const handleRewindToMove = useCallback(
+    (moveIndex: number) => {
+      const movesQnt = getMovesQnt({
+        moves: gameMoves!,
+      });
+
+      if (onRewindToMove) {
+        if (moveIndex === movesQnt) {
+          onRewindToMove(null);
+        } else {
+          onRewindToMove(moveIndex);
+        }
+      }
+    },
+    [gameMoves, onRewindToMove]
+  );
+
+  const handleRewindToFirstMove = useCallback(() => {
+    if (onRewindToMove) {
+      onRewindToMove(0);
+    }
+  }, [onRewindToMove]);
+
+  const handleRewindToLastMove = useCallback(() => {
+    if (onRewindToMove) {
+      onRewindToMove(null);
+    }
+  }, [onRewindToMove]);
+
+  const handleRewindToPrevMove = useCallback(() => {
+    const movesQnt = getMovesQnt({
+      moves: gameMoves!,
+    });
+
+    if (onRewindToMove) {
+      if (rewindToMoveIndex === null) {
+        onRewindToMove(movesQnt - 1);
+      } else {
+        onRewindToMove(rewindToMoveIndex - 1);
+      }
+    }
+  }, [gameMoves, onRewindToMove, rewindToMoveIndex]);
+
+  const handleRewindToNextMove = useCallback(() => {
+    const movesQnt = getMovesQnt({
+      moves: gameMoves!,
+    });
+
+    if (onRewindToMove) {
+      if (rewindToMoveIndex === movesQnt - 1) {
+        onRewindToMove(null);
+      } else {
+        onRewindToMove((rewindToMoveIndex as number) + 1);
+      }
+    }
+  }, [gameMoves, onRewindToMove, rewindToMoveIndex]);
+
   if (!game) {
     return null;
   }
@@ -107,53 +166,6 @@ export const GameControlPanelWrapper: FC<SingleGameControlPanelWrapperProps> = (
   ) {
     canOfferDraw = true;
   }
-
-  // @todo. use useCallback hook
-  const handleRewindToMove = (moveIndex: number) => {
-    if (onRewindToMove) {
-      if (moveIndex === movesQnt) {
-        onRewindToMove(null);
-      } else {
-        onRewindToMove(moveIndex);
-      }
-    }
-  };
-
-  // @todo. use useCallback hook
-  const handleRewindToFirstMove = () => {
-    if (onRewindToMove) {
-      onRewindToMove(0);
-    }
-  };
-
-  // @todo. use useCallback hook
-  const handleRewindToLastMove = () => {
-    if (onRewindToMove) {
-      onRewindToMove(null);
-    }
-  };
-
-  // @todo. use useCallback hook
-  const handleRewindToPrevMove = () => {
-    if (onRewindToMove) {
-      if (rewindToMoveIndex === null) {
-        onRewindToMove(movesQnt - 1);
-      } else {
-        onRewindToMove(rewindToMoveIndex - 1);
-      }
-    }
-  };
-
-  // @todo. use useCallback hook
-  const handleRewindToNextMove = () => {
-    if (onRewindToMove) {
-      if (rewindToMoveIndex === movesQnt - 1) {
-        onRewindToMove(null);
-      } else {
-        onRewindToMove((rewindToMoveIndex as number) + 1);
-      }
-    }
-  };
 
   return (
     <GameControlPanel
