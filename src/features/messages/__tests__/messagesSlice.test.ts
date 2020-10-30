@@ -17,6 +17,10 @@ import {
   messageSample1,
   messageSample2,
 } from "../../../test-utils/data-sample/message";
+import {
+  disconnectSocket,
+  reconnectSocket,
+} from "../../data-subscription/dataSubscriptionSlice";
 
 describe("messagesSlice reducer", () => {
   it("should handle initial state", () => {
@@ -221,6 +225,36 @@ describe("messagesSlice reducer", () => {
       {
         id: "declineDrawOfferError",
         body: "error text",
+        autoHide: true,
+      },
+    ]);
+  });
+
+  it("should handle disconnectSocket", () => {
+    expect(
+      messagesReducer([messageSample1], {
+        type: disconnectSocket.type,
+      })
+    ).toEqual([
+      messageSample1,
+      {
+        id: "disconnectSocket",
+        body: "Lost connection",
+        autoHide: false,
+      },
+    ]);
+  });
+
+  it("should handle reconnectSocket", () => {
+    expect(
+      messagesReducer([messageSample1], {
+        type: reconnectSocket.type,
+      })
+    ).toEqual([
+      messageSample1,
+      {
+        id: "reconnectSocket",
+        body: "The connection was restored. Page will be reloaded in 3 seconds",
         autoHide: true,
       },
     ]);
