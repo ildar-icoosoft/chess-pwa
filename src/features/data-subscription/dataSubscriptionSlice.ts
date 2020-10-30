@@ -144,15 +144,15 @@ export const watchChatMessages = (): AppThunk<void> => (dispatch) => {
 };
 
 export const watchConnection = (): AppThunk<void> => (dispatch) => {
+  ioClient.socket.on("disconnect", () => {
+    dispatch(disconnectSocket());
+  });
+
   ioClient.socket.on("reconnect", () => {
     dispatch(reconnectSocket());
 
-    // setTimeout(() => {
-    //   document.location.reload();
-    // }, 3000);
-  });
-
-  ioClient.socket.on("disconnect", () => {
-    dispatch(disconnectSocket());
+    setTimeout(() => {
+      document.location.reload();
+    }, 3000);
   });
 };
