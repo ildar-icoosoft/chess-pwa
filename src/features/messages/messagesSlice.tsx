@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { pullAllBy as _pullAllBy } from "lodash";
+import { remove as _remove } from "lodash";
 import { acceptSeekError } from "../challenge/challengeSlice";
 import ItemErrorPayload from "../../interfaces/ItemErrorPayload";
 import { Message } from "../../interfaces/Message";
@@ -33,7 +33,7 @@ const messagesSlice = createSlice({
       state.push(action.payload);
     },
     hideMessage: (state, action: PayloadAction<string>) => {
-      _pullAllBy(state, [{ id: action.payload }], "id");
+      _remove(state, (item) => item.id === action.payload);
     },
   },
   extraReducers: {
@@ -116,6 +116,7 @@ const messagesSlice = createSlice({
       state.push({
         id: "disconnectSocket",
         body: "Lost connection",
+        autoHide: false,
       });
     },
     [reconnectSocket.type]: (state) => {
@@ -123,6 +124,8 @@ const messagesSlice = createSlice({
         id: "reconnectSocket",
         body: "The connection was restored. Page will be reloaded in 3 seconds",
       });
+
+      _remove(state, (item) => item.id === "disconnectSocket");
     },
   },
 });

@@ -147,9 +147,9 @@ export const watchConnection = (): AppThunk<void> => (dispatch) => {
   ioClient.socket.on("reconnect", () => {
     dispatch(reconnectSocket());
 
-    setTimeout(() => {
-      document.location.reload();
-    }, 3000);
+    // setTimeout(() => {
+    //   document.location.reload();
+    // }, 3000);
   });
 
   ioClient.socket.on("disconnect", () => {
