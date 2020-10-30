@@ -44,30 +44,35 @@ const messagesSlice = createSlice({
       state.push({
         id: "acceptSeekError",
         body: action.payload.error,
+        autoHide: true,
       });
     },
     [makeMoveError.type]: (state, action: PayloadAction<string>) => {
       state.push({
         id: "makeMoveError",
         body: action.payload,
+        autoHide: true,
       });
     },
     [getCurrentUserError.type]: (state, action: PayloadAction<string>) => {
       state.push({
         id: "getCurrentUserError",
         body: action.payload,
+        autoHide: true,
       });
     },
     [logoutError.type]: (state, action: PayloadAction<string>) => {
       state.push({
         id: "logoutError",
         body: action.payload,
+        autoHide: true,
       });
     },
     [abortGameError.type]: (state, action: PayloadAction<ItemErrorPayload>) => {
       state.push({
         id: "abortGameError",
         body: action.payload.error,
+        autoHide: true,
       });
     },
     [createChatMessageError.type]: (
@@ -77,6 +82,7 @@ const messagesSlice = createSlice({
       state.push({
         id: "createChatMessageError",
         body: action.payload.error,
+        autoHide: true,
       });
     },
     [resignGameError.type]: (
@@ -86,12 +92,14 @@ const messagesSlice = createSlice({
       state.push({
         id: "resignGameError",
         body: action.payload.error,
+        autoHide: true,
       });
     },
     [offerDrawError.type]: (state, action: PayloadAction<ItemErrorPayload>) => {
       state.push({
         id: "offerDrawError",
         body: action.payload.error,
+        autoHide: true,
       });
     },
     [acceptDrawOfferError.type]: (
@@ -101,6 +109,7 @@ const messagesSlice = createSlice({
       state.push({
         id: "acceptDrawOfferError",
         body: action.payload.error,
+        autoHide: true,
       });
     },
     [declineDrawOfferError.type]: (
@@ -110,6 +119,7 @@ const messagesSlice = createSlice({
       state.push({
         id: "declineDrawOfferError",
         body: action.payload.error,
+        autoHide: true,
       });
     },
     [disconnectSocket.type]: (state) => {
@@ -123,6 +133,7 @@ const messagesSlice = createSlice({
       state.push({
         id: "reconnectSocket",
         body: "The connection was restored. Page will be reloaded in 3 seconds",
+        autoHide: true,
       });
 
       _remove(state, (item) => item.id === "disconnectSocket");

@@ -1,5 +1,5 @@
 export interface Message {
   id: string;
   body: string;
-  autoHide?: boolean;
+  autoHide: boolean;
 }
