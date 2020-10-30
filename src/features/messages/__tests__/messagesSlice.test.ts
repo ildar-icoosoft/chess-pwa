@@ -239,7 +239,7 @@ describe("messagesSlice reducer", () => {
       messageSample1,
       {
         id: "disconnectSocket",
-        body: "Lost connection",
+        body: "The Connection to the Server has been Lost",
         autoHide: false,
       },
     ]);
