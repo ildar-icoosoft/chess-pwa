@@ -50,6 +50,8 @@ const dataSubscriptionSlice = createSlice({
       _state,
       _action: PayloadAction<NormalizedData<number>>
     ) {},
+    reconnectSocket(_state) {},
+    disconnectSocket(_state) {},
   },
   extraReducers: {},
 });
@@ -63,6 +65,8 @@ export const {
   createUserBySubscription,
   updateUserBySubscription,
   createChatMessageBySubscription,
+  reconnectSocket,
+  disconnectSocket,
 } = dataSubscriptionSlice.actions;
 
 export default dataSubscriptionSlice.reducer;
@@ -136,5 +140,19 @@ export const watchChatMessages = (): AppThunk<void> => (dispatch) => {
 
       dispatch(createChatMessageBySubscription(normalizedChatMessage));
     }
+  });
+};
+
+export const watchConnection = (): AppThunk<void> => (dispatch) => {
+  ioClient.socket.on("reconnect", () => {
+    dispatch(reconnectSocket());
+
+    setTimeout(() => {
+      document.location.reload();
+    }, 3000);
+  });
+
+  ioClient.socket.on("disconnect", () => {
+    dispatch(disconnectSocket());
   });
 };

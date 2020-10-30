@@ -18,6 +18,10 @@ import {
   resignGameError,
 } from "../single-game/singleGameSlice";
 import { createChatMessageError } from "../chat/chatSlice";
+import {
+  disconnectSocket,
+  reconnectSocket,
+} from "../data-subscription/dataSubscriptionSlice";
 
 const initialState: Message[] = [];
 
@@ -106,6 +110,18 @@ const messagesSlice = createSlice({
       state.push({
         id: "declineDrawOfferError",
         body: action.payload.error,
+      });
+    },
+    [disconnectSocket.type]: (state) => {
+      state.push({
+        id: "disconnectSocket",
+        body: "Lost connection",
+      });
+    },
+    [reconnectSocket.type]: (state) => {
+      state.push({
+        id: "reconnectSocket",
+        body: "The connection was restored. Page will be reloaded in 3 seconds",
       });
     },
   },
