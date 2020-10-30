@@ -50,8 +50,8 @@ const dataSubscriptionSlice = createSlice({
       _state,
       _action: PayloadAction<NormalizedData<number>>
     ) {},
-    reconnectSocket(_state) {},
     disconnectSocket(_state) {},
+    reconnectSocket(_state) {},
   },
   extraReducers: {},
 });

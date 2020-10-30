@@ -13,6 +13,8 @@ import dataSubscriptionReducer, {
   watchSeeks,
   watchUsers,
   watchChatMessages,
+  disconnectSocket,
+  reconnectSocket,
 } from "../dataSubscriptionSlice";
 import ioClient from "../../../services/ioClient";
 import { defaultState } from "../../../test-utils/data-sample/state";
@@ -531,5 +533,27 @@ describe("dataSubscriptionSlice reducer", () => {
 
       expect(dispatch).toBeCalledTimes(0);
     });
+  });
+
+  it("should handle disconnectSocket", () => {
+    expect(
+      dataSubscriptionReducer(
+        {},
+        {
+          type: disconnectSocket.type,
+        }
+      )
+    ).toEqual({});
+  });
+
+  it("should handle reconnectSocket", () => {
+    expect(
+      dataSubscriptionReducer(
+        {},
+        {
+          type: reconnectSocket.type,
+        }
+      )
+    ).toEqual({});
   });
 });
