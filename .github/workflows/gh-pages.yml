@@ -5,7 +5,7 @@ env:
 
 on:
   push:
-    branches: [ master, CHESSPWA-79_github-pages-url ]
+    branches: [ master ]
 
 jobs:
   build:
