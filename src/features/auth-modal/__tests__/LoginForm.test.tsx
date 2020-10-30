@@ -1,8 +1,8 @@
-import mountTest from "../../../test-utils/mountTest";
-import { LoginForm } from "../LoginForm";
 import TestRenderer from "react-test-renderer";
 import React from "react";
 import { Formik } from "formik";
+import mountTest from "../../../test-utils/mountTest";
+import { LoginForm } from "../LoginForm";
 
 // @todo. add tests
 
